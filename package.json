@@ -1,0 +1,42 @@
+{
+    "name": "phonegap",
+    "description": "PhoneGap command-line interface.",
+    "version": "0.0.1",
+    "main": "./lib/phonegap.js",
+    "homepage": "http://github.com/mwbrooks/phonegap-client",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/mwbrooks/phonegap-client.git"
+    },
+    "keywords": [
+        "phonegap",
+        "phonegap build",
+        "cordova",
+        "cli"
+    ],
+    "preferGlobal": "true",
+    "bin": {
+        "phonegap": "./bin/phonegap.js"
+    },
+    "scripts": {
+        "test": "./node_modules/.bin/jasmine-node --color --verbose spec"
+    },
+    "engines": {
+        "node": ">=0.8.0"
+    },
+    "dependencies": {
+        "cordova": "*"
+    },
+    "devDependencies": {
+        "jasmine-node": "1.x.x"
+    },
+    "optionalDependencies": {
+    },
+    "author": {
+        "name": "Michael Brooks",
+        "email": "michael@michaelbrooks.ca",
+        "url": "http://michaelbrooks.ca/"
+    },
+    "contributors": [
+    ]
+}
