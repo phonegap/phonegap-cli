@@ -1,12 +1,20 @@
 # PhoneGap Client
 
-> PhoneGap client with command-line interface
+> PhoneGap command-line and node.js interface.
 
-## Install
+## Command-line
 
-    npm install -g phonegap
+### Install
 
-## Usage
+    $ npm install -g phonegap
 
-    phonegap help
+### Usage
+
+    $ phonegap help
+
+## Node.js
+
+### Usage
+
+    var phonegap = require('phonegap');
 
