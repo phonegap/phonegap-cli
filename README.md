@@ -1,6 +1,6 @@
 # PhoneGap Client
 
-> PhoneGap command-line and node.js interface.
+> PhoneGap and PhoneGap Build command-line interface and node.js library.
 
 ## Command-line
 
