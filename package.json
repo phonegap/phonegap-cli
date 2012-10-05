@@ -25,7 +25,7 @@
         "node": ">=0.8.0"
     },
     "dependencies": {
-        "cordova": "*"
+        "cordova": "0.1.x"
     },
     "devDependencies": {
         "jasmine-node": "1.x.x"
