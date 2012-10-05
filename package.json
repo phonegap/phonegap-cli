@@ -16,7 +16,8 @@
     ],
     "preferGlobal": "true",
     "bin": {
-        "phonegap": "./bin/phonegap.js"
+        "phonegap": "./bin/phonegap.js",
+        "phonegap-build": "./bin/phonegap-build.js"
     },
     "scripts": {
         "test": "./node_modules/.bin/jasmine-node --color --verbose spec"
