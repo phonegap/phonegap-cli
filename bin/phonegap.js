@@ -10,6 +10,14 @@ var phonegap = require('../lib/phonegap');
 
 var packageJSON = JSON.parse(fs.readFileSync(path.join(__dirname,'..','package.json'), 'utf8'));
 
+// Set the PhoneGap environment
+
+phonegap.env('local');
+
+// Exit for now
+
+process.exit();
+
 // Set the help message
 
 var help = function() {
