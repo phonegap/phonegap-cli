@@ -18,3 +18,6 @@
 
     var phonegap = require('phonegap');
 
+[travis-ci-img]: https://secure.travis-ci.org/mwbrooks/phonegap-client.png
+[travis-ci-url]: http://travis-ci.org/mwbrooks/phonegap-client
+
