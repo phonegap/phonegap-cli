@@ -1,4 +1,4 @@
-# PhoneGap Client
+# PhoneGap Client [![Build Status][travis-ci-img]][travis-ci-url]
 
 > PhoneGap and PhoneGap Build command-line interface and node.js library.
 
