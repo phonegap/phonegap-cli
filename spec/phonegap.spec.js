@@ -17,5 +17,14 @@ describe('phonegap', function() {
         it('should support remote environment', function() {
             expect(phonegap.env('remote')).toEqual('remote');
         });
+
+        it('should throw error on unsupported environment', function() {
+            expect(function() { phonegap.env('foo'); }).toThrow();
+        });
+
+        it('should not save an unsupported environment', function() {
+            expect(function() { phonegap.env('foo'); }).toThrow();
+            expect(phonegap.env()).toEqual('remote');
+        });
     });
 });
