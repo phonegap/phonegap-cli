@@ -1,11 +1,11 @@
 {
     "name": "phonegap",
-    "description": "PhoneGap command-line interface and node.js library.",
+    "description": "PhoneGap/Build command-line interface and node.js library.",
     "version": "0.0.1",
-    "homepage": "http://github.com/mwbrooks/phonegap-client",
+    "homepage": "http://github.com/mwbrooks/phonegap-cli",
     "repository": {
         "type": "git",
-        "url": "git://github.com/mwbrooks/phonegap-client.git"
+        "url": "git://github.com/mwbrooks/phonegap-cli.git"
     },
     "keywords": [
         "phonegap",
@@ -16,8 +16,7 @@
     "preferGlobal": "true",
     "main": "./lib/phonegap.js",
     "bin": {
-        "phonegap": "./bin/phonegap.js",
-        "phonegap-build": "./bin/phonegap-build.js"
+        "phonegap": "./bin/phonegap.js"
     },
     "scripts": {
         "test": "./node_modules/.bin/jasmine-node --color --verbose spec"

@@ -1,6 +1,6 @@
-# PhoneGap Client [![Build Status][travis-ci-img]][travis-ci-url]
+# PhoneGap CLI [![Build Status][travis-ci-img]][travis-ci-url]
 
-> PhoneGap and PhoneGap Build command-line interface and node.js library.
+> PhoneGap/Build command-line interface and Node.js library.
 
 ## Command-line
 
@@ -18,6 +18,6 @@
 
     var phonegap = require('phonegap');
 
-[travis-ci-img]: https://secure.travis-ci.org/mwbrooks/phonegap-client.png
-[travis-ci-url]: http://travis-ci.org/mwbrooks/phonegap-client
+[travis-ci-img]: https://secure.travis-ci.org/mwbrooks/phonegap-cli.png
+[travis-ci-url]: http://travis-ci.org/mwbrooks/phonegap-cli
 
