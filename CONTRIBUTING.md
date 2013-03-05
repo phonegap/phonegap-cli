@@ -1,4 +1,4 @@
-# Contributing
+# How to Contribute
 
 ## Get the Source
 
@@ -11,5 +11,11 @@
 
 ## Run the Tests
 
+### Mac and Linux
+
     $ npm test
+
+### Windows
+
+    $ ./node_modules/.bin/jasmine-node --verbose --color spec
 
