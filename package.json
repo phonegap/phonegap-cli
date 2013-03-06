@@ -10,6 +10,7 @@
     "keywords": [
         "phonegap",
         "phonegap build",
+        "phonegap/build",
         "cordova",
         "cli"
     ],
@@ -25,7 +26,8 @@
         "node": ">=0.8.0"
     },
     "dependencies": {
-        "phonegap-build": "0.4.x"
+        "shelljs": "0.0.x",
+        "optimist": "0.3.x"
     },
     "devDependencies": {
         "jasmine-node": "1.1.x"

@@ -1,8 +1,14 @@
 #!/usr/bin/env node
 
-// Module dependencies.
+/*!
+ * Module dependencies.
+ */
 
-var phonegap = require('../lib/phonegap');
+var CLI = require('../lib/cli'),
+    argv = require('optimist').argv;
 
-console.log('coming soon...');
+/*!
+ * Run the command-line client.
+ */
 
+var cli = new CLI().argv(argv);
