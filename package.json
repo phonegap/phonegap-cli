@@ -1,6 +1,6 @@
 {
     "name": "phonegap",
-    "description": "PhoneGap/Build command-line interface and node.js library.",
+    "description": "PhoneGap command-line interface and node.js library.",
     "version": "0.0.1",
     "homepage": "http://github.com/mwbrooks/phonegap-cli",
     "repository": {
@@ -25,10 +25,10 @@
         "node": ">=0.8.0"
     },
     "dependencies": {
-        "cordova": "0.1.x"
+        "phonegap-build": "0.4.x"
     },
     "devDependencies": {
-        "jasmine-node": "1.x.x"
+        "jasmine-node": "1.1.x"
     },
     "optionalDependencies": {
     },
