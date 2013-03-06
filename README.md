@@ -1,6 +1,6 @@
 # PhoneGap CLI [![Build Status][travis-ci-img]][travis-ci-url]
 
-> PhoneGap/Build command-line interface and Node.js library.
+> PhoneGap command-line interface and Node.js library.
 
 ## Command-line
 
