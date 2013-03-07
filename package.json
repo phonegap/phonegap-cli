@@ -26,6 +26,8 @@
         "node": ">=0.8.0"
     },
     "dependencies": {
+        "colors": "0.6.x",
+        "prompt": "0.2.x",
         "shelljs": "0.0.x",
         "optimist": "0.3.x"
     },
