@@ -1,7 +1,16 @@
-describe('phonegap', function() {
-    var phonegap = require('../lib/phonegap');
+/*!
+ * Module dependencies.
+ */
 
-    it('should not do anything', function() {
-        expect(phonegap).toBeDefined();
+var PhoneGap = require('../lib/phonegap'),
+    phonegap = new PhoneGap();
+
+/*!
+ * PhoneGap specification.
+ */
+
+describe('phonegap', function() {
+    it('should have a create create', function() {
+        expect(phonegap.create).toEqual(jasmine.any(Function));
     });
 });

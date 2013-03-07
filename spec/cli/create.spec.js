@@ -27,7 +27,10 @@ describe('$ phonegap create <path>', function() {
     describe('$ phonegap create ./my-app', function() {
         it('should try to create the project', function() {
             cli.argv({ _: ['create', './my-app'] });
-            expect(cli.phonegap.create).toHaveBeenCalled();
+            expect(cli.phonegap.create).toHaveBeenCalledWith({
+                path: jasmine.any(String)
+            },
+            jasmine.any(Function));
         });
     });
 });
