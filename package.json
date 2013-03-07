@@ -1,7 +1,7 @@
 {
     "name": "phonegap",
     "description": "PhoneGap command-line interface and node.js library.",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "homepage": "http://github.com/mwbrooks/phonegap-cli",
     "repository": {
         "type": "git",
