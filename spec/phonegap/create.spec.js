@@ -2,8 +2,7 @@
  * Module dependencies.
  */
 
-var cordova = require('cordova'),
-    create = require('../../lib/phonegap/create'),
+var create = require('../../lib/phonegap/create'),
     options;
 
 /*
@@ -15,7 +14,7 @@ describe('create(options, callback)', function() {
         options = {
             path: '/some/path/to/app/www'
         };
-        spyOn(cordova, 'create');
+        spyOn(create.phonegapbuild, 'create');
     });
 
     it('should require options', function() {
@@ -38,17 +37,24 @@ describe('create(options, callback)', function() {
         }).not.toThrow();
     });
 
-    it('should try to create a cordova project', function(done) {
+    it('should try to create a project', function(done) {
         create(options, function(e) {});
         process.nextTick(function() {
-            expect(cordova.create).toHaveBeenCalledWith(
-                options.path
+            expect(create.phonegapbuild.create).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
             );
             done();
         });
     });
 
     describe('successfully created a project', function() {
+        beforeEach(function() {
+            create.phonegapbuild.create.andCallFake(function(options, callback) {
+                callback();
+            });
+        });
+
         it('should trigger called without an error', function(done) {
             create(options, function(e) {
                 expect(e).toBeNull();
@@ -66,9 +72,8 @@ describe('create(options, callback)', function() {
 
     describe('failed to create a project', function() {
         beforeEach(function() {
-            cordova.create.andCallFake(function() {
-                // cordova does not consistently throw Error objects
-                throw 'missing the path';
+            create.phonegapbuild.create.andCallFake(function(options, callback) {
+                callback(new Error('missing the path'));
             });
         });
 

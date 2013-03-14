@@ -29,8 +29,8 @@
         "colors": "0.6.x",
         "prompt": "0.2.x",
         "shelljs": "0.0.x",
-        "cordova": "2.5.x",
-        "optimist": "0.3.x"
+        "optimist": "0.3.x",
+        "phonegap-build": "0.4.x"
     },
     "devDependencies": {
         "jasmine-node": "1.1.x"
