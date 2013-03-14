@@ -8,11 +8,11 @@
         "url": "git://github.com/mwbrooks/phonegap-cli.git"
     },
     "keywords": [
+        "cli",
+        "cordova",
         "phonegap",
         "phonegap build",
-        "phonegap/build",
-        "cordova",
-        "cli"
+        "phonegap/build"
     ],
     "preferGlobal": "true",
     "main": "./lib/phonegap.js",
@@ -27,10 +27,10 @@
     },
     "dependencies": {
         "colors": "0.6.x",
-        "prompt": "0.2.x",
-        "shelljs": "0.0.x",
         "optimist": "0.3.x",
-        "phonegap-build": "0.4.x"
+        "phonegap-build": "0.4.x",
+        "prompt": "0.2.x",
+        "shelljs": "0.0.x"
     },
     "devDependencies": {
         "jasmine-node": "1.1.x"
