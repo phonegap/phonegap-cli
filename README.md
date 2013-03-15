@@ -10,7 +10,28 @@
 
 ### Usage
 
-    $ phonegap help
+    Usage: phonegap [options] [commands]
+
+    Synopsis:
+
+      PhoneGap command-line tool.
+
+    Commands:
+
+      create <path>        create a phonegap project
+      app                  connect to phonegap app
+      help [command]       output usage information
+      version              output version number
+
+    Options:
+
+      -v, --version        output version number
+      -h, --help           output usage information
+
+    Examples:
+
+      phonegap help create
+      phonegap create path/to/my-app
 
 ## Node.js
 
