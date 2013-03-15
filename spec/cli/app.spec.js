@@ -13,7 +13,9 @@ describe('$ phonegap app', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
-        spyOn(cli.phonegap, 'app');
+        spyOn(cli.phonegap, 'app').andReturn({
+            on: function(){}
+        });
     });
 
     describe('$ phonegap help', function() {
@@ -27,30 +29,21 @@ describe('$ phonegap app', function() {
     describe('$ phonegap app', function() {
         it('should connect to phonegap app', function() {
             cli.argv({ _: ['app'] });
-            expect(cli.phonegap.app).toHaveBeenCalledWith(
-                {},
-                jasmine.any(Function)
-            );
+            expect(cli.phonegap.app).toHaveBeenCalledWith({});
         });
     });
 
     describe('$ phonegap app --port 1337', function() {
         it('should connect to phonegap app on port 1337', function() {
             cli.argv({ _: ['app'], port: 1337 });
-            expect(cli.phonegap.app).toHaveBeenCalledWith(
-                { port: 1337 },
-                jasmine.any(Function)
-            );
+            expect(cli.phonegap.app).toHaveBeenCalledWith({ port: 1337 });
         });
     });
 
     describe('$ phonegap app -p 1337', function() {
         it('should connect to phonegap app on port 1337', function() {
             cli.argv({ _: ['app'], p: 1337 });
-            expect(cli.phonegap.app).toHaveBeenCalledWith(
-                { port: 1337 },
-                jasmine.any(Function)
-            );
+            expect(cli.phonegap.app).toHaveBeenCalledWith({ port: 1337 });
         });
     });
 });
