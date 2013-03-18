@@ -3,8 +3,8 @@
  */
 
 var prompt = require('prompt'),
-    config = require('../../../lib/common/config'),
-    CLI = require('../../../lib/cli'),
+    config = require('../../lib/common/config'),
+    CLI = require('../../lib/cli'),
     cli;
 
 /*

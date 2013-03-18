@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-var CLI = require('../../../../lib/cli'),
+var CLI = require('../../../lib/cli'),
     cli,
     stdout;
 
