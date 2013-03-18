@@ -24,7 +24,7 @@ describe('phonegap help remote build', function() {
     describe('$ phonegap help remote', function() {
         it('should include the command', function() {
             cli.argv({ _: ['help', 'remote'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/Commands:[\w\W]*\s+build/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/\n\s+build <platform>.*\n/i);
         });
     });
 

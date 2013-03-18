@@ -20,7 +20,7 @@ describe('phonegap help app', function() {
     describe('$ phonegap help', function() {
         it('should include the command', function() {
             cli.argv({ _: ['help'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/Commands:[\w\W]*\s+app/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/\n\s+app.*\n/i);
         });
     });
 
