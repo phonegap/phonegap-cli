@@ -31,6 +31,7 @@
         "optimist": "0.3.x",
         "phonegap-build": "0.4.x",
         "prompt": "0.2.x",
+        "qrcode-terminal": "0.9.x",
         "shelljs": "0.0.x"
     },
     "devDependencies": {

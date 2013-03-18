@@ -1,0 +1,19 @@
+Usage: $0 remote build <platform>
+
+Description:
+
+  Build your application to a specific platform.
+
+  The platform names are:
+
+    - android
+    - blackberry
+    - ios
+    - symbian
+    - webos
+    - winphone
+
+Examples:
+
+  $ $0 remote build android
+  $ $0 remote build ios
