@@ -10,38 +10,38 @@ var CLI = require('../../../../lib/cli'),
  * Define the specification.
  */
 
-describe('$ phonegap-build login help', function() {
+describe('$ phonegap remote login help', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
         stdout = process.stdout.write;
     });
 
-    describe('$ phonegap-build login help', function() {
+    describe('$ phonegap remote login help', function() {
         it('should output the login help dialog', function() {
-            cli.argv({ _: ['login', 'help'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ login/i);
+            cli.argv({ _: ['remote', 'login', 'help'] });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
         });
     });
 
-    describe('$ phonegap-build login --help', function() {
+    describe('$ phonegap remote login --help', function() {
         it('should output the login help dialog', function() {
-            cli.argv({ _: ['login'], help: true });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ login/i);
+            cli.argv({ _: ['remote', 'login'], help: true });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
         });
     });
 
-    describe('$ phonegap-build login -h', function() {
+    describe('$ phonegap remote login -h', function() {
         it('should output the login help dialog', function() {
-            cli.argv({ _: ['login'], h: true });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ login/i);
+            cli.argv({ _: ['remote', 'login'], h: true });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
         });
     });
 
-    describe('$ phonegap-build help login', function() {
+    describe('$ phonegap remote help login', function() {
         it('should output the login help dialog', function() {
-            cli.argv({ _: ['help', 'login'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ login/i);
+            cli.argv({ _: ['help', 'remote', 'login'] });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
         });
     });
 });

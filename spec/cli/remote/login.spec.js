@@ -11,38 +11,30 @@ var prompt = require('prompt'),
  * Specification for login cli.
  */
 
-describe('$ phonegap-build login', function() {
+describe('$ phonegap remote login', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
         spyOn(config.global, 'load');
     });
 
-    describe('$ phonegap-build help', function() {
-        it('outputs info on the login command', function() {
-            cli.argv({ _: ['help'] });
-            expect(process.stdout.write.mostRecentCall.args[0])
-                .toMatch(/Commands:[\w\W]*\s+login/i);
-        });
-    });
-
-    describe('$ phonegap-build login', function() {
+    describe('$ phonegap remote login', function() {
         it('should try to lookup account', function() {
-            cli.argv({ _: ['login'] });
+            cli.argv({ _: ['remote', 'login'] });
             expect(config.global.load).toHaveBeenCalled();
         });
 
         describe('successful account lookup', function() {
             beforeEach(function() {
-                spyOn(cli.phonegap, 'login');
+                spyOn(cli.phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: 'abc123' });
                 });
             });
 
             it('should try to login', function() {
-                cli.argv({ _: ['login'] });
-                expect(cli.phonegap.login).toHaveBeenCalledWith(
+                cli.argv({ _: ['remote', 'login'] });
+                expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
                     null,
                     jasmine.any(Function)
                 );
@@ -50,20 +42,20 @@ describe('$ phonegap-build login', function() {
 
             describe('successful login', function() {
                 beforeEach(function() {
-                    cli.phonegap.login.andCallFake(function(argv, callback) {
+                    cli.phonegap.remote.login.andCallFake(function(argv, callback) {
                         callback(null, {});
                     });
                 });
 
                 it('should trigger callback without an error', function(done) {
-                    cli.argv({ _: ['login'] }, function(e, api) {
+                    cli.argv({ _: ['remote', 'login'] }, function(e, api) {
                         expect(e).toBeNull();
                         done();
                     });
                 });
 
                 it('should trigger callback with API object', function(done) {
-                    cli.argv({ _: ['login'] }, function(e, api) {
+                    cli.argv({ _: ['remote', 'login'] }, function(e, api) {
                         expect(api).toBeDefined();
                         done();
                     });
@@ -72,20 +64,20 @@ describe('$ phonegap-build login', function() {
 
             describe('failed login', function() {
                 beforeEach(function() {
-                    cli.phonegap.login.andCallFake(function(argv, callback) {
+                    cli.phonegap.remote.login.andCallFake(function(argv, callback) {
                         callback(new Error('Invalid password'));
                     });
                 });
 
                 it('should trigger callback with an error', function(done) {
-                    cli.argv({ _: ['login'] }, function(e, api) {
+                    cli.argv({ _: ['remote', 'login'] }, function(e, api) {
                         expect(e).toBeDefined();
                         done();
                     });
                 });
 
                 it('should trigger callback without an API object', function(done) {
-                    cli.argv({ _: ['login'] }, function(e, api) {
+                    cli.argv({ _: ['remote', 'login'] }, function(e, api) {
                         expect(api).not.toBeDefined();
                         done();
                     });
@@ -96,21 +88,21 @@ describe('$ phonegap-build login', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap, 'login');
+                spyOn(cli.phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
             });
 
             it('should prompt for username', function() {
-                cli.argv({ _: ['login'] });
+                cli.argv({ _: ['remote', 'login'] });
                 expect(prompt.get).toHaveBeenCalled();
                 expect(prompt.get.mostRecentCall.args[0].properties.username).toBeDefined();
                 expect(prompt.get.mostRecentCall.args[0].properties.username.required).toBe(true);
             });
 
             it('should prompt for password', function() {
-                cli.argv({ _: ['login'] });
+                cli.argv({ _: ['remote', 'login'] });
                 expect(prompt.get).toHaveBeenCalled();
                 expect(prompt.get.mostRecentCall.args[0].properties.password).toBeDefined();
                 expect(prompt.get.mostRecentCall.args[0].properties.password.required).toBe(true);
@@ -125,8 +117,8 @@ describe('$ phonegap-build login', function() {
                 });
 
                 it('should try to login', function() {
-                    cli.argv({ _: ['login'] });
-                    expect(cli.phonegap.login).toHaveBeenCalledWith(
+                    cli.argv({ _: ['remote', 'login'] });
+                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
@@ -134,20 +126,20 @@ describe('$ phonegap-build login', function() {
 
                 describe('successful login', function() {
                     beforeEach(function() {
-                        cli.phonegap.login.andCallFake(function(argv, callback) {
+                        cli.phonegap.remote.login.andCallFake(function(argv, callback) {
                             callback(null, {});
                         });
                     });
 
                     it('should trigger callback without an error', function(done) {
-                        cli.argv({ _: ['login'] }, function(e, api) {
+                        cli.argv({ _: ['remote', 'login'] }, function(e, api) {
                             expect(e).toBeNull();
                             done();
                         });
                     });
 
                     it('should trigger callback with API object', function(done) {
-                        cli.argv({ _: ['login'] }, function(e, api) {
+                        cli.argv({ _: ['remote', 'login'] }, function(e, api) {
                             expect(api).toBeDefined();
                             done();
                         });
@@ -156,20 +148,20 @@ describe('$ phonegap-build login', function() {
 
                 describe('failed login', function() {
                     beforeEach(function() {
-                        cli.phonegap.login.andCallFake(function(argv, callback) {
+                        cli.phonegap.remote.login.andCallFake(function(argv, callback) {
                             callback(new Error('Invalid password'));
                         });
                     });
 
                     it('should trigger callback with an error', function(done) {
-                        cli.argv({ _: ['login'] }, function(e, api) {
+                        cli.argv({ _: ['remote', 'login'] }, function(e, api) {
                             expect(e).toBeDefined();
                             done();
                         });
                     });
 
                     it('should trigger callback without an API object', function(done) {
-                        cli.argv({ _: ['login'] }, function(e, api) {
+                        cli.argv({ _: ['remote', 'login'] }, function(e, api) {
                             expect(api).not.toBeDefined();
                             done();
                         });
@@ -185,12 +177,12 @@ describe('$ phonegap-build login', function() {
                 });
 
                 it('should not try to login', function() {
-                    cli.argv({ _: ['login'] });
-                    expect(cli.phonegap.login).not.toHaveBeenCalled();
+                    cli.argv({ _: ['remote', 'login'] });
+                    expect(cli.phonegap.remote.login).not.toHaveBeenCalled();
                 });
 
                 it('should trigger callback with an error', function(done) {
-                    cli.argv({ _: ['login'] }, function(e) {
+                    cli.argv({ _: ['remote', 'login'] }, function(e) {
                         expect(e).toEqual(jasmine.any(Error));
                         done();
                     });
@@ -199,18 +191,18 @@ describe('$ phonegap-build login', function() {
         });
     });
 
-    describe('$ phonegap-build login --username zelda', function() {
+    describe('$ phonegap remote login --username zelda', function() {
         describe('successful account lookup', function() {
             beforeEach(function() {
-                spyOn(cli.phonegap, 'login');
+                spyOn(cli.phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: 'abc123' });
                 });
             });
 
             it('should try to login', function() {
-                cli.argv({ _: ['login'], username: 'zelda' });
-                expect(cli.phonegap.login).toHaveBeenCalledWith(
+                cli.argv({ _: ['remote', 'login'], username: 'zelda' });
+                expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
                     null,
                     jasmine.any(Function)
                 );
@@ -220,19 +212,19 @@ describe('$ phonegap-build login', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap, 'login');
+                spyOn(cli.phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
             });
 
             it('should not prompt for username', function() {
-                cli.argv({ _: ['login'], username: 'zelda' });
+                cli.argv({ _: ['remote', 'login'], username: 'zelda' });
                 expect(prompt.override.username).toEqual('zelda');
             });
 
             it('should prompt for password', function() {
-                cli.argv({ _: ['login'], username: 'zelda' });
+                cli.argv({ _: ['remote', 'login'], username: 'zelda' });
                 expect(prompt.override.password).not.toBeDefined();
             });
 
@@ -248,8 +240,8 @@ describe('$ phonegap-build login', function() {
                 });
 
                 it('should try to login', function() {
-                    cli.argv({ _: ['login'], username: 'zelda' });
-                    expect(cli.phonegap.login).toHaveBeenCalledWith(
+                    cli.argv({ _: ['remote', 'login'], username: 'zelda' });
+                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
@@ -258,18 +250,18 @@ describe('$ phonegap-build login', function() {
         });
     });
 
-    describe('$ phonegap-build login -u zelda', function() {
+    describe('$ phonegap remote login -u zelda', function() {
         describe('successful account lookup', function() {
             beforeEach(function() {
-                spyOn(cli.phonegap, 'login');
+                spyOn(cli.phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: 'abc123' });
                 });
             });
 
             it('should try to login', function() {
-                cli.argv({ _: ['login'], u: 'zelda' });
-                expect(cli.phonegap.login).toHaveBeenCalledWith(
+                cli.argv({ _: ['remote', 'login'], u: 'zelda' });
+                expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
                     null,
                     jasmine.any(Function)
                 );
@@ -279,19 +271,19 @@ describe('$ phonegap-build login', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap, 'login');
+                spyOn(cli.phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
             });
 
             it('should not prompt for username', function() {
-                cli.argv({ _: ['login'], u: 'zelda' });
+                cli.argv({ _: ['remote', 'login'], u: 'zelda' });
                 expect(prompt.override.username).toEqual('zelda');
             });
 
             it('should prompt for password', function() {
-                cli.argv({ _: ['login'], u: 'zelda' });
+                cli.argv({ _: ['remote', 'login'], u: 'zelda' });
                 expect(prompt.override.password).not.toBeDefined();
             });
 
@@ -307,8 +299,8 @@ describe('$ phonegap-build login', function() {
                 });
 
                 it('should try to login', function() {
-                    cli.argv({ _: ['login'], u: 'zelda' });
-                    expect(cli.phonegap.login).toHaveBeenCalledWith(
+                    cli.argv({ _: ['remote', 'login'], u: 'zelda' });
+                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
@@ -317,18 +309,18 @@ describe('$ phonegap-build login', function() {
         });
     });
 
-    describe('$ phonegap-build login --password tr1force', function() {
+    describe('$ phonegap remote login --password tr1force', function() {
         describe('successful account lookup', function() {
             beforeEach(function() {
-                spyOn(cli.phonegap, 'login');
+                spyOn(cli.phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: 'abc123' });
                 });
             });
 
             it('should try to login', function() {
-                cli.argv({ _: ['login'], password: 'tr1force' });
-                expect(cli.phonegap.login).toHaveBeenCalledWith(
+                cli.argv({ _: ['remote', 'login'], password: 'tr1force' });
+                expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
                     null,
                     jasmine.any(Function)
                 );
@@ -338,19 +330,19 @@ describe('$ phonegap-build login', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap, 'login');
+                spyOn(cli.phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
             });
 
             it('should prompt for username', function() {
-                cli.argv({ _: ['login'], password: 'tr1force' });
+                cli.argv({ _: ['remote', 'login'], password: 'tr1force' });
                 expect(prompt.override.username).not.toBeDefined();
             });
 
             it('should not prompt for password', function() {
-                cli.argv({ _: ['login'], password: 'tr1force' });
+                cli.argv({ _: ['remote', 'login'], password: 'tr1force' });
                 expect(prompt.override.password).toEqual('tr1force');
             });
 
@@ -366,8 +358,8 @@ describe('$ phonegap-build login', function() {
                 });
 
                 it('should try to login', function() {
-                    cli.argv({ _: ['login'], password: 'tr1force' });
-                    expect(cli.phonegap.login).toHaveBeenCalledWith(
+                    cli.argv({ _: ['remote', 'login'], password: 'tr1force' });
+                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
@@ -376,23 +368,23 @@ describe('$ phonegap-build login', function() {
         });
     });
 
-    describe('$ phonegap-build login -p tr1force', function() {
+    describe('$ phonegap remote login -p tr1force', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap, 'login');
+                spyOn(cli.phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
             });
 
             it('should prompt for username', function() {
-                cli.argv({ _: ['login'], p: 'tr1force' });
+                cli.argv({ _: ['remote', 'login'], p: 'tr1force' });
                 expect(prompt.override.username).not.toBeDefined();
             });
 
             it('should not prompt for password', function() {
-                cli.argv({ _: ['login'], p: 'tr1force' });
+                cli.argv({ _: ['remote', 'login'], p: 'tr1force' });
                 expect(prompt.override.password).toEqual('tr1force');
             });
 
@@ -408,8 +400,8 @@ describe('$ phonegap-build login', function() {
                 });
 
                 it('should try to login', function() {
-                    cli.argv({ _: ['login'], p: 'tr1force' });
-                    expect(cli.phonegap.login).toHaveBeenCalledWith(
+                    cli.argv({ _: ['remote', 'login'], p: 'tr1force' });
+                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
@@ -418,23 +410,23 @@ describe('$ phonegap-build login', function() {
         });
     });
 
-    describe('$ phonegap-build login --username zelda --password tr1force', function() {
+    describe('$ phonegap remote login --username zelda --password tr1force', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap, 'login');
+                spyOn(cli.phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
             });
 
             it('should not prompt for username', function() {
-                cli.argv({ _: ['login'], username: 'zelda', password: 'tr1force' });
+                cli.argv({ _: ['remote', 'login'], username: 'zelda', password: 'tr1force' });
                 expect(prompt.override.username).toEqual('zelda');
             });
 
             it('should not prompt for password', function() {
-                cli.argv({ _: ['login'], username: 'zelda', password: 'tr1force' });
+                cli.argv({ _: ['remote', 'login'], username: 'zelda', password: 'tr1force' });
                 expect(prompt.override.password).toEqual('tr1force');
             });
 
@@ -450,8 +442,8 @@ describe('$ phonegap-build login', function() {
                 });
 
                 it('should try to login', function() {
-                    cli.argv({ _: ['login'], username: 'zelda', password: 'tr1force' });
-                    expect(cli.phonegap.login).toHaveBeenCalledWith(
+                    cli.argv({ _: ['remote', 'login'], username: 'zelda', password: 'tr1force' });
+                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
