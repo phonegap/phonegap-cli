@@ -34,7 +34,26 @@
       phonegap help create
       phonegap create path/to/my-app
 
-## Node.js
+#### Remote Usage
+
+    Usage: phonegap remote [command]
+
+    Description:
+
+      Run commands for cloud-based development with PhoneGap/Build.
+
+    Commands:
+
+      login                login to PhoneGap/Build
+      logout               logout of PhoneGap/Build
+      build <platform>     build a specific platform
+
+    Examples:
+
+      $ phonegap remote login
+      $ phonegap remote build android
+
+## Node Library
 
 ### Usage
 
