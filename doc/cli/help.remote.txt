@@ -1,0 +1,14 @@
+Usage: $0 remote [command]
+
+Description:
+
+  Run commands for cloud-based development with PhoneGap/Build.
+
+Commands:
+
+  login                login to phonegap build
+
+Examples:
+
+  $ $0 remote login
+  $ $0 remote build android

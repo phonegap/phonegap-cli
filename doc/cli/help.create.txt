@@ -1,0 +1,9 @@
+Usage: $0 create [options] <path>
+
+Description:
+
+  Create a new application.
+
+Examples:
+
+  $ $0 create path/to/my-app

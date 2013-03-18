@@ -1,0 +1,23 @@
+Usage: $0 [options] [commands]
+
+Description:
+
+  PhoneGap command-line tool.
+
+Commands:
+
+  app                  connect to phonegap app
+  create <path>        create a phonegap project
+  remote [command]     cloud development with phonegap/build
+  help [command]       output usage information
+  version              output version number
+
+Options:
+
+  -v, --version        output version number
+  -h, --help           output usage information
+
+Examples:
+
+  $ $0 help create
+  $ $0 create path/to/my-app
