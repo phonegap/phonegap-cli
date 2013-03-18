@@ -6,10 +6,10 @@ var CLI = require('../../lib/cli'),
     cli;
 
 /*
- * Version command specification.
+ * Specification: phonegap version.
  */
 
-describe('$ phonegap --version', function() {
+describe('phonegap --version', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');

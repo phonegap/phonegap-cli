@@ -6,10 +6,10 @@ var CLI = require('../../lib/cli'),
     cli;
 
 /*
- * Unknown command specification.
+ * Specification: phonegap unknown.
  */
 
-describe('$ phonegap unknown', function() {
+describe('phonegap unknown', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');

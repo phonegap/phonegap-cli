@@ -6,10 +6,10 @@ var CLI = require('../../lib/cli'),
     cli;
 
 /*
- * Help command specification.
+ * Specification: phonegap help.
  */
 
-describe('$ phonegap help', function() {
+describe('phonegap help', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');

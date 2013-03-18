@@ -5,13 +5,61 @@
 var prompt = require('prompt'),
     config = require('../../lib/common/config'),
     CLI = require('../../lib/cli'),
-    cli;
+    cli,
+    stdout;
 
 /*
- * Specification for login cli.
+ * Specification: phonegap help remote login.
  */
 
-describe('$ phonegap remote login', function() {
+describe('phonegap help remote login', function() {
+    beforeEach(function() {
+        cli = new CLI();
+        spyOn(process.stdout, 'write');
+        stdout = process.stdout.write;
+    });
+
+    describe('$ phonegap help remote', function() {
+        it('should include the command', function() {
+            cli.argv({ _: ['help', 'remote'] });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/Commands:[\w\W]*\s+login/i);
+        });
+    });
+
+    describe('$ phonegap help remote login', function() {
+        it('should output usage info', function() {
+            cli.argv({ _: ['help', 'remote', 'login'] });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
+        });
+    });
+
+    describe('$ phonegap remote login help', function() {
+        it('should output usage info', function() {
+            cli.argv({ _: ['remote', 'login', 'help'] });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
+        });
+    });
+
+    describe('$ phonegap remote login --help', function() {
+        it('should output usage info', function() {
+            cli.argv({ _: ['remote', 'login'], help: true });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
+        });
+    });
+
+    describe('$ phonegap remote login -h', function() {
+        it('should output usage info', function() {
+            cli.argv({ _: ['remote', 'login'], h: true });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
+        });
+    });
+});
+
+/*
+ * Specification: phonegap remote login.
+ */
+
+describe('phonegap remote login', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');

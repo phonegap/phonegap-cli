@@ -3,26 +3,66 @@
  */
 
 var CLI = require('../../lib/cli'),
-    cli;
+    cli,
+    stdout;
 
 /*
- * App command specification.
+ * Specification: phonegap help app.
  */
 
-describe('$ phonegap app', function() {
+describe('phonegap help app', function() {
+    beforeEach(function() {
+        cli = new CLI();
+        spyOn(process.stdout, 'write');
+        stdout = process.stdout.write;
+    });
+
+    describe('$ phonegap help', function() {
+        it('should include the command', function() {
+            cli.argv({ _: ['help'] });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/Commands:[\w\W]*\s+app/i);
+        });
+    });
+
+    describe('$ phonegap help app', function() {
+        it('should output usage info', function() {
+            cli.argv({ _: ['help', 'app'] });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ app/i);
+        });
+    });
+
+    describe('$ phonegap app help', function() {
+        it('should output usage info', function() {
+            cli.argv({ _: ['app', 'help'] });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ app/i);
+        });
+    });
+
+    describe('$ phonegap app --help', function() {
+        it('should output usage info', function() {
+            cli.argv({ _: ['app'], help: true });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ app/i);
+        });
+    });
+
+    describe('$ phonegap app -h', function() {
+        it('should output usage info', function() {
+            cli.argv({ _: ['app'], h: true });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ app/i);
+        });
+    });
+});
+
+/*
+ * Specification: phonegap app.
+ */
+
+describe('phonegap app', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
         spyOn(cli.phonegap, 'app').andReturn({
             on: function(){}
-        });
-    });
-
-    describe('$ phonegap help', function() {
-        it('outputs info on the help command', function() {
-            cli.argv({ _: ['help'] });
-            expect(process.stdout.write.mostRecentCall.args[0])
-                .toMatch(/Commands:[\w\W]*\s+app/i);
         });
     });
 
