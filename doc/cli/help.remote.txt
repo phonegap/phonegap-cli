@@ -8,6 +8,7 @@ Commands:
 
   login                login to PhoneGap/Build
   logout               logout of PhoneGap/Build
+  build <platform>     build a specific platform
 
 Examples:
 
