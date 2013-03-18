@@ -6,7 +6,8 @@ Description:
 
 Commands:
 
-  login                login to phonegap build
+  login                login to PhoneGap/Build
+  logout               logout of PhoneGap/Build
 
 Examples:
 

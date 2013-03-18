@@ -1,0 +1,9 @@
+Usage: $0 remote logout
+
+Description:
+
+  Logout of your PhoneGap Build account.
+
+Examples:
+
+  $ $0 remote logout
