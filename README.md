@@ -20,6 +20,7 @@
 
       app                  connect to phonegap app
       create <path>        create a phonegap project
+      build <platform>     build a specific platform
       remote [command]     cloud development with phonegap/build
       help [command]       output usage information
       version              output version number
