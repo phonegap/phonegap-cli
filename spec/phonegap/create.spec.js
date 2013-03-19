@@ -3,6 +3,7 @@
  */
 
 var create = require('../../lib/phonegap/create'),
+    cordova = require('cordova'),
     options;
 
 /*
@@ -14,7 +15,7 @@ describe('create(options, callback)', function() {
         options = {
             path: '/some/path/to/app/www'
         };
-        spyOn(create.phonegapbuild, 'create');
+        spyOn(cordova, 'create');
     });
 
     it('should require options', function() {
@@ -40,19 +41,14 @@ describe('create(options, callback)', function() {
     it('should try to create a project', function(done) {
         create(options, function(e) {});
         process.nextTick(function() {
-            expect(create.phonegapbuild.create).toHaveBeenCalledWith(
-                options,
-                jasmine.any(Function)
-            );
+            expect(cordova.create).toHaveBeenCalledWith(options.path);
             done();
         });
     });
 
     describe('successfully created a project', function() {
         beforeEach(function() {
-            create.phonegapbuild.create.andCallFake(function(options, callback) {
-                callback();
-            });
+            cordova.create.andReturn();
         });
 
         it('should trigger called without an error', function(done) {
@@ -72,8 +68,8 @@ describe('create(options, callback)', function() {
 
     describe('failed to create a project', function() {
         beforeEach(function() {
-            create.phonegapbuild.create.andCallFake(function(options, callback) {
-                callback(new Error('missing the path'));
+            cordova.create.andCallFake(function(path) {
+                throw new Error('path already exists');
             });
         });
 
