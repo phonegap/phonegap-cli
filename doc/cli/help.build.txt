@@ -1,0 +1,27 @@
+Usage: $0 build <platform>
+
+Description:
+
+  Build your application to a specific platform.
+
+  When you have the platform SDK installed on your system,
+  then it will build the app locally. Otherwise it will
+  fallback on PhoneGap/Build.
+
+  The platform names are:
+
+    - android
+    - blackberry
+    - ios
+    - symbian
+    - webos
+    - winphone
+
+Examples:
+
+  $ $0 build android
+  $ $0 build ios
+
+Related:
+
+  $0 remote build <platform>
