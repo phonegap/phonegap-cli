@@ -29,7 +29,7 @@
         "colors": "0.6.x",
         "node-static": "0.6.x",
         "optimist": "0.3.x",
-        "phonegap-build": "0.4.x",
+        "phonegap-build": "0.5.x",
         "prompt": "0.2.x",
         "qrcode-terminal": "0.9.x",
         "shelljs": "0.0.x"
