@@ -6,7 +6,6 @@ Description:
 
 Commands:
 
-  app                  connect to phonegap app
   create <path>        create a phonegap project
   build <platform>     build a specific platform
   remote [command]     cloud development with phonegap/build
@@ -21,4 +20,5 @@ Options:
 Examples:
 
   $ $0 help create
+  $ $0 help remote build
   $ $0 create path/to/my-app
