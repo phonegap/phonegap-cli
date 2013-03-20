@@ -64,7 +64,7 @@ describe('phonegap help build', function() {
  * Specification: phonegap build <platform>.
  */
 
-describe('phonegap create <path>', function() {
+describe('phonegap build <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
