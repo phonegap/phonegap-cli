@@ -16,6 +16,7 @@ describe('create(options, callback)', function() {
             path: '/some/path/to/app/www'
         };
         spyOn(cordova, 'create');
+        spyOn(create, 'updateProject'); // ignore
     });
 
     it('should require options', function() {
@@ -85,6 +86,30 @@ describe('create(options, callback)', function() {
             emitter.on('error', function(e) {
                 expect(e).toEqual(jasmine.any(Error));
                 done();
+            });
+        });
+
+        // remove when cordova-cli workaround does not need to exists
+        describe('throws a String as an error', function() {
+            beforeEach(function() {
+                cordova.create.andCallFake(function(path) {
+                    throw 'path already exists';
+                });
+            });
+
+            it('should trigger callback with an error', function(done) {
+                create(options, function(e) {
+                    expect(e).toEqual(jasmine.any(Error));
+                    done();
+                });
+            });
+
+            it('should trigger "error" event', function(done) {
+                var emitter = create(options);
+                emitter.on('error', function(e) {
+                    expect(e).toEqual(jasmine.any(Error));
+                    done();
+                });
             });
         });
     });
