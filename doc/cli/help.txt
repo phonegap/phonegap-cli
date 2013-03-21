@@ -8,7 +8,8 @@ Commands:
 
   create <path>        create a phonegap project
   build <platform>     build a specific platform
-  remote [command]     cloud development with phonegap/build
+  local [command]      development on local system
+  remote [command]     development in cloud with phonegap/build
   help [command]       output usage information
   version              output version number
 

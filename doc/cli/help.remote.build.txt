@@ -16,4 +16,3 @@ Description:
 Examples:
 
   $ $0 remote build android
-  $ $0 remote build ios
