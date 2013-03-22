@@ -12,16 +12,16 @@
 
     Usage: phonegap [options] [commands]
 
-    Synopsis:
+    Description:
 
       PhoneGap command-line tool.
 
     Commands:
 
-      app                  connect to phonegap app
       create <path>        create a phonegap project
       build <platform>     build a specific platform
-      remote [command]     cloud development with phonegap/build
+      local [command]      development on local system
+      remote [command]     development in cloud with phonegap/build
       help [command]       output usage information
       version              output version number
 
@@ -32,8 +32,27 @@
 
     Examples:
 
-      phonegap help create
-      phonegap create path/to/my-app
+      $ phonegap help create
+      $ phonegap help remote build
+      $ phonegap create path/to/my-app
+
+#### Local Usage
+
+    Usage: phonegap local [command]
+
+    Description:
+
+      Run commands on your local system.
+
+      This requires that you have the correct platform SDKs installed.
+
+    Commands:
+
+      build <platform>     build (and deploy) a specific platform
+
+    Examples:
+
+      $ phonegap local build android
 
 #### Remote Usage
 
