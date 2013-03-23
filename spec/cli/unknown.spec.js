@@ -18,7 +18,6 @@ describe('phonegap unknown', function() {
     describe('$ phonegap noop', function() {
         it('should output the unknown command', function() {
             cli.argv({ _: ['noop'] });
-            expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/unknown/i);
             expect(process.stdout.write.mostRecentCall.args[0]).toMatch('noop');
         });
     });
