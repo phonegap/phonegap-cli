@@ -7,7 +7,7 @@ var create = require('../../lib/phonegap/create'),
     options;
 
 /*
- * Create specification.
+ * Specification: phonegap.create
  */
 
 describe('create(options, callback)', function() {

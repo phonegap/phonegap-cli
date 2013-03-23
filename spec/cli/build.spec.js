@@ -3,8 +3,11 @@
  */
 
 var CLI = require('../../lib/cli'),
+    cordova = require('cordova'),
+    events = require('events'),
     cli,
-    stdout;
+    stdout,
+    emitter;
 
 /*
  * Specification: phonegap help build.
@@ -67,18 +70,62 @@ describe('phonegap help build', function() {
 describe('phonegap build <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
-        spyOn(process.stdout, 'write');
-        //spyOn(cli.phonegap, 'build');
+        emitter = new events.EventEmitter();
+        spyOn(cli.local, 'build');
         spyOn(cli.remote, 'build');
+        spyOn(cordova.platform, 'supports');
+        //spyOn(process.stdout, 'write');
+        //stdout = process.stdout.write;
     });
 
     describe('$ phonegap build android', function() {
-        it('should try to build the android project', function() {
-            cli.argv({ _: ['build', 'android'] });
-            expect(cli.remote.build).toHaveBeenCalledWith(
-                { _: ['remote', 'build', 'android'] },
-                jasmine.any(Function)
-            );
+        // how it should be
+
+        //it('should try to build the android project', function() {
+        //    cli.argv({ _: ['build', 'android'] });
+        //    expect(cli.phonegap.build).toHaveBeenCalledWith(
+        //        { platforms: ['android'] }
+        //    );
+        //});
+
+        //it('should support the "log" event', function() {
+        //    cli.argv({ _: ['build', 'android'] });
+        //    emitter.emit('log', 'ping log');
+        //    expect(stdout.mostRecentCall.args[0]).toMatch('ping log');
+        //});
+
+        //it('should support the "warn" event', function() {
+        //    cli.argv({ _: ['build', 'android'] });
+        //    emitter.emit('warn', 'ping warn');
+        //    expect(stdout.mostRecentCall.args[0]).toMatch('ping warn');
+        //});
+
+        //it('should support the "error" event', function() {
+        //    cli.argv({ _: ['build', 'android'] });
+        //    emitter.emit('error', 'ping error');
+        //    expect(stdout.mostRecentCall.args[0]).toMatch('ping error');
+        //});
+
+        //it('should support the "complete" event', function() {
+        //    cli.argv({ _: ['build', 'android'] });
+        //    emitter.emit('complete', 'ping complete');
+        //    expect(stdout.mostRecentCall.args[0]).toMatch('ping complete');
+        //});
+
+        describe('with local environment', function() {
+            beforeEach(function() {
+                cordova.platform.supports.andCallFake(function(platform, callback) {
+                    callback(true);
+                });
+            });
+
+            it('should build locally', function() {
+                cli.argv({ _: ['build', 'android'] });
+                expect(cli.local.build).toHaveBeenCalledWith(
+                    { _: ['local', 'build', 'android'] },
+                    jasmine.any(Function)
+                );
+            });
         });
     });
 });
