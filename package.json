@@ -33,6 +33,7 @@
         "phonegap-build": "0.5.x",
         "prompt": "0.2.x",
         "qrcode-terminal": "0.9.x",
+        "semver": "1.1.0",
         "shelljs": "0.0.x"
     },
     "devDependencies": {
