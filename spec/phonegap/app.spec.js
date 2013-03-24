@@ -79,9 +79,9 @@ describe('app(options, callback)', function() {
             });
         });
 
-        it('should emit the event listening', function(done) {
+        it('should emit the "complete" event', function(done) {
             var e = app(options, function() {});
-            e.on('listening', function(server) {
+            e.on('complete', function(server) {
                 expect(server.address).toEqual(jasmine.any(String));
                 expect(server.port).toEqual(options.port);
                 done();
