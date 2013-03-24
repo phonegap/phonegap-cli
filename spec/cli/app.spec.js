@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var CLI = require('../../lib/cli'),
+var phonegap = require('../../lib/main'),
+    CLI = require('../../lib/cli'),
     cli,
     stdout;
 
@@ -13,6 +14,7 @@ var CLI = require('../../lib/cli'),
 describe('phonegap help app', function() {
     beforeEach(function() {
         cli = new CLI();
+        spyOn(phonegap, 'app');
         spyOn(process.stdout, 'write');
         stdout = process.stdout.write;
     });
@@ -61,7 +63,7 @@ describe('phonegap app', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
-        spyOn(cli.phonegap, 'app').andReturn({
+        spyOn(phonegap, 'app').andReturn({
             on: function(){}
         });
     });
@@ -69,21 +71,21 @@ describe('phonegap app', function() {
     describe('$ phonegap app', function() {
         it('should connect to phonegap app', function() {
             cli.argv({ _: ['app'] });
-            expect(cli.phonegap.app).toHaveBeenCalledWith({});
+            expect(phonegap.app).toHaveBeenCalledWith({});
         });
     });
 
     describe('$ phonegap app --port 1337', function() {
         it('should connect to phonegap app on port 1337', function() {
             cli.argv({ _: ['app'], port: 1337 });
-            expect(cli.phonegap.app).toHaveBeenCalledWith({ port: 1337 });
+            expect(phonegap.app).toHaveBeenCalledWith({ port: 1337 });
         });
     });
 
     describe('$ phonegap app -p 1337', function() {
         it('should connect to phonegap app on port 1337', function() {
             cli.argv({ _: ['app'], p: 1337 });
-            expect(cli.phonegap.app).toHaveBeenCalledWith({ port: 1337 });
+            expect(phonegap.app).toHaveBeenCalledWith({ port: 1337 });
         });
     });
 });

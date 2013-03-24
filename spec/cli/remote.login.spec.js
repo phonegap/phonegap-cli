@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var prompt = require('prompt'),
+var phonegap = require('../../lib/main'),
+    prompt = require('prompt'),
     config = require('../../lib/common/config'),
     CLI = require('../../lib/cli'),
     cli,
@@ -74,7 +75,7 @@ describe('phonegap remote login', function() {
 
         describe('successful account lookup', function() {
             beforeEach(function() {
-                spyOn(cli.phonegap.remote, 'login');
+                spyOn(phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: 'abc123' });
                 });
@@ -82,7 +83,7 @@ describe('phonegap remote login', function() {
 
             it('should try to login', function() {
                 cli.argv({ _: ['remote', 'login'] });
-                expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
+                expect(phonegap.remote.login).toHaveBeenCalledWith(
                     null,
                     jasmine.any(Function)
                 );
@@ -90,7 +91,7 @@ describe('phonegap remote login', function() {
 
             describe('successful login', function() {
                 beforeEach(function() {
-                    cli.phonegap.remote.login.andCallFake(function(argv, callback) {
+                    phonegap.remote.login.andCallFake(function(argv, callback) {
                         callback(null, {});
                     });
                 });
@@ -112,7 +113,7 @@ describe('phonegap remote login', function() {
 
             describe('failed login', function() {
                 beforeEach(function() {
-                    cli.phonegap.remote.login.andCallFake(function(argv, callback) {
+                    phonegap.remote.login.andCallFake(function(argv, callback) {
                         callback(new Error('Invalid password'));
                     });
                 });
@@ -136,7 +137,7 @@ describe('phonegap remote login', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap.remote, 'login');
+                spyOn(phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
@@ -166,7 +167,7 @@ describe('phonegap remote login', function() {
 
                 it('should try to login', function() {
                     cli.argv({ _: ['remote', 'login'] });
-                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
+                    expect(phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
@@ -174,7 +175,7 @@ describe('phonegap remote login', function() {
 
                 describe('successful login', function() {
                     beforeEach(function() {
-                        cli.phonegap.remote.login.andCallFake(function(argv, callback) {
+                        phonegap.remote.login.andCallFake(function(argv, callback) {
                             callback(null, {});
                         });
                     });
@@ -196,7 +197,7 @@ describe('phonegap remote login', function() {
 
                 describe('failed login', function() {
                     beforeEach(function() {
-                        cli.phonegap.remote.login.andCallFake(function(argv, callback) {
+                        phonegap.remote.login.andCallFake(function(argv, callback) {
                             callback(new Error('Invalid password'));
                         });
                     });
@@ -226,7 +227,7 @@ describe('phonegap remote login', function() {
 
                 it('should not try to login', function() {
                     cli.argv({ _: ['remote', 'login'] });
-                    expect(cli.phonegap.remote.login).not.toHaveBeenCalled();
+                    expect(phonegap.remote.login).not.toHaveBeenCalled();
                 });
 
                 it('should trigger callback with an error', function(done) {
@@ -242,7 +243,7 @@ describe('phonegap remote login', function() {
     describe('$ phonegap remote login --username zelda', function() {
         describe('successful account lookup', function() {
             beforeEach(function() {
-                spyOn(cli.phonegap.remote, 'login');
+                spyOn(phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: 'abc123' });
                 });
@@ -250,7 +251,7 @@ describe('phonegap remote login', function() {
 
             it('should try to login', function() {
                 cli.argv({ _: ['remote', 'login'], username: 'zelda' });
-                expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
+                expect(phonegap.remote.login).toHaveBeenCalledWith(
                     null,
                     jasmine.any(Function)
                 );
@@ -260,7 +261,7 @@ describe('phonegap remote login', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap.remote, 'login');
+                spyOn(phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
@@ -289,7 +290,7 @@ describe('phonegap remote login', function() {
 
                 it('should try to login', function() {
                     cli.argv({ _: ['remote', 'login'], username: 'zelda' });
-                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
+                    expect(phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
@@ -301,7 +302,7 @@ describe('phonegap remote login', function() {
     describe('$ phonegap remote login -u zelda', function() {
         describe('successful account lookup', function() {
             beforeEach(function() {
-                spyOn(cli.phonegap.remote, 'login');
+                spyOn(phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: 'abc123' });
                 });
@@ -309,7 +310,7 @@ describe('phonegap remote login', function() {
 
             it('should try to login', function() {
                 cli.argv({ _: ['remote', 'login'], u: 'zelda' });
-                expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
+                expect(phonegap.remote.login).toHaveBeenCalledWith(
                     null,
                     jasmine.any(Function)
                 );
@@ -319,7 +320,7 @@ describe('phonegap remote login', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap.remote, 'login');
+                spyOn(phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
@@ -348,7 +349,7 @@ describe('phonegap remote login', function() {
 
                 it('should try to login', function() {
                     cli.argv({ _: ['remote', 'login'], u: 'zelda' });
-                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
+                    expect(phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
@@ -360,7 +361,7 @@ describe('phonegap remote login', function() {
     describe('$ phonegap remote login --password tr1force', function() {
         describe('successful account lookup', function() {
             beforeEach(function() {
-                spyOn(cli.phonegap.remote, 'login');
+                spyOn(phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: 'abc123' });
                 });
@@ -368,7 +369,7 @@ describe('phonegap remote login', function() {
 
             it('should try to login', function() {
                 cli.argv({ _: ['remote', 'login'], password: 'tr1force' });
-                expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
+                expect(phonegap.remote.login).toHaveBeenCalledWith(
                     null,
                     jasmine.any(Function)
                 );
@@ -378,7 +379,7 @@ describe('phonegap remote login', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap.remote, 'login');
+                spyOn(phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
@@ -407,7 +408,7 @@ describe('phonegap remote login', function() {
 
                 it('should try to login', function() {
                     cli.argv({ _: ['remote', 'login'], password: 'tr1force' });
-                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
+                    expect(phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
@@ -420,7 +421,7 @@ describe('phonegap remote login', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap.remote, 'login');
+                spyOn(phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
@@ -449,7 +450,7 @@ describe('phonegap remote login', function() {
 
                 it('should try to login', function() {
                     cli.argv({ _: ['remote', 'login'], p: 'tr1force' });
-                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
+                    expect(phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );
@@ -462,7 +463,7 @@ describe('phonegap remote login', function() {
         describe('failed account lookup', function() {
             beforeEach(function() {
                 spyOn(prompt, 'get');
-                spyOn(cli.phonegap.remote, 'login');
+                spyOn(phonegap.remote, 'login');
                 config.global.load.andCallFake(function(callback) {
                     callback(null, { token: undefined });
                 });
@@ -491,7 +492,7 @@ describe('phonegap remote login', function() {
 
                 it('should try to login', function() {
                     cli.argv({ _: ['remote', 'login'], username: 'zelda', password: 'tr1force' });
-                    expect(cli.phonegap.remote.login).toHaveBeenCalledWith(
+                    expect(phonegap.remote.login).toHaveBeenCalledWith(
                         { username: 'zelda', password: 'tr1force' },
                         jasmine.any(Function)
                     );

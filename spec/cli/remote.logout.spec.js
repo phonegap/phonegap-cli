@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var CLI = require('../../lib/cli'),
+var phonegap = require('../../lib/main'),
+    CLI = require('../../lib/cli'),
     cli,
     stdout;
 
@@ -59,19 +60,19 @@ describe('phonegap help remote logout', function() {
 describe('phonegap remote logout', function() {
     beforeEach(function() {
         cli = new CLI();
-        spyOn(cli.phonegap.remote, 'logout');
+        spyOn(phonegap.remote, 'logout');
         spyOn(process.stdout, 'write');
     });
 
     describe('$ phonegap remote logout', function() {
         it('should try to logout', function() {
             cli.argv({ _: ['remote', 'logout'] });
-            expect(cli.phonegap.remote.logout).toHaveBeenCalled();
+            expect(phonegap.remote.logout).toHaveBeenCalled();
         });
 
         describe('successful logout', function() {
             beforeEach(function() {
-                cli.phonegap.remote.logout.andCallFake(function(argv, callback) {
+                phonegap.remote.logout.andCallFake(function(argv, callback) {
                     callback(null);
                 });
             });
@@ -91,7 +92,7 @@ describe('phonegap remote logout', function() {
 
         describe('failed logout', function() {
             beforeEach(function() {
-                cli.phonegap.remote.logout.andCallFake(function(argv, callback) {
+                phonegap.remote.logout.andCallFake(function(argv, callback) {
                     callback(new Error('Account does not exist.'));
                 });
             });

@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var CLI = require('../../lib/cli'),
+var phonegap = require('../../lib/main'),
+    CLI = require('../../lib/cli'),
     cli,
     stdout,
     emitterSpy;
@@ -14,7 +15,7 @@ var CLI = require('../../lib/cli'),
 describe('phonegap help local build', function() {
     beforeEach(function() {
         cli = new CLI();
-        spyOn(cli.phonegap.local, 'build');
+        spyOn(phonegap.local, 'build');
         spyOn(process.stdout, 'write');
         stdout = process.stdout.write;
     });
@@ -75,13 +76,13 @@ describe('phonegap local build <platform>', function() {
             }
         };
         spyOn(process.stdout, 'write');
-        spyOn(cli.phonegap.local, 'build').andReturn(emitterSpy);
+        spyOn(phonegap.local, 'build').andReturn(emitterSpy);
     });
 
     describe('$ phonegap local build android', function() {
         it('should try to build the project', function() {
             cli.argv({ _: ['local', 'build', 'android'] });
-            expect(cli.phonegap.local.build).toHaveBeenCalledWith(
+            expect(phonegap.local.build).toHaveBeenCalledWith(
                 {
                     platforms: ['android']
                 },
@@ -91,7 +92,7 @@ describe('phonegap local build <platform>', function() {
 
         describe('successful project build', function() {
             beforeEach(function() {
-                cli.phonegap.local.build.andCallFake(function(opts, callback) {
+                phonegap.local.build.andCallFake(function(opts, callback) {
                     callback(null);
                     return emitterSpy;
                 });
@@ -107,7 +108,7 @@ describe('phonegap local build <platform>', function() {
 
         describe('failed project build', function() {
             beforeEach(function() {
-                cli.phonegap.local.build.andCallFake(function(opts, callback) {
+                phonegap.local.build.andCallFake(function(opts, callback) {
                     callback(new Error('write access denied'));
                     return emitterSpy;
                 });

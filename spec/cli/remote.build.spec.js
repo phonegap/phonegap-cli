@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var qrcode = require('qrcode-terminal'),
+var phonegap = require('../../lib/main'),
+    qrcode = require('qrcode-terminal'),
     CLI = require('../../lib/cli'),
     cli,
     stdout,
@@ -16,7 +17,7 @@ var qrcode = require('qrcode-terminal'),
 describe('phonegap help remote build', function() {
     beforeEach(function() {
         cli = new CLI();
-        spyOn(cli.phonegap.remote, 'build');
+        spyOn(phonegap.remote, 'build');
         spyOn(process.stdout, 'write');
         stdout = process.stdout.write;
     });
@@ -85,7 +86,7 @@ describe('phonegap remote build <platform>', function() {
         };
         spyOn(qrcode, 'generate');
         spyOn(process.stdout, 'write');
-        spyOn(cli.phonegap.remote, 'build').andReturn(emitterSpy);
+        spyOn(phonegap.remote, 'build').andReturn(emitterSpy);
     });
 
     describe('$ phonegap remote build android', function() {
@@ -104,7 +105,7 @@ describe('phonegap remote build <platform>', function() {
 
             it('should try to build the project', function() {
                 cli.argv({ _: ['remote', 'build', 'android'] });
-                expect(cli.phonegap.remote.build).toHaveBeenCalledWith(
+                expect(phonegap.remote.build).toHaveBeenCalledWith(
                     {
                         api: jasmine.any(Object),
                         platforms: ['android']
@@ -115,7 +116,7 @@ describe('phonegap remote build <platform>', function() {
 
             describe('successful project build', function() {
                 beforeEach(function() {
-                    cli.phonegap.remote.build.andCallFake(function(opts, callback) {
+                    phonegap.remote.build.andCallFake(function(opts, callback) {
                         callback(null, appData);
                         return emitterSpy;
                     });
@@ -148,7 +149,7 @@ describe('phonegap remote build <platform>', function() {
 
             describe('failed project build', function() {
                 beforeEach(function() {
-                    cli.phonegap.remote.build.andCallFake(function(opts, callback) {
+                    phonegap.remote.build.andCallFake(function(opts, callback) {
                         callback(new Error('Could not connect to PhoneGap Build.'));
                         return emitterSpy;
                     });
@@ -172,7 +173,7 @@ describe('phonegap remote build <platform>', function() {
 
             it('should not build the project', function() {
                 cli.argv({ _: ['remote', 'build', 'android'] });
-                expect(cli.phonegap.remote.build).not.toHaveBeenCalled();
+                expect(phonegap.remote.build).not.toHaveBeenCalled();
             });
 
             it('should call callback with an error', function(done) {

@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var CLI = require('../../lib/cli'),
+var phonegap = require('../../lib/main'),
+    CLI = require('../../lib/cli'),
     cli,
     stdout;
 
@@ -68,13 +69,13 @@ describe('phonegap create <path>', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
-        spyOn(cli.phonegap, 'create');
+        spyOn(phonegap, 'create');
     });
 
     describe('$ phonegap create ./my-app', function() {
         it('should try to create the project', function() {
             cli.argv({ _: ['create', './my-app'] });
-            expect(cli.phonegap.create).toHaveBeenCalledWith({
+            expect(phonegap.create).toHaveBeenCalledWith({
                 path: './my-app'
             },
             jasmine.any(Function));

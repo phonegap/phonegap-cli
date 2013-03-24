@@ -83,7 +83,7 @@ describe('phonegap build <platform>', function() {
 
         //it('should try to build the android project', function() {
         //    cli.argv({ _: ['build', 'android'] });
-        //    expect(cli.phonegap.build).toHaveBeenCalledWith(
+        //    expect(phonegap.build).toHaveBeenCalledWith(
         //        { platforms: ['android'] }
         //    );
         //});
