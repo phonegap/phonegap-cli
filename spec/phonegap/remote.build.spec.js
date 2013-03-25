@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-var PhoneGap = require('../../../lib/phonegap'),
+var PhoneGap = require('../../lib/phonegap'),
     build = new PhoneGap().local.build,
     cordova = require('cordova'),
     fs = require('fs'),
