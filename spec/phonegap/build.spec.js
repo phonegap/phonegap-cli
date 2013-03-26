@@ -4,9 +4,7 @@
 
 var PhoneGap = require('../../lib/phonegap'),
     cordova = require('cordova'),
-    events = require('events'),
     phonegap,
-    emitter,
     options;
 
 /*
@@ -19,9 +17,8 @@ describe('phonegap.build(options, callback)', function() {
         options = {
             platforms: ['android']
         };
-        emitter = new events.EventEmitter();
-        spyOn(phonegap.local, 'build').andReturn(emitter);
-        spyOn(phonegap.remote, 'build').andReturn(emitter);
+        spyOn(phonegap.local, 'build').andReturn(phonegap);
+        spyOn(phonegap.remote, 'build').andReturn(phonegap);
         spyOn(cordova.platform, 'supports');
     });
 
@@ -45,6 +42,10 @@ describe('phonegap.build(options, callback)', function() {
         }).not.toThrow();
     });
 
+    it('should return itself', function() {
+        expect(phonegap.build(options)).toEqual(phonegap);
+    });
+
     describe('with local environment', function() {
         beforeEach(function() {
             cordova.platform.supports.andCallFake(function(platform, callback) {
@@ -52,12 +53,10 @@ describe('phonegap.build(options, callback)', function() {
             });
         });
 
-        it('should try to build the project locally', function(done) {
-            phonegap.build(options, function(e) {});
-            process.nextTick(function() {
-                expect(phonegap.local.build).toHaveBeenCalledWith(options);
-                done();
-            });
+        it('should try to build the project locally', function() {
+            var callback = function() {};
+            phonegap.build(options, callback);
+            expect(phonegap.local.build).toHaveBeenCalledWith(options, callback);
         });
     });
 
@@ -68,12 +67,10 @@ describe('phonegap.build(options, callback)', function() {
             });
         });
 
-        it('should try to build the project remotely', function(done) {
-            phonegap.build(options, function(e) {});
-            process.nextTick(function() {
-                expect(phonegap.remote.build).toHaveBeenCalledWith(options);
-                done();
-            });
+        it('should try to build the project remotely', function() {
+            var callback = function() {};
+            phonegap.build(options, callback);
+            expect(phonegap.remote.build).toHaveBeenCalledWith(options, callback);
         });
     });
 });
