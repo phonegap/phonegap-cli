@@ -23,9 +23,10 @@ describe('phonegap.app(options, callback)', function() {
         // mock the http.createServer
         spyOn(http, 'createServer').andCallFake(function(callback) {
             request = new events.EventEmitter();
+            request.url = '/some/path';
             serverSpy = new events.EventEmitter();
             serverSpy.listen = jasmine.createSpy();
-            callback(request); // bind routes
+            callback(request, { status: 200 }); // bind routes
             return serverSpy;
         });
         // mock node-static
@@ -96,7 +97,7 @@ describe('phonegap.app(options, callback)', function() {
 
             it('should emit a "log" event', function(done) {
                 serveSpy.andCallFake(function(request, response, callback) {
-                    callback();
+                    callback(null, { status: 200 });
                 });
                 phonegap.on('log', function(request, response) {
                     done();

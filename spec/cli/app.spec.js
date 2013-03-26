@@ -71,21 +71,23 @@ describe('phonegap app', function() {
     describe('$ phonegap app', function() {
         it('should connect to phonegap app', function() {
             cli.argv({ _: ['app'] });
-            expect(phonegap.app).toHaveBeenCalledWith({});
+            expect(phonegap.app).toHaveBeenCalled();
         });
     });
 
     describe('$ phonegap app --port 1337', function() {
         it('should connect to phonegap app on port 1337', function() {
             cli.argv({ _: ['app'], port: 1337 });
-            expect(phonegap.app).toHaveBeenCalledWith({ port: 1337 });
+            expect(phonegap.app).toHaveBeenCalled();
+            expect(phonegap.app.mostRecentCall.args[0]).toEqual({ port: 1337 });
         });
     });
 
     describe('$ phonegap app -p 1337', function() {
         it('should connect to phonegap app on port 1337', function() {
             cli.argv({ _: ['app'], p: 1337 });
-            expect(phonegap.app).toHaveBeenCalledWith({ port: 1337 });
+            expect(phonegap.app).toHaveBeenCalled();
+            expect(phonegap.app.mostRecentCall.args[0]).toEqual({ port: 1337 });
         });
     });
 });
