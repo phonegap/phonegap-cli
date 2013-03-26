@@ -83,11 +83,6 @@ describe('phonegap remote logout', function() {
                     done();
                 });
             });
-
-            it('should output a success message', function() {
-                cli.argv({ _: ['remote', 'logout'] });
-                expect(process.stdout.write).toHaveBeenCalled();
-            });
         });
 
         describe('failed logout', function() {
@@ -102,11 +97,6 @@ describe('phonegap remote logout', function() {
                     expect(e).not.toBeNull();
                     done();
                 });
-            });
-
-            it('should output a success message', function() {
-                cli.argv({ _: ['remote', 'logout'] });
-                expect(process.stdout.write).toHaveBeenCalled();
             });
         });
     });
