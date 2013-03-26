@@ -1,22 +1,24 @@
-/*
+/*!
  * Module dependencies.
  */
 
-var app = require('../../lib/phonegap/app'),
+var PhoneGap = require('../../lib/phonegap'),
     http = require('http'),
     events = require('events'),
     Static = require('node-static'),
+    phonegap,
     request,
     serverSpy,
     serveSpy,
     options;
 
-/*
- * App specification.
+/*!
+ * Specification: phonegap.app
  */
 
-describe('app(options, callback)', function() {
+describe('phonegap.app(options, callback)', function() {
     beforeEach(function() {
+        phonegap = new PhoneGap();
         options = {};
         // mock the http.createServer
         spyOn(http, 'createServer').andCallFake(function(callback) {
@@ -36,106 +38,91 @@ describe('app(options, callback)', function() {
     it('should require options', function() {
         expect(function() {
             options = undefined;
-            app(options, function(e) {});
+            phonegap.app(options, function(e) {});
         }).toThrow();
     });
 
     it('should not require options.port', function() {
         expect(function() {
             options.port = undefined;
-            app(options, function(e) {});
+            phonegap.app(options, function(e) {});
         }).not.toThrow();
     });
 
     it('should not require callback', function() {
         expect(function() {
-            app(options);
+            phonegap.app(options);
         }).not.toThrow();
     });
 
-    it('should try to serve the project', function(done) {
-        app(options, function(e) {});
-        process.nextTick(function() {
-            expect(http.createServer).toHaveBeenCalled();
-            done();
-        });
+    it('should return itself', function() {
+        expect(phonegap.app(options)).toEqual(phonegap);
+    });
+
+    it('should try to serve the project', function() {
+        phonegap.app(options);
+        expect(http.createServer).toHaveBeenCalled();
     });
 
     describe('when successfully started server', function() {
-        it('should listen on the default port (3000)', function(done) {
-            app(options, function(e) {});
-            process.nextTick(function() {
-                expect(serverSpy.listen).toHaveBeenCalledWith(3000);
-                done();
-            });
+        it('should listen on the default port (3000)', function() {
+            phonegap.app(options);
+            expect(serverSpy.listen).toHaveBeenCalledWith(3000);
         });
 
-        it('should listen on the specified port', function(done) {
+        it('should listen on the specified port', function() {
             options.port = 1337;
-            app(options, function(e) {});
-            process.nextTick(function() {
-                expect(serverSpy.listen).toHaveBeenCalledWith(1337);
-                done();
-            });
+            phonegap.app(options);
+            expect(serverSpy.listen).toHaveBeenCalledWith(1337);
         });
 
-        it('should emit the "complete" event', function(done) {
-            var e = app(options, function() {});
-            e.on('complete', function(server) {
-                expect(server.address).toEqual(jasmine.any(String));
-                expect(server.port).toEqual(options.port);
+        it('should trigger callback with server object', function(done) {
+            phonegap.app(options, function(e, server) {
+                expect(server).toEqual({
+                    address: '127.0.0.1',
+                    port: 3000
+                });
                 done();
             });
-            process.nextTick(function() {
-                serverSpy.emit('listening');
-            });
+            serverSpy.emit('listening');
         });
 
         describe('on request', function() {
-            it('should serve a response', function(done) {
-                app(options, function(e) {});
-                process.nextTick(function() {
-                    request.emit('end');
-                    expect(serveSpy).toHaveBeenCalled();
-                    done();
-                });
+            it('should serve a response', function() {
+                phonegap.app(options, function(e) {});
+                request.emit('end');
+                expect(serveSpy).toHaveBeenCalled();
             });
 
-            it('should emit a request event', function(done) {
+            it('should emit a "log" event', function(done) {
                 serveSpy.andCallFake(function(request, response, callback) {
                     callback();
                 });
-                var e = app(options, function() {});
-                e.on('request', function(request, response) {
+                phonegap.on('log', function(request, response) {
                     done();
                 });
-                process.nextTick(function() {
-                    request.emit('end');
-                });
+                phonegap.app(options);
+                request.emit('end');
             });
         });
     });
 
     describe('when failed to start server', function() {
         it('should trigger callback with an error', function(done) {
-            app(options, function(e) {
+            phonegap.app(options, function(e) {
                 expect(e).toEqual(jasmine.any(Error));
                 done();
             });
-            process.nextTick(function() {
-                serverSpy.emit('error', new Error('port in use'));
-            });
+            serverSpy.emit('error', new Error('port in use'));
         });
 
-        it('should emit the event error', function(done) {
-            var r = app(options, function() {});
-            r.on('error', function(e) {
-                expect(e).toEqual(jasmine.any(Error));
+        it('should fire "err" event', function(done) {
+            phonegap.on('err', function(e) {
+                expect(e).toEqual('port in use');
                 done();
             });
-            process.nextTick(function() {
-                serverSpy.emit('error', new Error('port in use'));
-            });
+            phonegap.app(options);
+            serverSpy.emit('error', new Error('port in use'));
         });
     });
 });
