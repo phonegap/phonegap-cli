@@ -2,8 +2,9 @@
  * Module dependencies.
  */
 
-var create = require('../../lib/phonegap/create'),
+var PhoneGap = require('../../lib/phonegap'),
     cordova = require('cordova'),
+    phonegap,
     options;
 
 /*
@@ -12,39 +13,41 @@ var create = require('../../lib/phonegap/create'),
 
 describe('create(options, callback)', function() {
     beforeEach(function() {
+        phonegap = new PhoneGap();
         options = {
             path: '/some/path/to/app/www'
         };
         spyOn(cordova, 'create');
-        spyOn(create, 'updateProject'); // ignore
+        spyOn(phonegap.create, 'updateProject'); // ignore
     });
 
     it('should require options', function() {
         expect(function() {
             options = undefined;
-            create(options, function(e) {});
+            phonegap.create(options, function(e) {});
         }).toThrow();
     });
 
     it('should require options.path', function() {
         expect(function() {
             options.path = undefined;
-            create(options, function(e) {});
+            phonegap.create(options, function(e) {});
         }).toThrow();
     });
 
     it('should not require callback', function() {
         expect(function() {
-            create(options);
+            phonegap.create(options);
         }).not.toThrow();
     });
 
-    it('should try to create a project', function(done) {
-        create(options, function(e) {});
-        process.nextTick(function() {
-            expect(cordova.create).toHaveBeenCalledWith(options.path);
-            done();
-        });
+    it('should return itself', function() {
+        expect(phonegap.create(options)).toEqual(phonegap);
+    });
+
+    it('should try to create a project', function() {
+        phonegap.create(options);
+        expect(cordova.create).toHaveBeenCalledWith(options.path);
     });
 
     describe('successfully created a project', function() {
@@ -53,15 +56,8 @@ describe('create(options, callback)', function() {
         });
 
         it('should trigger called without an error', function(done) {
-            create(options, function(e) {
+            phonegap.create(options, function(e) {
                 expect(e).toBeNull();
-                done();
-            });
-        });
-
-        it('should trigger "complete" event', function(done) {
-            var emitter = create(options);
-            emitter.on('complete', function() {
                 done();
             });
         });
@@ -75,18 +71,18 @@ describe('create(options, callback)', function() {
         });
 
         it('should trigger callback with an error', function(done) {
-            create(options, function(e) {
+            phonegap.create(options, function(e) {
                 expect(e).toEqual(jasmine.any(Error));
                 done();
             });
         });
 
-        it('should trigger "error" event', function(done) {
-            var emitter = create(options);
-            emitter.on('error', function(e) {
-                expect(e).toEqual(jasmine.any(Error));
+        it('should trigger "err" event', function(done) {
+            phonegap.on('err', function(e) {
+                expect(e).toEqual(jasmine.any(String));
                 done();
             });
+            phonegap.create(options);
         });
 
         // remove when cordova-cli workaround does not need to exists
@@ -98,18 +94,18 @@ describe('create(options, callback)', function() {
             });
 
             it('should trigger callback with an error', function(done) {
-                create(options, function(e) {
+                phonegap.create(options, function(e) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
                 });
             });
 
-            it('should trigger "error" event', function(done) {
-                var emitter = create(options);
-                emitter.on('error', function(e) {
-                    expect(e).toEqual(jasmine.any(Error));
+            it('should trigger "err" event', function(done) {
+                phonegap.on('err', function(e) {
+                    expect(e).toEqual(jasmine.any(String));
                     done();
                 });
+                phonegap.create(options);
             });
         });
     });
