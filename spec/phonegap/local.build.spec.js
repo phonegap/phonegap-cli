@@ -3,81 +3,78 @@
  */
 
 var PhoneGap = require('../../lib/phonegap'),
-    build = new PhoneGap().local.build,
     cordova = require('cordova'),
     fs = require('fs'),
-    callback,
+    phonegap,
     options;
 
 /*
  * Specification: phonegap.local.build
  */
 
-describe('local.build(options, [callback])', function() {
+describe('phonegap.local.build(options, [callback])', function() {
     beforeEach(function() {
+        phonegap = new PhoneGap();
         options = {
             platforms: ['android']
         };
-        callback = function(e) {};
         spyOn(cordova, 'build');
-        spyOn(build, 'addPlatform');
+        spyOn(phonegap.local.build, 'addPlatform');
     });
 
     it('should require options', function() {
         expect(function() {
             options = undefined;
-            build(options, callback);
+            phonegap.local.build(options, callback);
         }).toThrow();
     });
 
     it('should require options.platforms', function() {
         expect(function() {
             options.platforms = undefined;
-            build(options, callback);
+            phonegap.local.build(options, callback);
         }).toThrow();
     });
 
     it('should not require callback', function() {
         expect(function() {
-            build(options);
+            phonegap.local.build(options);
         }).not.toThrow();
+    });
+
+    it('should return itself', function() {
+        expect(phonegap.local.build(options)).toEqual(phonegap);
     });
 
     it('should require at least one platform', function(done) {
         options.platforms = [];
-        build(options, function(e) {
+        phonegap.local.build(options, function(e) {
             expect(e).toEqual(jasmine.any(Error));
             done();
         });
     });
 
-    it('should try to add the platform', function(done) {
-        build(options, callback);
-        process.nextTick(function() {
-            expect(build.addPlatform).toHaveBeenCalledWith(
-                options,
-                jasmine.any(Function)
-            );
-            done();
-        });
+    it('should try to add the platform', function() {
+        phonegap.local.build(options);
+        expect(phonegap.local.build.addPlatform).toHaveBeenCalledWith(
+            options,
+            jasmine.any(Function)
+        );
     });
 
     describe('successfully added platform', function() {
         beforeEach(function() {
-            build.addPlatform.andCallFake(function(options, callback) {
+            phonegap.local.build.addPlatform.andCallFake(function(options, callback) {
                 callback();
             });
         });
 
-        it('should try to build the platform', function(done) {
-            build(options, callback);
-            process.nextTick(function() {
-                expect(cordova.build).toHaveBeenCalledWith(
-                    options.platforms,
-                    jasmine.any(Function)
-                );
-                done();
-            });
+        it('should try to build the platform', function() {
+            phonegap.local.build(options);
+            expect(cordova.build).toHaveBeenCalledWith(
+                options.platforms,
+                jasmine.any(Function)
+            );
         });
 
         describe('successful build', function() {
@@ -88,15 +85,8 @@ describe('local.build(options, [callback])', function() {
             });
 
             it('should trigger called without an error', function(done) {
-                build(options, function(e) {
+                phonegap.local.build(options, function(e) {
                     expect(e).toBeNull();
-                    done();
-                });
-            });
-
-            it('should trigger "complete" event', function(done) {
-                var emitter = build(options);
-                emitter.on('complete', function() {
                     done();
                 });
             });
@@ -110,58 +100,56 @@ describe('local.build(options, [callback])', function() {
             });
 
             it('should trigger called with an error', function(done) {
-                build(options, function(e) {
+                phonegap.local.build(options, function(e) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
                 });
             });
 
-            it('should trigger "error" event', function(done) {
-                var emitter = build(options);
-                emitter.on('error', function(e) {
-                    expect(e).toEqual(jasmine.any(Error));
+            it('should trigger "err" event', function(done) {
+                phonegap.on('err', function(e) {
+                    expect(e).toEqual(jasmine.any(String));
                     done();
                 });
+                phonegap.local.build(options);
             });
         });
     });
 
     describe('failure adding platform', function() {
         beforeEach(function() {
-            build.addPlatform.andCallFake(function(options, callback) {
+            phonegap.local.build.addPlatform.andCallFake(function(options, callback) {
                 callback(new Error('write access denied'));
             });
         });
 
         it('should trigger callback with an error', function(done) {
-            build(options, function(e) {
+            phonegap.local.build(options, function(e) {
                 expect(e).toEqual(jasmine.any(Error));
                 done();
             });
         });
 
-        it('should trigger "error" event', function(done) {
-            var emitter = build(options);
-            emitter.on('error', function(e) {
-                expect(e).toEqual(jasmine.any(Error));
+        it('should trigger "err" event', function(done) {
+            phonegap.on('err', function(e) {
+                expect(e).toEqual(jasmine.any(String));
                 done();
             });
+            phonegap.local.build(options);
         });
     });
 });
 
-describe('local.build.addPlatform(options, callback)', function() {
+describe('phonegap.local.build.addPlatform(options, callback)', function() {
+    var emitter;
     beforeEach(function() {
+        phonegap = new PhoneGap();
         options = {
-            platforms: ['android'],
-            emitter: {
-                emit: function() {
-                },
-                on: function() {
-                }
-            }
+            platforms: ['android']
         };
-        callback = function(e) {};
+        emitter = {
+            emit: function() {}
+        };
         spyOn(fs, 'existsSync');
         spyOn(cordova, 'platform');
     });
@@ -169,28 +157,20 @@ describe('local.build.addPlatform(options, callback)', function() {
     it('should require options', function() {
         expect(function() {
             options = undefined;
-            build.addPlatform(options, callback);
+            phonegap.local.build.addPlatform.call(emitter, options, function() {});
         }).toThrow();
     });
 
     it('should require options.platforms', function() {
         expect(function() {
             options.platforms = undefined;
-            build.addPlatform(options, callback);
-        }).toThrow();
-    });
-
-    it('should require options.emitter', function() {
-        expect(function() {
-            options.emitter = undefined;
-            build.addPlatform(options, callback);
+            phonegap.local.build.addPlatform.call(emitter, options, function() {});
         }).toThrow();
     });
 
     it('should require callback', function() {
         expect(function() {
-            callback = undefined;
-            build.addPlatform(options, callback);
+            phonegap.local.build.addPlatform.call(emitter, options);
         }).toThrow();
     });
 
@@ -199,8 +179,8 @@ describe('local.build.addPlatform(options, callback)', function() {
             fs.existsSync.andReturn(true);
         });
 
-        it('should trigger called without an error', function(done) {
-            build.addPlatform(options, function(e) {
+        it('should trigger callback without an error', function(done) {
+            phonegap.local.build.addPlatform.call(emitter, options, function(e) {
                 expect(e).toBeNull();
                 done();
             });
@@ -213,7 +193,7 @@ describe('local.build.addPlatform(options, callback)', function() {
         });
 
         it('should try to add the platform', function() {
-            build.addPlatform(options, callback);
+            phonegap.local.build.addPlatform.call(emitter, options, function() {});
             expect(cordova.platform).toHaveBeenCalledWith(
                 'add',
                 options.platforms,
@@ -229,7 +209,7 @@ describe('local.build.addPlatform(options, callback)', function() {
             });
 
             it('should trigger callback without an error', function(done) {
-                build.addPlatform(options, function(e) {
+                phonegap.local.build.addPlatform.call(emitter, options, function(e) {
                     expect(e).toBeNull();
                     done();
                 });
@@ -244,7 +224,7 @@ describe('local.build.addPlatform(options, callback)', function() {
             });
 
             it('should trigger callback with an error', function(done) {
-                build.addPlatform(options, function(e) {
+                phonegap.local.build.addPlatform.call(emitter, options, function(e) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
                 });
