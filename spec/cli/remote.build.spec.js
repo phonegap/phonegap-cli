@@ -3,12 +3,9 @@
  */
 
 var phonegap = require('../../lib/main'),
-    qrcode = require('qrcode-terminal'),
     CLI = require('../../lib/cli'),
     cli,
-    stdout,
-    appData,
-    emitterSpy;
+    stdout;
 
 /*
  * Specification: phonegap help remote build.
@@ -72,112 +69,50 @@ describe('phonegap help remote build', function() {
 describe('phonegap remote build <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
-        emitterSpy = {
-            on: function() {
-                // spy stub
-            }
-        };
-        appData = {
-            id: '1234',
-            title: 'My App',
-            download: {
-                android: '/api/v1/apps/322388/android'
-            }
-        };
-        spyOn(qrcode, 'generate');
         spyOn(process.stdout, 'write');
-        spyOn(phonegap.remote, 'build').andReturn(emitterSpy);
+        spyOn(phonegap.remote, 'build');
     });
 
     describe('$ phonegap remote build android', function() {
-        it('should try to login', function() {
-            spyOn(cli.remote, 'login');
+        it('should try to build the project', function() {
             cli.argv({ _: ['remote', 'build', 'android'] });
-            expect(cli.remote.login).toHaveBeenCalled();
+            expect(phonegap.remote.build).toHaveBeenCalledWith(
+                { platforms: ['android'] },
+                jasmine.any(Function)
+            );
         });
 
-        describe('successful login', function() {
+        describe('successful project build', function() {
             beforeEach(function() {
-                spyOn(cli.remote, 'login').andCallFake(function(argv, callback) {
+                phonegap.remote.build.andCallFake(function(opts, callback) {
                     callback(null, {});
                 });
             });
 
-            it('should try to build the project', function() {
-                cli.argv({ _: ['remote', 'build', 'android'] });
-                expect(phonegap.remote.build).toHaveBeenCalledWith(
-                    {
-                        api: jasmine.any(Object),
-                        platforms: ['android']
-                    },
-                    jasmine.any(Function)
-                );
-            });
-
-            describe('successful project build', function() {
-                beforeEach(function() {
-                    phonegap.remote.build.andCallFake(function(opts, callback) {
-                        callback(null, appData);
-                        return emitterSpy;
-                    });
-                });
-
-                it('should call callback without an error', function(done) {
-                    cli.argv({ _: ['remote', 'build', 'android'] }, function(e, data) {
-                        expect(e).toBeNull();
-                        done();
-                    });
-                });
-
-                it('should call callback with a data object', function(done) {
-                    cli.argv({ _: ['remote', 'build', 'android'] }, function(e, data) {
-                        expect(data).toEqual(appData);
-                        done();
-                    });
-                });
-
-                it('should generate the QRCode', function(done) {
-                    cli.argv({ _: ['remote', 'build', 'android'] }, function(e, data) {
-                        expect(qrcode.generate).toHaveBeenCalled();
-                        expect(qrcode.generate.mostRecentCall.args[0]).toMatch(
-                            'https://build.phonegap.com' + data.download.android
-                        );
-                        done();
-                    });
+            it('should call callback without an error', function(done) {
+                cli.argv({ _: ['remote', 'build', 'android'] }, function(e, data) {
+                    expect(e).toBeNull();
+                    done();
                 });
             });
 
-            describe('failed project build', function() {
-                beforeEach(function() {
-                    phonegap.remote.build.andCallFake(function(opts, callback) {
-                        callback(new Error('Could not connect to PhoneGap Build.'));
-                        return emitterSpy;
-                    });
-                });
-
-                it('should call callback with an error', function(done) {
-                    cli.argv({ _: ['remote', 'build', 'android'] }, function(e) {
-                        expect(e).toEqual(jasmine.any(Error));
-                        done();
-                    });
+            it('should call callback with a data object', function(done) {
+                cli.argv({ _: ['remote', 'build', 'android'] }, function(e, data) {
+                    expect(data).toEqual({});
+                    done();
                 });
             });
         });
 
-        describe('failed login', function() {
+        describe('failed project build', function() {
             beforeEach(function() {
-                spyOn(cli.remote, 'login').andCallFake(function(argv, callback) {
-                    callback(new Error('Invalid account'));
+                phonegap.remote.build.andCallFake(function(opts, callback) {
+                    callback(new Error('Could not connect to PhoneGap Build.'));
                 });
             });
 
-            it('should not build the project', function() {
-                cli.argv({ _: ['remote', 'build', 'android'] });
-                expect(phonegap.remote.build).not.toHaveBeenCalled();
-            });
-
             it('should call callback with an error', function(done) {
-                cli.argv({ _: ['remote', 'build', 'android'] }, function(e) {
+                cli.argv({ _: ['remote', 'build', 'android'] }, function(e, data) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
                 });
