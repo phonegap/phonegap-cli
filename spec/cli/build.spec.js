@@ -2,12 +2,10 @@
  * Module dependencies.
  */
 
-var CLI = require('../../lib/cli'),
-    cordova = require('cordova'),
-    events = require('events'),
+var phonegap = require('../../lib/main'),
+    CLI = require('../../lib/cli'),
     cli,
-    stdout,
-    emitter;
+    stdout;
 
 /*
  * Specification: phonegap help build.
@@ -70,61 +68,54 @@ describe('phonegap help build', function() {
 describe('phonegap build <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
-        emitter = new events.EventEmitter();
-        spyOn(cli.local, 'build');
-        spyOn(cli.remote, 'build');
-        spyOn(cordova.platform, 'supports');
-        //spyOn(process.stdout, 'write');
-        //stdout = process.stdout.write;
+        spyOn(phonegap, 'build');
+        spyOn(process.stdout, 'write');
+        stdout = process.stdout.write;
     });
 
     describe('$ phonegap build android', function() {
-        // how it should be
+        it('should try to build the project', function() {
+            cli.argv({ _: ['build', 'android'] });
+            expect(phonegap.build).toHaveBeenCalledWith(
+                { platforms: ['android'] },
+                jasmine.any(Function)
+            );
+        });
 
-        //it('should try to build the android project', function() {
-        //    cli.argv({ _: ['build', 'android'] });
-        //    expect(phonegap.build).toHaveBeenCalledWith(
-        //        { platforms: ['android'] }
-        //    );
-        //});
-
-        //it('should support the "log" event', function() {
-        //    cli.argv({ _: ['build', 'android'] });
-        //    emitter.emit('log', 'ping log');
-        //    expect(stdout.mostRecentCall.args[0]).toMatch('ping log');
-        //});
-
-        //it('should support the "warn" event', function() {
-        //    cli.argv({ _: ['build', 'android'] });
-        //    emitter.emit('warn', 'ping warn');
-        //    expect(stdout.mostRecentCall.args[0]).toMatch('ping warn');
-        //});
-
-        //it('should support the "error" event', function() {
-        //    cli.argv({ _: ['build', 'android'] });
-        //    emitter.emit('error', 'ping error');
-        //    expect(stdout.mostRecentCall.args[0]).toMatch('ping error');
-        //});
-
-        //it('should support the "complete" event', function() {
-        //    cli.argv({ _: ['build', 'android'] });
-        //    emitter.emit('complete', 'ping complete');
-        //    expect(stdout.mostRecentCall.args[0]).toMatch('ping complete');
-        //});
-
-        describe('with local environment', function() {
+        describe('successful build', function() {
             beforeEach(function() {
-                cordova.platform.supports.andCallFake(function(platform, callback) {
-                    callback(true);
+                phonegap.build.andCallFake(function(options, callback) {
+                    callback(null, {});
                 });
             });
 
-            it('should build locally', function() {
-                cli.argv({ _: ['build', 'android'] });
-                expect(cli.local.build).toHaveBeenCalledWith(
-                    { _: ['local', 'build', 'android'] },
-                    jasmine.any(Function)
-                );
+            it('should trigger callback without an error', function(done) {
+                cli.argv({ _: ['build', 'android'] }, function(e, data) {
+                    expect(e).toBeNull();
+                    done();
+                });
+            });
+
+            it('should trigger callback with data', function(done) {
+                cli.argv({ _: ['build', 'android'] }, function(e, data) {
+                    expect(data).toEqual(jasmine.any(Object));
+                    done();
+                });
+            });
+        });
+
+        describe('failed build', function() {
+            beforeEach(function() {
+                phonegap.build.andCallFake(function(options, callback) {
+                    callback(new Error('Ganon stole the binary!'));
+                });
+            });
+
+            it('should trigger callback with an error', function(done) {
+                cli.argv({ _: ['build', 'android'] }, function(e, data) {
+                    expect(e).toEqual(jasmine.any(Error));
+                    done();
+                });
             });
         });
     });
