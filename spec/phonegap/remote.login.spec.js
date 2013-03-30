@@ -2,9 +2,8 @@
  * Module dependencies.
  */
 
-var PhoneGap = require('../../lib/phonegap'),
+var phonegap = require('../../lib/phonegap'),
     config = require('../../lib/common/config'),
-    phonegap,
     options;
 
 /*!
@@ -13,8 +12,8 @@ var PhoneGap = require('../../lib/phonegap'),
 
 describe('phonegap.remote.login(options, [callback])', function() {
     beforeEach(function() {
-        phonegap = new PhoneGap();
         options = {};
+        phonegap.removeAllListeners();
         spyOn(phonegap.phonegapbuild, 'login');
         spyOn(config.global, 'load');
     });

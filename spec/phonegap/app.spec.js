@@ -2,11 +2,10 @@
  * Module dependencies.
  */
 
-var PhoneGap = require('../../lib/phonegap'),
+var phonegap = require('../../lib/phonegap'),
     http = require('http'),
     events = require('events'),
     Static = require('node-static'),
-    phonegap,
     request,
     serverSpy,
     serveSpy,
@@ -18,8 +17,8 @@ var PhoneGap = require('../../lib/phonegap'),
 
 describe('phonegap.app(options, callback)', function() {
     beforeEach(function() {
-        phonegap = new PhoneGap();
         options = {};
+        phonegap.removeAllListeners();
         // mock the http.createServer
         spyOn(http, 'createServer').andCallFake(function(callback) {
             request = new events.EventEmitter();

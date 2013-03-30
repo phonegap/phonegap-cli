@@ -2,11 +2,10 @@
  * Module dependencies.
  */
 
-var PhoneGap = require('../../lib/phonegap'),
+var phonegap = require('../../lib/phonegap'),
     qrcode = require('qrcode-terminal'),
     events = require('events'),
     emitter = new events.EventEmitter(),
-    phonegap,
     appData,
     options,
     stdout;
@@ -17,7 +16,7 @@ var PhoneGap = require('../../lib/phonegap'),
 
 describe('phonegap.remote.build(options, [callback])', function() {
     beforeEach(function() {
-        phonegap = new PhoneGap();
+        phonegap.removeAllListeners();
         options = {
             platforms: ['android']
         };

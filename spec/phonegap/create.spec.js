@@ -2,9 +2,8 @@
  * Module dependencies.
  */
 
-var PhoneGap = require('../../lib/phonegap'),
+var phonegap = require('../../lib/phonegap'),
     cordova = require('cordova'),
-    phonegap,
     options;
 
 /*
@@ -13,10 +12,10 @@ var PhoneGap = require('../../lib/phonegap'),
 
 describe('create(options, callback)', function() {
     beforeEach(function() {
-        phonegap = new PhoneGap();
         options = {
             path: '/some/path/to/app/www'
         };
+        phonegap.removeAllListeners();
         spyOn(cordova, 'create');
         spyOn(phonegap.create, 'updateProject'); // ignore
     });
