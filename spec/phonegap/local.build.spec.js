@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var phonegap = require('../../lib/phonegap'),
+var localBuild = require('../../lib/phonegap/local.build'),
+    phonegap = require('../../lib/phonegap'),
     emitter = require('../../lib/phonegap/util/emitter'),
     cordova = require('cordova'),
     fs = require('fs'),
@@ -19,7 +20,7 @@ describe('phonegap.local.build(options, [callback])', function() {
         };
         phonegap.removeAllListeners();
         spyOn(cordova, 'build');
-        spyOn(phonegap.local.build, 'addPlatform');
+        spyOn(localBuild, 'addPlatform');
     });
 
     it('should require options', function() {
@@ -56,7 +57,7 @@ describe('phonegap.local.build(options, [callback])', function() {
 
     it('should try to add the platform', function() {
         phonegap.local.build(options);
-        expect(phonegap.local.build.addPlatform).toHaveBeenCalledWith(
+        expect(localBuild.addPlatform).toHaveBeenCalledWith(
             options,
             jasmine.any(Function)
         );
@@ -64,7 +65,7 @@ describe('phonegap.local.build(options, [callback])', function() {
 
     describe('successfully added platform', function() {
         beforeEach(function() {
-            phonegap.local.build.addPlatform.andCallFake(function(options, callback) {
+            localBuild.addPlatform.andCallFake(function(options, callback) {
                 callback();
             });
         });
@@ -118,7 +119,7 @@ describe('phonegap.local.build(options, [callback])', function() {
 
     describe('failure adding platform', function() {
         beforeEach(function() {
-            phonegap.local.build.addPlatform.andCallFake(function(options, callback) {
+            localBuild.addPlatform.andCallFake(function(options, callback) {
                 callback(new Error('write access denied'));
             });
         });
@@ -140,7 +141,7 @@ describe('phonegap.local.build(options, [callback])', function() {
     });
 });
 
-describe('phonegap.local.build.addPlatform(options, callback)', function() {
+describe('localBuild.addPlatform(options, callback)', function() {
     var emitter;
     beforeEach(function() {
         phonegap.removeAllListeners();
@@ -157,20 +158,20 @@ describe('phonegap.local.build.addPlatform(options, callback)', function() {
     it('should require options', function() {
         expect(function() {
             options = undefined;
-            phonegap.local.build.addPlatform.call(emitter, options, function() {});
+            localBuild.addPlatform.call(emitter, options, function() {});
         }).toThrow();
     });
 
     it('should require options.platforms', function() {
         expect(function() {
             options.platforms = undefined;
-            phonegap.local.build.addPlatform.call(emitter, options, function() {});
+            localBuild.addPlatform.call(emitter, options, function() {});
         }).toThrow();
     });
 
     it('should require callback', function() {
         expect(function() {
-            phonegap.local.build.addPlatform.call(emitter, options);
+            localBuild.addPlatform.call(emitter, options);
         }).toThrow();
     });
 
@@ -180,7 +181,7 @@ describe('phonegap.local.build.addPlatform(options, callback)', function() {
         });
 
         it('should trigger callback without an error', function(done) {
-            phonegap.local.build.addPlatform.call(emitter, options, function(e) {
+            localBuild.addPlatform.call(emitter, options, function(e) {
                 expect(e).toBeNull();
                 done();
             });
@@ -193,7 +194,7 @@ describe('phonegap.local.build.addPlatform(options, callback)', function() {
         });
 
         it('should try to add the platform', function() {
-            phonegap.local.build.addPlatform.call(emitter, options, function() {});
+            localBuild.addPlatform.call(emitter, options, function() {});
             expect(cordova.platform).toHaveBeenCalledWith(
                 'add',
                 options.platforms,
@@ -209,7 +210,7 @@ describe('phonegap.local.build.addPlatform(options, callback)', function() {
             });
 
             it('should trigger callback without an error', function(done) {
-                phonegap.local.build.addPlatform.call(emitter, options, function(e) {
+                localBuild.addPlatform.call(emitter, options, function(e) {
                     expect(e).toBeNull();
                     done();
                 });
@@ -224,7 +225,7 @@ describe('phonegap.local.build.addPlatform(options, callback)', function() {
             });
 
             it('should trigger callback with an error', function(done) {
-                phonegap.local.build.addPlatform.call(emitter, options, function(e) {
+                localBuild.addPlatform.call(emitter, options, function(e) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
                 });
