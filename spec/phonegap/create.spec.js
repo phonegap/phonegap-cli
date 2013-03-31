@@ -3,7 +3,6 @@
  */
 
 var phonegap = require('../../lib/phonegap'),
-    emitter = require('../../lib/phonegap/util/emitter'),
     cordova = require('cordova'),
     shell = require('shelljs'),
     options;
@@ -43,8 +42,8 @@ describe('create(options, callback)', function() {
         }).not.toThrow();
     });
 
-    it('should return EventEmitter', function() {
-        expect(phonegap.create(options)).toEqual(emitter);
+    it('should return itself', function() {
+        expect(phonegap.create(options)).toEqual(phonegap);
     });
 
     it('should try to create a project', function() {

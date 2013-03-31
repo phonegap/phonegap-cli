@@ -3,7 +3,6 @@
  */
 
 var phonegap = require('../../lib/phonegap'),
-    emitter = require('../../lib/phonegap/util/emitter'),
     http = require('http'),
     events = require('events'),
     Static = require('node-static'),
@@ -56,8 +55,8 @@ describe('phonegap.app(options, callback)', function() {
         }).not.toThrow();
     });
 
-    it('should return EventEmitter', function() {
-        expect(phonegap.app(options)).toEqual(emitter);
+    it('should return itself', function() {
+        expect(phonegap.app(options)).toEqual(phonegap);
     });
 
     it('should try to serve the project', function() {

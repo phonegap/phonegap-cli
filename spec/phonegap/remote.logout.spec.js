@@ -4,7 +4,6 @@
 
 var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     phonegap = require('../../lib/phonegap'),
-    emitter = require('../../lib/phonegap/util/emitter'),
     options;
 
 /*!
@@ -31,8 +30,8 @@ describe('phonegap.remote.logout(options, callback)', function() {
         }).not.toThrow();
     });
 
-    it('should return EventEmitter', function() {
-        expect(phonegap.remote.logout(options)).toEqual(emitter);
+    it('should return itself', function() {
+        expect(phonegap.remote.logout(options)).toEqual(phonegap);
     });
 
     it('should try to call PhoneGapBuild logout', function() {
