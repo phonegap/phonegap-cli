@@ -3,6 +3,7 @@
  */
 
 var phonegap = require('../../lib/phonegap'),
+    emitter = require('../../lib/phonegap/util/emitter'),
     cordova = require('cordova'),
     fs = require('fs'),
     options;
@@ -41,8 +42,8 @@ describe('phonegap.local.build(options, [callback])', function() {
         }).not.toThrow();
     });
 
-    it('should return itself', function() {
-        expect(phonegap.local.build(options)).toEqual(phonegap);
+    it('should return EventEmitter', function() {
+        expect(phonegap.local.build(options)).toEqual(emitter);
     });
 
     it('should require at least one platform', function(done) {

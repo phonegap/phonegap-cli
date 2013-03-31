@@ -4,9 +4,10 @@
 
 var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     phonegap = require('../../lib/phonegap'),
+    emitter = require('../../lib/phonegap/util/emitter'),
     qrcode = require('qrcode-terminal'),
     events = require('events'),
-    emitter = new events.EventEmitter(),
+    emitterStub = new events.EventEmitter(),
     appData,
     options,
     stdout;
@@ -31,8 +32,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
         spyOn(qrcode, 'generate');
         spyOn(process.stdout, 'write');
         spyOn(phonegap.remote, 'login');
-
-        spyOn(phonegapbuild, 'build').andReturn(emitter);
+        spyOn(phonegapbuild, 'build').andReturn(emitterStub);
     });
 
     it('should require options', function() {
@@ -55,8 +55,8 @@ describe('phonegap.remote.build(options, [callback])', function() {
         }).not.toThrow();
     });
 
-    it('should return itself', function() {
-        expect(phonegap.remote.build(options)).toEqual(phonegap);
+    it('should return EventEmitter', function() {
+        expect(phonegap.remote.build(options)).toEqual(emitter);
     });
 
     it('should try to login', function() {
@@ -87,7 +87,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
             beforeEach(function() {
                 phonegapbuild.build.andCallFake(function(opts, callback) {
                     callback(null, appData);
-                    return emitter;
+                    return emitterStub;
                 });
                 qrcode.generate.andCallFake(function(message, callback) {
                     callback('this would be a qrcode');
@@ -123,7 +123,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
             beforeEach(function() {
                 phonegapbuild.build.andCallFake(function(opts, callback) {
                     callback(new Error('Could not connect to PhoneGap Build.'));
-                    return emitter;
+                    return emitterStub;
                 });
             });
 

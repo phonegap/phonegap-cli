@@ -4,6 +4,7 @@
 
 var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     phonegap = require('../../lib/phonegap'),
+    emitter = require('../../lib/phonegap/util/emitter'),
     config = require('../../lib/common/config'),
     options;
 
@@ -32,8 +33,8 @@ describe('phonegap.remote.login(options, [callback])', function() {
         }).not.toThrow();
     });
 
-    it('should return itself', function() {
-        expect(phonegap.remote.login(options)).toEqual(phonegap);
+    it('should return EventEmitter', function() {
+        expect(phonegap.remote.login(options)).toEqual(emitter);
     });
 
     it('should try to find account', function() {
