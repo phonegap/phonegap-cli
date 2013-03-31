@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var phonegap = require('../../lib/phonegap'),
+var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
+    phonegap = require('../../lib/phonegap'),
     options;
 
 /*!
@@ -13,7 +14,7 @@ describe('phonegap.remote.logout(options, callback)', function() {
     beforeEach(function() {
         options = {};
         phonegap.removeAllListeners();
-        spyOn(phonegap.phonegapbuild, 'logout');
+        spyOn(phonegapbuild, 'logout');
     });
 
     it('should require options parameter', function() {
@@ -35,7 +36,7 @@ describe('phonegap.remote.logout(options, callback)', function() {
 
     it('should try to call PhoneGapBuild logout', function() {
         phonegap.remote.logout(options);
-        expect(phonegap.phonegapbuild.logout).toHaveBeenCalledWith(
+        expect(phonegapbuild.logout).toHaveBeenCalledWith(
             options,
             jasmine.any(Function)
         );
@@ -43,7 +44,7 @@ describe('phonegap.remote.logout(options, callback)', function() {
 
     describe('successful logout', function() {
         beforeEach(function() {
-            phonegap.phonegapbuild.logout.andCallFake(function(options, callback) {
+            phonegapbuild.logout.andCallFake(function(options, callback) {
                 callback(null);
             });
         });
@@ -66,7 +67,7 @@ describe('phonegap.remote.logout(options, callback)', function() {
 
     describe('failed logout', function() {
         beforeEach(function() {
-            phonegap.phonegapbuild.logout.andCallFake(function(options, callback) {
+            phonegapbuild.logout.andCallFake(function(options, callback) {
                 callback(new Error('write access denied'));
             });
         });

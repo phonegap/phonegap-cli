@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var phonegap = require('../../lib/phonegap'),
+var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
+    phonegap = require('../../lib/phonegap'),
     qrcode = require('qrcode-terminal'),
     events = require('events'),
     emitter = new events.EventEmitter(),
@@ -31,7 +32,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
         spyOn(process.stdout, 'write');
         spyOn(phonegap.remote, 'login');
 
-        spyOn(phonegap.phonegapbuild, 'build').andReturn(emitter);
+        spyOn(phonegapbuild, 'build').andReturn(emitter);
     });
 
     it('should require options', function() {
@@ -73,7 +74,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
 
         it('should try to build the project', function() {
             phonegap.remote.build(options);
-            expect(phonegap.phonegapbuild.build).toHaveBeenCalledWith(
+            expect(phonegapbuild.build).toHaveBeenCalledWith(
                 {
                     api: jasmine.any(Object),
                     platforms: ['android']
@@ -84,7 +85,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
 
         describe('successful project build', function() {
             beforeEach(function() {
-                phonegap.phonegapbuild.build.andCallFake(function(opts, callback) {
+                phonegapbuild.build.andCallFake(function(opts, callback) {
                     callback(null, appData);
                     return emitter;
                 });
@@ -120,7 +121,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
 
         describe('failed project build', function() {
             beforeEach(function() {
-                phonegap.phonegapbuild.build.andCallFake(function(opts, callback) {
+                phonegapbuild.build.andCallFake(function(opts, callback) {
                     callback(new Error('Could not connect to PhoneGap Build.'));
                     return emitter;
                 });
@@ -152,7 +153,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
 
         it('should not build the project', function() {
             phonegap.remote.build(options);
-            expect(phonegap.phonegapbuild.build).not.toHaveBeenCalled();
+            expect(phonegapbuild.build).not.toHaveBeenCalled();
         });
 
         it('should call callback with an error', function(done) {

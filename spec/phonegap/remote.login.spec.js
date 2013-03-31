@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var phonegap = require('../../lib/phonegap'),
+var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
+    phonegap = require('../../lib/phonegap'),
     config = require('../../lib/common/config'),
     options;
 
@@ -14,7 +15,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
     beforeEach(function() {
         options = {};
         phonegap.removeAllListeners();
-        spyOn(phonegap.phonegapbuild, 'login');
+        spyOn(phonegapbuild, 'login');
         spyOn(config.global, 'load');
     });
 
@@ -49,7 +50,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
 
         it('should try to login', function() {
             phonegap.remote.login(options);
-            expect(phonegap.phonegapbuild.login).toHaveBeenCalledWith(
+            expect(phonegapbuild.login).toHaveBeenCalledWith(
                 null,
                 jasmine.any(Function)
             );
@@ -57,7 +58,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
 
         describe('successful login', function() {
             beforeEach(function() {
-                phonegap.phonegapbuild.login.andCallFake(function(opt, callback) {
+                phonegapbuild.login.andCallFake(function(opt, callback) {
                     callback(null, {});
                 });
             });
@@ -79,7 +80,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
 
         describe('failed login', function() {
             beforeEach(function() {
-                phonegap.phonegapbuild.login.andCallFake(function(opt, callback) {
+                phonegapbuild.login.andCallFake(function(opt, callback) {
                     callback(new Error('Ganon stole the token!'));
                 });
             });
@@ -149,7 +150,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
 
             it('should try to login', function() {
                 phonegap.remote.login(options);
-                expect(phonegap.phonegapbuild.login).toHaveBeenCalledWith(
+                expect(phonegapbuild.login).toHaveBeenCalledWith(
                     { username: 'zelda', password: 'tr1force' },
                     jasmine.any(Function)
                 );
@@ -157,7 +158,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
 
             describe('successful login', function() {
                 beforeEach(function() {
-                    phonegap.phonegapbuild.login.andCallFake(function(opt, callback) {
+                    phonegapbuild.login.andCallFake(function(opt, callback) {
                         callback(null, {});
                     });
                 });
@@ -179,7 +180,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
 
             describe('failed login', function() {
                 beforeEach(function() {
-                    phonegap.phonegapbuild.login.andCallFake(function(opt, callback) {
+                    phonegapbuild.login.andCallFake(function(opt, callback) {
                         callback(new Error('Ganon stole the token!'));
                     });
                 });
