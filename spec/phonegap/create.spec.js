@@ -5,6 +5,7 @@
 var phonegap = require('../../lib/phonegap'),
     emitter = require('../../lib/phonegap/util/emitter'),
     cordova = require('cordova'),
+    shell = require('shelljs'),
     options;
 
 /*
@@ -18,7 +19,8 @@ describe('create(options, callback)', function() {
         };
         phonegap.removeAllListeners();
         spyOn(cordova, 'create');
-        spyOn(phonegap.create, 'updateProject'); // ignore
+        spyOn(shell, 'rm');
+        spyOn(shell, 'cp');
     });
 
     it('should require options', function() {
