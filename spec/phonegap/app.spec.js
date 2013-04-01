@@ -119,7 +119,7 @@ describe('phonegap.app(options, callback)', function() {
 
         it('should fire "error" event', function(done) {
             phonegap.on('error', function(e) {
-                expect(e).toEqual('port in use');
+                expect(e).toEqual(jasmine.any(Error));
                 done();
             });
             phonegap.app(options);

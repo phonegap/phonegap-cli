@@ -81,7 +81,7 @@ describe('create(options, callback)', function() {
 
         it('should trigger "error" event', function(done) {
             phonegap.on('error', function(e) {
-                expect(e).toEqual(jasmine.any(String));
+                expect(e).toEqual(jasmine.any(Error));
                 done();
             });
             phonegap.create(options);
@@ -104,7 +104,7 @@ describe('create(options, callback)', function() {
 
             it('should trigger "error" event', function(done) {
                 phonegap.on('error', function(e) {
-                    expect(e).toEqual(jasmine.any(String));
+                    expect(e).toEqual(jasmine.any(Error));
                     done();
                 });
                 phonegap.create(options);

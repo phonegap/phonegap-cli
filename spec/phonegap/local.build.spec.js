@@ -109,7 +109,7 @@ describe('phonegap.local.build(options, [callback])', function() {
 
             it('should trigger "error" event', function(done) {
                 phonegap.on('error', function(e) {
-                    expect(e).toEqual(jasmine.any(String));
+                    expect(e).toEqual(jasmine.any(Error));
                     done();
                 });
                 phonegap.local.build(options);
@@ -133,7 +133,7 @@ describe('phonegap.local.build(options, [callback])', function() {
 
         it('should trigger "error" event', function(done) {
             phonegap.on('error', function(e) {
-                expect(e).toEqual(jasmine.any(String));
+                expect(e).toEqual(jasmine.any(Error));
                 done();
             });
             phonegap.local.build(options);
