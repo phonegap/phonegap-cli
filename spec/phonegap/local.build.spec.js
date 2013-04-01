@@ -107,8 +107,8 @@ describe('phonegap.local.build(options, [callback])', function() {
                 });
             });
 
-            it('should trigger "err" event', function(done) {
-                phonegap.on('err', function(e) {
+            it('should trigger "error" event', function(done) {
+                phonegap.on('error', function(e) {
                     expect(e).toEqual(jasmine.any(String));
                     done();
                 });
@@ -131,8 +131,8 @@ describe('phonegap.local.build(options, [callback])', function() {
             });
         });
 
-        it('should trigger "err" event', function(done) {
-            phonegap.on('err', function(e) {
+        it('should trigger "error" event', function(done) {
+            phonegap.on('error', function(e) {
                 expect(e).toEqual(jasmine.any(String));
                 done();
             });

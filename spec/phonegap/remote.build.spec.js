@@ -134,8 +134,8 @@ describe('phonegap.remote.build(options, [callback])', function() {
                 });
             });
 
-            it('should fire "err" event', function(done) {
-                phonegap.on('err', function(message) {
+            it('should fire "error" event', function(done) {
+                phonegap.on('error', function(message) {
                     expect(message).toEqual(jasmine.any(String));
                     done();
                 });
@@ -163,8 +163,8 @@ describe('phonegap.remote.build(options, [callback])', function() {
             });
         });
 
-        it('should fire "err" event', function(done) {
-            phonegap.on('err', function(message) {
+        it('should fire "error" event', function(done) {
+            phonegap.on('error', function(message) {
                 expect(message).toEqual(jasmine.any(String));
                 done();
             });

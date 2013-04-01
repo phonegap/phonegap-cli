@@ -117,8 +117,8 @@ describe('phonegap.app(options, callback)', function() {
             serverSpy.emit('error', new Error('port in use'));
         });
 
-        it('should fire "err" event', function(done) {
-            phonegap.on('err', function(e) {
+        it('should fire "error" event', function(done) {
+            phonegap.on('error', function(e) {
                 expect(e).toEqual('port in use');
                 done();
             });

@@ -80,8 +80,8 @@ describe('phonegap.remote.logout(options, callback)', function() {
             });
         });
 
-        it('should fire a "err" event', function(done) {
-            phonegap.on('err', function(msg) {
+        it('should fire a "error" event', function(done) {
+            phonegap.on('error', function(msg) {
                 expect(msg).toEqual(jasmine.any(String));
                 done();
             });
