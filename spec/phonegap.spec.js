@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var phonegap = require('../lib/phonegap');
+var PhoneGap = require('../lib/phonegap'),
+    phonegap = new PhoneGap();
 
 /*!
  * PhoneGap specification.

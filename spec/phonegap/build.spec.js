@@ -2,8 +2,9 @@
  * Module dependencies.
  */
 
-var phonegap = require('../../lib/phonegap'),
+var PhoneGap = require('../../lib/phonegap'),
     cordova = require('cordova'),
+    phonegap,
     options;
 
 /*
@@ -12,10 +13,10 @@ var phonegap = require('../../lib/phonegap'),
 
 describe('phonegap.build(options, callback)', function() {
     beforeEach(function() {
+        phonegap = new PhoneGap();
         options = {
             platforms: ['android']
         };
-        phonegap.removeAllListeners();
         spyOn(phonegap.local, 'build').andReturn(phonegap);
         spyOn(phonegap.remote, 'build').andReturn(phonegap);
         spyOn(cordova.platform, 'supports');

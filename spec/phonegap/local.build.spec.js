@@ -3,9 +3,10 @@
  */
 
 var localBuild = require('../../lib/phonegap/local.build'),
-    phonegap = require('../../lib/phonegap'),
+    PhoneGap = require('../../lib/phonegap'),
     cordova = require('cordova'),
     fs = require('fs'),
+    phonegap,
     options;
 
 /*
@@ -14,10 +15,10 @@ var localBuild = require('../../lib/phonegap/local.build'),
 
 describe('phonegap.local.build(options, [callback])', function() {
     beforeEach(function() {
+        phonegap = new PhoneGap();
         options = {
             platforms: ['android']
         };
-        phonegap.removeAllListeners();
         spyOn(cordova, 'build');
         spyOn(localBuild, 'addPlatform');
     });
@@ -143,7 +144,7 @@ describe('phonegap.local.build(options, [callback])', function() {
 describe('localBuild.addPlatform(options, callback)', function() {
     var emitter;
     beforeEach(function() {
-        phonegap.removeAllListeners();
+        phonegap = new PhoneGap();
         options = {
             platforms: ['android']
         };

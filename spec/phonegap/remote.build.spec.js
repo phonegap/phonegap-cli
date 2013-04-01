@@ -3,9 +3,10 @@
  */
 
 var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
-    phonegap = require('../../lib/phonegap'),
+    PhoneGap = require('../../lib/phonegap'),
     qrcode = require('qrcode-terminal'),
     events = require('events'),
+    phonegap,
     emitter,
     appData,
     options,
@@ -17,7 +18,7 @@ var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
 
 describe('phonegap.remote.build(options, [callback])', function() {
     beforeEach(function() {
-        phonegap.removeAllListeners();
+        phonegap = new PhoneGap();
         options = {
             platforms: ['android']
         };

@@ -3,8 +3,9 @@
  */
 
 var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
-    phonegap = require('../../lib/phonegap'),
+    PhoneGap = require('../../lib/phonegap'),
     config = require('../../lib/common/config'),
+    phonegap,
     options;
 
 /*!
@@ -13,8 +14,8 @@ var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
 
 describe('phonegap.remote.login(options, [callback])', function() {
     beforeEach(function() {
+        phonegap = new PhoneGap();
         options = {};
-        phonegap.removeAllListeners();
         spyOn(phonegapbuild, 'login');
         spyOn(config.global, 'load');
     });

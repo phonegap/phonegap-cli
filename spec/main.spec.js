@@ -11,6 +11,6 @@ var PhoneGap = require('../lib/phonegap'),
 
 describe('main', function() {
     it('should be an instance of PhoneGap', function() {
-        expect(phonegap).toEqual(PhoneGap);
+        expect(phonegap).toEqual(jasmine.any(PhoneGap));
     });
 });
