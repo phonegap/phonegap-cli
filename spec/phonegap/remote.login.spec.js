@@ -45,7 +45,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
     describe('when account exists', function() {
         beforeEach(function() {
             config.global.load.andCallFake(function(callback) {
-                callback(null, { token: 'abc123' });
+                callback(null, { phonegap: { token: 'abc123' } });
             });
         });
 
@@ -113,7 +113,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
     describe('failed account lookup', function() {
         beforeEach(function() {
             config.global.load.andCallFake(function(callback) {
-                callback(null, { token: undefined });
+                callback(null, { phonegap: { token: undefined } });
             });
         });
 
