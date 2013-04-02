@@ -3,13 +3,14 @@ Usage: $0 local [command]
 Description:
 
   Run commands on your local system.
-
   This requires that you have the correct platform SDKs installed.
 
 Commands:
 
-  build <platform>     build (and deploy) a specific platform
+  build <platform>     build a specific platform
+  run <platform>       build and install a specific platform
 
 Examples:
 
   $ $0 local build android
+  $ $0 local run android
