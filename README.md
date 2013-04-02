@@ -43,16 +43,17 @@
     Description:
 
       Run commands on your local system.
-
       This requires that you have the correct platform SDKs installed.
 
     Commands:
 
-      build <platform>     build (and deploy) a specific platform
+      build <platform>     build a specific platform
+      run <platform>       build and install a specific platform
 
     Examples:
 
       $ phonegap local build android
+      $ phonegap local run android
 
 #### Remote Usage
 
@@ -67,11 +68,13 @@
       login                login to PhoneGap/Build
       logout               logout of PhoneGap/Build
       build <platform>     build a specific platform
+      run <platform>       build and install a specific platform
 
     Examples:
 
       $ phonegap remote login
       $ phonegap remote build android
+      $ phonegap remote run android
 
 ## Node Library
 
