@@ -4,7 +4,6 @@
 
 var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     PhoneGap = require('../../lib/phonegap'),
-    qrcode = require('qrcode-terminal'),
     events = require('events'),
     phonegap,
     emitter,
@@ -30,7 +29,6 @@ describe('phonegap.remote.build(options, [callback])', function() {
             }
         };
         emitter = new events.EventEmitter();
-        spyOn(qrcode, 'generate');
         spyOn(process.stdout, 'write');
         spyOn(phonegap.remote, 'login');
         spyOn(phonegapbuild, 'build').andReturn(emitter);
@@ -89,9 +87,6 @@ describe('phonegap.remote.build(options, [callback])', function() {
                     callback(null, appData);
                     return emitter;
                 });
-                qrcode.generate.andCallFake(function(message, callback) {
-                    callback('this would be a qrcode');
-                });
             });
 
             it('should call callback without an error', function(done) {
@@ -104,16 +99,6 @@ describe('phonegap.remote.build(options, [callback])', function() {
             it('should call callback with a data object', function(done) {
                 phonegap.remote.build(options, function(e, data) {
                     expect(data).toEqual(appData);
-                    done();
-                });
-            });
-
-            it('should generate a qrcode', function(done) {
-                phonegap.remote.build(options, function(e, data) {
-                    expect(qrcode.generate).toHaveBeenCalled();
-                    expect(qrcode.generate.mostRecentCall.args[0]).toMatch(
-                        'https://build.phonegap.com' + data.download.android
-                    );
                     done();
                 });
             });
