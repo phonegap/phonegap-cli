@@ -66,7 +66,7 @@ describe('phonegap help remote run', function() {
  * Specification: phonegap remote run.
  */
 
-describe('phonegap remote build <platform>', function() {
+describe('phonegap remote run <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
