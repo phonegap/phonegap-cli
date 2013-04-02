@@ -24,4 +24,5 @@ Examples:
 
 Related:
 
+  $0 local build <platform>
   $0 remote build <platform>
