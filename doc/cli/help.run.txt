@@ -1,0 +1,17 @@
+Usage: $0 run <platform>
+
+Description:
+
+  Build and install your application to a specific platform.
+
+  Automatically detects your platform SDK and fallsback on PhoneGap/Build.
+
+Examples:
+
+  $ $0 run android
+  $ $0 run ios
+
+Related:
+
+  $0 local run <platform>
+  $0 remote run <platform>

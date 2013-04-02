@@ -20,6 +20,7 @@
 
       create <path>        create a phonegap project
       build <platform>     build a specific platform
+      run <platform>       build and install a specific platform
       local [command]      development on local system
       remote [command]     development in cloud with phonegap/build
       help [command]       output usage information
