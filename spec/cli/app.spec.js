@@ -8,7 +8,7 @@ var phonegap = require('../../lib/main'),
     stdout;
 
 /*
- * Specification: phonegap help app.
+ * Specification: $ phonegap help app
  */
 
 describe('phonegap help app', function() {
@@ -56,7 +56,7 @@ describe('phonegap help app', function() {
 });
 
 /*
- * Specification: phonegap app.
+ * Specification: $ phonegap app
  */
 
 describe('phonegap app', function() {

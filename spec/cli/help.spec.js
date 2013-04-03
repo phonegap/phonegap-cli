@@ -6,7 +6,7 @@ var CLI = require('../../lib/cli'),
     cli;
 
 /*
- * Specification: phonegap help.
+ * Specification: $ phonegap help
  */
 
 describe('phonegap help', function() {

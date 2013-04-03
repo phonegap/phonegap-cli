@@ -9,10 +9,10 @@ var PhoneGap = require('../../lib/phonegap'),
     options;
 
 /*
- * Specification: phonegap.create
+ * Specification: phonegap.create(options, [callback])
  */
 
-describe('create(options, callback)', function() {
+describe('create(options, [callback])', function() {
     beforeEach(function() {
         phonegap = new PhoneGap();
         options = {

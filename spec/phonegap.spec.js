@@ -6,7 +6,7 @@ var PhoneGap = require('../lib/phonegap'),
     phonegap = new PhoneGap();
 
 /*!
- * PhoneGap specification.
+ * Specification: PhoneGap.
  */
 
 describe('phonegap', function() {

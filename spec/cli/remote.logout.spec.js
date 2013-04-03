@@ -8,7 +8,7 @@ var phonegap = require('../../lib/main'),
     stdout;
 
 /*
- * Specification: phonegap help remote logout.
+ * Specification: $ phonegap help remote logout
  */
 
 describe('phonegap help remote logout', function() {
@@ -54,7 +54,7 @@ describe('phonegap help remote logout', function() {
     });
 });
 /*
- * Specification: phonegap remote logout.
+ * Specification: $ phonegap remote logout
  */
 
 describe('phonegap remote logout', function() {

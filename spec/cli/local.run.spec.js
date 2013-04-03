@@ -8,7 +8,7 @@ var phonegap = require('../../lib/main'),
     stdout;
 
 /*
- * Specification: phonegap help local run.
+ * Specification: phonegap help local run
  */
 
 describe('phonegap help local run', function() {
@@ -63,7 +63,7 @@ describe('phonegap help local run', function() {
 });
 
 /*
- * Specification: phonegap local run.
+ * Specification: phonegap local run <platform>
  */
 
 describe('phonegap local build <platform>', function() {

@@ -6,7 +6,7 @@ var CLI = require('../../lib/cli'),
     cli;
 
 /*
- * Specification: phonegap unknown.
+ * Specification: $ phonegap unknown
  */
 
 describe('phonegap unknown', function() {

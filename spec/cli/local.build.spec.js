@@ -9,7 +9,7 @@ var phonegap = require('../../lib/main'),
     emitterSpy;
 
 /*
- * Specification: phonegap help local build.
+ * Specification: $ phonegap help local build
  */
 
 describe('phonegap help local build', function() {
@@ -64,7 +64,7 @@ describe('phonegap help local build', function() {
 });
 
 /*
- * Specification: phonegap local build.
+ * Specification: $ phonegap local build <platform>
  */
 
 describe('phonegap local build <platform>', function() {

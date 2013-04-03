@@ -6,7 +6,7 @@ var PhoneGap = require('../lib/phonegap'),
     phonegap = require('../lib/main');
 
 /*!
- * Specification: phonegap
+ * Specification: phonegap.
  */
 
 describe('main', function() {

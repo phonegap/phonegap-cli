@@ -7,7 +7,7 @@ var CLI = require('../../lib/cli'),
     stdout;
 
 /*
- * Specification: phonegap help remote.
+ * Specification: $ phonegap help remote
  */
 
 describe('phonegap help remote', function() {
@@ -61,7 +61,7 @@ describe('phonegap help remote', function() {
 });
 
 /*
- * Specification: phonegap remote.
+ * Specification: $ phonegap remote [command]
  */
 
 //describe('phonegap remote', function() {

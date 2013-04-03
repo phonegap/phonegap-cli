@@ -8,10 +8,10 @@ var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     options;
 
 /*!
- * Specification: phonegap.remote.logout
+ * Specification: phonegap.remote.logout(options, [callback])
  */
 
-describe('phonegap.remote.logout(options, callback)', function() {
+describe('phonegap.remote.logout(options, [callback])', function() {
     beforeEach(function() {
         phonegap = new PhoneGap();
         options = {};

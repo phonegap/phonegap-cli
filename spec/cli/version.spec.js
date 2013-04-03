@@ -6,7 +6,7 @@ var CLI = require('../../lib/cli'),
     cli;
 
 /*
- * Specification: phonegap version.
+ * Specification: $ phonegap version
  */
 
 describe('phonegap --version', function() {

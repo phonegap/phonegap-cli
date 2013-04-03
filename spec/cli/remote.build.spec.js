@@ -8,7 +8,7 @@ var phonegap = require('../../lib/main'),
     stdout;
 
 /*
- * Specification: phonegap help remote build.
+ * Specification: $ phonegap help remote build
  */
 
 describe('phonegap help remote build', function() {
@@ -63,7 +63,7 @@ describe('phonegap help remote build', function() {
 });
 
 /*
- * Specification: phonegap remote build.
+ * Specification: $ phonegap remote build <platform>
  */
 
 describe('phonegap remote build <platform>', function() {

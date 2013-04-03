@@ -10,7 +10,7 @@ var localBuild = require('../../lib/phonegap/local.build'),
     options;
 
 /*
- * Specification: phonegap.local.build
+ * Specification: phonegap.local.build(options, [callback])
  */
 
 describe('phonegap.local.build(options, [callback])', function() {

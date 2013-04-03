@@ -9,7 +9,7 @@ var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     options;
 
 /*!
- * Specification: phonegap.remote.login
+ * Specification: phonegap.remote.login(options, [callback])
  */
 
 describe('phonegap.remote.login(options, [callback])', function() {

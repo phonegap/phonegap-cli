@@ -8,7 +8,7 @@ var phonegap = require('../../lib/main'),
     stdout;
 
 /*
- * Specification: phonegap help create.
+ * Specification: $ phonegap help create
  */
 
 describe('phonegap help create', function() {
@@ -62,7 +62,7 @@ describe('phonegap help create', function() {
 });
 
 /*
- * Specification: phonegap create <path>.
+ * Specification: $ phonegap create <path>
  */
 
 describe('phonegap create <path>', function() {
