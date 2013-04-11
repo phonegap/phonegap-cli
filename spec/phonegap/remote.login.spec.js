@@ -37,177 +37,77 @@ describe('phonegap.remote.login(options, [callback])', function() {
         expect(phonegap.remote.login(options)).toEqual(phonegap);
     });
 
-    it('should try to find account', function() {
+    it('should try to login', function() {
         phonegap.remote.login(options);
-        expect(config.global.load).toHaveBeenCalled();
+        expect(phonegapbuild.login).toHaveBeenCalledWith(
+            options,
+            jasmine.any(Function)
+        );
     });
 
-    describe('when account exists', function() {
-        beforeEach(function() {
-            config.global.load.andCallFake(function(callback) {
-                callback(null, { phonegap: { token: 'abc123' } });
+    describe('on "login" event', function() {
+        it('should map PhoneGapBuild "login" event', function(done) {
+            phonegapbuild.login.andCallFake(function(options, callback) {
+                phonegapbuild.emit('login', options, callback);
             });
-        });
-
-        it('should try to login', function() {
-            phonegap.remote.login(options);
-            expect(phonegapbuild.login).toHaveBeenCalledWith(
-                null,
-                jasmine.any(Function)
-            );
-        });
-
-        describe('successful login', function() {
-            beforeEach(function() {
-                phonegapbuild.login.andCallFake(function(opt, callback) {
-                    callback(null, {});
-                });
-            });
-
-            it('should trigger callback without an error', function(done) {
-                phonegap.remote.login(options, function(e, api) {
-                    expect(e).toBeNull();
-                    done();
-                });
-            });
-
-            it('should trigger callback with API object', function(done) {
-                phonegap.remote.login(options, function(e, api) {
-                    expect(api).toBeDefined();
-                    done();
-                });
-            });
-        });
-
-        describe('failed login', function() {
-            beforeEach(function() {
-                phonegapbuild.login.andCallFake(function(opt, callback) {
-                    callback(new Error('Ganon stole the token!'));
-                });
-            });
-
-            it('should trigger callback with an error', function(done) {
-                phonegap.remote.login(options, function(e, api) {
-                    expect(e).toBeDefined();
-                    done();
-                });
-            });
-
-            it('should trigger callback without an API object', function(done) {
-                phonegap.remote.login(options, function(e, api) {
-                    expect(api).not.toBeDefined();
-                    done();
-                });
-            });
-
-            it('should fire "error" event', function(done) {
-                phonegap.on('error', function(e) {
-                    expect(e).toEqual(jasmine.any(Error));
-                    done();
-                });
-                phonegap.remote.login(options);
-            });
-        });
-    });
-
-    describe('failed account lookup', function() {
-        beforeEach(function() {
-            config.global.load.andCallFake(function(callback) {
-                callback(null, { phonegap: { token: undefined } });
-            });
-        });
-
-        it('should trigger "login" event', function(done) {
-            phonegap.on('login', function(data, callback) {
+            phonegap.on('login', function(options, callback) {
+                expect(options).toEqual(options);
+                expect(callback).toEqual(jasmine.any(Function));
                 done();
             });
             phonegap.remote.login(options);
         });
+    });
 
-        describe('"login" event parameters', function() {
-            it('should have login data', function(done) {
-                phonegap.on('login', function(data, callback) {
-                    expect(data.username).toEqual('zelda');
-                    done();
-                });
-                phonegap.remote.login({ username: 'zelda' });
-            });
-
-            it('should have a callback function', function(done) {
-                phonegap.on('login', function(data, callback) {
-                    expect(callback).toEqual(jasmine.any(Function));
-                    done();
-                });
-                phonegap.remote.login(options);
+    describe('successful login', function() {
+        beforeEach(function() {
+            phonegapbuild.login.andCallFake(function(opt, callback) {
+                callback(null, {});
             });
         });
 
-        describe('successful login', function() {
-            beforeEach(function() {
-                phonegap.on('login', function(data, callback) {
-                    callback(null, { username: 'zelda', password: 'tr1force' });
-                });
+        it('should trigger callback without an error', function(done) {
+            phonegap.remote.login(options, function(e, api) {
+                expect(e).toBeNull();
+                done();
             });
+        });
 
-            it('should try to login', function() {
-                phonegap.remote.login(options);
-                expect(phonegapbuild.login).toHaveBeenCalledWith(
-                    { username: 'zelda', password: 'tr1force' },
-                    jasmine.any(Function)
-                );
+        it('should trigger callback with API object', function(done) {
+            phonegap.remote.login(options, function(e, api) {
+                expect(api).toBeDefined();
+                done();
             });
+        });
+    });
 
-            describe('successful login', function() {
-                beforeEach(function() {
-                    phonegapbuild.login.andCallFake(function(opt, callback) {
-                        callback(null, {});
-                    });
-                });
-
-                it('should trigger callback without an error', function(done) {
-                    phonegap.remote.login(options, function(e, api) {
-                        expect(e).toBeNull();
-                        done();
-                    });
-                });
-
-                it('should trigger callback with API object', function(done) {
-                    phonegap.remote.login(options, function(e, api) {
-                        expect(api).toBeDefined();
-                        done();
-                    });
-                });
+    describe('failed login', function() {
+        beforeEach(function() {
+            phonegapbuild.login.andCallFake(function(opt, callback) {
+                callback(new Error('Ganon stole the token!'));
             });
+        });
 
-            describe('failed login', function() {
-                beforeEach(function() {
-                    phonegapbuild.login.andCallFake(function(opt, callback) {
-                        callback(new Error('Ganon stole the token!'));
-                    });
-                });
-
-                it('should trigger callback with an error', function(done) {
-                    phonegap.remote.login(options, function(e, api) {
-                        expect(e).toBeDefined();
-                        done();
-                    });
-                });
-
-                it('should trigger callback without an API object', function(done) {
-                    phonegap.remote.login(options, function(e, api) {
-                        expect(api).not.toBeDefined();
-                        done();
-                    });
-                });
-
-                it('should fire "error" event', function(done) {
-                    phonegap.on('error', function(e) {
-                        expect(e).toEqual(jasmine.any(Error));
-                        done();
-                    });
-                    phonegap.remote.login(options);
-                });
+        it('should trigger callback with an error', function(done) {
+            phonegap.remote.login(options, function(e, api) {
+                expect(e).toBeDefined();
+                done();
             });
+        });
+
+        it('should trigger callback without an API object', function(done) {
+            phonegap.remote.login(options, function(e, api) {
+                expect(api).not.toBeDefined();
+                done();
+            });
+        });
+
+        it('should fire "error" event', function(done) {
+            phonegap.on('error', function(e) {
+                expect(e).toEqual(jasmine.any(Error));
+                done();
+            });
+            phonegap.remote.login(options);
         });
     });
 });
