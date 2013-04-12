@@ -107,7 +107,9 @@ describe('phonegap.remote.build(options, [callback])', function() {
         describe('failed project build', function() {
             beforeEach(function() {
                 phonegapbuild.build.andCallFake(function(opts, callback) {
-                    callback(new Error('Could not connect to PhoneGap Build.'));
+                    var e = new Error('could not connect to PhoneGap/Build');
+                    phonegapbuild.emit('error', e);
+                    callback(e);
                     return emitter;
                 });
             });
@@ -132,7 +134,9 @@ describe('phonegap.remote.build(options, [callback])', function() {
     describe('failed login', function() {
         beforeEach(function() {
             phonegap.remote.login.andCallFake(function(opts, callback) {
-                callback(new Error('Invalid account'));
+                var e = new Error('invalid account');
+                phonegapbuild.emit('error', e);
+                callback(e);
             });
         });
 
