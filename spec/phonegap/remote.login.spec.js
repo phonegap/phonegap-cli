@@ -84,6 +84,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
     describe('failed login', function() {
         beforeEach(function() {
             phonegapbuild.login.andCallFake(function(opt, callback) {
+                phonegapbuild.emit('error', new Error('Ganon stole the token!'));
                 callback(new Error('Ganon stole the token!'));
             });
         });

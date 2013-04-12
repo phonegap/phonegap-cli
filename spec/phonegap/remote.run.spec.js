@@ -87,7 +87,8 @@ describe('phonegap.remote.run(options, [callback])', function() {
     describe('failed build', function() {
         beforeEach(function() {
             phonegap.remote.build.andCallFake(function(opts, callback) {
-                callback(new Error('Server did no respond'));
+                phonegapbuild.emit('error', new Error('Server did not respond'));
+                callback(new Error('Server did not respond'));
             });
         });
 
