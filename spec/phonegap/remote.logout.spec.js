@@ -56,14 +56,6 @@ describe('phonegap.remote.logout(options, [callback])', function() {
                 done();
             });
         });
-
-        it('should fire a "log" event', function(done) {
-            phonegap.on('log', function(msg) {
-                expect(msg).toEqual(jasmine.any(String));
-                done();
-            });
-            phonegap.remote.logout(options);
-        });
     });
 
     describe('failed logout', function() {
@@ -78,14 +70,6 @@ describe('phonegap.remote.logout(options, [callback])', function() {
                 expect(e).toEqual(jasmine.any(Error));
                 done();
             });
-        });
-
-        it('should fire a "error" event', function(done) {
-            phonegap.on('error', function(e) {
-                expect(e).toEqual(jasmine.any(Error));
-                done();
-            });
-            phonegap.remote.logout(options);
         });
     });
 });
