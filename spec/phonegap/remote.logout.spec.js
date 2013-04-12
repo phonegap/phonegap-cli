@@ -61,6 +61,7 @@ describe('phonegap.remote.logout(options, [callback])', function() {
     describe('failed logout', function() {
         beforeEach(function() {
             phonegapbuild.logout.andCallFake(function(options, callback) {
+                phonegapbuild.emit('error', new Error('write access denied'));
                 callback(new Error('write access denied'));
             });
         });
@@ -70,6 +71,14 @@ describe('phonegap.remote.logout(options, [callback])', function() {
                 expect(e).toEqual(jasmine.any(Error));
                 done();
             });
+        });
+
+        it('should fire "error" event', function(done) {
+            phonegap.on('error', function(e) {
+                expect(e).toEqual(jasmine.any(Error));
+                done();
+            });
+            phonegap.remote.logout(options);
         });
     });
 });
