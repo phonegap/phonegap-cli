@@ -6,7 +6,6 @@ var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     PhoneGap = require('../../lib/phonegap'),
     events = require('events'),
     phonegap,
-    emitter,
     appData,
     options,
     stdout;
@@ -28,10 +27,9 @@ describe('phonegap.remote.build(options, [callback])', function() {
                 android: '/api/v1/apps/322388/android'
             }
         };
-        emitter = new events.EventEmitter();
         spyOn(process.stdout, 'write');
         spyOn(phonegap.remote, 'login');
-        spyOn(phonegapbuild, 'build').andReturn(emitter);
+        spyOn(phonegapbuild, 'build');
     });
 
     it('should require options', function() {
@@ -72,7 +70,6 @@ describe('phonegap.remote.build(options, [callback])', function() {
         beforeEach(function() {
             phonegapbuild.build.andCallFake(function(opts, callback) {
                 callback(null, appData);
-                return emitter;
             });
         });
 
@@ -97,7 +94,6 @@ describe('phonegap.remote.build(options, [callback])', function() {
                 var e = new Error('could not connect to PhoneGap/Build');
                 phonegapbuild.emit('error', e);
                 callback(e);
-                return emitter;
             });
         });
 
