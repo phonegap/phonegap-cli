@@ -58,91 +58,47 @@ describe('phonegap.remote.build(options, [callback])', function() {
         expect(phonegap.remote.build(options)).toEqual(phonegap);
     });
 
-    it('should try to login', function() {
+    it('should try to build the project', function() {
         phonegap.remote.build(options);
-        expect(phonegap.remote.login).toHaveBeenCalled();
+        expect(phonegapbuild.build).toHaveBeenCalledWith(
+            {
+                platforms: ['android']
+            },
+            jasmine.any(Function)
+        );
     });
 
-    describe('successful login', function() {
+    describe('successful project build', function() {
         beforeEach(function() {
-            phonegap.remote.login.andCallFake(function(options, callback) {
-                callback(null, {});
+            phonegapbuild.build.andCallFake(function(opts, callback) {
+                callback(null, appData);
+                return emitter;
             });
         });
 
-        it('should try to build the project', function() {
-            phonegap.remote.build(options);
-            expect(phonegapbuild.build).toHaveBeenCalledWith(
-                {
-                    api: jasmine.any(Object),
-                    platforms: ['android']
-                },
-                jasmine.any(Function)
-            );
-        });
-
-        describe('successful project build', function() {
-            beforeEach(function() {
-                phonegapbuild.build.andCallFake(function(opts, callback) {
-                    callback(null, appData);
-                    return emitter;
-                });
-            });
-
-            it('should call callback without an error', function(done) {
-                phonegap.remote.build(options, function(e, data) {
-                    expect(e).toBeNull();
-                    done();
-                });
-            });
-
-            it('should call callback with a data object', function(done) {
-                phonegap.remote.build(options, function(e, data) {
-                    expect(data).toEqual(appData);
-                    done();
-                });
+        it('should call callback without an error', function(done) {
+            phonegap.remote.build(options, function(e, data) {
+                expect(e).toBeNull();
+                done();
             });
         });
 
-        describe('failed project build', function() {
-            beforeEach(function() {
-                phonegapbuild.build.andCallFake(function(opts, callback) {
-                    var e = new Error('could not connect to PhoneGap/Build');
-                    phonegapbuild.emit('error', e);
-                    callback(e);
-                    return emitter;
-                });
-            });
-
-            it('should call callback with an error', function(done) {
-                phonegap.remote.build(options, function(e, data) {
-                    expect(e).toEqual(jasmine.any(Error));
-                    done();
-                });
-            });
-
-            it('should fire "error" event', function(done) {
-                phonegap.on('error', function(e) {
-                    expect(e).toEqual(jasmine.any(Error));
-                    done();
-                });
-                phonegap.remote.build(options);
+        it('should call callback with a data object', function(done) {
+            phonegap.remote.build(options, function(e, data) {
+                expect(data).toEqual(appData);
+                done();
             });
         });
     });
 
-    describe('failed login', function() {
+    describe('failed project build', function() {
         beforeEach(function() {
-            phonegap.remote.login.andCallFake(function(opts, callback) {
-                var e = new Error('invalid account');
+            phonegapbuild.build.andCallFake(function(opts, callback) {
+                var e = new Error('could not connect to PhoneGap/Build');
                 phonegapbuild.emit('error', e);
                 callback(e);
+                return emitter;
             });
-        });
-
-        it('should not build the project', function() {
-            phonegap.remote.build(options);
-            expect(phonegapbuild.build).not.toHaveBeenCalled();
         });
 
         it('should call callback with an error', function(done) {
