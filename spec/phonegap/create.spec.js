@@ -86,29 +86,5 @@ describe('create(options, [callback])', function() {
             });
             phonegap.create(options);
         });
-
-        // remove when cordova-cli workaround does not need to exists
-        describe('throws a String as an error', function() {
-            beforeEach(function() {
-                cordova.create.andCallFake(function(path) {
-                    throw 'path already exists';
-                });
-            });
-
-            it('should trigger callback with an error', function(done) {
-                phonegap.create(options, function(e) {
-                    expect(e).toEqual(jasmine.any(Error));
-                    done();
-                });
-            });
-
-            it('should trigger "error" event', function(done) {
-                phonegap.on('error', function(e) {
-                    expect(e).toEqual(jasmine.any(Error));
-                    done();
-                });
-                phonegap.create(options);
-            });
-        });
     });
 });
