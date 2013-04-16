@@ -84,7 +84,7 @@ describe('phonegap.local.run(options, [callback])', function() {
         describe('failed run', function() {
             beforeEach(function() {
                 cordova.emulate.andCallFake(function(platforms, callback) {
-                    throw new Error('Ganon stole the binaries');
+                    throw new Error('Ganon stole the binary');
                 });
             });
 
@@ -108,7 +108,9 @@ describe('phonegap.local.run(options, [callback])', function() {
     describe('failed build', function() {
         beforeEach(function() {
             phonegap.local.build.andCallFake(function(opts, callback) {
-                callback(new Error('file I/O error'));
+                var e = new Error('file I/O error');
+                phonegap.emit('error', e);
+                callback(e);
             });
         });
 
