@@ -49,7 +49,7 @@ describe('phonegap.build(options, [callback])', function() {
     describe('with local environment', function() {
         beforeEach(function() {
             cordova.platform.supports.andCallFake(function(platform, callback) {
-                callback(true);
+                callback(null);
             });
         });
 
@@ -63,7 +63,7 @@ describe('phonegap.build(options, [callback])', function() {
     describe('with remote environment', function() {
         beforeEach(function() {
             cordova.platform.supports.andCallFake(function(platform, callback) {
-                callback(false);
+                callback(new Error('could not find sdk'));
             });
         });
 
