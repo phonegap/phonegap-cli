@@ -120,7 +120,9 @@ describe('phonegap.local.build(options, [callback])', function() {
     describe('failure adding platform', function() {
         beforeEach(function() {
             localBuild.addPlatform.andCallFake(function(options, callback) {
-                callback(new Error('write access denied'));
+                var e = new Error('write access denied');
+                phonegap.emit('error', e);
+                callback(e);
             });
         });
 
