@@ -37,7 +37,8 @@
         "shelljs": "0.0.x"
     },
     "devDependencies": {
-        "jasmine-node": "1.1.x"
+        "jasmine-node": "1.1.x",
+        "chdir": "0.0.x"
     },
     "optionalDependencies": {
     },
