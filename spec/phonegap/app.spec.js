@@ -3,6 +3,7 @@
  */
 
 var PhoneGap = require('../../lib/phonegap'),
+    project = require('../../lib/phonegap/util/project'),
     http = require('http'),
     events = require('events'),
     Static = require('node-static'),
@@ -20,6 +21,7 @@ describe('phonegap.app(options, [callback])', function() {
     beforeEach(function() {
         phonegap = new PhoneGap();
         options = {};
+        spyOn(project, 'cd').andReturn(true);
         // mock the http.createServer
         spyOn(http, 'createServer').andCallFake(function(callback) {
             request = new events.EventEmitter();
@@ -58,6 +60,14 @@ describe('phonegap.app(options, [callback])', function() {
 
     it('should return itself', function() {
         expect(phonegap.app(options)).toEqual(phonegap);
+    });
+
+    it('should change to project directory', function() {
+        phonegap.app(options);
+        expect(project.cd).toHaveBeenCalledWith({
+            emitter: phonegap,
+            callback: jasmine.any(Function)
+        });
     });
 
     it('should try to serve the project', function() {
