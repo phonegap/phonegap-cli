@@ -3,6 +3,7 @@
  */
 
 var PhoneGap = require('../../lib/phonegap'),
+    project = require('../../lib/phonegap/util/project'),
     cordova = require('cordova'),
     phonegap,
     options;
@@ -20,6 +21,7 @@ describe('phonegap.build(options, [callback])', function() {
         spyOn(phonegap.local, 'run').andReturn(phonegap);
         spyOn(phonegap.remote, 'run').andReturn(phonegap);
         spyOn(cordova.platform, 'supports');
+        spyOn(project, 'cd').andReturn(true);
     });
 
     it('should require options', function() {
@@ -40,6 +42,14 @@ describe('phonegap.build(options, [callback])', function() {
         expect(function() {
             phonegap.run(options);
         }).not.toThrow();
+    });
+
+    it('should change to project directory', function() {
+        phonegap.run(options);
+        expect(project.cd).toHaveBeenCalledWith({
+            emitter: phonegap,
+            callback: jasmine.any(Function)
+        });
     });
 
     it('should return itself', function() {

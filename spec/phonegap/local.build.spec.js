@@ -4,6 +4,7 @@
 
 var localBuild = require('../../lib/phonegap/local.build'),
     PhoneGap = require('../../lib/phonegap'),
+    project = require('../../lib/phonegap/util/project'),
     cordova = require('cordova'),
     fs = require('fs'),
     phonegap,
@@ -21,6 +22,7 @@ describe('phonegap.local.build(options, [callback])', function() {
         };
         spyOn(cordova, 'build');
         spyOn(localBuild, 'addPlatform');
+        spyOn(project, 'cd').andReturn(true);
     });
 
     it('should require options', function() {
@@ -41,6 +43,14 @@ describe('phonegap.local.build(options, [callback])', function() {
         expect(function() {
             phonegap.local.build(options);
         }).not.toThrow();
+    });
+
+    it('should change to project directory', function() {
+        phonegap.local.build(options);
+        expect(project.cd).toHaveBeenCalledWith({
+            emitter: phonegap,
+            callback: jasmine.any(Function)
+        });
     });
 
     it('should return itself', function() {

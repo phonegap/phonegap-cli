@@ -4,6 +4,7 @@
 
 var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     PhoneGap = require('../../lib/phonegap'),
+    project = require('../../lib/phonegap/util/project'),
     qrcode = require('qrcode-terminal'),
     phonegap,
     options;
@@ -20,6 +21,7 @@ describe('phonegap.remote.run(options, [callback])', function() {
         };
         spyOn(process.stdout, 'write');
         spyOn(phonegap.remote, 'build');
+        spyOn(project, 'cd').andReturn(true);
     });
 
     it('should require options', function() {
@@ -40,6 +42,14 @@ describe('phonegap.remote.run(options, [callback])', function() {
         expect(function() {
             phonegap.remote.run(options);
         }).not.toThrow();
+    });
+
+    it('should change to project directory', function() {
+        phonegap.remote.run(options);
+        expect(project.cd).toHaveBeenCalledWith({
+            emitter: phonegap,
+            callback: jasmine.any(Function)
+        });
     });
 
     it('should return itself', function() {

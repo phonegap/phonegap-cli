@@ -4,6 +4,7 @@
 
 var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     PhoneGap = require('../../lib/phonegap'),
+    project = require('../../lib/phonegap/util/project'),
     events = require('events'),
     phonegap,
     appData,
@@ -30,6 +31,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
         spyOn(process.stdout, 'write');
         spyOn(phonegap.remote, 'login');
         spyOn(phonegapbuild, 'build');
+        spyOn(project, 'cd').andReturn(true);
     });
 
     it('should require options', function() {
@@ -50,6 +52,14 @@ describe('phonegap.remote.build(options, [callback])', function() {
         expect(function() {
             phonegap.remote.build(options);
         }).not.toThrow();
+    });
+
+    it('should change to project directory', function() {
+        phonegap.remote.build(options);
+        expect(project.cd).toHaveBeenCalledWith({
+            emitter: phonegap,
+            callback: jasmine.any(Function)
+        });
     });
 
     it('should return itself', function() {
