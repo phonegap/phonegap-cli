@@ -19,6 +19,14 @@ Options:
   -v, --version        output version number
   -h, --help           output usage information
 
+Platforms:
+
+  android              target Android
+  blackberry           target BlackBerry 10
+  ios                  target iOS
+  wp7                  target Windows Phone 7
+  wp8                  target Windows Phone 8
+
 Examples:
 
   $ $0 help create

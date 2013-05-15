@@ -12,12 +12,6 @@ Description:
   explain what is happening. This is an inconsistency in the
   Apache Cordova project that is actively being resolved.
 
-  The platform names are:
-
-    - android
-    - blackberry
-    - ios
-
 Examples:
 
   $ $0 local build android

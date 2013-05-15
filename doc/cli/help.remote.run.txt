@@ -4,15 +4,6 @@ Description:
 
   Build and install your application to a specific platform.
 
-  The platform names are:
-
-    - android
-    - blackberry
-    - ios
-    - symbian
-    - webos
-    - winphone
-
 Examples:
 
   $ $0 remote run android

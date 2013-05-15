@@ -4,12 +4,6 @@ Description:
 
   Build and install your application to a specific platform.
 
-  The platform names are:
-
-    - android
-    - blackberry
-    - ios
-
 Examples:
 
   $ $0 local run android
