@@ -2,7 +2,7 @@ Usage: $0 create [options] <path>
 
 Description:
 
-  Create a new application.
+  Creates a new application at a given path.
 
 Examples:
 
