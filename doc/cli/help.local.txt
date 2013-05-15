@@ -2,8 +2,9 @@ Usage: $0 local [command]
 
 Description:
 
-  Run commands on your local system.
-  This requires that you have the correct platform SDKs installed.
+  Executes the command on the local system.
+
+  This requires that platform SDK is correctly installed.
 
 Commands:
 

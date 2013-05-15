@@ -2,16 +2,17 @@ Usage: $0 run <platform>
 
 Description:
 
-  Build and install your application to a specific platform.
+  Builds and installs your application to a specific platform.
 
-  Automatically detects your platform SDK and fallsback on PhoneGap/Build.
+  Automatically detects support for the platform SDK and executes the
+  run command locally or remotely.
 
 Examples:
 
   $ $0 run android
   $ $0 run ios
 
-Related:
+Also see:
 
   $0 local run <platform>
   $0 remote run <platform>

@@ -2,9 +2,9 @@ Usage: $0 local build <platform>
 
 Description:
 
-  Build your application to a specific platform.
+  Builds your application for a specific platform.
 
-  Build will happen locally on your system. This requires that
+  Build will execute on the local system. This requires that
   the <platform> SDK environment is correctly installed.
 
   After the build, the <platform> may attempt to install the
