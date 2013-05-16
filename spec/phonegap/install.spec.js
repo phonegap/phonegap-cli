@@ -9,17 +9,17 @@ var PhoneGap = require('../../lib/phonegap'),
     options;
 
 /*
- * Specification: phonegap.run(options, [callback])
+ * Specification: phonegap.install(options, [callback])
  */
 
-describe('phonegap.run(options, [callback])', function() {
+describe('phonegap.install(options, [callback])', function() {
     beforeEach(function() {
         phonegap = new PhoneGap();
         options = {
             platforms: ['android']
         };
-        spyOn(phonegap.local, 'run').andReturn(phonegap);
-        spyOn(phonegap.remote, 'run').andReturn(phonegap);
+        spyOn(phonegap.local, 'install').andReturn(phonegap);
+        spyOn(phonegap.remote, 'install').andReturn(phonegap);
         spyOn(cordova.platform, 'supports');
         spyOn(project, 'cd').andReturn(true);
     });
@@ -27,25 +27,25 @@ describe('phonegap.run(options, [callback])', function() {
     it('should require options', function() {
         expect(function() {
             options = undefined;
-            phonegap.run(options, function(e) {});
+            phonegap.install(options, function(e) {});
         }).toThrow();
     });
 
     it('should require options.platforms', function() {
         expect(function() {
             options.platforms = undefined;
-            phonegap.run(options, function(e) {});
+            phonegap.install(options, function(e) {});
         }).toThrow();
     });
 
     it('should not require callback', function() {
         expect(function() {
-            phonegap.run(options);
+            phonegap.install(options);
         }).not.toThrow();
     });
 
     it('should change to project directory', function() {
-        phonegap.run(options);
+        phonegap.install(options);
         expect(project.cd).toHaveBeenCalledWith({
             emitter: phonegap,
             callback: jasmine.any(Function)
@@ -53,7 +53,7 @@ describe('phonegap.run(options, [callback])', function() {
     });
 
     it('should return itself', function() {
-        expect(phonegap.run(options)).toEqual(phonegap);
+        expect(phonegap.install(options)).toEqual(phonegap);
     });
 
     describe('with local environment', function() {
@@ -63,10 +63,10 @@ describe('phonegap.run(options, [callback])', function() {
             });
         });
 
-        it('should try to run the project locally', function() {
+        it('should try to install the app locally', function() {
             var callback = function() {};
-            phonegap.run(options, callback);
-            expect(phonegap.local.run).toHaveBeenCalledWith(options, callback);
+            phonegap.install(options, callback);
+            expect(phonegap.local.install).toHaveBeenCalledWith(options, callback);
         });
     });
 
@@ -77,10 +77,10 @@ describe('phonegap.run(options, [callback])', function() {
             });
         });
 
-        it('should try to run the project remotely', function() {
+        it('should try to install the app remotely', function() {
             var callback = function() {};
-            phonegap.run(options, callback);
-            expect(phonegap.remote.run).toHaveBeenCalledWith(options, callback);
+            phonegap.install(options, callback);
+            expect(phonegap.remote.install).toHaveBeenCalledWith(options, callback);
         });
     });
 });

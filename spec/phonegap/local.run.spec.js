@@ -4,7 +4,6 @@
 
 var PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
-    cordova = require('cordova'),
     phonegap,
     options;
 
@@ -20,7 +19,7 @@ describe('phonegap.local.run(options, [callback])', function() {
         };
         spyOn(process.stdout, 'write');
         spyOn(phonegap.local, 'build');
-        spyOn(cordova, 'emulate');
+        spyOn(phonegap.local, 'install');
         spyOn(project, 'cd').andReturn(true);
     });
 
@@ -68,18 +67,18 @@ describe('phonegap.local.run(options, [callback])', function() {
             });
         });
 
-        it('should run the app', function() {
+        it('should install the app', function() {
             phonegap.local.run(options);
-            expect(cordova.emulate).toHaveBeenCalledWith(
-                options.platforms,
+            expect(phonegap.local.install).toHaveBeenCalledWith(
+                options,
                 jasmine.any(Function)
             );
         });
 
-        describe('successful run', function() {
+        describe('successful install', function() {
             beforeEach(function() {
-                cordova.emulate.andCallFake(function(platforms, callback) {
-                    callback();
+                phonegap.local.install.andCallFake(function(options, callback) {
+                    callback(null);
                 });
             });
 
@@ -91,10 +90,12 @@ describe('phonegap.local.run(options, [callback])', function() {
             });
         });
 
-        describe('failed run', function() {
+        describe('failed install', function() {
             beforeEach(function() {
-                cordova.emulate.andCallFake(function(platforms, callback) {
-                    throw new Error('Ganon stole the binary');
+                phonegap.local.install.andCallFake(function(options, callback) {
+                    var e = new Error('Ganon stole the binary');
+                    phonegap.emit('error', e);
+                    callback(e);
                 });
             });
 

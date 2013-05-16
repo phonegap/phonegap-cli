@@ -65,7 +65,7 @@ describe('phonegap help run', function() {
  * Specification: phonegap run <platform>
  */
 
-describe('phonegap build <platform>', function() {
+describe('phonegap run <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(phonegap, 'run');

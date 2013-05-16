@@ -1,0 +1,20 @@
+Usage: $0 install <platform>
+
+Description:
+
+  Installs the application to a specific platform.
+
+  When there is nothing to install, the command will fail.
+
+  Automatically detects support for the platform SDK and executes the
+  install command locally or remotely.
+
+Examples:
+
+  $ $0 install android
+  $ $0 install ios
+
+Also see:
+
+  $0 local install <platform>
+  $0 remote install <platform>
