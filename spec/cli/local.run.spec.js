@@ -66,7 +66,7 @@ describe('phonegap help local run', function() {
  * Specification: phonegap local run <platform>
  */
 
-describe('phonegap local build <platform>', function() {
+describe('phonegap local run <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');

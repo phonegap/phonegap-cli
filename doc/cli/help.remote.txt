@@ -9,6 +9,7 @@ Commands:
   login                login to PhoneGap/Build
   logout               logout of PhoneGap/Build
   build <platform>     build a specific platform
+  install <platform>   install a specific platform
   run <platform>       build and install a specific platform
 
 Examples:
