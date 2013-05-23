@@ -11,11 +11,5 @@
 
 ## Run the Tests
 
-### Mac and Linux
-
     $ npm test
-
-### Windows
-
-    $ ./node_modules/.bin/jasmine-node --verbose --color spec
 
