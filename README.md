@@ -20,6 +20,7 @@
 
       create <path>        create a phonegap project
       build <platform>     build a specific platform
+      install <platform>   install a specific platform
       run <platform>       build and install a specific platform
       local [command]      development on local system
       remote [command]     development in cloud with phonegap/build
@@ -31,11 +32,20 @@
       -v, --version        output version number
       -h, --help           output usage information
 
+    Platforms:
+
+      android              target Android
+      blackberry           target BlackBerry 10
+      ios                  target iOS
+      wp7                  target Windows Phone 7
+      wp8                  target Windows Phone 8
+
     Examples:
 
       $ phonegap help create
       $ phonegap help remote build
       $ phonegap create path/to/my-app
+      $ phonegap remote build android
 
 #### Local Usage
 
@@ -43,12 +53,14 @@
 
     Description:
 
-      Run commands on your local system.
-      This requires that you have the correct platform SDKs installed.
+      Executes the command on the local system.
+
+      This requires that platform SDK is correctly installed.
 
     Commands:
 
       build <platform>     build a specific platform
+      install <platform>   install a specific platform
       run <platform>       build and install a specific platform
 
     Examples:
@@ -62,13 +74,14 @@
 
     Description:
 
-      Run commands for cloud-based development with PhoneGap/Build.
+      Executes the command remotely using the cloud-based PhoneGap/Build service.
 
     Commands:
 
       login                login to PhoneGap/Build
       logout               logout of PhoneGap/Build
       build <platform>     build a specific platform
+      install <platform>   install a specific platform
       run <platform>       build and install a specific platform
 
     Examples:
