@@ -4,13 +4,8 @@ Description:
 
   Builds your application for a specific platform.
 
-  Build will execute on the local system. This requires that
+  Build executes on the local system. This requires that
   the <platform> SDK environment is correctly installed.
-
-  After the build, the <platform> may attempt to install the
-  app on an emulator or device. The command-line output will
-  explain what is happening. This is an inconsistency in the
-  Apache Cordova project that is actively being resolved.
 
 Examples:
 

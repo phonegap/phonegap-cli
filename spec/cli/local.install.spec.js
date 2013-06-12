@@ -119,4 +119,14 @@ describe('phonegap local install <platform>', function() {
             });
         });
     });
+
+    describe('$ phonegap local install --device android', function() {
+        it('should try to install the app', function() {
+            cli.argv({ _: ['local', 'install', 'android'], device: true });
+            expect(phonegap.local.install).toHaveBeenCalledWith(
+                { platforms: ['android'], device: true },
+                jasmine.any(Function)
+            );
+        });
+    });
 });

@@ -2,9 +2,9 @@ Usage: $0 remote install <platform>
 
 Description:
 
-  Installs the application to a specific platform.
+  Installs the application for a specific platform.
 
-  When there is no application to install, the command will fail.
+  Since no SDK is available, a QRCode is generated in the terminal.
 
 Examples:
 

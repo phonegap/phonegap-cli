@@ -2,7 +2,9 @@ Usage: $0 remote run <platform>
 
 Description:
 
-  Builds and installs your application to a specific platform.
+  Builds and installs your application for a specific platform.
+
+  See the 'build' and 'install' commands for available [options].
 
 Examples:
 

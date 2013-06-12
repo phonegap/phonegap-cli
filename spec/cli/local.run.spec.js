@@ -119,4 +119,14 @@ describe('phonegap local run <platform>', function() {
             });
         });
     });
+
+    describe('$ phonegap local run --device android', function() {
+        it('should try to run the project on a device', function() {
+            cli.argv({ _: ['local', 'run', 'android'], device: true });
+            expect(phonegap.local.run).toHaveBeenCalledWith(
+                { platforms: ['android'], device: true },
+                jasmine.any(Function)
+            );
+        });
+    });
 });

@@ -23,11 +23,11 @@
         "test": "jasmine-node --color --verbose spec"
     },
     "engines": {
-        "node": ">=0.8.0"
+        "node": ">=0.10.0"
     },
     "dependencies": {
         "colors": "0.6.x",
-        "cordova": "2.7.4",
+        "cordova": "2.8.15",
         "node-static": "0.6.x",
         "optimist": "0.3.x",
         "phonegap-build": "0.8.0",
@@ -37,7 +37,7 @@
         "shelljs": "0.0.x"
     },
     "devDependencies": {
-        "jasmine-node": "1.1.x",
+        "jasmine-node": "1.8.0",
         "chdir": "0.0.x"
     },
     "optionalDependencies": {

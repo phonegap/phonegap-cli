@@ -2,11 +2,11 @@ Usage: $0 build <platform>
 
 Description:
 
-  Builds your application to a specific platform.
+  Builds your application for a specific platform.
 
-  Automatically detects support for the platform SDK.
-  When the SDK is supported, the build is executed locally.
-  When the SDK is unsupported, the build is executed remotely.
+  Automatically detects platform SDK support and uses the correct environment.
+
+  See each environment for available [options].
 
 Examples:
 

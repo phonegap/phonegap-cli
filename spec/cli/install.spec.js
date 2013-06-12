@@ -28,35 +28,35 @@ describe('phonegap help install', function() {
     describe('$ phonegap install', function() {
         it('should output usage info', function() {
             cli.argv({ _: ['install'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install <platform>/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install [\S]+ <platform>/i);
         });
     });
 
     describe('$ phonegap help install', function() {
         it('should output usage info', function() {
             cli.argv({ _: ['help', 'install'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install <platform>/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install [\S]+ <platform>/i);
         });
     });
 
     describe('$ phonegap install help', function() {
         it('should output usage info', function() {
             cli.argv({ _: ['install', 'help'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install <platform>/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install [\S]+ <platform>/i);
         });
     });
 
     describe('$ phonegap install --help', function() {
         it('should output usage info', function() {
             cli.argv({ _: ['install'], help: true });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install <platform>/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install [\S]+ <platform>/i);
         });
     });
 
     describe('$ phonegap install -h', function() {
         it('should output usage info', function() {
             cli.argv({ _: ['install'], h: true });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install <platform>/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install [\S]+ <platform>/i);
         });
     });
 });
@@ -117,6 +117,16 @@ describe('phonegap install <platform>', function() {
                     done();
                 });
             });
+        });
+    });
+
+    describe('$ phonegap install --device android', function() {
+        it('should try to install the app on a device', function() {
+            cli.argv({ _: ['install', 'android'], device: true });
+            expect(phonegap.install).toHaveBeenCalledWith(
+                { platforms: ['android'], device: true },
+                jasmine.any(Function)
+            );
         });
     });
 });
