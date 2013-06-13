@@ -6,6 +6,7 @@ var localBuild = require('../../lib/phonegap/local.build'),
     PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
     cordova = require('cordova'),
+    shell = require('shelljs'),
     fs = require('fs'),
     phonegap,
     options;
@@ -92,6 +93,23 @@ describe('phonegap.local.build(options, [callback])', function() {
             beforeEach(function() {
                 cordova.build.andCallFake(function(platforms, callback) {
                     callback();
+                });
+            });
+
+            it('should inject phonegap.js into project', function(done) {
+                spyOn(shell, 'cp');
+                spyOn(cordova.platform.android, 'parser').andReturn({
+                    www_dir: function() {
+                        return 'platforms/android/assets/www';
+                    }
+                });
+                cordova.emit('after_prepare', {}, function() {
+                    expect(cordova.platform.android.parser).toHaveBeenCalled();
+                    expect(shell.cp).toHaveBeenCalledWith(
+                        'platforms/android/assets/www/cordova.js',
+                        'platforms/android/assets/www/phonegap.js'
+                    );
+                    done();
                 });
             });
 
