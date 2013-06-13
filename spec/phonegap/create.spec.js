@@ -49,12 +49,24 @@ describe('create(options, [callback])', function() {
 
     it('should try to create a project', function() {
         phonegap.create(options);
-        expect(cordova.create).toHaveBeenCalledWith(options.path);
+        expect(cordova.create).toHaveBeenCalledWith(
+            options.path,
+            jasmine.any(Function)
+        );
     });
 
     describe('successfully created a project', function() {
         beforeEach(function() {
-            cordova.create.andReturn();
+            cordova.create.andCallFake(function(path, callback) {
+                callback(null);
+            });
+        });
+
+        it('should use PhoneGap Hello World app', function(done) {
+            phonegap.create(options, function(e) {
+                expect(shell.cp).toHaveBeenCalled();
+                done();
+            });
         });
 
         it('should trigger called without an error', function(done) {
@@ -67,8 +79,8 @@ describe('create(options, [callback])', function() {
 
     describe('failed to create a project', function() {
         beforeEach(function() {
-            cordova.create.andCallFake(function(path) {
-                throw new Error('path already exists');
+            cordova.create.andCallFake(function(path, callback) {
+                callback(new Error('path already exists'));
             });
         });
 
