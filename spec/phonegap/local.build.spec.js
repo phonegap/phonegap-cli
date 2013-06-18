@@ -98,16 +98,12 @@ describe('phonegap.local.build(options, [callback])', function() {
 
             it('should inject phonegap.js into project', function(done) {
                 spyOn(shell, 'cp');
-                spyOn(cordova.platform.android, 'parser').andReturn({
-                    www_dir: function() {
-                        return 'platforms/android/assets/www';
-                    }
-                });
-                cordova.emit('after_prepare', {}, function() {
-                    expect(cordova.platform.android.parser).toHaveBeenCalled();
+
+                var prepareData = { paths: [ '/platforms/android/assets/www' ] };
+                cordova.emit('after_prepare', prepareData, function() {
                     expect(shell.cp).toHaveBeenCalledWith(
-                        'platforms/android/assets/www/cordova.js',
-                        'platforms/android/assets/www/phonegap.js'
+                        '/platforms/android/assets/www/cordova.js',
+                        '/platforms/android/assets/www/phonegap.js'
                     );
                     done();
                 });
