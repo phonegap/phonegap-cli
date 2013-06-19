@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 
-var CLI = require('../../lib/cli'),
+var phonegap = require('../../lib/main'),
+    CLI = require('../../lib/cli'),
     cli;
 
 /*
@@ -13,6 +14,11 @@ describe('phonegap --version', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
+        spyOn(phonegap, 'version').andReturn({
+            npm: '2.8.0-0.10.6',
+            module: '0.10.6',
+            phonegap: '2.8.0'
+        });
     });
 
     describe('$ phonegap help', function() {
