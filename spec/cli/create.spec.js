@@ -76,7 +76,113 @@ describe('phonegap create <path>', function() {
         it('should try to create the project', function() {
             cli.argv({ _: ['create', './my-app'] });
             expect(phonegap.create).toHaveBeenCalledWith({
-                path: './my-app'
+                path: './my-app',
+                id: undefined,
+                name: undefined
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app com.example.app', function() {
+        it('should try to create the project', function() {
+            cli.argv({ _: ['create', './my-app', 'com.example.app'] });
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: 'com.example.app',
+                name: undefined
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app com.example.app "My App"', function() {
+        it('should try to create the project', function() {
+            cli.argv({ _: ['create', './my-app', 'com.example.app', 'My App'] });
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: 'com.example.app',
+                name: 'My App'
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app --id com.example.app', function() {
+        it('should try to create the project', function() {
+            cli.argv({ _: ['create', './my-app'], id: 'com.example.app' });
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: 'com.example.app',
+                name: undefined
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app -i com.example.app', function() {
+        it('should try to create the project', function() {
+            cli.argv({ _: ['create', './my-app'], i: 'com.example.app' });
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: 'com.example.app',
+                name: undefined
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app --name "My App"', function() {
+        it('should try to create the project', function() {
+            cli.argv({ _: ['create', './my-app'], name: 'My App' });
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: undefined,
+                name: "My App"
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app -n "My App"', function() {
+        it('should try to create the project', function() {
+            cli.argv({ _: ['create', './my-app'], n: 'My App' });
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: undefined,
+                name: "My App"
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app --id com.example.app --name "My App"', function() {
+        it('should try to create the project', function() {
+            cli.argv({
+                _: ['create', './my-app'],
+                id: 'com.example.app',
+                name: 'My App'
+            });
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: 'com.example.app',
+                name: 'My App'
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app -i com.example.app -n "My App"', function() {
+        it('should try to create the project', function() {
+            cli.argv({
+                _: ['create', './my-app'],
+                i: 'com.example.app',
+                n: 'My App'
+            });
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: 'com.example.app',
+                name: 'My App'
             },
             jasmine.any(Function));
         });

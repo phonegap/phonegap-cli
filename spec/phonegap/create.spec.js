@@ -12,7 +12,7 @@ var PhoneGap = require('../../lib/phonegap'),
  * Specification: phonegap.create(options, [callback])
  */
 
-describe('create(options, [callback])', function() {
+describe('phonegap.create(options, [callback])', function() {
     beforeEach(function() {
         phonegap = new PhoneGap();
         options = {
@@ -62,17 +62,31 @@ describe('create(options, [callback])', function() {
         });
     });
 
-    it('should try to create a project', function() {
+    it('should try to create a project with default values', function() {
         phonegap.create(options);
         expect(cordova.create).toHaveBeenCalledWith(
             options.path,
+            'com.phonegap.hello-world',
+            'Hello World',
+            jasmine.any(Function)
+        );
+    });
+
+    it('should try to create a project with custom values', function() {
+        options.id = 'com.example.app';
+        options.name = 'My App';
+        phonegap.create(options);
+        expect(cordova.create).toHaveBeenCalledWith(
+            options.path,
+            options.id,
+            options.name,
             jasmine.any(Function)
         );
     });
 
     describe('successfully created a project', function() {
         beforeEach(function() {
-            cordova.create.andCallFake(function(path, callback) {
+            cordova.create.andCallFake(function(path, id, name, callback) {
                 callback(null);
             });
         });
@@ -87,7 +101,7 @@ describe('create(options, [callback])', function() {
 
     describe('failed to create a project', function() {
         beforeEach(function() {
-            cordova.create.andCallFake(function(path, callback) {
+            cordova.create.andCallFake(function(path, id, name, callback) {
                 callback(new Error('path already exists'));
             });
         });

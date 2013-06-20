@@ -1,9 +1,20 @@
-Usage: $0 create [options] <path>
+Usage: $0 create [options] <path> [id [name]]
 
 Description:
 
   Creates a new application at the provided path.
 
+  The application name and package ID can also be customized.
+  These values are set in the app manifest (www/config.xml) and are used when
+  creating a native project (platforms/<platform>/).
+
+Options:
+
+  --name, -n <name>    application name (default: "Hello World")
+  --id, -i <package>   package name (default: "com.phonegap.hello-world")
+
 Examples:
 
   $ $0 create path/to/my-app
+  $ $0 create path/to/my-app "com.example.app" "My App" 
+  $ $0 create path/to/my-app --id "com.example.app" --name "My App" 
