@@ -67,7 +67,7 @@ describe('phonegap.create(options, [callback])', function() {
         expect(cordova.create).toHaveBeenCalledWith(
             options.path,
             'com.phonegap.hello-world',
-            'Hello World',
+            'HelloWorld',
             jasmine.any(Function)
         );
     });
