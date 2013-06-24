@@ -22,6 +22,7 @@
     "scripts": {
         "test": "jasmine-node --color --verbose spec"
     },
+    "engineStrict": "true",
     "engines": {
         "node": ">=0.10.0"
     },
