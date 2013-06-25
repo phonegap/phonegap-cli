@@ -103,7 +103,6 @@ apps to the iOS simulator.
 
 ## Related Projects
 
-- [phonegap-app-site](https://github.com/nitobi/phonegap-app-site)
 - [phonegap-app](https://github.com/mwbrooks/phonegap-app)
 - [phonegap-build-cli](https://github.com/mwbrooks/phonegap-build-cli)
 
