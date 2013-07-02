@@ -31,7 +31,7 @@
         "cordova": "2.9.0",
         "node-static": "0.6.x",
         "optimist": "0.3.x",
-        "phonegap-build": "0.8.0",
+        "phonegap-build": "0.8.1",
         "prompt": "0.2.x",
         "qrcode-terminal": "0.9.x",
         "semver": "1.1.0",
