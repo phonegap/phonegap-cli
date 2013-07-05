@@ -8,8 +8,6 @@
 
     $ npm install -g phonegap
 
-#### iOS Simulator Support
-
 [Install ios-sim](https://github.com/phonegap/ios-sim#installation) to deploy
 apps to the iOS simulator.
 
