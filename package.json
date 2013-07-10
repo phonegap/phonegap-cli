@@ -20,7 +20,7 @@
         "phonegap": "./bin/phonegap.js"
     },
     "scripts": {
-        "test": "jasmine-node --color --verbose spec"
+        "test": "jasmine-node --color spec"
     },
     "engineStrict": "true",
     "engines": {
