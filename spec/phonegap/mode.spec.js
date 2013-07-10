@@ -47,6 +47,9 @@ describe('phonegap.mode(options, [callback])', function() {
             expect(phonegapbuild.listeners('warn').length).toBeGreaterThan(0);
             expect(phonegapbuild.listeners('error').length).toBeGreaterThan(0);
             expect(phonegapbuild.listeners('raw').length).toBeGreaterThan(0);
+            expect(cordova.on).toHaveBeenCalledWith('before_library_download', jasmine.any(Function));
+            expect(cordova.on).toHaveBeenCalledWith('after_library_download', jasmine.any(Function));
+            expect(cordova.on).toHaveBeenCalledWith('library_download', jasmine.any(Function));
             expect(cordova.on).not.toHaveBeenCalledWith('log', jasmine.any(Function));
             expect(cordova.on).not.toHaveBeenCalledWith('warn', jasmine.any(Function));
         });
@@ -63,6 +66,9 @@ describe('phonegap.mode(options, [callback])', function() {
             expect(phonegapbuild.listeners('warn').length).toBeGreaterThan(0);
             expect(phonegapbuild.listeners('error').length).toBeGreaterThan(0);
             expect(phonegapbuild.listeners('raw').length).toBeGreaterThan(0);
+            expect(cordova.on).toHaveBeenCalledWith('before_library_download', jasmine.any(Function));
+            expect(cordova.on).toHaveBeenCalledWith('after_library_download', jasmine.any(Function));
+            expect(cordova.on).toHaveBeenCalledWith('library_download', jasmine.any(Function));
             expect(cordova.on).toHaveBeenCalledWith('log', jasmine.any(Function));
             expect(cordova.on).toHaveBeenCalledWith('warn', jasmine.any(Function));
         });
