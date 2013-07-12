@@ -11,6 +11,12 @@
 [Install ios-sim](https://github.com/phonegap/ios-sim#installation) to deploy
 apps to the iOS simulator.
 
+### Getting Started
+
+    $ phonegap create my-app    # create a PhoneGap project
+    $ cd my-app                 # change to project directory
+    $ phonegap run ios          # build and install the app to iOS
+
 ### Usage
 
     Usage: phonegap [options] [commands]
