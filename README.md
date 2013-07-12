@@ -105,11 +105,6 @@ apps to the iOS simulator.
 
     var phonegap = require('phonegap');
 
-## Related Projects
-
-- [phonegap-app](https://github.com/mwbrooks/phonegap-app)
-- [phonegap-build-cli](https://github.com/mwbrooks/phonegap-build-cli)
-
 [travis-ci-img]: https://secure.travis-ci.org/mwbrooks/phonegap-cli.png
 [travis-ci-url]: http://travis-ci.org/mwbrooks/phonegap-cli
 
