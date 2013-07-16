@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "colors": "0.6.0-1",
-        "cordova": "2.9.6",
+        "cordova": "2.9.7",
         "node-static": "0.7.0",
         "optimist": "0.6.0",
         "phonegap-build": "0.8.3",
