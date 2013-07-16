@@ -5,7 +5,17 @@
  */
 
 var CLI = require('../lib/cli'),
-    argv = require('optimist').argv;
+    argv = require('optimist').boolean('d')
+                              .boolean('device')
+                              .boolean('e')
+                              .boolean('emulator')
+                              .boolean('V')
+                              .boolean('verbose')
+                              .boolean('v')
+                              .boolean('version')
+                              .boolean('h')
+                              .boolean('help')
+                              .argv;
 
 /*!
  * Run the command-line client.
