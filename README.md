@@ -38,16 +38,21 @@ apps to the iOS simulator.
 
     Options:
 
+      -V, --verbose        allow verbose output
       -v, --version        output version number
       -h, --help           output usage information
 
     Platforms:
 
-      android              target Android
-      blackberry           target BlackBerry 10
-      ios                  target iOS
-      wp7                  target Windows Phone 7
-      wp8                  target Windows Phone 8
+      keyword            | local environment | remote environment
+      -------------------|-------------------|-------------------
+      android            | ✔                 | ✔
+      blackberry         | ✔ (BlackBerry 10) | ✔ (BlackBerry 6)
+      ios                | ✔                 | ✔
+      symbian            | ✖                 | ✔
+      webos              | ✖                 | ✔
+      wp7                | ✔                 | ✔
+      wp8                | ✔                 | ✖
 
     Examples:
 
@@ -71,11 +76,13 @@ apps to the iOS simulator.
       build <platform>     build a specific platform
       install <platform>   install a specific platform
       run <platform>       build and install a specific platform
+      plugin <command>     add, remove, and list plugins
 
     Examples:
 
       $ phonegap local build android
       $ phonegap local run android
+      $ phonegap local plugin list
 
 #### Remote Usage
 
