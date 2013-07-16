@@ -1,0 +1,12 @@
+Usage: $0 local plugin add <path>
+
+Description:
+
+  Add a plugin to your application.
+
+  <path> can be a local directory path or HTTP URI to a git repository.
+
+Examples:
+
+  $ $0 local plugin add /local/path/to/plugin/
+  $ $0 local plugin add http://example.com/path/to/plugin.git

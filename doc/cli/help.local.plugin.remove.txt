@@ -1,0 +1,12 @@
+Usage: $0 local plugin remove <id>
+
+Description:
+
+  Remove a plugin from your application.
+
+  <id> is the value of the "id" attribute in the plugin manifest.
+  <id> is also the directory name under /plugins/.
+
+Examples:
+
+  $ $0 local plugin remove org.apache.cordova.core.geolocation

@@ -1,0 +1,18 @@
+Usage: $0 local plugin <command>
+
+Description:
+
+  Add, remove, and list plugins for your application.
+
+Commands:
+
+  add <path>           add a plugin
+  remove <id>          remove a plugin
+  list                 list installed plugins
+
+Examples:
+
+  $ $0 local plugin add /local/path/to/plugin/
+  $ $0 local plugin add http://example.com/path/to/plugin.git
+  $ $0 local plugin remove org.apache.cordova.core.geolocation
+  $ $0 local plugin list

@@ -11,8 +11,10 @@ Commands:
   build <platform>     build a specific platform
   install <platform>   install a specific platform
   run <platform>       build and install a specific platform
+  plugin <command>     add, remove, and list plugins
 
 Examples:
 
   $ $0 local build android
   $ $0 local run android
+  $ $0 local plugin list

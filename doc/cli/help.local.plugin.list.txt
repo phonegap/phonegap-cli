@@ -1,0 +1,9 @@
+Usage: $0 local plugin list
+
+Description:
+
+  List currently installed plugins for your application.
+
+Examples:
+
+  $ $0 local plugin list

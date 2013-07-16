@@ -27,11 +27,12 @@
         "node": ">=0.10.0"
     },
     "dependencies": {
-        "colors": "0.6.x",
-        "cordova": "2.9.4",
+        "colors": "0.6.0-1",
+        "cordova": "2.9.6",
         "node-static": "0.6.x",
         "optimist": "0.3.x",
         "phonegap-build": "0.8.3",
+        "pluralize": "0.0.4",
         "prompt": "0.2.x",
         "qrcode-terminal": "0.9.x",
         "semver": "1.1.0",
