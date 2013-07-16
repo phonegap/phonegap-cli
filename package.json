@@ -29,12 +29,12 @@
     "dependencies": {
         "colors": "0.6.0-1",
         "cordova": "2.9.6",
-        "node-static": "0.6.x",
-        "optimist": "0.3.x",
+        "node-static": "0.7.0",
+        "optimist": "0.6.0",
         "phonegap-build": "0.8.3",
         "pluralize": "0.0.4",
-        "prompt": "0.2.x",
-        "qrcode-terminal": "0.9.x",
+        "prompt": "0.2.11",
+        "qrcode-terminal": "0.9.4",
         "semver": "1.1.0",
         "shelljs": "0.1.4"
     },
