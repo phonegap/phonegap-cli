@@ -64,8 +64,19 @@ describe('phonegap help remote', function() {
  * Specification: $ phonegap remote [command]
  */
 
-//describe('phonegap remote', function() {
-//    beforeEach(function() {
-//        cli = new CLI();
-//    });
-//});
+describe('phonegap remote <command>', function() {
+    beforeEach(function() {
+        cli = new CLI();
+    });
+
+    describe('unknown command', function() {
+        it('should output the unknown command', function() {
+            spyOn(cli, 'unknown');
+            cli.argv({ _: ['remote', 'noop'] });
+            expect(cli.unknown).toHaveBeenCalledWith(
+                { _: ['remote', 'noop'] },
+                jasmine.any(Function)
+            );
+        });
+    });
+});

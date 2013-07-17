@@ -64,8 +64,19 @@ describe('phonegap help local', function() {
  * Specification: $ phonegap local [command]
  */
 
-//describe('phonegap local', function() {
-//    beforeEach(function() {
-//        cli = new CLI();
-//    });
-//});
+describe('phonegap local <command>', function() {
+    beforeEach(function() {
+        cli = new CLI();
+    });
+
+    describe('unknown command', function() {
+        it('should output the unknown command', function() {
+            spyOn(cli, 'unknown');
+            cli.argv({ _: ['local', 'noop'] });
+            expect(cli.unknown).toHaveBeenCalledWith(
+                { _: ['local', 'noop'] },
+                jasmine.any(Function)
+            );
+        });
+    });
+});

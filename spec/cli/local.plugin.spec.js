@@ -61,3 +61,24 @@ describe('phonegap help local plugin', function() {
         });
     });
 });
+
+/*
+ * Specification: $ phonegap local plugin [command]
+ */
+
+describe('phonegap local plugin <command>', function() {
+    beforeEach(function() {
+        cli = new CLI();
+    });
+
+    describe('unknown command', function() {
+        it('should output the unknown command', function() {
+            spyOn(cli, 'unknown');
+            cli.argv({ _: ['local', 'plugin', 'noop'] });
+            expect(cli.unknown).toHaveBeenCalledWith(
+                { _: ['local', 'plugin', 'noop'] },
+                jasmine.any(Function)
+            );
+        });
+    });
+});
