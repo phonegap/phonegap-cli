@@ -3,9 +3,8 @@
 > PhoneGap command-line interface and Node.js library.
 
 ## Requirements
-    [node.js](http://nodejs.org/) version 0.10.x or higher
-    [Install ios-sim](https://github.com/phonegap/ios-sim#installation) 
-      to deploy apps to the iOS simulator.
+* [node.js](http://nodejs.org/) version 0.10.x or higher
+* [Install ios-sim](https://github.com/phonegap/ios-sim#installation) to deploy apps to the iOS simulator.
 
 ## Command-line
 
