@@ -5,7 +5,7 @@
 ## Command-line
 
 ### Install
-
+    $ brew install node
     $ npm install -g phonegap
 
 [Install ios-sim](https://github.com/phonegap/ios-sim#installation) to deploy
