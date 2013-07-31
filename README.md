@@ -115,6 +115,6 @@
 
     var phonegap = require('phonegap');
 
-[travis-ci-img]: https://secure.travis-ci.org/mwbrooks/phonegap-cli.png
-[travis-ci-url]: http://travis-ci.org/mwbrooks/phonegap-cli
+[travis-ci-img]: https://travis-ci.org/phonegap/phonegap-cli.png?branch=master
+[travis-ci-url]: http://travis-ci.org/phonegap/phonegap-cli
 
