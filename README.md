@@ -115,6 +115,44 @@
 
     var phonegap = require('phonegap');
 
+## FAQ
+
+### phonegap: command not found
+
+The PhoneGap CLI installs successfully but you do not have a command `phonegap`.
+
+Depending on how `node` and `npm` were installed, your globally installed npm
+modules may not be in your `PATH`.
+
+__To add the modules to your `PATH`, you must first find your npm binary path:__
+
+Look at the bottom of your `phonegap` installation log the following line:
+
+    ...
+    /usr/local/share/npm/bin/phonegap -> /usr/local/share/npm/lib/node_modules/phonegap/bin/phonegap.js
+    phonegap@3.0.0-0.14.0 /usr/local/share/npm/lib/node_modules/phonegap
+    ...
+
+In this example, the path is `/usr/local/share/npm/bin`.
+
+__Add npm to your `PATH`:__
+
+Open `~/.profile` or `~/.bashrc` depending on what exists on your system.
+
+Adding the following line to the file (your path may be different):
+
+    export PATH=$PATH:/usr/local/share/npm/bin
+
+Save and close the file.
+
+__Refresh your terminal:__
+
+Open a new terminal tab or type the following command:
+
+    $ source ~/.profile
+    or
+    $ source ~/.bashrc
+
 [travis-ci-img]: https://travis-ci.org/phonegap/phonegap-cli.png?branch=master
 [travis-ci-url]: http://travis-ci.org/phonegap/phonegap-cli
 
