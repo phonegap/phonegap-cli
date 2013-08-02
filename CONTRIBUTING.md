@@ -2,7 +2,7 @@
 
 ## Get the Source
 
-    $ git clone https://github.com/mwbrooks/phonegap-cli.git
+    $ git clone https://github.com/phonegap/phonegap-cli.git
     $ cd phonegap-cli/
 
 ## Install the Dependencies
