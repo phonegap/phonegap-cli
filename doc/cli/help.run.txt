@@ -11,7 +11,8 @@ Description:
 Examples:
 
   $ $0 run android
-  $ $0 run --device android
+  $ $0 run android --device
+  $ $0 run android --emulator
 
 Also see:
 
