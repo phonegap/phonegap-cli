@@ -4,9 +4,10 @@ Description:
 
   Builds and installs your application for a specific platform.
 
-  See the 'build' and 'install' commands for available [options].
+  See the 'local build' and 'local install' commands for available [options].
 
 Examples:
 
   $ $0 local run android
-  $ $0 local run --device android
+  $ $0 local run android --device
+  $ $0 local run android --emulator
