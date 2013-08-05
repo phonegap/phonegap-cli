@@ -44,16 +44,16 @@ describe('phonegap help', function() {
     });
 
     describe('$ phonegap help x', function() {
-      it('should output the invalid usage error information', function() {
-        cli.argv({ _: [ 'help','x' ] });
-        expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/Invalid Usage: phonegap /i);
-      });
+        it('should output the invalid usage error information', function() {
+            cli.argv({ _: [ 'help','x' ] });
+            expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/undefined command/i);
+        });
     });
 
     describe('$ phonegap help local x', function() {
-      it('should output the invalid usage error information', function() {
-        cli.argv({ _: [ 'help','local','x' ] });
-        expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/Invalid Usage: phonegap /i);
-      });
+        it('should output the invalid usage error information', function() {
+            cli.argv({ _: [ 'help','local','x' ] });
+            expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/undefined command/i);
+        });
     });
 });
