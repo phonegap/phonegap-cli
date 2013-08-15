@@ -23,15 +23,15 @@ Options:
 
 Platforms:
 
-  keyword            | local environment | remote environment
-  -------------------|-------------------|-------------------
-  android            | ✔                 | ✔
-  blackberry         | ✔ (BlackBerry 10) | ✔ (BlackBerry 6)
-  ios                | ✔                 | ✔
-  symbian            | ✖                 | ✔
-  webos              | ✖                 | ✔
-  wp7                | ✔                 | ✔
-  wp8                | ✔                 | ✖
+  keyword            | local environment   | remote environment
+  -------------------|---------------------|-------------------
+  android            | Yes                 | Yes
+  blackberry         | Yes (BlackBerry 10) | Yes (BlackBerry 6)
+  ios                | Yes                 | Yes
+  symbian            | No                  | Yes
+  webos              | No                  | Yes
+  wp7                | Yes                 | Yes
+  wp8                | Yes                 | Coming Soon
 
 Examples:
 
