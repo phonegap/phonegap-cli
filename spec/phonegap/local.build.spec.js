@@ -101,10 +101,12 @@ describe('phonegap.local.build(options, [callback])', function() {
 
                 var prepareData = { paths: [ '/platforms/android/assets/www' ] };
                 cordova.emit('after_prepare', prepareData, function() {
-                    expect(shell.cp).toHaveBeenCalledWith(
-                        '/platforms/android/assets/www/cordova.js',
-                        '/platforms/android/assets/www/phonegap.js'
-                    );
+
+                     var allSlashesRegex = /[\\\/]/g;
+                     expect(shell.cp.mostRecentCall.args[0]).toBe('-f');
+                     expect((shell.cp.mostRecentCall.args[1]).replace(allSlashesRegex,"|")).toBe("|platforms|android|assets|www|cordova.js");
+                     expect((shell.cp.mostRecentCall.args[2]).replace(allSlashesRegex,"|")).toBe("|platforms|android|assets|www|phonegap.js");
+
                     done();
                 });
             });
