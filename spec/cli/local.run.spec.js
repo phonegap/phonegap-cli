@@ -22,7 +22,7 @@ describe('phonegap help local run', function() {
     describe('$ phonegap help local', function() {
         it('should include the command', function() {
             cli.argv({ _: ['help', 'local'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\n\s+run <platform>.*\n/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+run <platform>.*\r?\n/i);
         });
     });
 
