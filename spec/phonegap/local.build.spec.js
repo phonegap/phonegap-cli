@@ -101,7 +101,7 @@ describe('phonegap.local.build(options, [callback])', function() {
 
                 var prepareData = { paths: [ '/platforms/android/assets/www' ] };
                 cordova.emit('after_prepare', prepareData, function() {
-                    expect(shell.cp).toHaveBeenCalledWith(
+                    expect(shell.cp).toHaveBeenCalledWith(jasmine.any(String),
                         '/platforms/android/assets/www/cordova.js',
                         '/platforms/android/assets/www/phonegap.js'
                     );
