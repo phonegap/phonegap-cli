@@ -22,7 +22,7 @@ describe('phonegap help local plugin list', function() {
     describe('$ phonegap help local plugin', function() {
         it('should include the command', function() {
             cli.argv({ _: ['help', 'local', 'plugin'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\n\s+list.*\n/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+list.*\r?\n/i);
         });
     });
 
