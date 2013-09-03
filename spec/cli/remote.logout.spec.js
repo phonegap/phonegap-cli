@@ -21,7 +21,7 @@ describe('phonegap help remote logout', function() {
     describe('$ phonegap help remote', function() {
         it('should include the command', function() {
             cli.argv({ _: ['help', 'remote'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\n\s+logout.*\n/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+logout.*\r?\n/i);
         });
     });
 
