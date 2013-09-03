@@ -21,7 +21,7 @@ describe('phonegap help install', function() {
     describe('$ phonegap help', function() {
         it('should include the command', function() {
             cli.argv({ _: ['help'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\n\s+install <platform>.*\n/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+install <platform>.*\r?\n/i);
         });
     });
 

@@ -22,7 +22,7 @@ describe('phonegap help remote login', function() {
     describe('$ phonegap help remote', function() {
         it('should include the command', function() {
             cli.argv({ _: ['help', 'remote'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\n\s+login.*\n/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+login.*\r?\n/i);
         });
     });
 
