@@ -44,11 +44,15 @@
     },
     "optionalDependencies": {
     },
-    "author": {
-        "name": "Michael Brooks",
-        "email": "michael@michaelbrooks.ca",
-        "url": "http://michaelbrooks.ca/"
-    },
     "contributors": [
+        {
+            "name": "Ryan Stewart",
+            "email": "ryan@adobe.com"
+        },
+        {
+            "name": "Michael Brooks",
+            "email": "michael@michaelbrooks.ca",
+            "url": "http://michaelbrooks.ca/"
+        }
     ]
 }
