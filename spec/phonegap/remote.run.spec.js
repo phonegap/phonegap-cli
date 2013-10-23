@@ -5,6 +5,7 @@
 var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
+    config = require('../../lib/common/config'),
     qrcode = require('qrcode-terminal'),
     phonegap,
     options;
@@ -69,6 +70,13 @@ describe('phonegap.remote.run(options, [callback])', function() {
                         android: '/api/v1/apps/1234'
                     },
                     token: 'abc123'
+                });
+            });
+            spyOn(config.global, 'load').andCallFake(function(callback) {
+                callback(null, {
+                    phonegap: {
+                        token: 'abc123'
+                    }
                 });
             });
         });
