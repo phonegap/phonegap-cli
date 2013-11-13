@@ -46,13 +46,17 @@
     },
     "contributors": [
         {
-            "name": "Ryan Stewart",
-            "email": "ryan@adobe.com"
-        },
-        {
             "name": "Michael Brooks",
             "email": "michael@michaelbrooks.ca",
             "url": "http://michaelbrooks.ca/"
+        },
+        {
+            "name": "Jesse MacFadyen",
+            "url": "http://risingj.com"
+        },
+        {
+            "name": "Ryan Stewart",
+            "email": "ryan@adobe.com"
         }
     ]
 }
