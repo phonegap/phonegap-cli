@@ -183,6 +183,65 @@ Next, you can try to rebuild the project. Enabling verbose mode is sometimes hel
 
     $ phonegap build android --verbose
 
+## Upgrading Cordova
+
+There are a few steps that should be taken when upgrading to a new version of the
+[cordova-cli](http://github.com/apache/cordova-cli).
+
+1. Update the `package.json` dependencies version for `cordova`.
+
+        {
+          "dependencies": {
+            "cordova": "3.1.0"
+          }
+        }
+
+1. Update the `package.json` version.
+
+        {
+          "version": "3.1.0-0.15.0"
+        }
+
+1. Run the tests.
+
+        $ npm test
+
+1. Commit stating the version increment.
+
+        $ git commit -am "Version 3.1.0-0.15.0"
+
+1. Tag the version commit.
+
+        $ git tag 3.1.0-0.15.0
+
+1. Update the [PhoneGap Hello World App](https://github.com/phonegap/phonegap-app-hello-world) to match the new version.
+  - See [Update instructions](https://github.com/phonegap/phonegap-app-hello-world#updating-the-application).
+  - In the above example, we would update the app to `3.1.0`.
+1. Manually test that the latest Hello World app is lazy-loaded.
+
+        # Link the phonegap-cli for easier development (only need to do once).
+
+        $ cd phonegap-cli/
+        $ [sudo] npm link .
+
+        # Manually test and verify hello world app is lazy-loaded.
+
+        $ phonegap create my-app
+        [phonegap] missing library phonegap/www/3.1.0
+        [phonegap] downloading https://github.com/phonegap/phonegap-app-hello-world/archive/3.1.0.tar.gz...
+        [phonegap] created project at /Users/mwbrooks/Development/sandbox/my-app
+
+        $ cd my-app/
+        $ phonegap run ios
+
+1. Push the git commit after the Hello World has been updated.
+
+        $ git push phonegap master
+
+1. Publish the npm release.
+
+        $ npm publish
+
 [travis-ci-img]: https://travis-ci.org/phonegap/phonegap-cli.png?branch=master
 [travis-ci-url]: http://travis-ci.org/phonegap/phonegap-cli
 
