@@ -152,13 +152,13 @@ The command `phonegap` should now be available to you.
 
 ### The provided path is not an Android project
 
-### Problem
+#### Problem
 
 You receive the following error message when building an Android project:
 
     throw new Error('The provided path "' + project + '" is not an Android
 
-### Reason
+#### Reason
 
 The first time that you build for a platform, the framework is downloaded from Apache Cordova.
 
@@ -170,7 +170,7 @@ know reasons:
 1. Your Android SDK environment is not properly configured.
 1. Unknown issue related to Apache's servers or the untar operation.
 
-### Solution
+#### Solution
 
 First, you must properly configure your Android environment by following
 the [platform setup guide](http://docs.phonegap.com/en/3.0.0/guide_platforms_android_index.md.html).
