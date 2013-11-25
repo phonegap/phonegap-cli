@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "colors": "0.6.0-1",
-        "cordova": "3.1.0-0.1.0",
+        "cordova": "3.2.0-0.1.0",
         "node-static": "0.7.0",
         "optimist": "0.6.0",
         "phonegap-build": "0.8.4",
@@ -49,6 +49,11 @@
             "name": "Michael Brooks",
             "email": "michael@michaelbrooks.ca",
             "url": "http://michaelbrooks.ca/"
+        },
+        {
+            "name": "Lorin Beer",
+            "email": "lorin.beer@gmail.com",
+            "url": "http://www.ensufire.com/"
         },
         {
             "name": "Jesse MacFadyen",
