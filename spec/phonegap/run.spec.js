@@ -20,7 +20,7 @@ describe('phonegap.run(options, [callback])', function() {
         };
         spyOn(phonegap.local, 'run').andReturn(phonegap);
         spyOn(phonegap.remote, 'run').andReturn(phonegap);
-        spyOn(cordova.raw.platform, 'supports');
+        spyOn(cordova.raw.platform, 'supports').andReturn({ then: function(){} });
         spyOn(project, 'cd').andReturn(true);
     });
 
@@ -58,9 +58,9 @@ describe('phonegap.run(options, [callback])', function() {
 
     describe('with local environment', function() {
         beforeEach(function() {
-            cordova.raw.platform.supports.andCallFake(function(path, platform, callback) {
-                callback(null);
-            });
+            cordova.raw.platform.supports.andReturn({ then: function(success, fail) {
+              success();
+            }});
         });
 
         it('should try to run the project locally', function() {
@@ -72,9 +72,9 @@ describe('phonegap.run(options, [callback])', function() {
 
     describe('with remote environment', function() {
         beforeEach(function() {
-            cordova.raw.platform.supports.andCallFake(function(path, platform, callback) {
-                callback(new Error('could not find sdk'));
-            });
+            cordova.raw.platform.supports.andReturn({ then: function(success, fail) {
+                fail(new Error('could not find sdk'));
+            }});
         });
 
         it('should try to run the project remotely', function() {
