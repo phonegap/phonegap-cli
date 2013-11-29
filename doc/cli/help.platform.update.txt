@@ -1,0 +1,12 @@
+Usage: $0 platform update <platform>
+
+Description:
+
+  Updates the platform native files to the same version as PhoneGap.
+
+  It is recommended that you only update one version increment.
+  For example, upgrading from PhoneGap 3.1.0 to 3.2.0.
+
+Examples:
+
+  $ $0 platform update android
