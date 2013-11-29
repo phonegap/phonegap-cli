@@ -1,0 +1,13 @@
+Usage: $0 platform [command]
+
+Description:
+
+  Update a platform to the latest version.
+
+Commands:
+
+  update <platform>    update platform to the latest version
+
+Examples:
+
+  $ $0 platform update android

@@ -36,6 +36,7 @@
       run <platform>       build and install a specific platform
       local [command]      development on local system
       remote [command]     development in cloud with phonegap/build
+      platform [command]   update a platform version
       help [command]       output usage information
       version              output version number
 
