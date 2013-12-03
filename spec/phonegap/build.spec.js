@@ -20,19 +20,16 @@ describe('phonegap.build(options, [callback])', function() {
         options = {
             platforms: ['android']
         };
-
         qyes = {
             then : function(success, fail) {
                 success();
             }
         }
-
         qno = {
             then : function(success, fail) {
                 fail();
             }
         }
-
         spyOn(phonegap.local, 'build').andReturn(phonegap);
         spyOn(phonegap.remote, 'build').andReturn(phonegap);
         spyOn(cordova.raw.platform, 'supports').andReturn(qyes);
