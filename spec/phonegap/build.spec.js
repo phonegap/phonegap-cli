@@ -6,7 +6,8 @@ var PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
     cordova = require('cordova'),
     phonegap,
-    options;
+    options,
+    qmock;
 
 /*
  * Specification: phonegap.build(options, [callback])
@@ -18,9 +19,13 @@ describe('phonegap.build(options, [callback])', function() {
         options = {
             platforms: ['android']
         };
+        qmock = {
+            then : function(cb) {
+            }
+        }
         spyOn(phonegap.local, 'build').andReturn(phonegap);
         spyOn(phonegap.remote, 'build').andReturn(phonegap);
-        spyOn(cordova.raw.platform, 'supports');
+        spyOn(cordova.raw.platform, 'supports').andReturn(qmock);
         spyOn(project, 'cd').andReturn(true);
     });
 
