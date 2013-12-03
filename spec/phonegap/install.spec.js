@@ -6,8 +6,9 @@ var PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
     cordova = require('cordova'),
     phonegap,
-    options;
-
+    options,
+    qyes,
+    qno;
 /*
  * Specification: phonegap.install(options, [callback])
  */
@@ -18,9 +19,19 @@ describe('phonegap.install(options, [callback])', function() {
         options = {
             platforms: ['android']
         };
+        qyes = {
+            then : function(success, fail) {
+                success();
+            }
+        }
+        qno = {
+            then : function(success, fail) {
+                fail();
+            }
+        }
         spyOn(phonegap.local, 'install').andReturn(phonegap);
         spyOn(phonegap.remote, 'install').andReturn(phonegap);
-        spyOn(cordova.raw.platform, 'supports');
+        spyOn(cordova.raw.platform, 'supports').andReturn(qyes);
         spyOn(project, 'cd').andReturn(true);
     });
 
