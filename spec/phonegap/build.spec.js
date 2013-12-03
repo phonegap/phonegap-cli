@@ -21,6 +21,7 @@ describe('phonegap.build(options, [callback])', function() {
         };
         qmock = {
             then : function(cb) {
+                cb();
             }
         }
         spyOn(phonegap.local, 'build').andReturn(phonegap);
@@ -63,9 +64,11 @@ describe('phonegap.build(options, [callback])', function() {
 
     describe('with local environment', function() {
         beforeEach(function() {
+/*
             cordova.raw.platform.supports.andCallFake(function(path, platform, callback) {
                 callback(null);
             });
+*/
         });
 
         it('should try to build the project locally', function() {
