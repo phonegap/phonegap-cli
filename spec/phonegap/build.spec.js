@@ -7,7 +7,8 @@ var PhoneGap = require('../../lib/phonegap'),
     cordova = require('cordova'),
     phonegap,
     options,
-    qmock;
+    qyes;
+    qno;
 
 /*
  * Specification: phonegap.build(options, [callback])
@@ -19,14 +20,22 @@ describe('phonegap.build(options, [callback])', function() {
         options = {
             platforms: ['android']
         };
-        qmock = {
-            then : function(cb) {
-                cb();
+
+        qyes = {
+            then : function(success, fail) {
+                success();
             }
         }
+
+        qno = {
+            then : function(success, fail) {
+                fail();
+            }
+        }
+
         spyOn(phonegap.local, 'build').andReturn(phonegap);
         spyOn(phonegap.remote, 'build').andReturn(phonegap);
-        spyOn(cordova.raw.platform, 'supports').andReturn(qmock);
+        spyOn(cordova.raw.platform, 'supports').andReturn(qyes);
         spyOn(project, 'cd').andReturn(true);
     });
 
@@ -64,11 +73,9 @@ describe('phonegap.build(options, [callback])', function() {
 
     describe('with local environment', function() {
         beforeEach(function() {
-/*
             cordova.raw.platform.supports.andCallFake(function(path, platform, callback) {
                 callback(null);
-            });
-*/
+            }).andReturn(qyes);
         });
 
         it('should try to build the project locally', function() {
@@ -82,7 +89,7 @@ describe('phonegap.build(options, [callback])', function() {
         beforeEach(function() {
             cordova.raw.platform.supports.andCallFake(function(path, platform, callback) {
                 callback(new Error('could not find sdk'));
-            });
+            }).andReturn(qno);
         });
 
         it('should try to build the project remotely', function() {
