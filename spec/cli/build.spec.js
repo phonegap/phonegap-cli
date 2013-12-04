@@ -15,6 +15,7 @@ describe('phonegap help build', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
     });
 
@@ -70,6 +71,7 @@ describe('phonegap build <platform>', function() {
         cli = new CLI();
         spyOn(phonegap, 'build');
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
     });
 

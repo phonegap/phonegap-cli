@@ -16,6 +16,7 @@ describe('phonegap help remote install', function() {
         cli = new CLI();
         spyOn(phonegap.remote, 'install');
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
     });
 

@@ -16,6 +16,7 @@ describe('phonegap.local.plugin.list(options, [callback])', function() {
     beforeEach(function() {
         phonegap = new PhoneGap();
         options = {};
+        spyOn(process.stderr, 'write');
         spyOn(cordova, 'plugin');
         spyOn(project, 'cd').andReturn(true);
     });
@@ -47,17 +48,13 @@ describe('phonegap.local.plugin.list(options, [callback])', function() {
 
     it('should try to list the plugins', function() {
         phonegap.local.plugin.list(options);
-        expect(cordova.plugin).toHaveBeenCalledWith(
-            'list',
-            [],
-            jasmine.any(Function)
-        );
+        expect(cordova.plugin).toHaveBeenCalledWith('list');
     });
 
     describe('successfully list plugins', function() {
         beforeEach(function() {
             cordova.plugin.andCallFake(function(command, targets, callback) {
-                callback(null, [
+                cordova.emit('results', [
                     'org.cordova.core.geolocation',
                     'org.cordova.core.contacts'
                 ]);
@@ -82,10 +79,13 @@ describe('phonegap.local.plugin.list(options, [callback])', function() {
         });
     });
 
+    //
+    // cordova does not support an error state, but this is for the future
+    //
     describe('failed to list plugins', function() {
         beforeEach(function() {
             cordova.plugin.andCallFake(function(command, targets, callback) {
-                callback(new Error('read access denied'));
+                cordova.emit('results', new Error('read access denied'));
             });
         });
 

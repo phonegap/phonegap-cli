@@ -21,6 +21,7 @@ describe('phonegap.remote.run(options, [callback])', function() {
             platforms: ['android']
         };
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         spyOn(phonegap.remote, 'build');
         spyOn(project, 'cd').andReturn(true);
     });

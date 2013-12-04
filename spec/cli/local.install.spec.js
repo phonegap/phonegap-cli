@@ -16,6 +16,7 @@ describe('phonegap help local install', function() {
         cli = new CLI();
         spyOn(phonegap.local, 'install');
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
     });
 
@@ -70,6 +71,7 @@ describe('phonegap local install <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         spyOn(phonegap.local, 'install');
     });
 

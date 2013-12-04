@@ -16,7 +16,8 @@ describe('phonegap --verbose <command>', function() {
         spyOn(phonegap, 'build');
         spyOn(phonegap, 'mode');
         spyOn(process.stdout, 'write');
-    });
+        spyOn(process.stderr, 'write');
+   });
 
     describe('$ phonegap --verbose <command>', function() {
         it('should enable verbose mode', function() {
@@ -29,7 +30,7 @@ describe('phonegap --verbose <command>', function() {
 
     describe('$ phonegap -V <command>', function() {
         it('should enable verbose mode', function() {
-            cli.argv({ _: ['build', 'android'], V: true });
+            cli.argv({ _: ['build', 'android'], d: true });
             expect(phonegap.mode).toHaveBeenCalledWith({
                 verbose: true
             });

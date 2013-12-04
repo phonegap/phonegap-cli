@@ -1,4 +1,4 @@
-Usage: $0 app [options]
+Usage: $0 serve [options]
 
 Description:
 
@@ -10,8 +10,16 @@ Description:
 Options:
 
   --port, -p <n>       port for web server (default: 3000)
+  --autoreload         enable app refresh on file changes (default: true)
+  --no-autoreload      disable app refresh on file changes
+
+Alias:
+
+  $0 app
 
 Examples:
 
+  $ $0 serve
+  $ $0 serve --port 1337
+  $ $0 serve --no-autoreload
   $ $0 app
-  $ $0 app --port 1337

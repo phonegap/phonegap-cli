@@ -5,6 +5,7 @@ var shell = require('shelljs'),
 describe('$ phonegap [options] commands', function() {
     beforeEach(function() {
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
     });
 
     it('should support no arguments', function() {

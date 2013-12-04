@@ -16,6 +16,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
     beforeEach(function() {
         phonegap = new PhoneGap();
         options = {};
+        spyOn(process.stderr, 'write');
         spyOn(phonegapbuild, 'login');
         spyOn(config.global, 'load');
     });

@@ -42,7 +42,7 @@
 
     Options:
 
-      -V, --verbose        allow verbose output
+      -d, --verbose        allow verbose output
       -v, --version        output version number
       -h, --help           output usage information
 
@@ -51,12 +51,10 @@
       keyword            | local environment | remote environment
       -------------------|-------------------|-------------------
       android            | ✔                 | ✔
-      blackberry         | ✔ (BlackBerry 10) | ✔ (BlackBerry 6)
+      blackberry10       | ✔                 | ✖
       ios                | ✔                 | ✔
-      symbian            | ✖                 | ✔
-      webos              | ✖                 | ✔
-      wp7                | ✔                 | ✔
-      wp8                | ✔                 | ✖
+      wp8                | ✔                 | ✔
+
 
     Examples:
 

@@ -19,6 +19,7 @@ describe('phonegap.platform.update(options, [callback])', function() {
         options = {
             platforms: ['android']
         };
+        spyOn(process.stderr, 'write');
         spyOn(cordova, 'platform');
         spyOn(project, 'cd').andReturn(true);
     });
