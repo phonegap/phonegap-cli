@@ -7,7 +7,7 @@ var PhoneGap = require('../../lib/phonegap'),
     cordova = require('cordova'),
     phonegap,
     options,
-    qyes;
+    qyes,
     qno;
 
 /*
@@ -23,11 +23,13 @@ describe('phonegap.build(options, [callback])', function() {
         qyes = {
             then : function(success, fail) {
                 success();
+                return qyes;
             }
         }
         qno = {
             then : function(success, fail) {
-                fail();
+                fail(new Error("the promise has failed"));
+                return qno;
             }
         }
         spyOn(phonegap.local, 'build').andReturn(phonegap);
@@ -84,9 +86,7 @@ describe('phonegap.build(options, [callback])', function() {
 
     describe('with remote environment', function() {
         beforeEach(function() {
-            cordova.raw.platform.supports.andCallFake(function(path, platform, callback) {
-                callback(new Error('could not find sdk'));
-            }).andReturn(qno);
+            cordova.raw.platform.supports.andReturn(qno);
         });
 
         it('should try to build the project remotely', function() {

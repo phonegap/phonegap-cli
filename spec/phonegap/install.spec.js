@@ -71,7 +71,7 @@ describe('phonegap.install(options, [callback])', function() {
         beforeEach(function() {
             cordova.raw.platform.supports.andCallFake(function(path, platform, callback) {
                 callback(null);
-            });
+            }).andReturn(qyes);
         });
 
         it('should try to install the app locally', function() {
@@ -83,9 +83,7 @@ describe('phonegap.install(options, [callback])', function() {
 
     describe('with remote environment', function() {
         beforeEach(function() {
-            cordova.raw.platform.supports.andCallFake(function(path, platform, callback) {
-                callback(new Error('could not find sdk'));
-            });
+            cordova.raw.platform.supports.andReturn(qno);
         });
 
         it('should try to install the app remotely', function() {
