@@ -5,7 +5,7 @@ Description:
   PhoneGap command-line tool.
 
 Commands:
-
+  config <path>        changes the config.xml parameters 
   create <path>        create a phonegap project
   build <platform>     build a specific platform
   install <platform>   install a specific platform

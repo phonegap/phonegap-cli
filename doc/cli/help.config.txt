@@ -1,0 +1,17 @@
+Usage: $0 config <path> [options]
+
+Description:
+
+  Modifies the config.xml file with the provided preferences and access settings.
+  Without parameters it just lists the current preferences and access.
+
+Options:
+
+  --preference <key>=<value>, -p <key>=<value>	Adds or override an existing preference called key with value
+  --access <url-pattern>, -a <url-pattern>		Adds a new access level.
+
+Examples:
+
+  $ $0 config /path/to/my-app
+  $ $0 config /path/to/my-app --preference orientation=landscape
+  $ $0 config /path/to/my-app -p orientation=landscape --access "http://myhost.com/*"

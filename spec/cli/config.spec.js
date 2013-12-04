@@ -12,24 +12,50 @@ var phonegap = require('../../lib/main'),
  */
 
 describe('phonegap help config', function() {
-    beforeEach(function() {
+	beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
         stdout = process.stdout.write;
-    });
-
-    describe('$ phonegap help', function() {
+	});
+	
+	    describe('$ phonegap help', function() {
         it('should include the command', function() {
             cli.argv({ _: ['help'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+config <path>.*\r?\n/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+config.*\r?\n/i);
         });
     });
 
     describe('$ phonegap config', function() {
-        it('should output usage info', function() {
-            cli.argv({ _: ['config'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ config/i);
-        });
+		var originalFs;
+		beforeEach(function(){
+			var fs = require('fs');
+			originalFs = fs.readFileSync;
+			fs.readFileSync = function(path, encoding){
+				return '<?xml version="1.0" encoding="utf-8"?>\\n\
+<widget id="com.spilgames.dev.hello4" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">\\n\
+	<feature name="http://api.phonegap.com/1.0/device" />\\n\
+	<preference name="permissions" value="none" />\\n\
+	<icon src="icon.png" />\\n\
+	<icon gap:density="ldpi" gap:platform="android" src="res/icon/android/icon-36-ldpi.png" />\\n\
+	<gap:splash gap:density="ldpi" gap:platform="android" src="res/screen/android/screen-ldpi-portrait.png" />\\n\
+	<access origin="http://myhost2.com/*" />\\n\
+</widget>';
+			};
+		});
+		
+		afterEach(function(){
+			var fs = require('fs');
+			fs.readFileSync = originalFs;
+		});
+
+        it('should print the preferences of the project', function(){
+			cli.argv({ _: ['config'] });
+			expect(stdout.mostRecentCall.args[0]).toMatch(/Preferences/i);
+		});
+		it('should print the access of the project', function(){
+			cli.argv({ _: ['config'] });
+            expect(stdout.mostRecentCall.args[0]).toMatch(/Access/i);
+		});
     });
 
     describe('$ phonegap help config', function() {
@@ -65,38 +91,28 @@ describe('phonegap help config', function() {
  * Specification: $ phonegap config <path> [options]
  */
 
-describe('phonegap config <path> [options]', function() {
+describe('phonegap config [options]', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
         spyOn(phonegap, 'config');
     });
 
-    describe('$ phonegap config ./my-app', function() {
+    describe('$ phonegap config', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'] });
+            cli.argv({ _: ['config'] });
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [],
                 access: []
             },
             jasmine.any(Function));
         });
-		it('should print the preferences of the project', function(){
-			cli.argv({ _: ['config', './my-app'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/Preferences/i);
-		});
-		it('should print the access of the project', function(){
-			cli.argv({ _: ['config', './my-app'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/Access/i);
-		});
     });
 	
-    describe('$ phonegap config ./my-app -p orientation=landscape', function() {
+    describe('$ phonegap config -p orientation=landscape', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], p:'orientation=landscape'});
+            cli.argv({ _: ['config'], p:'orientation=landscape'});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [{ name:'orientation', value:'landscape'}],
                 access: []
             },
@@ -104,11 +120,10 @@ describe('phonegap config <path> [options]', function() {
         });
     });
 	
-	describe('$ phonegap config ./my-app --preference orientation=landscape', function() {
+	describe('$ phonegap config --preference orientation=landscape', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], preference:'orientation=landscape'});
+            cli.argv({ _: ['config'], preference:'orientation=landscape'});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [{ name:'orientation', value:'landscape'}],
                 access: []
             },
@@ -116,11 +131,10 @@ describe('phonegap config <path> [options]', function() {
         });
     });
 	
-	describe('$ phonegap config ./my-app -p orientation=landscape -p fullscreen=false', function() {
+	describe('$ phonegap config -p orientation=landscape -p fullscreen=false', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], p:['orientation=landscape', 'fullscreen=false']});
+            cli.argv({ _: ['config'], p:['orientation=landscape', 'fullscreen=false']});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [{ name:'orientation', value:'landscape'}, { name:'fullscreen', value:'false'}],
                 access: []
             },
@@ -128,11 +142,10 @@ describe('phonegap config <path> [options]', function() {
         });
     });
 	
-	describe('$ phonegap config ./my-app --preference orientation=landscape --preference fullscreen=false', function() {
+	describe('$ phonegap config --preference orientation=landscape --preference fullscreen=false', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], preference:['orientation=landscape', 'fullscreen=false']});
+            cli.argv({ _: ['config'], preference:['orientation=landscape', 'fullscreen=false']});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [{ name:'orientation', value:'landscape'}, { name:'fullscreen', value:'false'}],
                 access: []
             },
@@ -140,23 +153,21 @@ describe('phonegap config <path> [options]', function() {
         });
     });
 	
-	describe('$ phonegap config ./my-app --preference orientation=landscape -p fullscreen=false', function() {
+	describe('$ phonegap config --preference orientation=landscape -p fullscreen=false', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], preference:'orientation=landscape',p:'fullscreen=false'});
+            cli.argv({ _: ['config'], preference:'orientation=landscape',p:'fullscreen=false'});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
-                preference: [{ name:'orientation', value:'landscape'}, { name:'fullscreen', value:'false'}],
+				preference: [{ name:'orientation', value:'landscape'}, { name:'fullscreen', value:'false'}],
                 access: []
             },
             jasmine.any(Function));
         });
     });
 	
-	describe('$ phonegap config ./my-app -a "http://myhost.com/*"', function() {
+	describe('$ phonegap config -a "http://myhost.com/*"', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], a:'http://myhost.com/*'});
+            cli.argv({ _: ['config'], a:'http://myhost.com/*'});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [],
                 access: ['http://myhost.com/*']
             },
@@ -164,11 +175,10 @@ describe('phonegap config <path> [options]', function() {
         });
     });
 	
-	describe('$ phonegap config ./my-app --access "http://myhost.com/*"', function() {
+	describe('$ phonegap config --access "http://myhost.com/*"', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], access:'http://myhost.com/*'});
+            cli.argv({ _: ['config'], access:'http://myhost.com/*'});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [],
                 access: ['http://myhost.com/*']
             },
@@ -176,11 +186,10 @@ describe('phonegap config <path> [options]', function() {
         });
     });
 	
-	describe('$ phonegap config ./my-app -a "http://myhost.com/*" -a "http://example.com/*"', function() {
+	describe('$ phonegap config -a "http://myhost.com/*" -a "http://example.com/*"', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], a:['http://myhost.com/*', 'http://example.com/*']});
+            cli.argv({ _: ['config'], a:['http://myhost.com/*', 'http://example.com/*']});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [],
                 access: ['http://myhost.com/*', 'http://example.com/*']
             },
@@ -188,11 +197,10 @@ describe('phonegap config <path> [options]', function() {
         });
     });
 	
-	describe('$ phonegap config ./my-app --access orientation=landscape --access fullscreen=false', function() {
+	describe('$ phonegap config --access orientation=landscape --access fullscreen=false', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], access:['http://myhost.com/*', 'http://example.com/*']});
+            cli.argv({ _: ['config'], access:['http://myhost.com/*', 'http://example.com/*']});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [],
                 access: ['http://myhost.com/*', 'http://example.com/*']
             },
@@ -200,11 +208,10 @@ describe('phonegap config <path> [options]', function() {
         });
     });
 	
-	describe('$ phonegap config ./my-app --access "http://myhost.com/*" -a "http://example.com/*"', function() {
+	describe('$ phonegap config --access "http://myhost.com/*" -a "http://example.com/*"', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], access:'http://myhost.com/*',a:'http://example.com/*'});
+            cli.argv({ _: ['config'], access:'http://myhost.com/*',a:'http://example.com/*'});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [],
                 access: ['http://myhost.com/*', 'http://example.com/*']
             },
@@ -212,11 +219,10 @@ describe('phonegap config <path> [options]', function() {
         });
     });
 	
-	describe('$ phonegap config ./my-app -p orientation=landscape -a "http://example.com/*"', function() {
+	describe('$ phonegap config -p orientation=landscape -a "http://example.com/*"', function() {
         it('should try to config the project', function() {
-            cli.argv({ _: ['config', './my-app'], p:'orientation=landscape',a:'http://example.com/*'});
+            cli.argv({ _: ['config'], p:'orientation=landscape',a:'http://example.com/*'});
             expect(phonegap.config).toHaveBeenCalledWith({
-                path: './my-app',
                 preference: [{ name:'orientation', value:'landscape'}],
                 access: ['http://example.com/*']
             },
