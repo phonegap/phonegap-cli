@@ -29,28 +29,28 @@ describe('phonegap help app', function() {
     describe('$ phonegap help app', function() {
         it('should output usage info', function() {
             cli.argv({ _: ['help', 'app'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ app/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 
     describe('$ phonegap app help', function() {
         it('should output usage info', function() {
             cli.argv({ _: ['app', 'help'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ app/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 
     describe('$ phonegap app --help', function() {
         it('should output usage info', function() {
             cli.argv({ _: ['app'], help: true });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ app/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 
     describe('$ phonegap app -h', function() {
         it('should output usage info', function() {
             cli.argv({ _: ['app'], h: true });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ app/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 });
@@ -63,31 +63,15 @@ describe('phonegap app', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
-        spyOn(phonegap, 'app').andReturn({
+        spyOn(phonegap, 'serve').andReturn({
             on: function(){}
         });
     });
 
     describe('$ phonegap app', function() {
-        it('should connect to phonegap app', function() {
+        it('should use phonegap.serve', function() {
             cli.argv({ _: ['app'] });
-            expect(phonegap.app).toHaveBeenCalled();
-        });
-    });
-
-    describe('$ phonegap app --port 1337', function() {
-        it('should connect to phonegap app on port 1337', function() {
-            cli.argv({ _: ['app'], port: 1337 });
-            expect(phonegap.app).toHaveBeenCalled();
-            expect(phonegap.app.mostRecentCall.args[0]).toEqual({ port: 1337 });
-        });
-    });
-
-    describe('$ phonegap app -p 1337', function() {
-        it('should connect to phonegap app on port 1337', function() {
-            cli.argv({ _: ['app'], p: 1337 });
-            expect(phonegap.app).toHaveBeenCalled();
-            expect(phonegap.app.mostRecentCall.args[0]).toEqual({ port: 1337 });
+            expect(phonegap.serve).toHaveBeenCalled();
         });
     });
 });
