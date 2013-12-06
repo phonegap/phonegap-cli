@@ -11,6 +11,10 @@ Options:
 
   --port, -p <n>       port for web server (default: 3000)
 
+Alias:
+
+  $0 serve
+
 Examples:
 
   $ $0 app
