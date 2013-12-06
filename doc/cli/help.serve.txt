@@ -1,4 +1,4 @@
-Usage: $0 app [options]
+Usage: $0 serve [options]
 
 Description:
 
@@ -13,9 +13,10 @@ Options:
 
 Alias:
 
-  $0 serve
+  $0 app
 
 Examples:
 
+  $ $0 serve
+  $ $0 serve --port 1337
   $ $0 app
-  $ $0 app --port 1337
