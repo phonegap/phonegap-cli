@@ -60,10 +60,20 @@ describe('phonegap.serve(options, [callback])', function() {
     });
 
     describe('when successfully started server', function() {
-        it('should emit a "log" event', function() {
+        beforeEach(function() {
+            soundwave.serve.andCallFake(function(options, callback) {
+                soundwave.emit('log', 'serve has started');
+                callback();
+            });
+        });
+
+        it('should emit a "log" event', function(done) {
+            phonegap.on('log', function(message) {
+                expect(message).toEqual(jasmine.any(String));
+                done();
+            });
             phonegap.serve(options);
-            expect(soundwave.on).toHaveBeenCalledWith('log',jasmine.any(Function))
-        });        
+        });
     });
 
 });
