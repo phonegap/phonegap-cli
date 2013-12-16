@@ -62,18 +62,62 @@ describe('phonegap.serve(options, [callback])', function() {
     describe('when successfully started server', function() {
         beforeEach(function() {
             soundwave.serve.andCallFake(function(options, callback) {
-                soundwave.emit('log', 'serve has started');
-                callback();
+                callback(null, {
+                    address: '127.0.0.1',
+                    port: 3000
+                });
             });
         });
 
-        it('should emit a "log" event', function(done) {
-            phonegap.on('log', function(message) {
-                expect(message).toEqual(jasmine.any(String));
+        it('should fire callback without an error', function(done) {
+            phonegap.serve(options, function(e, server) {
+                expect(e).toBeNull();
                 done();
             });
-            phonegap.serve(options);
+        });
+
+        it('should fire callback with server options', function(done) {
+            phonegap.serve(options, function(e, server) {
+                expect(server).toEqual(jasmine.any(Object));
+                done();
+            });
+        });
+
+        describe('on request and response', function() {
+            it('should trigger a "log" event', function(done) {
+                phonegap.on('log', function(message) {
+                    expect(message).toEqual(jasmine.any(String));
+                    done();
+                });
+                phonegap.serve(options);
+                soundwave.emit('log', '201 /path/to/a/file.html');
+            });
         });
     });
 
+    describe('when failed to start server', function() {
+        beforeEach(function() {
+            soundwave.serve.andCallFake(function(options, callback) {
+                var e = new Error('port in use');
+                //soundwave.on('error', function() {});
+                //soundwave.emit('error', e);
+                callback(e);
+            });
+        });
+
+        it('should fire callback with an error', function(done) {
+            phonegap.serve(options, function(e, server) {
+                expect(e).toEqual(jasmine.any(Error));
+                done();
+            });
+        });
+
+        //it('should trigger error event', function(done) {
+        //    phonegap.on('error', function(e, server) {
+        //        expect(e).toEqual(jasmine.any(Error));
+        //        done();
+        //    });
+        //    phonegap.serve(options);
+        //});
+    });
 });
