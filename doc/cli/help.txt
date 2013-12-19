@@ -13,6 +13,7 @@ Commands:
   local [command]      development on local system
   remote [command]     development in cloud with phonegap/build
   platform [command]   update a platform version
+  plugin [command]     add, remove, and list plugins
   help [command]       output usage information
   version              output version number
 
