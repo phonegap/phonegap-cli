@@ -1,3 +1,4 @@
+Usage: $0 plugin add <path>
 Usage: $0 local plugin add <path>
 
 Description:

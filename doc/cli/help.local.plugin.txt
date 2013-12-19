@@ -1,3 +1,4 @@
+Usage: $0 plugin <command>
 Usage: $0 local plugin <command>
 
 Description:
@@ -13,6 +14,7 @@ Commands:
 Examples:
 
   $ $0 local plugin add /local/path/to/plugin/
-  $ $0 local plugin add http://example.com/path/to/plugin.git
-  $ $0 local plugin remove org.apache.cordova.core.geolocation
-  $ $0 local plugin list
+  $ $0 plugin add /local/path/to/plugin/
+  $ $0 plugin add http://example.com/path/to/plugin.git
+  $ $0 plugin remove org.apache.cordova.core.geolocation
+  $ $0 plugin list
