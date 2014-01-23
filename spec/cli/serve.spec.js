@@ -90,4 +90,20 @@ describe('phonegap serve', function() {
             expect(phonegap.serve.mostRecentCall.args[0]).toEqual({ port: 1337 });
         });
     });
+
+    describe('$ phonegap serve --autoreload', function() {
+        it('should enable autoreload', function() {
+            cli.argv({ _: ['serve'], autoreload: true });
+            expect(phonegap.serve).toHaveBeenCalled();
+            expect(phonegap.serve.mostRecentCall.args[0]).toEqual({ autoreload: true });
+        });
+    });
+
+    describe('$ phonegap serve --no-autoreload', function() {
+        it('should disable autoreload', function() {
+            cli.argv({ _: ['serve'], autoreload: false });
+            expect(phonegap.serve).toHaveBeenCalled();
+            expect(phonegap.serve.mostRecentCall.args[0]).toEqual({ autoreload: false });
+        });
+    });
 });

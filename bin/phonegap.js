@@ -15,6 +15,8 @@ var CLI = require('../lib/cli'),
                               .boolean('version')
                               .boolean('h')
                               .boolean('help')
+                              .boolean('autoreload')
+                              .boolean('autorefresh')
                               .argv;
 
 /*!
