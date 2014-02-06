@@ -28,8 +28,8 @@
     },
     "dependencies": {
         "colors": "0.6.0-1",
+        "connect-phonegap": "0.8.0",
         "cordova": "3.3.0-0.1.1",
-        "phonegap-soundwave": "0.7.0",
         "optimist": "0.6.0",
         "phonegap-build": "0.8.4",
         "pluralize": "0.0.4",
