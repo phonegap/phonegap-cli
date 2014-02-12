@@ -75,20 +75,6 @@ describe('platform', function() {
                     expect(platforms[0].local).toEqual('android');
                 });
             });
-
-            describe('symbian', function() {
-                beforeEach(function() {
-                    platforms = ['symbian'];
-                });
-
-                it('should support remote', function() {
-                    platforms = platform.names(platforms);
-                    expect(platforms.length).toEqual(1);
-                    expect(platforms[0].local).toBe(null);
-                    expect(platforms[0].remote).toBe('symbian');
-                    expect(platforms[0].human).toBe('Symbian');
-                });
-            });
         });
     });
 });
