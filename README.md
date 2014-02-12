@@ -51,12 +51,10 @@
       keyword            | local environment | remote environment
       -------------------|-------------------|-------------------
       android            | ✔                 | ✔
-      blackberry         | ✔ (BlackBerry 10) | ✔ (BlackBerry 6)
+      blackberry10       | ✔                 | ✖
       ios                | ✔                 | ✔
-      symbian            | ✖                 | ✔
-      webos              | ✖                 | ✔
-      wp7                | ✔                 | ✔
-      wp8                | ✔                 | ✖
+      wp8                | ✔                 | ✔
+
 
     Examples:
 
