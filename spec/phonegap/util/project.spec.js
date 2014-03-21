@@ -87,4 +87,25 @@ describe('project', function() {
             });
         });
     });
+    describe('clobbersConfig', function() {
+        var fixtureUri = '/User/dev/correct/uri/to/config',
+            fixtureContent = 'aabbcc';
+
+        beforeEach(function(){
+            spyOn(fs,open);
+            spyOn(fs,readFile).andReturn(null,'');
+        });
+
+        it('should have a fucking clue', function() {
+            expect(project.clobberProjectConfig).toBeDefined();
+        });
+        it('should return null if path is invalid', function () {
+            var res = project.clobberProjectConfig('blarg',{});
+        });
+        it('should return the path of the config file when successful', function () {
+            var res = project.clobberProjectConfig(fixtureUri, {'aa':'bb','cc':'bb'});
+
+            expect(res).toEqual(fixtureUri); 
+        });
+    });
 });
