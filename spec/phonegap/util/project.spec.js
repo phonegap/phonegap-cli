@@ -92,11 +92,11 @@ describe('project', function() {
             fixtureContent = 'aabbcc';
 
         beforeEach(function(){
-            spyOn(fs,open);
-            spyOn(fs,readFile).andReturn(null,'');
+            createSpyObj('fs', ['open','readFile']);
+            spyOn(fs,'readFile').andReturn(null,'');
         });
 
-        it('should have a fucking clue', function() {
+        it('should be defined clue', function() {
             expect(project.clobberProjectConfig).toBeDefined();
         });
         it('should return null if path is invalid', function () {
