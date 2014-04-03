@@ -39,6 +39,13 @@ describe('phonegap.create(options, [callback])', function() {
         }).toThrow();
     });
 
+    it('should require accept a numeric path', function() {
+        expect(function() {
+            options.path = 123;
+            phonegap.create(options, function(e) {});
+        }).not.toThrow();
+    });
+
     it('should not require callback', function() {
         expect(function() {
             phonegap.create(options);
