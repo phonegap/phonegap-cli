@@ -42,7 +42,7 @@
 
     Options:
 
-      -V, --verbose        allow verbose output
+      -d, --verbose        allow verbose output
       -v, --version        output version number
       -h, --help           output usage information
 
