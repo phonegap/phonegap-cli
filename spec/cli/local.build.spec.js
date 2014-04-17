@@ -17,6 +17,7 @@ describe('phonegap help local build', function() {
         cli = new CLI();
         spyOn(phonegap.local, 'build');
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
     });
 
@@ -76,6 +77,7 @@ describe('phonegap local build <platform>', function() {
             }
         };
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         spyOn(phonegap.local, 'build').andReturn(emitterSpy);
     });
 

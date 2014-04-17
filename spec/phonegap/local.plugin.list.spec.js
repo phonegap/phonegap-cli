@@ -16,6 +16,7 @@ describe('phonegap.local.plugin.list(options, [callback])', function() {
     beforeEach(function() {
         phonegap = new PhoneGap();
         options = {};
+        spyOn(process.stderr, 'write');
         spyOn(cordova, 'plugin');
         spyOn(project, 'cd').andReturn(true);
     });

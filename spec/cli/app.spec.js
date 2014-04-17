@@ -16,6 +16,7 @@ describe('phonegap help app', function() {
         cli = new CLI();
         spyOn(phonegap, 'app');
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
     });
 

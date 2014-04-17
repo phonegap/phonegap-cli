@@ -21,6 +21,7 @@ describe('phonegap.local.build(options, [callback])', function() {
         options = {
             platforms: ['android']
         };
+        spyOn(process.stderr, 'write');
         spyOn(cordova, 'build');
         spyOn(localBuild, 'addPlatform');
         spyOn(project, 'cd').andReturn(true);
@@ -181,6 +182,7 @@ describe('localBuild.addPlatform(options, callback)', function() {
                 emit: function() {}
             }
         };
+        spyOn(process.stderr, 'write');
         spyOn(fs, 'existsSync');
         spyOn(cordova, 'platform');
     });

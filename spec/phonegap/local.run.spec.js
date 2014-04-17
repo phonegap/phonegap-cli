@@ -17,6 +17,7 @@ describe('phonegap.local.run(options, [callback])', function() {
         options = {
             platforms: ['android']
         };
+        spyOn(process.stderr, 'write');
         spyOn(process.stdout, 'write');
         spyOn(phonegap.local, 'build');
         spyOn(phonegap.local, 'install');

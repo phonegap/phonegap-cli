@@ -14,6 +14,7 @@ describe('phonegap --version', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         spyOn(phonegap, 'version').andReturn({
             npm: '2.8.0-0.10.6',
             module: '0.10.6',

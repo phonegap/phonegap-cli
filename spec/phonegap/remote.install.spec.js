@@ -20,6 +20,7 @@ describe('phonegap.remote.install(options, [callback])', function() {
             platforms: ['android']
         };
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         spyOn(project, 'cd').andReturn(true);
     });
 

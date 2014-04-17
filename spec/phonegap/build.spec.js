@@ -32,6 +32,7 @@ describe('phonegap.build(options, [callback])', function() {
                 return qno;
             }
         }
+        spyOn(process.stderr, 'write');
         spyOn(phonegap.local, 'build').andReturn(phonegap);
         spyOn(phonegap.remote, 'build').andReturn(phonegap);
         spyOn(cordova.raw.platform, 'supports').andReturn(qyes);

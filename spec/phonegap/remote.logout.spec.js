@@ -15,6 +15,7 @@ describe('phonegap.remote.logout(options, [callback])', function() {
     beforeEach(function() {
         phonegap = new PhoneGap();
         options = {};
+        spyOn(process.stderr, 'write');
         spyOn(phonegapbuild, 'logout');
     });
 
