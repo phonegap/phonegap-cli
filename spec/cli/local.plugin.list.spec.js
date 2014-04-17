@@ -16,6 +16,7 @@ describe('phonegap help local plugin list', function() {
         cli = new CLI();
         spyOn(phonegap.local.plugin, 'list');
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
     });
 

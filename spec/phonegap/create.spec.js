@@ -23,6 +23,8 @@ describe('phonegap.create(options, [callback])', function() {
         spyOn(cordova, 'config');
         spyOn(shell, 'rm');
         spyOn(shell, 'cp');
+
+        spyOn(process.stderr, 'write');
     });
 
     it('should require options', function() {

@@ -16,6 +16,7 @@ describe('phonegap help local run', function() {
         cli = new CLI();
         spyOn(phonegap.local, 'run');
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
     });
 

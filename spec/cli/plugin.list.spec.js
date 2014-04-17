@@ -16,6 +16,7 @@ describe('phonegap help plugin list', function() {
         cli = new CLI();
         spyOn(phonegap.plugin, 'list');
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
     });
 

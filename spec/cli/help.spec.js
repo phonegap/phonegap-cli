@@ -13,6 +13,7 @@ describe('phonegap help', function() {
     beforeEach(function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
     });
 
     describe('$ phonegap', function() {

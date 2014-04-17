@@ -18,6 +18,7 @@ describe('phonegap.local.plugin.remove(options, [callback])', function() {
         options = {
             id: ['org.apache.core.geolocation']
         };
+        spyOn(process.stderr, 'write');
         spyOn(cordova, 'plugin');
         spyOn(project, 'cd').andReturn(true);
     });

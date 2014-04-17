@@ -29,6 +29,7 @@ describe('phonegap.install(options, [callback])', function() {
                 fail();
             }
         }
+        spyOn(process.stderr, 'write');
         spyOn(phonegap.local, 'install').andReturn(phonegap);
         spyOn(phonegap.remote, 'install').andReturn(phonegap);
         spyOn(cordova.raw.platform, 'supports').andReturn(qyes);

@@ -16,7 +16,8 @@ describe('phonegap --verbose <command>', function() {
         spyOn(phonegap, 'build');
         spyOn(phonegap, 'mode');
         spyOn(process.stdout, 'write');
-    });
+        spyOn(process.stderr, 'write');
+   });
 
     describe('$ phonegap --verbose <command>', function() {
         it('should enable verbose mode', function() {

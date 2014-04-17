@@ -18,6 +18,8 @@ describe('phonegap.local.plugin.add(options, [callback])', function() {
         options = {
             path: ['/path/to/plugin']
         };
+        spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         spyOn(cordova, 'plugin');
         spyOn(project, 'cd').andReturn(true);
     });

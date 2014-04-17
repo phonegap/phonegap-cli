@@ -16,6 +16,7 @@ describe('phonegap help remote build', function() {
         cli = new CLI();
         spyOn(phonegap.remote, 'build');
         spyOn(process.stdout, 'write');
+        spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
     });
 

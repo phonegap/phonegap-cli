@@ -16,6 +16,7 @@ describe('phonegap help plugin remove', function() {
         cli = new CLI();
         spyOn(process.stdout, 'write');
         stdout = process.stdout.write;
+        spyOn(process.stderr, 'write');
         spyOn(phonegap.plugin, 'remove');
     });
 
