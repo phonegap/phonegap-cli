@@ -20,7 +20,6 @@ describe('phonegap.create(options, [callback])', function() {
         };
         spyOn(phonegap, 'version').andReturn({ phonegap: '2.8.0' });
         spyOn(cordova, 'create');
-        spyOn(cordova, 'config');
         spyOn(shell, 'rm');
         spyOn(shell, 'cp');
 
@@ -56,19 +55,6 @@ describe('phonegap.create(options, [callback])', function() {
 
     it('should return itself', function() {
         expect(phonegap.create(options)).toEqual(phonegap);
-    });
-
-    it('should use phonegap hello world app', function() {
-        phonegap.create(options);
-        expect(cordova.config).toHaveBeenCalledWith(options.path, {
-            lib: {
-                www: {
-                    id: 'phonegap',
-                    version: '2.8.0',
-                    uri: jasmine.any(String)
-                }
-            }
-        });
     });
 
     it('should try to create a project with default values', function() {
