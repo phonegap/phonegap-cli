@@ -87,6 +87,24 @@ describe('project', function() {
             });
         });
     });
+
+    describe('readPackage', function () {
+        var relativePath;
+        
+        beforeEach(function() {
+            packagepath = path.join(__dirname, '..', '..', '..', 'package.json');
+            spyOn(JSON,'parse').andReturn({});
+        });
+
+        it('should be defined', function() {
+            expect(project.readPackage).toEqual(jasmine.any(Function));
+        });
+
+        it('should return the package.json contents', function() {
+            expect(project.readPackage()).toEqual({}); 
+        });
+    });
+
     describe('clobbersConfig', function() {
         var fixtureUri = '/User/dev/correct/uri/to/config',
             fixtureContent = 'aabbcc';
