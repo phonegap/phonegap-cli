@@ -20,7 +20,6 @@ describe('phonegap.create(options, [callback])', function() {
         };
         spyOn(phonegap, 'version').andReturn({ phonegap: '2.8.0' });
         spyOn(cordova, 'create');
-        spyOn(cordova, 'config');
         spyOn(shell, 'rm');
         spyOn(shell, 'cp');
 
