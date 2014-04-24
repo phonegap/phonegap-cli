@@ -7,6 +7,7 @@ Description:
 Commands:
 
   create <path>        create a phonegap project
+  serve                serve a phonegap project
   build <platform>     build a specific platform
   install <platform>   install a specific platform
   run <platform>       build and install a specific platform
