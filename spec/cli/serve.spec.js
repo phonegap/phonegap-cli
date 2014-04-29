@@ -20,20 +20,6 @@ describe('phonegap help serve', function() {
         stdout = process.stdout.write;
     });
 
-    describe('$ phonegap help', function() {
-        it('should not include the command', function() {
-            cli.argv({ _: ['help'] });
-            expect(stdout.mostRecentCall.args[0]).not.toMatch(/\r?\n\s+serve.*\r?\n/i);
-        });
-    });
-
-    describe('$ phonegap help serve', function() {
-        it('should output usage info', function() {
-            cli.argv({ _: ['help', 'serve'] });
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
-        });
-    });
-
     describe('$ phonegap serve help', function() {
         it('should output usage info', function() {
             cli.argv({ _: ['serve', 'help'] });
