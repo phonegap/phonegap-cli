@@ -2,7 +2,7 @@ Usage: $0 install [options] <platform>
 
 Description:
 
-  Installs the application for a specific platform.
+  Installs the application on a specific platform.
 
   Automatically detects platform SDK support and uses the correct environment.
 

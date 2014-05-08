@@ -31,9 +31,10 @@
     Commands:
 
       create <path>        create a phonegap project
-      build <platform>     build a specific platform
-      install <platform>   install a specific platform
-      run <platform>       build and install a specific platform
+      build <platform>     build the project for specific platform
+      install <platform>   install the project on a specific platform
+      run <platform>       build and install the projectfor specific platform
+      serve                serve a phonegap project
       local [command]      development on local system
       remote [command]     development in cloud with phonegap/build
       platform [command]   update a platform version
