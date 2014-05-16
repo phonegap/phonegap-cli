@@ -10,7 +10,7 @@ Commands:
   serve                serve a phonegap project
   build <platform>     build the project for a specific platform
   install <platform>   install the project on for a specific platform
-  run <platform>       build and install the projet for a specific platform
+  run <platform>       build and install the project for a specific platform
   local [command]      development on local system
   remote [command]     development in cloud with phonegap/build
   platform [command]   update a platform version
