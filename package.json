@@ -28,9 +28,9 @@
     },
     "dependencies": {
         "colors": "0.6.0-1",
-        "connect-phonegap": "0.10.0",
         "cordova": "3.5.0-0.2.4",
         "cordova-lib": "lorinbeer/cordova-lib.git#configparser_module",
+        "connect-phonegap": "0.11.0",
         "optimist": "0.6.0",
         "phonegap-build": "0.8.4",
         "pluralize": "0.0.4",
