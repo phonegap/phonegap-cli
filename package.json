@@ -1,7 +1,7 @@
 {
     "name": "phonegap",
     "description": "PhoneGap command-line interface and node.js library.",
-    "version": "3.5.0-0.20.00",
+    "version": "3.5.0-0.20.01",
     "homepage": "http://github.com/phonegap/phonegap-cli",
     "repository": {
         "type": "git",
@@ -29,7 +29,7 @@
     "dependencies": {
         "colors": "0.6.0-1",
         "cordova": "3.5.0-0.2.4",
-        "cordova-lib": "lorinbeer/cordova-lib.git#configparser_module",
+        "cordova-lib": "lorinbeer/cordova-lib.git#pg.3.5.0",
         "connect-phonegap": "0.11.0",
         "optimist": "0.6.0",
         "phonegap-build": "0.8.4",

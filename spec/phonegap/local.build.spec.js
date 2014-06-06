@@ -113,7 +113,6 @@ describe('successfully added platform', function() {
 
         it('should trigger called without an error', function(done) {
             phonegap.local.build(options, function(e) {
-                console.log(e);
                 expect(e).toBeNull();
                 done();
             });
