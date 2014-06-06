@@ -4,7 +4,7 @@
 
 var PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
-    cordova = require('cordova'),
+    cordova = require('cordova-lib').cordova,
     phonegap,
     options;
 
@@ -21,8 +21,8 @@ describe('phonegap.local.install(options, [callback])', function() {
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
         spyOn(project, 'cd').andReturn(true);
-        spyOn(cordova, 'emulate');
-        spyOn(cordova, 'run');
+        spyOn(cordova.raw, 'emulate');
+        spyOn(cordova.raw, 'run');
     });
 
     it('should require options', function() {
@@ -79,16 +79,16 @@ describe('phonegap.local.install(options, [callback])', function() {
 
         it('should install the app to the device', function() {
             phonegap.local.install(options);
-            expect(cordova.run).toHaveBeenCalledWith(
+            expect(cordova.raw.run).toHaveBeenCalledWith(
                 options.platforms,
                 jasmine.any(Function)
             );
-            expect(cordova.emulate).not.toHaveBeenCalled();
+            expect(cordova.raw.emulate).not.toHaveBeenCalled();
         });
 
         describe('on successful install', function() {
             beforeEach(function() {
-                cordova.run.andCallFake(function(platforms, callback) {
+                cordova.raw.run.andCallFake(function(platforms, callback) {
                     callback(null);
                 });
             });
@@ -103,7 +103,7 @@ describe('phonegap.local.install(options, [callback])', function() {
 
         describe('on failed install', function() {
             beforeEach(function() {
-                cordova.run.andCallFake(function(platforms, callback) {
+                cordova.raw.run.andCallFake(function(platforms, callback) {
                     callback(new Error('Ganon stole the binary'));
                 });
             });
@@ -132,16 +132,16 @@ describe('phonegap.local.install(options, [callback])', function() {
 
         it('should install the app to the emulator', function() {
             phonegap.local.install(options);
-            expect(cordova.emulate).toHaveBeenCalledWith(
+            expect(cordova.raw.emulate).toHaveBeenCalledWith(
                 options.platforms,
                 jasmine.any(Function)
             );
-            expect(cordova.run).not.toHaveBeenCalled();
+            expect(cordova.raw.run).not.toHaveBeenCalled();
         });
 
         describe('on successful install', function() {
             beforeEach(function() {
-                cordova.emulate.andCallFake(function(platforms, callback) {
+                cordova.raw.emulate.andCallFake(function(platforms, callback) {
                     callback(null);
                 });
             });
@@ -156,7 +156,7 @@ describe('phonegap.local.install(options, [callback])', function() {
 
         describe('on failed install', function() {
             beforeEach(function() {
-                cordova.emulate.andCallFake(function(platforms, callback) {
+                cordova.raw.emulate.andCallFake(function(platforms, callback) {
                     callback(new Error('Ganon stole the binary'));
                 });
             });
@@ -186,16 +186,16 @@ describe('phonegap.local.install(options, [callback])', function() {
 
         it('should try to install the app to a device', function() {
             phonegap.local.install(options);
-            expect(cordova.run).toHaveBeenCalledWith(
+            expect(cordova.raw.run).toHaveBeenCalledWith(
                 options.platforms,
                 jasmine.any(Function)
             );
-            expect(cordova.emulate).not.toHaveBeenCalled();
+            expect(cordova.raw.emulate).not.toHaveBeenCalled();
         });
 
         describe('on successful device install', function() {
             beforeEach(function() {
-                cordova.run.andCallFake(function(platforms, callback) {
+                cordova.raw.run.andCallFake(function(platforms, callback) {
                     callback(null);
                 });
             });
@@ -210,14 +210,14 @@ describe('phonegap.local.install(options, [callback])', function() {
 
         describe('on failed device install', function() {
             beforeEach(function() {
-                cordova.run.andCallFake(function(platforms, callback) {
+                cordova.raw.run.andCallFake(function(platforms, callback) {
                     callback(new Error('Ganon stole the binary'));
                 });
             });
 
             it('should try to install the app to an emulator', function() {
                 phonegap.local.install(options);
-                expect(cordova.emulate).toHaveBeenCalledWith(
+                expect(cordova.raw.emulate).toHaveBeenCalledWith(
                     options.platforms,
                     jasmine.any(Function)
                 );
@@ -225,7 +225,7 @@ describe('phonegap.local.install(options, [callback])', function() {
 
             describe('on successful install', function() {
                 beforeEach(function() {
-                    cordova.emulate.andCallFake(function(platforms, callback) {
+                    cordova.raw.emulate.andCallFake(function(platforms, callback) {
                         callback(null);
                     });
                 });
@@ -240,7 +240,7 @@ describe('phonegap.local.install(options, [callback])', function() {
 
             describe('on failed install', function() {
                 beforeEach(function() {
-                    cordova.emulate.andCallFake(function(platforms, callback) {
+                    cordova.raw.emulate.andCallFake(function(platforms, callback) {
                         callback(new Error('Ganon stole the binary'));
                     });
                 });
