@@ -5,19 +5,25 @@
  */
 
 var CLI = require('../lib/cli'),
-    argv = require('optimist').boolean('d')
-                              .boolean('device')
-                              .boolean('e')
-                              .boolean('emulator')
-                              .boolean('V')
-                              .boolean('verbose')
-                              .boolean('v')
-                              .boolean('version')
-                              .boolean('h')
-                              .boolean('help')
-                              .boolean('autoreload')
-                              .default('autoreload', true)
-                              .argv;
+    argv = require('minimist')(process.argv.slice(2), {
+        boolean: [
+            'd', 'device',
+            'e', 'emulator',
+            'V', 'verbose',
+            'v', 'version',
+            'h', 'help',
+            'autoreload'
+        ],
+        default: {
+            'autoreload': true
+        }
+    });
+
+/*!
+ * Add optimist backward-compatibility.
+ */
+
+argv.$0 = require('path').basename(process.argv[1]);
 
 /*!
  * Run the command-line client.

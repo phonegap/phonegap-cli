@@ -31,7 +31,7 @@
         "cordova": "3.5.0-0.2.4",
         "cordova-lib": "git://github.com/apache/cordova-lib.git#3623a84eb391f41c5a32ddc67eea89512c4ba654",
         "connect-phonegap": "0.11.0",
-        "optimist": "0.6.0",
+        "minimist": "0.1.0",
         "phonegap-build": "0.8.4",
         "pluralize": "0.0.4",
         "prompt": "0.2.11",
