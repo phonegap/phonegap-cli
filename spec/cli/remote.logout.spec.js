@@ -4,6 +4,7 @@
 
 var phonegap = require('../../lib/main'),
     CLI = require('../../lib/cli'),
+    argv,
     cli,
     stdout;
 
@@ -14,6 +15,7 @@ var phonegap = require('../../lib/main'),
 describe('phonegap help remote logout', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
@@ -21,35 +23,35 @@ describe('phonegap help remote logout', function() {
 
     describe('$ phonegap help remote', function() {
         it('should include the command', function() {
-            cli.argv({ _: ['help', 'remote'] });
+            cli.argv(argv.concat(['help', 'remote']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+logout.*\r?\n/i);
         });
     });
 
     describe('$ phonegap help remote logout', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['help', 'remote', 'logout'] });
+            cli.argv(argv.concat(['help', 'remote', 'logout']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote logout/i);
         });
     });
 
     describe('$ phonegap remote logout help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['remote', 'logout', 'help'] });
+            cli.argv(argv.concat(['remote', 'logout', 'help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote logout/i);
         });
     });
 
     describe('$ phonegap remote logout --help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['remote', 'logout'], help: true });
+            cli.argv(argv.concat(['remote', 'logout', '--help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote logout/i);
         });
     });
 
     describe('$ phonegap remote logout -h', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['remote', 'logout'], h: true });
+            cli.argv(argv.concat(['remote', 'logout', '-h']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote logout/i);
         });
     });
@@ -61,13 +63,14 @@ describe('phonegap help remote logout', function() {
 describe('phonegap remote logout', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(phonegap.remote, 'logout');
         spyOn(process.stdout, 'write');
     });
 
     describe('$ phonegap remote logout', function() {
         it('should try to logout', function() {
-            cli.argv({ _: ['remote', 'logout'] });
+            cli.argv(argv.concat(['remote', 'logout']));
             expect(phonegap.remote.logout).toHaveBeenCalled();
         });
 
@@ -79,7 +82,7 @@ describe('phonegap remote logout', function() {
             });
 
             it('should not return an error', function(done) {
-                cli.argv({ _: ['remote', 'logout'] }, function(e) {
+                cli.argv(argv.concat(['remote', 'logout']), function(e) {
                     expect(e).toBeNull();
                     done();
                 });
@@ -94,7 +97,7 @@ describe('phonegap remote logout', function() {
             });
 
             it('should not return an error', function(done) {
-                cli.argv({ _: ['remote', 'logout'] }, function(e) {
+                cli.argv(argv.concat(['remote', 'logout']), function(e) {
                     expect(e).not.toBeNull();
                     done();
                 });

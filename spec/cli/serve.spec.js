@@ -4,6 +4,7 @@
 
 var phonegap = require('../../lib/main'),
     CLI = require('../../lib/cli'),
+    argv,
     cli,
     stdout;
 
@@ -14,6 +15,7 @@ var phonegap = require('../../lib/main'),
 describe('phonegap help serve', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(phonegap, 'serve');
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
@@ -22,21 +24,21 @@ describe('phonegap help serve', function() {
 
     describe('$ phonegap serve help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['serve', 'help'] });
+            cli.argv(argv.concat(['serve', 'help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 
     describe('$ phonegap serve --help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['serve'], help: true });
+            cli.argv(argv.concat(['serve', '--help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 
     describe('$ phonegap serve -h', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['serve'], h: true });
+            cli.argv(argv.concat(['serve', '-h']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
@@ -49,6 +51,7 @@ describe('phonegap help serve', function() {
 describe('phonegap serve', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
         spyOn(phonegap, 'serve').andReturn({
             on: function(){}
@@ -57,30 +60,30 @@ describe('phonegap serve', function() {
 
     describe('$ phonegap serve', function() {
         it('should connect to phonegap serve', function() {
-            cli.argv({ _: ['serve'] });
+            cli.argv(argv.concat(['serve']));
             expect(phonegap.serve).toHaveBeenCalled();
         });
     });
 
     describe('$ phonegap serve --port 1337', function() {
         it('should connect to phonegap serve on port 1337', function() {
-            cli.argv({ _: ['serve'], port: 1337 });
+            cli.argv(argv.concat(['serve', '--port', '1337']));
             expect(phonegap.serve).toHaveBeenCalled();
-            expect(phonegap.serve.mostRecentCall.args[0]).toEqual({ port: 1337 });
+            expect(phonegap.serve.mostRecentCall.args[0]).toMatch({ port: 1337 });
         });
     });
 
     describe('$ phonegap serve -p 1337', function() {
         it('should connect to phonegap serve on port 1337', function() {
-            cli.argv({ _: ['serve'], p: 1337 });
+            cli.argv(argv.concat(['serve', '-p', '1337']));
             expect(phonegap.serve).toHaveBeenCalled();
-            expect(phonegap.serve.mostRecentCall.args[0]).toEqual({ port: 1337 });
+            expect(phonegap.serve.mostRecentCall.args[0]).toMatch({ port: 1337 });
         });
     });
 
     describe('$ phonegap serve --autoreload', function() {
         it('should enable autoreload', function() {
-            cli.argv({ _: ['serve'], autoreload: true });
+            cli.argv(argv.concat(['serve', '--autoreload']));
             expect(phonegap.serve).toHaveBeenCalled();
             expect(phonegap.serve.mostRecentCall.args[0]).toEqual({ autoreload: true });
         });
@@ -88,7 +91,7 @@ describe('phonegap serve', function() {
 
     describe('$ phonegap serve --no-autoreload', function() {
         it('should disable autoreload', function() {
-            cli.argv({ _: ['serve'], autoreload: false });
+            cli.argv(argv.concat(['serve', '--no-autoreload']));
             expect(phonegap.serve).toHaveBeenCalled();
             expect(phonegap.serve.mostRecentCall.args[0]).toEqual({ autoreload: false });
         });

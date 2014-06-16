@@ -3,6 +3,7 @@
  */
 
 var CLI = require('../../lib/cli'),
+    argv,
     cli;
 
 /*
@@ -12,6 +13,7 @@ var CLI = require('../../lib/cli'),
 describe('phonegap unknown', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
 
@@ -19,14 +21,14 @@ describe('phonegap unknown', function() {
 
     describe('$ phonegap noop', function() {
         it('should output the unknown command as "noop"', function() {
-            cli.argv({ _: ['noop'] });
+            cli.argv(argv.concat(['noop']));
             expect(process.stdout.write.mostRecentCall.args[0]).toMatch('noop');
         });
     });
 
     describe('$ phonegap local noop', function() {
         it('should output the unknown command as "noop"', function() {
-            cli.argv({ _: ['local', 'noop'] });
+            cli.argv(argv.concat(['local', 'noop']));
             expect(process.stdout.write.mostRecentCall.args[0]).toMatch('noop');
         });
     });

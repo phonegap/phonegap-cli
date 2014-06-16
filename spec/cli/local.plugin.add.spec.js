@@ -4,6 +4,7 @@
 
 var phonegap = require('../../lib/main'),
     CLI = require('../../lib/cli'),
+    argv,
     cli,
     stdout;
 
@@ -14,6 +15,7 @@ var phonegap = require('../../lib/main'),
 describe('phonegap help local plugin add', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
         stdout = process.stdout.write;
         spyOn(process.stderr, 'write');
@@ -22,42 +24,42 @@ describe('phonegap help local plugin add', function() {
 
     describe('$ phonegap help local plugin', function() {
         it('should include the command', function() {
-            cli.argv({ _: ['help', 'local', 'plugin'] });
+            cli.argv(argv.concat(['help', 'local', 'plugin']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+add <path>.*\r?\n/i);
         });
     });
 
     describe('$ phonegap local plugin add', function() {
         it('outputs usage info', function() {
-            cli.argv({ _: ['local', 'plugin', 'add'] });
+            cli.argv(argv.concat(['local', 'plugin', 'add']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local plugin add <path>/i);
         });
     });
 
     describe('$ phonegap help local plugin add', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['help', 'local', 'plugin', 'add'] });
+            cli.argv(argv.concat(['help', 'local', 'plugin', 'add']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local plugin add <path>/i);
         });
     });
 
     describe('$ phonegap local plugin add help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['local', 'plugin', 'add', 'help'] });
+            cli.argv(argv.concat(['local', 'plugin', 'add', 'help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local plugin add <path>/i);
         });
     });
 
     describe('$ phonegap local plugin add --help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['local', 'plugin', 'add'], help: true });
+            cli.argv(argv.concat(['local', 'plugin', 'add', '--help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local plugin add <path>/i);
         });
     });
 
     describe('$ phonegap local plugin add -h', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['local', 'plugin', 'add'], h: true });
+            cli.argv(argv.concat(['local', 'plugin', 'add', '-h']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local plugin add <path>/i);
         });
     });
@@ -76,7 +78,7 @@ describe('phonegap local plugin add <path>', function() {
 
     describe('$ phonegap local plugin add /path/to/plugin', function() {
         it('should try to add the plugin', function() {
-            cli.argv({ _: ['local', 'plugin', 'add', '/path/to/plugin'] });
+            cli.argv(argv.concat(['local', 'plugin', 'add', '/path/to/plugin']));
             expect(phonegap.local.plugin.add).toHaveBeenCalledWith(
                 {
                     path: ['/path/to/plugin']
@@ -93,7 +95,7 @@ describe('phonegap local plugin add <path>', function() {
             });
 
             it('should call callback without an error', function(done) {
-                cli.argv({ _: ['local', 'plugin', 'add', '/path/to/plugin'] }, function(e, data) {
+                cli.argv(argv.concat(['local', 'plugin', 'add', '/path/to/plugin']), function(e, data) {
                     expect(e).toBeNull();
                     done();
                 });
@@ -108,7 +110,7 @@ describe('phonegap local plugin add <path>', function() {
             });
 
             it('should call callback with an error', function(done) {
-                cli.argv({ _: ['local', 'plugin', 'add', 'android'] }, function(e) {
+                cli.argv(argv.concat(['local', 'plugin', 'add', '/path/to/plugin']), function(e, data) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
                 });

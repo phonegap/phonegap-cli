@@ -4,6 +4,7 @@
 
 var phonegap = require('../../lib/main'),
     CLI = require('../../lib/cli'),
+    argv,
     cli,
     stdout,
     emitterSpy;
@@ -15,6 +16,7 @@ var phonegap = require('../../lib/main'),
 describe('phonegap help local build', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(phonegap.local, 'build');
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
@@ -23,42 +25,42 @@ describe('phonegap help local build', function() {
 
     describe('$ phonegap help local', function() {
         it('should include the command', function() {
-            cli.argv({ _: ['help', 'local'] });
+            cli.argv(argv.concat(['help', 'local']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+build <platform>.*\r?\n/i);
         });
     });
 
     describe('$ phonegap local build', function() {
         it('outputs usage info', function() {
-            cli.argv({ _: ['local', 'build'] });
+            cli.argv(argv.concat(['local', 'build']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local build/i);
         });
     });
 
     describe('$ phonegap help local build', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['help', 'local', 'build'] });
+            cli.argv(argv.concat(['help', 'local', 'build']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local build/i);
         });
     });
 
     describe('$ phonegap local build help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['local', 'build', 'help'] });
+            cli.argv(argv.concat(['local', 'build', 'help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local build/i);
         });
     });
 
     describe('$ phonegap local build --help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['local', 'build'], help: true });
+            cli.argv(argv.concat(['local', 'build', '--help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local build/i);
         });
     });
 
     describe('$ phonegap local build -h', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['local', 'build'], h: true });
+            cli.argv(argv.concat(['local', 'build', '-h']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local build/i);
         });
     });
@@ -71,6 +73,7 @@ describe('phonegap help local build', function() {
 describe('phonegap local build <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         emitterSpy = {
             on: function() {
                  // spy stub
@@ -83,7 +86,7 @@ describe('phonegap local build <platform>', function() {
 
     describe('$ phonegap local build android', function() {
         it('should try to build the project', function() {
-            cli.argv({ _: ['local', 'build', 'android'] });
+            cli.argv(argv.concat(['local', 'build', 'android']));
             expect(phonegap.local.build).toHaveBeenCalledWith(
                 {
                     platforms: ['android']
@@ -101,7 +104,7 @@ describe('phonegap local build <platform>', function() {
             });
 
             it('should call callback without an error', function(done) {
-                cli.argv({ _: ['local', 'build', 'android'] }, function(e, data) {
+                cli.argv(argv.concat(['local', 'build', 'android']), function(e, data) {
                     expect(e).toBeNull();
                     done();
                 });
@@ -117,7 +120,7 @@ describe('phonegap local build <platform>', function() {
             });
 
             it('should call callback with an error', function(done) {
-                cli.argv({ _: ['local', 'build', 'android'] }, function(e) {
+                cli.argv(argv.concat(['local', 'build', 'android']), function(e, data) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
                 });

@@ -4,29 +4,10 @@
  * Module dependencies.
  */
 
-var CLI = require('../lib/cli'),
-    argv = require('minimist')(process.argv.slice(2), {
-        boolean: [
-            'd', 'device',
-            'e', 'emulator',
-            'V', 'verbose',
-            'v', 'version',
-            'h', 'help',
-            'autoreload'
-        ],
-        default: {
-            'autoreload': true
-        }
-    });
-
-/*!
- * Add optimist backward-compatibility.
- */
-
-argv.$0 = require('path').basename(process.argv[1]);
+var CLI = require('../lib/cli');
 
 /*!
  * Run the command-line client.
  */
 
-var cli = new CLI().argv(argv);
+var cli = new CLI().argv(process.argv);

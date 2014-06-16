@@ -4,6 +4,7 @@
 
 var phonegap = require('../../lib/main'),
     CLI = require('../../lib/cli'),
+    argv,
     cli,
     stdout,
     emitterSpy;
@@ -15,6 +16,7 @@ var phonegap = require('../../lib/main'),
 describe('phonegap help platform update', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(phonegap.platform, 'update');
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
@@ -23,42 +25,42 @@ describe('phonegap help platform update', function() {
 
     describe('$ phonegap help platform', function() {
         it('should include the command', function() {
-            cli.argv({ _: ['help', 'platform'] });
+            cli.argv(argv.concat(['help', 'platform']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+update <platform>.*\r?\n/i);
         });
     });
 
     describe('$ phonegap platform update', function() {
         it('outputs usage info', function() {
-            cli.argv({ _: ['platform', 'update'] });
+            cli.argv(argv.concat(['platform', 'update']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ platform update/i);
         });
     });
 
     describe('$ phonegap help platform update', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['help', 'platform', 'update'] });
+            cli.argv(argv.concat(['help', 'platform', 'update']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ platform update/i);
         });
     });
 
     describe('$ phonegap platform update help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['platform', 'update', 'help'] });
+            cli.argv(argv.concat(['platform', 'update', 'help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ platform update/i);
         });
     });
 
     describe('$ phonegap platform update --help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['platform', 'update'], help: true });
+            cli.argv(argv.concat(['platform', 'update', '--help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ platform update/i);
         });
     });
 
     describe('$ phonegap platform update -h', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['platform', 'update'], h: true });
+            cli.argv(argv.concat(['platform', 'update', '-h']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ platform update/i);
         });
     });
@@ -71,6 +73,7 @@ describe('phonegap help platform update', function() {
 describe('phonegap platform update <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         emitterSpy = {
             on: function() {
                  // spy stub
@@ -82,7 +85,7 @@ describe('phonegap platform update <platform>', function() {
 
     describe('$ phonegap platform update android', function() {
         it('should try to update the platform', function() {
-            cli.argv({ _: ['platform', 'update', 'android'] });
+            cli.argv(argv.concat(['platform', 'update', 'android']));
             expect(phonegap.platform.update).toHaveBeenCalledWith(
                 {
                     platforms: ['android']
@@ -100,7 +103,7 @@ describe('phonegap platform update <platform>', function() {
             });
 
             it('should call callback without an error', function(done) {
-                cli.argv({ _: ['platform', 'update', 'android'] }, function(e, data) {
+                cli.argv(argv.concat(['platform', 'update', 'android']), function(e, data) {
                     expect(e).toBeNull();
                     done();
                 });
@@ -116,7 +119,7 @@ describe('phonegap platform update <platform>', function() {
             });
 
             it('should call callback with an error', function(done) {
-                cli.argv({ _: ['platform', 'update', 'android'] }, function(e) {
+                cli.argv(argv.concat(['platform', 'update', 'android']), function(e) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
                 });

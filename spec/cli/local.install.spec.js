@@ -4,6 +4,7 @@
 
 var phonegap = require('../../lib/main'),
     CLI = require('../../lib/cli'),
+    argv,
     cli,
     stdout;
 
@@ -14,6 +15,7 @@ var phonegap = require('../../lib/main'),
 describe('phonegap help local install', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(phonegap.local, 'install');
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
@@ -22,42 +24,42 @@ describe('phonegap help local install', function() {
 
     describe('$ phonegap help local', function() {
         it('should include the command', function() {
-            cli.argv({ _: ['help', 'local'] });
+            cli.argv(argv.concat(['help', 'local']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+install <platform>.*\r?\n/i);
         });
     });
 
     describe('$ phonegap local install', function() {
         it('outputs usage info', function() {
-            cli.argv({ _: ['local', 'install'] });
+            cli.argv(argv.concat(['local', 'install']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local install/i);
         });
     });
 
     describe('$ phonegap help local install', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['help', 'local', 'install'] });
+            cli.argv(argv.concat(['help', 'local', 'install']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local install/i);
         });
     });
 
     describe('$ phonegap local install help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['local', 'install', 'help'] });
+            cli.argv(argv.concat(['local', 'install', 'help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local install/i);
         });
     });
 
     describe('$ phonegap local install --help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['local', 'install'], help: true });
+            cli.argv(argv.concat(['local', 'install', '--help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local install/i);
         });
     });
 
     describe('$ phonegap local install -h', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['local', 'install'], h: true });
+            cli.argv(argv.concat(['local', 'install', '-h']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ local install/i);
         });
     });
@@ -70,6 +72,7 @@ describe('phonegap help local install', function() {
 describe('phonegap local install <platform>', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
         spyOn(phonegap.local, 'install');
@@ -77,11 +80,10 @@ describe('phonegap local install <platform>', function() {
 
     describe('$ phonegap local install android', function() {
         it('should try to install the app', function() {
-            cli.argv({ _: ['local', 'install', 'android'] });
-            expect(phonegap.local.install).toHaveBeenCalledWith(
-                { platforms: ['android'] },
-                jasmine.any(Function)
-            );
+            cli.argv(argv.concat(['local', 'install', 'android']));
+            expect(phonegap.local.install.mostRecentCall.args[0]).toMatch({
+                platforms: ['android']
+            });
         });
 
         describe('successful install', function() {
@@ -92,14 +94,14 @@ describe('phonegap local install <platform>', function() {
             });
 
             it('should call callback without an error', function(done) {
-                cli.argv({ _: ['local', 'install', 'android'] }, function(e, data) {
+                cli.argv(argv.concat(['local', 'install', 'android']), function(e, data) {
                     expect(e).toBeNull();
                     done();
                 });
             });
 
             it('should call callback with a data object', function(done) {
-                cli.argv({ _: ['local', 'install', 'android'] }, function(e, data) {
+                cli.argv(argv.concat(['local', 'install', 'android']), function(e, data) {
                     expect(data).toEqual({});
                     done();
                 });
@@ -114,7 +116,7 @@ describe('phonegap local install <platform>', function() {
             });
 
             it('should call callback with an error', function(done) {
-                cli.argv({ _: ['local', 'install', 'android'] }, function(e, data) {
+                cli.argv(argv.concat(['local', 'install', 'android']), function(e, data) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
                 });
@@ -124,11 +126,11 @@ describe('phonegap local install <platform>', function() {
 
     describe('$ phonegap local install --device android', function() {
         it('should try to install the app', function() {
-            cli.argv({ _: ['local', 'install', 'android'], device: true });
-            expect(phonegap.local.install).toHaveBeenCalledWith(
-                { platforms: ['android'], device: true },
-                jasmine.any(Function)
-            );
+            cli.argv(argv.concat(['local', 'install', 'android', '--device']));
+            expect(phonegap.local.install.mostRecentCall.args[0]).toMatch({
+                platforms: ['android'],
+                device: true
+            });
         });
     });
 });

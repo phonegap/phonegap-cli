@@ -3,6 +3,7 @@
  */
 
 var CLI = require('../../lib/cli'),
+    argv,
     cli,
     stdout;
 
@@ -13,6 +14,7 @@ var CLI = require('../../lib/cli'),
 describe('phonegap help plugin', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
         stdout = process.stdout.write;
@@ -20,42 +22,42 @@ describe('phonegap help plugin', function() {
 
     describe('$ phonegap help', function() {
         it('should include the command', function() {
-            cli.argv({ _: ['help'] });
+            cli.argv(argv.concat(['help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+plugin \[command\].*\r?\n/i);
         });
     });
 
     describe('$ phonegap plugin', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['plugin'] });
+            cli.argv(argv.concat(['plugin']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ plugin/i);
         });
     });
 
     describe('$ phonegap help plugin', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['help', 'plugin'] });
+            cli.argv(argv.concat(['help', 'plugin']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ plugin/i);
         });
     });
 
     describe('$ phonegap plugin help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['plugin', 'help'] });
+            cli.argv(argv.concat(['plugin', 'help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ plugin/i);
         });
     });
 
     describe('$ phonegap plugin --help', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['plugin'], help: true });
+            cli.argv(argv.concat(['plugin', '--help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ plugin/i);
         });
     });
 
     describe('$ phonegap plugin -h', function() {
         it('should output usage info', function() {
-            cli.argv({ _: ['plugin'], h: true });
+            cli.argv(argv.concat(['plugin', '-h']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ plugin/i);
         });
     });
@@ -68,16 +70,16 @@ describe('phonegap help plugin', function() {
 describe('phonegap plugin <command>', function() {
     beforeEach(function() {
         cli = new CLI();
+        argv = ['node', '/usr/local/bin/phonegap'];
     });
 
     describe('unknown command', function() {
         it('should output the unknown command', function() {
             spyOn(cli, 'unknown');
-            cli.argv({ _: ['plugin', 'noop'] });
-            expect(cli.unknown).toHaveBeenCalledWith(
-                { _: ['plugin', 'noop'] },
-                jasmine.any(Function)
-            );
+            cli.argv(argv.concat(['plugin', 'noop']));
+            expect(cli.unknown.mostRecentCall.args[0]).toMatch({
+                _: ['plugin', 'noop']
+            });
         });
     });
 });
