@@ -5,7 +5,7 @@
 var localBuild = require('../../lib/phonegap/local.build'),
     PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
-    cordova = require('cordova'),
+    cordova = require('cordova-lib').cordova,
     shell = require('shelljs'),
     fs = require('fs'),
     phonegap,
