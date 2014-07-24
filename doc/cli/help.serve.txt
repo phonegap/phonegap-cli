@@ -12,6 +12,7 @@ Options:
   --port, -p <n>       port for web server (default: 3000)
   --autoreload         enable app refresh on file changes (default: true)
   --no-autoreload      disable app refresh on file changes
+  --localtunnel        enable local tunnel (default: false)
 
 Alias:
 
@@ -23,3 +24,4 @@ Examples:
   $ $0 serve --port 1337
   $ $0 serve --no-autoreload
   $ $0 app
+  $ $0 serve --localtunnel
