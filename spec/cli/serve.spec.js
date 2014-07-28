@@ -80,20 +80,4 @@ describe('phonegap serve', function() {
             expect(phonegap.serve.mostRecentCall.args[0]).toMatch({ port: 1337 });
         });
     });
-
-    describe('$ phonegap serve --autoreload', function() {
-        it('should enable autoreload', function() {
-            cli.argv(argv.concat(['serve', '--autoreload']));
-            expect(phonegap.serve).toHaveBeenCalled();
-            expect(phonegap.serve.mostRecentCall.args[0]).toEqual({ autoreload: true });
-        });
-    });
-
-    describe('$ phonegap serve --no-autoreload', function() {
-        it('should disable autoreload', function() {
-            cli.argv(argv.concat(['serve', '--no-autoreload']));
-            expect(phonegap.serve).toHaveBeenCalled();
-            expect(phonegap.serve.mostRecentCall.args[0]).toEqual({ autoreload: false });
-        });
-    });
 });
