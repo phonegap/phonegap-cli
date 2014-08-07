@@ -1,5 +1,7 @@
 
 var serveModule = require("../../lib/phonegap/serve"),
+    http = require("http"),
+    server = require("connect-phonegap"), 
     project = require("../../lib/phonegap/util/project"),
     serve;
 
@@ -19,21 +21,28 @@ describe("PhoneGap serve", function () {
 
     describe("when called", function() {
         var validOptions,
-            wrapper = {
-                emit: function(){}
-            };
+            wrapper;
 
         beforeEach(function() {
+            // valid options
             validOptions = {
                 port:3939,
                 autoreload:true,
                 localtunnel:false
             };
 
+            // define wrapper as a stub
+            wrapper = {
+                emit: function(){},
+                on: function(){}
+            };
+
+            // initialize the serve function with wrapper
             serve = serveModule.create(wrapper);
-            
-            spyOn(project,'cd');
-            
+           
+            // declare spies 
+            spyOn(project,'cd').andReturn(true);
+            spyOn(server,'listen').andReturn({on:function(){return this}});
         });
 
         it("should be a function", function() {
@@ -78,6 +87,11 @@ describe("PhoneGap serve", function () {
         it("should change to the project directory", function (){
             serve(validOptions);
             expect(project.cd).toHaveBeenCalled(); 
+        });
+
+        it("should call connect-phonegap library", function (){
+            serve(validOptions);
+            expect(server.listen).toHaveBeenCalled();
         });
 
 
