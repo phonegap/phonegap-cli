@@ -1,5 +1,6 @@
 
-var serveModule = require("../../lib/phonegap/serve.js"),
+var serveModule = require("../../lib/phonegap/serve"),
+    project = require("../../lib/phonegap/util/project"),
     serve;
 
 describe("PhoneGap serve", function () {
@@ -16,7 +17,7 @@ describe("PhoneGap serve", function () {
     
     });
 
-    describe("instance", function() {
+    describe("when called", function() {
         var validOptions,
             wrapper = {
                 emit: function(){}
@@ -30,10 +31,18 @@ describe("PhoneGap serve", function () {
             };
 
             serve = serveModule.create(wrapper);
+            
+            spyOn(project,'cd');
+            
         });
 
         it("should be a function", function() {
             expect(serve).toEqual(any(Function));
+        });
+
+        it("should return the wrapper object given to create", function () {
+            var ret = serve({}); 
+            expect(ret).toEqual(wrapper);
         });
 
         it("should require options parameter", function(){
@@ -65,17 +74,11 @@ describe("PhoneGap serve", function () {
                 serve({port:undefined});
             }).not.toThrow();    
         });
-        it("should require options.autoreload to be boolean", function(){
-            expect(function() {
-                serve({autoreload:"wutsdis"});
-            }).not.toThrow(); 
-        });
-        it("should not require options.port", function(){
-            expect(function() {
-                serve({port:undefined});
-            }).not.toThrow();    
-        });
 
+        it("should change to the project directory", function (){
+            serve(validOptions);
+            expect(project.cd).toHaveBeenCalled(); 
+        });
 
 
     });
