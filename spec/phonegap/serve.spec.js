@@ -21,6 +21,8 @@ describe("PhoneGap serve", function () {
 
     describe("when called", function() {
         var validOptions,
+            invalidOptions,
+            defaultOptions,
             wrapper;
 
         beforeEach(function() {
@@ -29,6 +31,18 @@ describe("PhoneGap serve", function () {
                 port:3939,
                 autoreload:true,
                 localtunnel:false
+            };
+
+            invalidOptions = {
+                port: undefined,
+                autoreload:"batman",
+                localtunnel:"wonderwoman"
+            };
+
+            defaultOptions = {
+                port: 3000,
+                autoreload: true,
+                localtunnel: false
             };
 
             // define wrapper as a stub
@@ -89,11 +103,24 @@ describe("PhoneGap serve", function () {
             expect(project.cd).toHaveBeenCalled(); 
         });
 
-        it("should call connect-phonegap library", function (){
-            serve(validOptions);
+        it("should call connect-phonegap listen", function (){
+            serve({});
             expect(server.listen).toHaveBeenCalled();
         });
 
+        it("should call connect-phonegap listen with valid options passed through", function (){
+            serve(validOptions);
+            expect(server.listen).toHaveBeenCalledWith(validOptions);
+        });
+
+        describe("if called with invalid options", function () {
+            
+            it("should call connect-phonegap listen with default options", function (){
+                serve(invalidOptions);
+                expect(server.listen.argsForCall).toEqual([[defaultOptions]]);
+            });
+
+        });
 
     });
 
