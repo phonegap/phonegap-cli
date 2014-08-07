@@ -21,8 +21,6 @@ describe("PhoneGap serve", function () {
 
     describe("when called", function() {
         var validOptions,
-            invalidOptions,
-            defaultOptions,
             wrapper;
 
         beforeEach(function() {
@@ -32,19 +30,6 @@ describe("PhoneGap serve", function () {
                 autoreload:true,
                 localtunnel:false
             };
-
-            invalidOptions = {
-                port: undefined,
-                autoreload:"batman",
-                localtunnel:"wonderwoman"
-            };
-
-            defaultOptions = {
-                port: 3000,
-                autoreload: true,
-                localtunnel: false
-            };
-
             // define wrapper as a stub
             wrapper = {
                 emit: function(){},
@@ -114,14 +99,40 @@ describe("PhoneGap serve", function () {
         });
 
         describe("if called with invalid options", function () {
-            
+            var invalidOptions,
+                defaultOptions;
+
+            beforeEach(function () {
+                invalidOptions = {
+                    port: undefined,
+                    autoreload:"batman",
+                    localtunnel:"wonderwoman"
+                };
+                defaultOptions = {
+                    port: 3000,
+                    autoreload: true,
+                    localtunnel: false
+                };
+
+            });
+ 
             it("should call connect-phonegap listen with default options", function (){
                 serve(invalidOptions);
                 expect(server.listen.argsForCall).toEqual([[defaultOptions]]);
             });
+ 
+            it("should call connect-phonegap listen with corrected autoreload option", function (){
+                defaultOptions.autoreload = "batman";
+                serve(defaultOptions);
+                expect(server.listen.argsForCall[0][0].autoreload).toEqual(true);
+            });
+
+            it("should call connect-phonegap listen with corrected localtunnel option", function (){
+                defaultOptions.localtunnel = "batman";
+                serve(defaultOptions);
+                expect(server.listen.argsForCall[0][0].localtunnel).toEqual(false);
+            });
 
         });
-
     });
-
 });
