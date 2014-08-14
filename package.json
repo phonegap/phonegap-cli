@@ -27,7 +27,6 @@
         "node": ">=0.10.0"
     },
     "dependencies": {
-        "bluebird": "2.3.0",
         "colors": "0.6.0-1",
         "cordova": "3.5.0-0.2.6",
         "cordova-lib": "0.21.6",
