@@ -29,9 +29,10 @@ Platforms:
   keyword            | local environment   | remote environment
   -------------------|---------------------|-------------------
   android            | Yes                 | Yes
+  blackberry         | Yes                 | No
+  firefoxos          | Yes                 | No
   ios                | Yes                 | Yes
   wp8                | Yes                 | Yes
-  Blackberry 10      | Yes                 | No 
 
 Examples:
 
