@@ -2,8 +2,15 @@
 var serveModule = require("../../lib/phonegap/serve"),
     http = require("http"),
     server = require("connect-phonegap"), 
+    cordova = require('cordova-lib').cordova,
     project = require("../../lib/phonegap/util/project"),
-    serve;
+    preparePromise = null,
+    serve = null;
+
+
+var dummyPromise = { then: function() {} },
+    realPromise = { then: function(f) { f(); } };
+
 
 describe("PhoneGap serve", function () {
     
@@ -41,22 +48,28 @@ describe("PhoneGap serve", function () {
            
             // declare spies 
             spyOn(project,'cd').andReturn(true);
-            spyOn(server,'listen').andReturn({on:function(){return this}});
+
+            preparePromise = dummyPromise;
+            spyOn(cordova.raw, 'prepare').andCallFake(function() {
+                return preparePromise;
+            });
+
+            spyOn(server,'listen').andReturn({ on: function() { return this; }});
         });
 
         it("should be a function", function() {
             expect(serve).toEqual(any(Function));
         });
 
-        it("should return the wrapper object given to create", function () {
-            var ret = serve({}); 
-            expect(ret).toEqual(wrapper);
-        });
-
         it("should require options parameter", function(){
             expect(function() {
                 serve();
             }).toThrow();
+        });
+
+        it("should return the wrapper object given to create", function () {
+            var ret = serve({}); 
+            expect(ret).toEqual(wrapper);
         });
 
         it("should accept empty options", function(){
@@ -68,7 +81,7 @@ describe("PhoneGap serve", function () {
         it("should not require callback parameter", function(){
             expect(function() {
                 serve(validOptions);
-            }).not.toThrow();    
+            }).not.toThrow();
         });
 
         it("should not require options.port", function(){
@@ -88,12 +101,20 @@ describe("PhoneGap serve", function () {
             expect(project.cd).toHaveBeenCalled(); 
         });
 
+        it('should prepare the build first', function() {
+            serve({});
+            expect(cordova.raw.prepare).toHaveBeenCalled();
+            expect(cordova.raw.prepare).toHaveBeenCalledWith([]);
+        });
+
         it("should call connect-phonegap listen", function (){
+            preparePromise = realPromise;
             serve({});
             expect(server.listen).toHaveBeenCalled();
         });
 
         it("should call connect-phonegap listen with valid options passed through", function (){
+            preparePromise = realPromise;
             serve(validOptions);
             expect(server.listen).toHaveBeenCalledWith(validOptions);
         });
@@ -117,18 +138,21 @@ describe("PhoneGap serve", function () {
             });
  
             it("should call connect-phonegap listen with default options", function (){
+                preparePromise = realPromise;
                 serve(invalidOptions);
                 expect(server.listen.argsForCall).toEqual([[defaultOptions]]);
             });
  
             it("should call connect-phonegap listen with corrected autoreload option", function (){
                 defaultOptions.autoreload = "batman";
+                preparePromise = realPromise;
                 serve(defaultOptions);
                 expect(server.listen.argsForCall[0][0].autoreload).toEqual(true);
             });
 
             it("should call connect-phonegap listen with corrected localtunnel option", function (){
                 defaultOptions.localtunnel = "batman";
+                preparePromise = realPromise;
                 serve(defaultOptions);
                 expect(server.listen.argsForCall[0][0].localtunnel).toEqual(false);
             });
