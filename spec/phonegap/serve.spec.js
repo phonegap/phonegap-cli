@@ -50,8 +50,8 @@ describe("PhoneGap serve", function () {
             spyOn(project,'cd').andReturn(true);
 
             preparePromise = dummyPromise;
-            spyOn(cordova.raw, 'prepare').andCallFake(function() {
-                return preparePromise;
+            spyOn(cordova, 'prepare').andCallFake(function(platforms, callback) {
+                callback(true);
             });
 
             spyOn(server,'listen').andReturn({ on: function() { return this; }});
@@ -103,8 +103,8 @@ describe("PhoneGap serve", function () {
 
         it('should prepare the build first', function() {
             serve({});
-            expect(cordova.raw.prepare).toHaveBeenCalled();
-            expect(cordova.raw.prepare).toHaveBeenCalledWith([]);
+            expect(cordova.prepare).toHaveBeenCalled();
+            expect(cordova.prepare).toHaveBeenCalledWith([], jasmine.any(Function));
         });
 
         it("should call connect-phonegap listen", function (){
