@@ -21,8 +21,12 @@ describe('phonegap.local.install(options, [callback])', function() {
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
         spyOn(project, 'cd').andReturn(true);
+        spyOn(project, 'listPlatforms').andReturn([ 'android' ]);
         spyOn(cordova.raw, 'emulate');
         spyOn(cordova.raw, 'run');
+        spyOn(cordova, 'platform').andCallFake(function(a,b,c, callback){
+            callback();
+        });
     });
 
     it('should require options', function() {
@@ -81,6 +85,7 @@ describe('phonegap.local.install(options, [callback])', function() {
 
     describe('when target is device', function() {
         beforeEach(function() {
+            project.listPlatforms.andReturn([ 'android' ]);
             options.device = true;
         });
 
