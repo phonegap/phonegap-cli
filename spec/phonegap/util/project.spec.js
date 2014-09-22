@@ -9,7 +9,8 @@ var project = require('../../../lib/phonegap/util/project'),
     fs = require('fs'),
     currentPath,
     projectPath,
-    delegate;
+    delegate,
+    cdvutil = require('../../../node_modules/cordova-lib/src/cordova/util')
 
 /*!
  * Specification: Project Operations
@@ -25,12 +26,17 @@ describe('project', function() {
                 callback: function(e) {}
             };
             delegate.emitter.on('error', function(e) {});  // required error catcher
-            spyOn(fs, 'existsSync').andCallFake(function(_path) {
-                return (_path === path.join(projectPath, '.cordova'));
-            });
+
         });
 
         describe('when in project path', function() {
+
+            beforeEach(function() {
+                spyOn(cdvutil, 'isCordova').andCallFake(function(_path) {
+                    return true;
+                });
+            });
+
             it('should return the path', function() {
                 expect(project.cd(delegate)).toEqual(projectPath);
             });
@@ -39,9 +45,13 @@ describe('project', function() {
         describe('when in a subdirectory of the project path', function() {
             beforeEach(function() {
                 currentPath = path.join(projectPath, 'lib', 'phonegap');
+                spyOn(cdvutil, 'isCordova').andCallFake(function(_path) {
+                    return _path === projectPath;
+                });
             });
 
             it('should return the path', function() {
+
                 chdir(currentPath, function() {
                     expect(project.cd(delegate)).toEqual(projectPath);
                 });
