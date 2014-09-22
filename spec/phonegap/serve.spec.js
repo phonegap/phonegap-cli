@@ -119,6 +119,29 @@ describe("PhoneGap serve", function () {
             expect(server.listen).toHaveBeenCalledWith(validOptions);
         });
 
+        describe("if cordova prepare throws", function () {
+           var invalidOptions,
+               defaultOptions;
+
+           beforeEach(function () {
+                invalidOptions = {
+                    port: undefined,
+                    autoreload:"batman",
+                    localtunnel:"wonderwoman"
+                };
+                defaultOptions = {
+                    port: 3000,
+                    autoreload: true,
+                    localtunnel: false
+                };
+
+               spyOn(cordova, 'prepare').andCallFake(function () {
+                    throw new Error('IWETTUM!');
+                });
+            });
+
+       });
+
         describe("if called with invalid options", function () {
             var invalidOptions,
                 defaultOptions;
