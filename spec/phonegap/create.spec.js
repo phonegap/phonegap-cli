@@ -5,6 +5,7 @@
 var PhoneGap = require('../../lib/phonegap'),
     cordova = require('cordova-lib').cordova,
     shell = require('shelljs'),
+    fs = require('fs'),
     phonegap,
     options;
 
@@ -23,6 +24,7 @@ describe('phonegap.create(options, [callback])', function() {
         spyOn(cordova, 'config');
         spyOn(shell, 'rm');
         spyOn(shell, 'cp');
+        spyOn(fs, 'renameSync');
 
         spyOn(process.stderr, 'write');
     });
