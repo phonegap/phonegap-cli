@@ -54,6 +54,13 @@ describe('phonegap.local.install(options, [callback])', function() {
         }).not.toThrow();
     });
 
+    it('should not require options.target', function()  {
+        expect(function() {
+            options.target = undefined;
+            phonegap.local.install(options);
+        }).not.toThrow();
+    });
+
     it('should not require callback', function() {
         expect(function() {
             phonegap.local.install(options);
@@ -78,6 +85,16 @@ describe('phonegap.local.install(options, [callback])', function() {
         });
 
         it('should install the app to the device', function() {
+            phonegap.local.install(options);
+            expect(cordova.raw.run).toHaveBeenCalledWith(
+                options.platforms,
+                jasmine.any(Function)
+            );
+            expect(cordova.raw.emulate).not.toHaveBeenCalled();
+        });
+
+        it('should ignore target parameter', function() {
+            options.target = "sometarget";
             phonegap.local.install(options);
             expect(cordova.raw.run).toHaveBeenCalledWith(
                 options.platforms,
@@ -134,6 +151,16 @@ describe('phonegap.local.install(options, [callback])', function() {
             phonegap.local.install(options);
             expect(cordova.raw.emulate).toHaveBeenCalledWith(
                 options.platforms,
+                jasmine.any(Function)
+            );
+            expect(cordova.raw.run).not.toHaveBeenCalled();
+        });
+
+        it('should pass target along to the emulator', function() {
+            options.target = "sometarget";
+            phonegap.local.install(options);
+            expect(cordova.raw.emulate).toHaveBeenCalledWith(
+                {platforms: options.platforms, options: "--target=sometarget"},
                 jasmine.any(Function)
             );
             expect(cordova.raw.run).not.toHaveBeenCalled();
