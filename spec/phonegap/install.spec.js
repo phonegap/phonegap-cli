@@ -32,7 +32,7 @@ describe('phonegap.install(options, [callback])', function() {
         spyOn(process.stderr, 'write');
         spyOn(phonegap.local, 'install').andReturn(phonegap);
         spyOn(phonegap.remote, 'install').andReturn(phonegap);
-        spyOn(cordova.raw.platform, 'supports').andReturn(qyes);
+        spyOn(cordova, 'platform');
         spyOn(project, 'cd').andReturn(true);
     });
 
@@ -69,12 +69,6 @@ describe('phonegap.install(options, [callback])', function() {
     });
 
     describe('with local environment', function() {
-        beforeEach(function() {
-            cordova.raw.platform.supports.andCallFake(function(path, platform, callback) {
-                callback(null);
-            }).andReturn(qyes);
-        });
-
         it('should try to install the app locally', function() {
             var callback = function() {};
             phonegap.install(options, callback);
@@ -84,7 +78,9 @@ describe('phonegap.install(options, [callback])', function() {
 
     describe('with remote environment', function() {
         beforeEach(function() {
-            cordova.raw.platform.supports.andReturn(qno);
+            cordova.platform.andCallFake(function(){
+                throw new Error;
+            });
         });
 
         it('should try to install the app remotely', function() {
