@@ -20,7 +20,7 @@ describe('phonegap.run(options, [callback])', function() {
         };
         spyOn(phonegap.local, 'run').andReturn(phonegap);
         spyOn(phonegap.remote, 'run').andReturn(phonegap);
-        cdvplatform = spyOn(cordova, 'platform');
+        spyOn(cordova, 'platform');
         spyOn(project, 'cd').andReturn(true);
     });
 
