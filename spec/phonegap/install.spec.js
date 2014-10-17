@@ -72,6 +72,11 @@ describe('phonegap.install(options, [callback])', function() {
         );
     });
 
+    it('should not attempt to execute the remote build command if platform is unsupported', function () {
+        expect(phonegap.local.install).toHaveBeenCalled();
+        expect(phonegap.remote.install).not.toHaveBeenCalled();
+    });
+
 
     it('should return itself', function() {
         expect(phonegap.install(options)).toEqual(phonegap);
