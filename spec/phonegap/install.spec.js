@@ -64,9 +64,19 @@ describe('phonegap.install(options, [callback])', function() {
         });
     });
 
+    it('should add the platform if it is not already present', function () {
+        expect(cordova.platform).toHaveBeenCalledWith(
+            'add',
+            options.platforms,
+            function () {} 
+        );
+    });
+
+
     it('should return itself', function() {
         expect(phonegap.install(options)).toEqual(phonegap);
     });
+
 
     describe('with local environment', function() {
         it('should try to install the app locally', function() {
