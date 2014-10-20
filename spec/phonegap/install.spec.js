@@ -32,7 +32,9 @@ describe('phonegap.install(options, [callback])', function() {
         spyOn(process.stderr, 'write');
         spyOn(phonegap.local, 'install').andReturn(phonegap);
         spyOn(phonegap.remote, 'install').andReturn(phonegap);
-        spyOn(cordova, 'platform');
+        spyOn(cordova, 'platform').andCallFake(function(action, platforms, options, callback) {
+            callback();
+        });
         spyOn(project, 'cd').andReturn(true);
     });
 
@@ -65,14 +67,17 @@ describe('phonegap.install(options, [callback])', function() {
     });
 
     it('should add the platform if it is not already present', function () {
+        phonegap.install(options, function(){});
         expect(cordova.platform).toHaveBeenCalledWith(
             'add',
             options.platforms,
-            function () {} 
+            null,
+            jasmine.any(Function) 
         );
     });
 
     it('should not attempt to execute the remote build command if platform is unsupported', function () {
+        phonegap.install(options, function () {});
         expect(phonegap.local.install).toHaveBeenCalled();
         expect(phonegap.remote.install).not.toHaveBeenCalled();
     });
