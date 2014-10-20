@@ -97,11 +97,8 @@ describe('phonegap.create(options, [callback])', function() {
         });
     });
 
-    describe('project path already exists', function () {
+    describe('config.xml not found', function () {
         beforeEach(function() {
-            cordova.create.andCallFake(function (path, id, name, cb) {
-                cb(new Error("this is an error"));
-            });
             fs.renameSync.andCallFake(function () {
                 throw new Error;
             }); 
@@ -109,14 +106,15 @@ describe('phonegap.create(options, [callback])', function() {
         
         it('should emit an error if project creation fails', function () {
             phonegap.create(options, function(e) {
-                expect(e).toEqual(jasmine.any(Error));
+                expect(cordova.create).toHaveBeenCalled();
+                expect(fs.renameSync).not.toHaveBeenCalled();
             });
         }); 
 
         it('should emit an error if project config.xml is not found', function () {
             phonegap.create(options, function(e) {
-                expect(e).toEqual(jasmine.any(error));
                 expect(fs.renameSync).toHaveBeenCalled();
+                expect(e).toEqual(jasmine.any(Error));
             }); 
         });
 
