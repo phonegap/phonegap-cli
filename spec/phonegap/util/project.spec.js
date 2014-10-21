@@ -98,6 +98,42 @@ describe('project', function() {
         });
     });
 
+    describe('listPlatforms', function () {
+        var exampleOut = ['platformA', 'platformB'];
+
+
+        beforeEach(function() {
+            spyOn(cdvutil, 'listPlatforms').andCallFake(function() {
+                return exampleOut;
+            }); 
+        });        
+
+        it('should be defined', function() {
+            expect(project.listPlatforms).toBeDefined();    
+        });
+
+        it('should pass the results of the cordova-lib utility', function () {
+            var ret = project.listPlatforms();
+            expect(ret).toEqual(exampleOut);
+        });
+
+        describe('checkPlatform', function () {
+            it('should be defined', function() {
+                expect(project.checkPlatform).toBeDefined();
+            });
+            it('should return true if the platform is installed', function () {
+                var platform = exampleOut[0];
+                expect(project.checkPlatform(platform)).toBe(true);
+            });
+            it('should return false if the platform is not found', function () {
+                var platform = "IMadeThisUp";
+                expect(project.checkPlatform(platform)).toBe(false);
+            });
+        });
+    
+    });
+
+
     describe('readPackage', function () {
         var relativePath;
         
