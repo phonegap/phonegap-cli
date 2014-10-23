@@ -1,0 +1,21 @@
+Usage: $0 help <command>
+
+Description:
+
+  Display help string for the specified command
+
+  $ $0 help will display the full help text
+
+Examples:
+
+  $ $0 help <command>
+  $ $0 <command> help
+  $ $0 <command> --help
+
+these will all display the appropriate help string for <command>
+
+Also see:
+
+    $ $0 help
+
+for a full list of arguments to help
