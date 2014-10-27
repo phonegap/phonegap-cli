@@ -83,16 +83,23 @@ describe('phonegap.install(options, [callback])', function() {
             options = {
                 platforms: ['nophone']
             };
-            
+            callback = jasmine.createSpy('callback');
+            phonegap.install(options, callback);
         });
 
-        it('should error out gracefully on invalid platform argument', function() {
-            phonegap.install(options, function(e){});
-           
+        it('should error out gracefully, calling the callback with an error on invalid platform argument', function() {
             expect(phonegap.local.install).not.toThrow(); 
-            expect(phonegap.local.install).not.toHaveBeenCalled();
-
+            expect(callback).toHaveBeenCalledWith(jasmine.any(Error));
         });
+
+        it('should emit an error message on invalid platform argument', function() {
+            expect(phonegap.local.install).not.toThrow(); 
+            expect(process.stderr.write).toHaveBeenCalledWith(jasmine.any(String));
+        });
+
+
+
+
     });
 
     describe('with local environment', function() {
