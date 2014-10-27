@@ -6,9 +6,7 @@ var PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
     cordova = require('cordova-lib').cordova,
     phonegap,
-    options,
-    qyes,
-    qno;
+    options;
 /*
  * Specification: phonegap.install(options, [callback])
  */
@@ -19,16 +17,7 @@ describe('phonegap.install(options, [callback])', function() {
         options = {
             platforms: ['android']
         };
-        qyes = {
-            then : function(success, fail) {
-                success();
-            }
-        }
-        qno = {
-            then : function(success, fail) {
-                fail();
-            }
-        }
+        
         spyOn(process.stderr, 'write');
         spyOn(phonegap.local, 'install').andReturn(phonegap);
         spyOn(phonegap.remote, 'install').andReturn(phonegap);
@@ -87,6 +76,17 @@ describe('phonegap.install(options, [callback])', function() {
         expect(phonegap.install(options)).toEqual(phonegap);
     });
 
+
+
+    describe('with local environment', function() {
+        beforeEach(function(){
+
+        });
+
+        it('should error out gracefully on invalid platform argument', function() {
+        
+        });
+    });
 
     describe('with local environment', function() {
         it('should try to install the app locally', function() {
