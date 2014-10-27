@@ -78,13 +78,20 @@ describe('phonegap.install(options, [callback])', function() {
 
 
 
-    describe('with local environment', function() {
+    describe('with invalid options', function() {
         beforeEach(function(){
-
+            options = {
+                platforms: ['nophone']
+            };
+            
         });
 
         it('should error out gracefully on invalid platform argument', function() {
-        
+            phonegap.install(options, function(e){});
+           
+            expect(phonegap.local.install).not.toThrow(); 
+            expect(phonegap.local.install).not.toHaveBeenCalled();
+
         });
     });
 
