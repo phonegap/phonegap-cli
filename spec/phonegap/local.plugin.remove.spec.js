@@ -32,7 +32,7 @@ describe('phonegap.local.plugin.remove(options, [callback])', function() {
 
     it('should require options.id', function() {
         expect(function() {
-            options.path = undefined;
+            options.id = undefined;
             phonegap.local.plugin.remove(options, callback);
         }).toThrow();
     });
