@@ -96,12 +96,7 @@ describe('platform', function() {
             platforms.push('notaplatform');
             result = platform.supports(platforms);
 
-            expect(result).toEqual(platforms.slice(0,2));
-        });
-
-        it('', function() {
-
-
+            expect(result).toEqual(platforms.slice(0,3));
         });
     });
 });
