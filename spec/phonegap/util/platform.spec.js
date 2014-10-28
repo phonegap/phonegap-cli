@@ -80,7 +80,7 @@ describe('platform', function() {
 
     describe('supports', function() {
         beforeEach(function() {
-            platforms = [ 'Android', 'iOS' , 'BlackBerry' ] 
+            platforms = [ 'android', 'ios' , 'blackberry10' ] 
         });
 
 
