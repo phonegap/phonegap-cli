@@ -83,6 +83,7 @@ describe('platform', function() {
             platforms = [ 'Android', 'iOS' , 'BlackBerry' ] 
         });
 
+
         it('should return the same array when called with valid platforms', function () {
             var result = platform.supports(platforms);
             
@@ -90,12 +91,20 @@ describe('platform', function() {
             expect(result).toEqual(platforms);
         });
 
+
+        it('should return an empty array when called with invalid platforms', function () {
+            var result = platform.supports(['none','are','platforms']);
+            
+            expect(result.length).toEqual(0)
+            expect(result).toEqual([]);
+        });
+
+
         it('should return only the valid platforms when called with an invalid platform', function () {
             var result;
             
             platforms.push('notaplatform');
             result = platform.supports(platforms);
-
             expect(result).toEqual(platforms.slice(0,3));
         });
     });
