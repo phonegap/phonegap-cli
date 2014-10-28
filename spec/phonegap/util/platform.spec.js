@@ -77,4 +77,31 @@ describe('platform', function() {
             });
         });
     });
+
+    describe('supports', function() {
+        beforeEach(function() {
+            platforms = [ 'Android', 'iOS' , 'BlackBerry' ] 
+        });
+
+        it('should return the same array when called with valid platforms', function () {
+            var result = platform.supports(platforms);
+            
+            expect(result.length).toEqual(platforms.length)
+            expect(result).toEqual(platforms);
+        });
+
+        it('should return only the valid platforms when called with an invalid platform', function () {
+            var result;
+            
+            platforms.push('notaplatform');
+            result = platform.supports(platforms);
+
+            expect(result).toEqual(platforms.slice(0,2));
+        });
+
+        it('', function() {
+
+
+        });
+    });
 });
