@@ -28,12 +28,12 @@ describe('phonegap help build', function() {
         });
     });
 
-    describe('$ phonegap build', function() {
-        it('should output usage info', function() {
-            cli.argv(argv.concat(['build']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ build <platform>/i);
-        });
-    });
+    //describe('$ phonegap build', function() {
+    //    it('should output usage info', function() {
+    //        cli.argv(argv.concat(['build']));
+    //        expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ build <platform>/i);
+    //    });
+    //});
 
     describe('$ phonegap help build', function() {
         it('should output usage info', function() {
@@ -68,60 +68,60 @@ describe('phonegap help build', function() {
  * Specification: $ phonegap build <platform>
  */
 
-describe('phonegap build <platform>', function() {
-    beforeEach(function() {
-        cli = new CLI();
-        argv = ['node', '/usr/local/bin/phonegap'];
-        spyOn(phonegap, 'build');
-        spyOn(process.stdout, 'write');
-        spyOn(process.stderr, 'write');
-        stdout = process.stdout.write;
-    });
+//describe('phonegap build <platform>', function() {
+//    beforeEach(function() {
+//        cli = new CLI();
+//        argv = ['node', '/usr/local/bin/phonegap'];
+//        spyOn(phonegap, 'build');
+//        spyOn(process.stdout, 'write');
+//        spyOn(process.stderr, 'write');
+//        stdout = process.stdout.write;
+//    });
 
-    describe('$ phonegap build android', function() {
-        it('should try to build the project', function() {
-            cli.argv(argv.concat(['build', 'android']));
-            expect(phonegap.build).toHaveBeenCalledWith(
-                { platforms: ['android'] },
-                jasmine.any(Function)
-            );
-        });
+//    describe('$ phonegap build android', function() {
+//        it('should try to build the project', function() {
+//            cli.argv(argv.concat(['build', 'android']));
+//            expect(phonegap.build).toHaveBeenCalledWith(
+//                { platforms: ['android'] },
+//                jasmine.any(Function)
+//            );
+//        });
 
-        describe('successful build', function() {
-            beforeEach(function() {
-                phonegap.build.andCallFake(function(options, callback) {
-                    callback(null, {});
-                });
-            });
+//        describe('successful build', function() {
+//            beforeEach(function() {
+//                phonegap.build.andCallFake(function(options, callback) {
+//                    callback(null, {});
+//                });
+//            });
 
-            it('should trigger callback without an error', function(done) {
-                cli.argv(argv.concat(['build', 'android']), function(e, data) {
-                    expect(e).toBeNull();
-                    done();
-                });
-            });
+//            it('should trigger callback without an error', function(done) {
+//                cli.argv(argv.concat(['build', 'android']), function(e, data) {
+//                    expect(e).toBeNull();
+//                    done();
+//                });
+//            });
 
-            it('should trigger callback with data', function(done) {
-                cli.argv(argv.concat(['build', 'android']), function(e, data) {
-                    expect(data).toEqual(jasmine.any(Object));
-                    done();
-                });
-            });
-        });
+//            it('should trigger callback with data', function(done) {
+//                cli.argv(argv.concat(['build', 'android']), function(e, data) {
+//                    expect(data).toEqual(jasmine.any(Object));
+//                    done();
+//                });
+//            });
+//        });
 
-        describe('failed build', function() {
-            beforeEach(function() {
-                phonegap.build.andCallFake(function(options, callback) {
-                    callback(new Error('Ganon stole the binary!'));
-                });
-            });
+//        describe('failed build', function() {
+//            beforeEach(function() {
+//                phonegap.build.andCallFake(function(options, callback) {
+//                    callback(new Error('Ganon stole the binary!'));
+//                });
+//            });
 
-            it('should trigger callback with an error', function(done) {
-                cli.argv(argv.concat(['build', 'android']), function(e, data) {
-                    expect(e).toEqual(jasmine.any(Error));
-                    done();
-                });
-            });
-        });
-    });
-});
+//            it('should trigger callback with an error', function(done) {
+//                cli.argv(argv.concat(['build', 'android']), function(e, data) {
+//                    expect(e).toEqual(jasmine.any(Error));
+//                    done();
+//                });
+//            });
+//        });
+//    });
+//});
