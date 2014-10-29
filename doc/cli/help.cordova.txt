@@ -1,0 +1,14 @@
+Usage: $0 cordova [commands [options]]
+
+Description:
+
+  Execute any Cordova CLI command.
+
+  The command is passed directly to the Cordova CLI.
+
+Examples:
+
+  $ $0 cordova info
+  $ $0 cordova create path/to/my-app
+  $ $0 cordova platform add android
+  $ $0 cordova run android --target=FOO

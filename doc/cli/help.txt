@@ -16,6 +16,7 @@ Commands:
   platform [command]   update a platform version
   plugin [command]     add, remove, and list plugins
   help [command]       output usage information
+  cordova              force execution of any cordova command
   version              output version number
 
 Options:
