@@ -14,10 +14,6 @@ describe('phonegap', function() {
         expect(phonegap.app).toEqual(jasmine.any(Function));
     });
 
-    it('should define phonegap.build', function() {
-        expect(phonegap.build).toEqual(jasmine.any(Function));
-    });
-
     it('should define phonegap.create', function() {
         expect(phonegap.create).toEqual(jasmine.any(Function));
     });
