@@ -82,7 +82,10 @@ describe('phonegap create <path>', function() {
             expect(phonegap.create).toHaveBeenCalledWith({
                 path: './my-app',
                 id: undefined,
-                name: undefined
+                name: undefined,
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -94,7 +97,10 @@ describe('phonegap create <path>', function() {
             expect(phonegap.create).toHaveBeenCalledWith({
                 path: './my-app',
                 id: 'com.example.app',
-                name: undefined
+                name: undefined,
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -106,7 +112,39 @@ describe('phonegap create <path>', function() {
             expect(phonegap.create).toHaveBeenCalledWith({
                 path: './my-app',
                 id: 'com.example.app',
-                name: 'My App'
+                name: 'My App',
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app com.example.app "My App" "{ \\"lib\\": { \\"www\\": { \\"id\\": \\"com.example.app\\", \\"version\\": \\"1.0.0\\", \\"uri\\": \\"http://example.com/app.tar.gz\\" } } }"', function() {
+        it('should try to create the project', function() {
+            cli.argv(argv.concat([
+                'create',
+                './my-app',
+                'com.example.app',
+                'My App',
+                '{ "lib": { "www": { "id": "com.example.app", "version": "1.0.0", "uri": "http://example.com/app.tar.gz" } } }'
+            ]));
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: 'com.example.app',
+                name: 'My App',
+                config: {
+                    lib: {
+                        www: {
+                            id: 'com.example.app',
+                            version: '1.0.0',
+                            uri: 'http://example.com/app.tar.gz'
+                        }
+                    }
+                },
+                'copy-from': undefined,
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -118,7 +156,10 @@ describe('phonegap create <path>', function() {
             expect(phonegap.create).toHaveBeenCalledWith({
                 path: './my-app',
                 id: 'com.example.app',
-                name: undefined
+                name: undefined,
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -130,7 +171,10 @@ describe('phonegap create <path>', function() {
             expect(phonegap.create).toHaveBeenCalledWith({
                 path: './my-app',
                 id: 'com.example.app',
-                name: undefined
+                name: undefined,
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -142,7 +186,10 @@ describe('phonegap create <path>', function() {
             expect(phonegap.create).toHaveBeenCalledWith({
                 path: './my-app',
                 id: undefined,
-                name: "My App"
+                name: 'My App',
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -154,7 +201,10 @@ describe('phonegap create <path>', function() {
             expect(phonegap.create).toHaveBeenCalledWith({
                 path: './my-app',
                 id: undefined,
-                name: "My App"
+                name: 'My App',
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -170,7 +220,10 @@ describe('phonegap create <path>', function() {
             expect(phonegap.create).toHaveBeenCalledWith({
                 path: './my-app',
                 id: 'com.example.app',
-                name: 'My App'
+                name: 'My App',
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -186,7 +239,64 @@ describe('phonegap create <path>', function() {
             expect(phonegap.create).toHaveBeenCalledWith({
                 path: './my-app',
                 id: 'com.example.app',
-                name: 'My App'
+                name: 'My App',
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app --copy-from http://example.com/app.tar.gz', function() {
+        it('should try to create the project', function() {
+            cli.argv(argv.concat([
+                'create', './my-app',
+                '--copy-from', 'http://example.com/app.tar.gz'
+            ]));
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: undefined,
+                name: undefined,
+                config: {},
+                'copy-from': 'http://example.com/app.tar.gz',
+                'link-to': undefined
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app -src http://example.com/app.tar.gz', function() {
+        it('should try to create the project', function() {
+            cli.argv(argv.concat([
+                'create', './my-app',
+                '-src', 'http://example.com/app.tar.gz'
+            ]));
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: undefined,
+                name: undefined,
+                config: {},
+                'copy-from': 'http://example.com/app.tar.gz',
+                'link-to': undefined
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app --link-to path/to/an-app', function() {
+        it('should try to create the project', function() {
+            cli.argv(argv.concat([
+                'create', './my-app',
+                '--link-to', 'path/to/an-app'
+            ]));
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: undefined,
+                name: undefined,
+                config: {},
+                'copy-from': undefined,
+                'link-to': 'path/to/an-app'
             },
             jasmine.any(Function));
         });
