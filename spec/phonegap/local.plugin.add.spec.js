@@ -4,7 +4,7 @@
 
 var PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
-    cordova = require('cordova-lib').cordova,
+    cordova = require('../../lib/cordova').cordova,
     phonegap,
     options;
 
