@@ -3,14 +3,14 @@
  */
 
 var project = require('../../../lib/phonegap/util/project'),
+    cdvutil = require('../../../lib/cordova').util,
     events = require('events'),
     chdir = require('chdir'),
     path = require('path'),
     fs = require('fs'),
     currentPath,
     projectPath,
-    delegate,
-    cdvutil = require('../../../node_modules/cordova-lib/src/cordova/util')
+    delegate;
 
 /*!
  * Specification: Project Operations

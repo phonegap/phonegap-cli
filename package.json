@@ -30,7 +30,6 @@
         "colors": "0.6.0-1",
         "connect-phonegap": "0.13.0",
         "cordova": "3.6.3-0.2.13",
-        "cordova-lib": "0.21.13",
         "minimist": "0.1.0",
         "phonegap-build": "0.8.4",
         "pluralize": "0.0.4",
