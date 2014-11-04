@@ -18,14 +18,6 @@ describe('phonegap', function() {
         expect(phonegap.create).toEqual(jasmine.any(Function));
     });
 
-    it('should define phonegap.local', function() {
-        expect(phonegap.local).toEqual(jasmine.any(Object));
-    });
-
-    it('should define phonegap.local.build', function() {
-        expect(phonegap.local.build).toEqual(jasmine.any(Function));
-    });
-
     it('should define phonegap.remote', function() {
         expect(phonegap.remote).toEqual(jasmine.any(Object));
     });

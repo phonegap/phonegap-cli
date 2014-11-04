@@ -71,15 +71,13 @@ describe('phonegap local <command>', function() {
     beforeEach(function() {
         cli = new CLI();
         argv = ['node', '/usr/local/bin/phonegap'];
+        spyOn(cli, 'cordova');
     });
 
-    describe('unknown command', function() {
-        it('should output the unknown command', function() {
-            spyOn(cli, 'unknown');
-            cli.argv(argv.concat(['local', 'noop']));
-            expect(cli.unknown.mostRecentCall.args[0]).toMatch({
-                _: ['local', 'noop']
-            });
+    it('should redirect to cordova', function() {
+        cli.argv(argv.concat(['local', 'build', 'ios', 'android', '--verbose']));
+        expect(cli.cordova.mostRecentCall.args[0]).toMatch({
+            cmd: ['cordova', 'build', 'ios', 'android', '--verbose']
         });
     });
 });
