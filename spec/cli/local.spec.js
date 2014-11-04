@@ -72,12 +72,28 @@ describe('phonegap local <command>', function() {
         cli = new CLI();
         argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(cli, 'cordova');
+        spyOn(process.stdout, 'write');
+        stdout = process.stdout.write;
     });
 
     it('should redirect to cordova', function() {
         cli.argv(argv.concat(['local', 'build', 'ios', 'android', '--verbose']));
         expect(cli.cordova.mostRecentCall.args[0]).toMatch({
             cmd: ['cordova', 'build', 'ios', 'android', '--verbose']
+        });
+    });
+
+    it('should emit a deprecation message', function() {
+        cli.argv(argv.concat(['local', 'build', 'ios', 'android', '--verbose']));
+        expect(stdout.calls[0].args[0]).toMatch('DEPRECATED');
+    });
+
+    describe('install command', function() {
+        it('should delegate to `phonegap run`', function() {
+            cli.argv(argv.concat(['local', 'run', 'ios']));
+            expect(cli.cordova.mostRecentCall.args[0]).toMatch({
+                cmd: ['cordova', 'run', 'ios']
+            });
         });
     });
 });
