@@ -1,6 +1,14 @@
 Usage: $0 plugin list
 Usage: $0 local plugin list
 
+DEPRECATED:
+
+  This command has been deprecated and will soon be removed entirely.
+
+  You should now use the `$0 plugin list` command.
+
+  See `$0 plugin list help` to learn more about the command.
+
 Description:
 
   List currently installed plugins for your application.

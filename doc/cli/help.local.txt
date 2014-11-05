@@ -1,5 +1,13 @@
 Usage: $0 local [command]
 
+DEPRECATED:
+
+  This command has been deprecated and will soon be removed entirely.
+
+  You should now use the `$0 local [command]` command.
+
+  See `$0 local help` to learn more about the command.
+
 Description:
 
   Executes the command on the local system.

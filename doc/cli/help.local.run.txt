@@ -1,5 +1,13 @@
 Usage: $0 local run <platform>
 
+DEPRECATED:
+
+  This command has been deprecated and will soon be removed entirely.
+
+  You should now use the `$0 run <platform>` command.
+
+  See `$0 run help` to learn more about the command.
+
 Description:
 
   Builds and installs your application for a specific platform.

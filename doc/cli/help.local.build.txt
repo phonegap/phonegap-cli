@@ -1,5 +1,13 @@
 Usage: $0 local build <platform>
 
+DEPRECATED:
+
+  This command has been deprecated and will soon be removed entirely.
+
+  You should now use the `$0 build <platform>` command.
+
+  See `$0 build help` to learn more about the command.
+
 Description:
 
   Builds your application for a specific platform.

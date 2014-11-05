@@ -1,6 +1,14 @@
 Usage: $0 plugin <command>
 Usage: $0 local plugin <command>
 
+DEPRECATED:
+
+  This command has been deprecated and will soon be removed entirely.
+
+  You should now use the `$0 plugin <command>` command.
+
+  See `$0 plugin help` to learn more about the command.
+
 Description:
 
   Add, remove, and list plugins for your application.

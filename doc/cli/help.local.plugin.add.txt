@@ -1,6 +1,14 @@
 Usage: $0 plugin add <path>
 Usage: $0 local plugin add <path>
 
+DEPRECATED:
+
+  This command has been deprecated and will soon be removed entirely.
+
+  You should now use the `$0 plugin add <path>` command.
+
+  See `$0 plugin add help` to learn more about the command.
+
 Description:
 
   Add a plugin to your application.
