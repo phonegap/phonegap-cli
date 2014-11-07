@@ -1,0 +1,11 @@
+Usage: $0 plugin list [options]
+Usage: $0 plugin ls   [options]
+
+Description:
+
+  List the plugins that are installed in the application.
+
+Examples:
+
+  $ $0 plugin list
+  $ $0 plugin ls

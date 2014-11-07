@@ -1,0 +1,27 @@
+Usage: $0 plugin  <command> [options]
+Usage: $0 plugins <command> [options]
+
+Description:
+
+  Manage the plugins for your application.
+
+Commands:
+
+  add <plugin>         add a plugin
+  remove <id>          remove a plugin
+  search <keyword>     search plugin registry
+  list                 list installed plugins
+
+Examples:
+
+  $ $0 plugin search org.apache.cordova.geolocation
+  $ $0 plugin add org.apache.cordova.geolocation
+  $ $0 plugin list
+  $ $0 plugin remove org.apache.cordova.geolocation
+
+Also See:
+
+  $ $0 help plugin add
+  $ $0 help plugin remove
+  $ $0 help plugin search
+  $ $0 help plugin list

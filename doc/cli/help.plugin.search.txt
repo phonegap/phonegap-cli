@@ -1,0 +1,10 @@
+Usage: $0 plugin search <keywords> [options]
+
+Description:
+
+  Search the plugin registry for plugins that match <keywords>.
+
+Examples:
+
+  $ $0 plugin search geolocation
+  $ $0 plugin search apache geolocation

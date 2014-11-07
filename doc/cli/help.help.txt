@@ -8,14 +8,7 @@ Description:
 
 Examples:
 
-  $ $0 help <command>
-  $ $0 <command> help
-  $ $0 <command> --help
-
-these will all display the appropriate help string for <command>
-
-Also see:
-
-    $ $0 help
-
-for a full list of arguments to help
+  $ $0 help create
+  $ $0 create help
+  $ $0 create --help
+  $ $0 create -h

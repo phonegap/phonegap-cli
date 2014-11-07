@@ -1,0 +1,13 @@
+Usage: $0 platform list
+Usage: $0 platform ls
+
+Description:
+
+  List the currently installed and available platforms. The available platforms
+  are based on your operating systems support for the platform. This means
+  you will not see iOS on a Windows machine or wp8 on a OS X machine.
+
+Examples:
+
+  $ $0 platform ls
+  $ $0 platform list

@@ -1,0 +1,12 @@
+Usage: $0 info
+
+Description:
+
+  Prints out a report that summarizes your system and application setup.
+
+  The file `info.txt` is created in your project root. Feel free to delete
+  this file.
+
+Examples:
+
+  $ $0 info

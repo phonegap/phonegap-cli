@@ -1,0 +1,24 @@
+Usage: $0 compile <platforms> [options] [-- [platform options]]
+
+Description:
+
+  Compiles the platform project into a binary application.
+
+  Before running the `compile` command, you will want to update the web
+  assets in the platform project. This is accomplished by using the `prepare`
+  command.
+
+  The convenience command `run` can be used instead of both prepare and compile.
+
+  Multiple platforms can be compiled at once by listing each platform name.
+
+Examples:
+
+  $ $0 compile android
+  $ $0 compile android ios
+  $ $0 prepare android && $0 compile android
+
+Also see:
+
+  $0 help prepare
+  $0 help run

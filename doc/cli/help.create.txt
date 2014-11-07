@@ -1,4 +1,4 @@
-Usage: $0 create [options] <path> [id [name]]
+Usage: $0 create [options] <path> [id [name [config]]]
 
 Description:
 
@@ -8,13 +8,19 @@ Description:
   These values are set in the app manifest (www/config.xml) and are used when
   creating a native project (platforms/<platform>/).
 
+  The [config] option allows you to pass a JSON string, which will be injected
+  into `<path>/.cordova/config.json`.
+
 Options:
 
-  --name, -n <name>    application name (default: "Hello World")
-  --id, -i <package>   package name (default: "com.phonegap.hello-world")
+  --name, -n <name>         application name (default: "Hello World")
+  --id, -i <package>        package name (default: "com.phonegap.hello-world")
+  --copy-from, -src <path>  create project using a copy of an existing project
+  --link-to <path>          symlink/shortcut to the www assets without copying
 
 Examples:
 
   $ $0 create path/to/my-app
   $ $0 create path/to/my-app "com.example.app" "My App" 
   $ $0 create path/to/my-app --id "com.example.app" --name "My App" 
+  $ $0 create path/to/my-app --copy-from ../my-other-app

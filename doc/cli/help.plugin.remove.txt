@@ -1,0 +1,16 @@
+Usage: $0 plugin remove <id...> [options]
+Usage: $0 plugin rm     <id...> [options]
+
+Description:
+
+  Remove a plugin from your application.
+
+  <id> is the value of the "id" attribute in the plugin manifest.
+  <id> is also the directory name under /plugins/.
+
+  Multiple plugins can be removed by specifying multiple <id>'s.
+
+Examples:
+
+  $ $0 plugin remove org.apache.cordova.geolocation
+  $ $0 plugin remove org.apache.cordova.geolocation org.apache.cordova.device

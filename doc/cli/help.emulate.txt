@@ -1,0 +1,28 @@
+Usage: $0 emulate <platforms> [options] [-- [platform options]]
+
+Description:
+
+  Installs your applicaiton onto the emulator of one or more
+  specified platforms.
+
+  This is an alias command for: $0 run --emulator
+
+Options:
+
+  --target <id>        install to a specific target
+  --debug              build in debug mode (default)
+  --release            build in release mode
+  --nobuild            skips the build and only installs the app
+
+Experimental Options:
+
+  --browserify         plugin javascript is loaded into cordova.js
+
+Examples:
+
+  $ $0 emulate android
+  $ $0 emulate android ios
+
+Also See:
+
+  $0 help run

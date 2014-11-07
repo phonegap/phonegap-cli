@@ -1,0 +1,13 @@
+Usage: $0 platform check
+
+Description:
+
+  Lists the platforms that can be updated by the platform update command.
+
+Examples:
+
+  $ $0 platform check
+
+Also See:
+
+  $ $0 help platform update

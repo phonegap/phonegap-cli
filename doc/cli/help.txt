@@ -6,18 +6,32 @@ Description:
 
 Commands:
 
+  help [command]       output usage information
   create <path>        create a phonegap project
-  serve                serve a phonegap project
   build <platform>     build the project for a specific platform
   install <platform>   install the project on for a specific platform
   run <platform>       build and install the project for a specific platform
-  local [command]      development on local system
-  remote [command]     development in cloud with phonegap/build
   platform [command]   update a platform version
   plugin [command]     add, remove, and list plugins
-  help [command]       output usage information
-  cordova              execute of any cordova command
+  info                 display information about the project
+  serve                serve a phonegap project
   version              output version number
+
+Additional Commands:
+
+  local [command]      development on local system
+  remote [command]     development in cloud with phonegap/build
+  prepare <platform>   copies www/ into platform project before compiling
+  compile <platform>   compiles platform project without preparing it
+  emulate <platform>   runs the project with the flag --emulator
+  cordova              execute of any cordova command
+
+Experimental Commands:
+
+  Requires the --experimental flag to use the command
+
+  save                 save installed platforms and plugins
+  restore              restores saved platforms and plugins
 
 Options:
 
@@ -25,19 +39,9 @@ Options:
   -v, --version        output version number
   -h, --help           output usage information
 
-Platforms:
-
-  keyword            | local environment   | remote environment
-  -------------------|---------------------|-------------------
-  android            | Yes                 | Yes
-  blackberry         | Yes                 | No
-  firefoxos          | Yes                 | No
-  ios                | Yes                 | Yes
-  wp8                | Yes                 | Yes
-
 Examples:
 
   $ $0 help create
-  $ $0 help remote build
   $ $0 create path/to/my-app
-  $ $0 remote build android
+  $ cd my-app/
+  $ $0 run ios

@@ -1,19 +1,29 @@
-Usage: $0 build <platform>
+Usage: $0 build <platforms> [options] [-- [platform options]]
 
 Description:
 
-  Builds your application for a specific platform.
+  Builds your application for one or more specified platforms.
 
-  Automatically detects platform SDK support and uses the correct environment.
+  The build task will first prepare and then compile your application.
+  If you want more control, you can individually prepare and compile
+  your application with the commands.
 
-  See each environment for available [options].
+Options:
+
+  --debug                   build in debug mode (default)
+  --release                 build in release mode
+
+Experimental Options:
+
+  --browserify              plugin javascript is loaded into cordova.js
 
 Examples:
 
   $ $0 build android
-  $ $0 build ios
+  $ $0 build android ios
+  $ $0 build ios --release
 
-Also see:
+Also See:
 
-  $0 local build <platform>
-  $0 remote build <platform>
+  $0 help prepare
+  $0 help compile

@@ -1,0 +1,27 @@
+Usage: $0 save <command> [options] --experimental
+
+Description:
+
+  Saves the project metadata to the config.xml
+
+  This is an experimental command, so you must include the --experimental
+  option.
+
+Commands:
+
+  platforms                 save the installed platforms to config.xml
+  plugins                   save the installed plugins to config.xml
+
+Options:
+
+  --shrinkwrap              save installed plugin versions to the config.xml
+
+Examples:
+
+  $ $0 save platforms --experimental
+  $ $0 save plugins --experimental
+  $ $0 save plugins --experimetnal --shrinkwrap
+
+Also See:
+
+  $ $0 help restore

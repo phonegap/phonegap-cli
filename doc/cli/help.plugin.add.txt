@@ -1,0 +1,27 @@
+Usage: $0 plugin add <plugins> [options]
+
+Description:
+
+  Add a plugin to your application.
+
+  <plugins> can be a plugin id, local directory path, or git repository URL.
+  The plugin id is searched on the plugin registry: http://plugins.cordova.io
+
+  Multiple plugins can be installed at the same time.
+
+Options:
+
+  --searchpath <paths>   searches the directory path and subdirectories for
+                         the <plugins> before searching the registry. Multiple
+                         paths can be specified by using --searchpath multiple
+                         times or seperating the paths with your system's
+                         PATH delimiter (":" on OS X / Linux, ";" on Windows)
+  --noregistry           do not search the registry for <plugins>
+
+Examples:
+
+  $ $0 plugin add /local/path/to/plugin/
+  $ $0 plugin add http://example.com/path/to/plugin.git
+  $ $0 plugin add org.apache.cordova.geolocation
+  $ $0 plugin add org.apache.cordova.geolocation --searchpath ../local/plugins
+  $ $0 plugin add org.apache.cordova.geolocation org.apache.cordova.device

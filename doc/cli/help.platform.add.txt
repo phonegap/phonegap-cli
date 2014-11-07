@@ -1,0 +1,26 @@
+Usage: $0 platform add <platforms> [options]
+
+Description:
+
+  Adds one or more specified platforms to your project.
+
+  The <platforms> can be a platform name or directory path. Platform names
+  are retrived from the npm registry.
+
+  Platform versions can be specified as: ios@3.7.0
+
+  Platform names are displayed with the list command: $0 platform list
+
+Options:
+
+  --usegit             use git instead of the npm registry
+
+Examples:
+
+  $ $0 platform add android
+  $ $0 platform add android@3.5.1
+  $ $0 platform add path/to/cordova-android
+
+Also See:
+
+  $ $0 help platform list

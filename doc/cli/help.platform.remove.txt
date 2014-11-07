@@ -1,0 +1,18 @@
+Usage: $0 platform remove <platforms> [options]
+Usage: $0 platform rm     <platforms> [options]
+
+Description:
+
+  Removes one or more specified platforms from your project.
+
+  The <platforms> must be a platform name provided by the list command.
+
+Examples:
+
+  $ $0 platform rm ios
+  $ $0 platform remove ios
+  $ $0 platform remove ios android
+
+Also See:
+
+  $ $0 help platform list

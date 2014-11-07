@@ -1,13 +1,34 @@
-Usage: $0 platform [command]
+Usage: $0 platform  [command] [options]
+Usage: $0 platforms [command] [options]
 
 Description:
 
-  Update a platform to the latest version.
+  Manage the platforms available to your application.
+
+  The add command can accept a platform name or file path.
+  When the name is used, the platform is retrieved from the npm registry.
 
 Commands:
 
-  update <platform>    update platform to the latest version
+  add <platforms>      add one or more specified platforms
+  remove <platforms>   remove the specified platforms
+  update <platform>    update a platform to the version bundled with the CLI
+  check                list platforms that can be updated
+  list                 list all installed and available platforms
+
+Options:
+
+  --usegit             use git instead of the npm registry
+
+Aliases:
+
+  rm <platforms>       alias for remove command
+  ls                   alias for list command
 
 Examples:
 
+  $ $0 platform add android
+  $ $0 platform add android@3.5.1
+  $ $0 platform add path/to/cordova-android
   $ $0 platform update android
+  $ $0 platform list

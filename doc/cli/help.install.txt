@@ -10,18 +10,16 @@ DEPRECATED:
 
 Description:
 
-  Installs the application on a specific platform.
+  Installs the application for a specific platform.
 
-  Automatically detects platform SDK support and uses the correct environment.
+  Default action installs to a connected device, otherwise uses an emulator.
 
-  See each environment for available [options].
+Options:
+
+  -d, --device         only install to a device
+  -e, --emulator       only install to an emulator
 
 Examples:
 
-  $ $0 install android
-  $ $0 install --device android
-
-Also see:
-
-  $0 local install <platform>
-  $0 remote install <platform>
+  $ $0 local install android
+  $ $0 local install --device android

@@ -1,0 +1,22 @@
+Usage: $0 restore <command> [options] --experimental
+
+Description:
+
+  Restores the project state based on the config.xml
+
+  This is an experimental command, so you must include the --experimental
+  option.
+
+Commands:
+
+  platforms                 install platforms listed in config.xml
+  plugins                   install plugins listed in config.xml
+
+Examples:
+
+  $ $0 restore platforms --experimental
+  $ $0 restore plugins --experimental
+
+Also See:
+
+  $ $0 help save

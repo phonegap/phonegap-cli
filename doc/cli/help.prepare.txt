@@ -1,0 +1,29 @@
+Usage: $0 prepare <platforms> [options]
+
+Description:
+
+  Prepares the platform project using the web assets from `www/`.
+
+  Once a platform project has been prepared, it is ready to be compiled into
+  into a binary application using the `compile` command.
+
+  The convenience command `run` can be used to prepare and compile
+  your application. Most users will want to use `run` instead of `prepare`
+  and `compile`.
+
+  Multiple platforms can be prepared at once by listing each platform name.
+
+Experimental Options:
+
+  --browserify              plugin javascript is loaded into cordova.js
+
+Examples:
+
+  $ $0 prepare android
+  $ $0 prepare android ios
+  $ $0 prepare android && $0 compile android
+
+Also see:
+
+  $0 help compile
+  $0 help run
