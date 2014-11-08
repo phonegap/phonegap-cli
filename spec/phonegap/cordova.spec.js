@@ -28,6 +28,10 @@ describe('phonegap.cordova(options, [callback])', function() {
             stderr: new events.EventEmitter()
         };
         spyOn(shell, 'exec').andReturn(processSpy);
+        // disable adding phonegap.js
+        spyOn(cordova.util, 'isCordova').andReturn('/some/path');
+        spyOn(fs, 'existsSync').andReturn(false);
+        spyOn(shell, 'cp');
     });
 
     it('should require options', function() {
@@ -245,6 +249,35 @@ describe('phonegap.cordova(options, [callback])', function() {
                     done();
                 });
             });
+        });
+    });
+
+    describe('adding phonegap.js backwards compatibility', function() {
+        beforeEach(function() {
+            // enable injecting phonegap.js
+            fs.existsSync.andCallFake(function(filepath) {
+                // return true if checking cordova.js path
+                return (filepath.match('cordova.js'));
+            });
+        });
+
+        it('should add phonegap.js for ios', function() {
+            phonegap.cordova(options);
+            expect(shell.cp).toHaveBeenCalled();
+            expect(shell.cp.mostRecentCall.args[1]).toMatch(/ios.*cordova\.js/);
+            expect(shell.cp.mostRecentCall.args[2]).toMatch(/ios.*phonegap\.js/);
+        });
+
+        it('should add phonegap.js for ios and android', function() {
+            options.cmd = 'cordova build ios android';
+            cordova.util.listPlatforms.andReturn(['ios', 'android']);
+            phonegap.cordova(options);
+            expect(shell.cp).toHaveBeenCalled();
+            expect(shell.cp.calls.length).toEqual(2);
+            expect(shell.cp.calls[0].args[1]).toMatch(/ios.*cordova\.js/);
+            expect(shell.cp.calls[0].args[2]).toMatch(/ios.*phonegap\.js/);
+            expect(shell.cp.calls[1].args[1]).toMatch(/android.*cordova\.js/);
+            expect(shell.cp.calls[1].args[2]).toMatch(/android.*phonegap\.js/);
         });
     });
 });
