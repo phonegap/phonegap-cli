@@ -32,6 +32,8 @@ describe('phonegap.cordova(options, [callback])', function() {
         spyOn(cordova.util, 'isCordova').andReturn('/some/path');
         spyOn(fs, 'existsSync').andReturn(false);
         spyOn(shell, 'cp');
+        // disable phonegap.js deprecation warning
+        spyOn(shell, 'grep').andReturn('');
     });
 
     it('should require options', function() {
@@ -278,6 +280,41 @@ describe('phonegap.cordova(options, [callback])', function() {
             expect(shell.cp.calls[0].args[2]).toMatch(/ios.*phonegap\.js/);
             expect(shell.cp.calls[1].args[1]).toMatch(/android.*cordova\.js/);
             expect(shell.cp.calls[1].args[2]).toMatch(/android.*phonegap\.js/);
+        });
+    });
+
+    describe('adding phonegap.js deprecation warning', function() {
+        describe('when app does not reference phonegap.js', function() {
+            beforeEach(function() {
+                // no phonegap.js reference found
+                shell.grep.andReturn('');
+            });
+
+            it('should not emit a deprecation warning', function(done) {
+                phonegap.on('warn', function(message) {
+                    expect(false).toBe(true);
+                    done();
+                });
+                phonegap.cordova(options);
+                process.nextTick(function() {
+                    done(); // given time for warn event to be emitted
+                });
+            });
+        });
+
+        describe('when app references phonegap.js', function() {
+            beforeEach(function() {
+                // phonegap.js reference found
+                shell.grep.andReturn('<script src="phonegap.js"></script>');
+            });
+
+            it('should not emit a deprecation warning', function(done) {
+                phonegap.on('warn', function(message) {
+                    expect(message).toMatch(/DEPRECATION.*phonegap\.js/i);
+                    done();
+                });
+                phonegap.cordova(options);
+            });
         });
     });
 });
