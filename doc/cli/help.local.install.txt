@@ -16,10 +16,10 @@ Description:
 
 Options:
 
-  -d, --device         only install to a device
-  -e, --emulator       only install to an emulator
+  --device             only install to a device
+  --emulator, -e       only install to an emulator
 
 Examples:
 
   $ $0 local install android
-  $ $0 local install --device android
+  $ $0 local install android --device

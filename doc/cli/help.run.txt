@@ -9,7 +9,7 @@ Description:
 
 Options:
 
-  --device, -d         install to a device
+  --device             install to a device
   --emulator, -e       install to an emulator
   --target <id>        install to a specific target
   --debug              build in debug mode (default)

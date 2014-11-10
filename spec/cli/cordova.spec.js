@@ -55,4 +55,20 @@ describe('$ phonegap cordova', function() {
             );
         });
     });
+
+    describe('argument mapping', function() {
+        beforeEach(function() {
+            spyOn(phonegap, 'cordova');
+        });
+
+        it('should map -e to --emulator', function() {
+            cli.argv(argv.concat(['cordova', 'run', 'ios', '-e']));
+            expect(phonegap.cordova).toHaveBeenCalledWith(
+                {
+                    cmd: 'cordova run ios --emulator'
+                },
+                jasmine.any(Function)
+            );
+        });
+    });
 });
