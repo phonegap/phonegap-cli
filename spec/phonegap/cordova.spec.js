@@ -260,6 +260,8 @@ describe('phonegap.cordova(options, [callback])', function() {
 
     describe('adding phonegap.js backwards compatibility', function() {
         beforeEach(function() {
+            // phonegap.js reference found
+            shell.grep.andReturn('<script src="phonegap.js"></script>');
             // enable injecting phonegap.js
             fs.existsSync.andCallFake(function(filepath) {
                 // return true if checking cordova.js path
@@ -314,7 +316,7 @@ describe('phonegap.cordova(options, [callback])', function() {
 
             it('should not emit a deprecation warning', function(done) {
                 phonegap.on('warn', function(message) {
-                    expect(message).toMatch(/DEPRECATION.*phonegap\.js/i);
+                    expect(message).toMatch(/phonegap\.js/i);
                     done();
                 });
                 phonegap.cordova(options);
