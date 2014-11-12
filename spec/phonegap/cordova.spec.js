@@ -127,8 +127,8 @@ describe('phonegap.cordova(options, [callback])', function() {
         });
     });
 
-    describe('add platforms before a command', function() {
-        describe('with the type', function() {
+    describe('add platforms', function() {
+        describe('when the command is of the type:', function() {
             beforeEach(function() {
                 cordova.util.listPlatforms.andReturn([]);
             });
@@ -195,6 +195,28 @@ describe('phonegap.cordova(options, [callback])', function() {
 
             it('not cordova create <path>', function() {
                 options.cmd = 'cordova create my-app';
+                phonegap.cordova(options);
+                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add');
+            });
+        });
+
+        describe('when no platform is specified', function() {
+            beforeEach(function() {
+                options.cmd = 'cordova run';
+            });
+
+            it('should not add a platform', function() {
+                phonegap.cordova(options);
+                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add');
+            });
+
+            it('should ignore an option and not add a platform', function() {
+                options.cmd = 'cordova run --emulator';
+                phonegap.cordova(options);
+                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add');
+            });
+            it('should ignore options and not add a platform', function() {
+                options.cmd = 'cordova run --emulator --target="Sim"';
                 phonegap.cordova(options);
                 expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add');
             });
