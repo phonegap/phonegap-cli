@@ -1,8 +1,9 @@
-Usage: $0 run <platforms> [options] [-- [platform options]]
+Usage: $0 run [<platforms>] [options] [-- [platform options]]
 
 Description:
 
   Builds and installs your application for one or more specific platform.
+  When no platforms are specified, all installed platforms will be run.
 
   Run is an all-in-one command that will prepare, compile, and install your
   application to an emulator or device.

@@ -8,9 +8,9 @@ Commands:
 
   help [command]       output usage information
   create <path>        create a phonegap project
-  build <platform>     build the project for a specific platform
-  install <platform>   install the project on for a specific platform
-  run <platform>       build and install the project for a specific platform
+  build <platforms>    build the project for a specific platform
+  install <platforms>  install the project on for a specific platform
+  run <platforms>      build and install the project for a specific platform
   platform [command]   update a platform version
   plugin [command]     add, remove, and list plugins
   info                 display information about the project
@@ -21,9 +21,9 @@ Additional Commands:
 
   local [command]      development on local system
   remote [command]     development in cloud with phonegap/build
-  prepare <platform>   copies www/ into platform project before compiling
-  compile <platform>   compiles platform project without preparing it
-  emulate <platform>   runs the project with the flag --emulator
+  prepare <platforms>  copies www/ into platform project before compiling
+  compile <platforms>  compiles platform project without preparing it
+  emulate <platforms>  runs the project with the flag --emulator
   cordova              execute of any cordova command
 
 Experimental Commands:

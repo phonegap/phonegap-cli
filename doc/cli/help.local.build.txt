@@ -1,16 +1,18 @@
-Usage: $0 local build <platform>
+Usage: $0 local build [<platforms>] [options] [-- [platform options]]
 
 DEPRECATED:
 
   This command has been deprecated and will soon be removed entirely.
 
-  You should now use the `$0 build <platform>` command.
+  You should now use the `$0 build <platforms>` command.
 
   See `$0 build help` to learn more about the command.
 
 Description:
 
-  Builds your application for a specific platform.
+
+  Builds your application for one or more specific platforms. When no
+  platform is specified, then all installed platforms will be built.
 
   Build executes on the local system. This requires that
   the <platform> SDK environment is correctly installed.

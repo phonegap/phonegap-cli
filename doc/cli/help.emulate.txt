@@ -1,9 +1,10 @@
-Usage: $0 emulate <platforms> [options] [-- [platform options]]
+Usage: $0 emulate [<platforms>] [options] [-- [platform options]]
 
 Description:
 
-  Installs your applicaiton onto the emulator of one or more
-  specified platforms.
+  Installs your application onto the emulator of one or more
+  specified platforms. When no platforms are specified, all installed
+  platforms will be run on emulators.
 
   This is an alias command for: $0 run --emulator
 

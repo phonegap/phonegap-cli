@@ -1,16 +1,17 @@
-Usage: $0 local run <platform>
+Usage: $0 local run [<platforms>] [options] [-- [platform options]]
 
 DEPRECATED:
 
   This command has been deprecated and will soon be removed entirely.
 
-  You should now use the `$0 run <platform>` command.
+  You should now use the `$0 run <platforms>` command.
 
   See `$0 run help` to learn more about the command.
 
 Description:
 
-  Builds and installs your application for a specific platform.
+  Builds and installs your application for one or more specific platforms.
+  When no platform is specified, all installed platforms will be run.
 
   See the 'local build' and 'local install' commands for available [options].
 

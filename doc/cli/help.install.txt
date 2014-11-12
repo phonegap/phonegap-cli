@@ -1,4 +1,4 @@
-Usage: $0 install [options] <platform>
+Usage: $0 install [<platforms>] [options] [-- [platform options]]
 
 DEPRECATED:
 
@@ -10,7 +10,9 @@ DEPRECATED:
 
 Description:
 
-  Installs the application for a specific platform.
+  Installs the application for one or more specific platform. When no
+  platform is specified, all platforms will be installed to target
+  emulators or devices.
 
   Default action installs to a connected device, otherwise uses an emulator.
 

@@ -1,8 +1,10 @@
-Usage: $0 prepare <platforms> [options]
+Usage: $0 prepare [<platforms>] [options]
 
 Description:
 
-  Prepares the platform project using the web assets from `www/`.
+  Prepares the one or more specified platform projects using the
+  web assets from `www/`. When no platforms are specified, all installed
+  platforms will be prepared.
 
   Once a platform project has been prepared, it is ready to be compiled into
   into a binary application using the `compile` command.

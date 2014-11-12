@@ -1,8 +1,9 @@
-Usage: $0 compile <platforms> [options] [-- [platform options]]
+Usage: $0 compile [<platforms>] [options] [-- [platform options]]
 
 Description:
 
-  Compiles the platform project into a binary application.
+  Compiles the one or more specified platform projects into binary applications.
+  When no platform is specified, all installed platforms will be compiled.
 
   Before running the `compile` command, you will want to update the web
   assets in the platform project. This is accomplished by using the `prepare`

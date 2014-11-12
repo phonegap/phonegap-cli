@@ -1,8 +1,9 @@
-Usage: $0 build <platforms> [options] [-- [platform options]]
+Usage: $0 build [<platforms>] [options] [-- [platform options]]
 
 Description:
 
-  Builds your application for one or more specified platforms.
+  Builds your application for one or more specified platforms. When no
+  platforms are specified, all installed platforms will be built.
 
   The build task will first prepare and then compile your application.
   If you want more control, you can individually prepare and compile
