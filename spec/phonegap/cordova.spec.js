@@ -125,6 +125,20 @@ describe('phonegap.cordova(options, [callback])', function() {
                 });
             });
         });
+
+        describe('when not a valid cordova project', function() {
+            beforeEach(function() {
+                cordova.util.isCordova.andReturn(false);
+                shell.exec.andCallThrough();
+            });
+
+            it('should trigger the callback without an error', function(done) {
+                phonegap.cordova(options, function(e) {
+                    expect(e).toEqual(jasmine.any(Error));
+                    done();
+                });
+            });
+        });
     });
 
     describe('add platforms', function() {
