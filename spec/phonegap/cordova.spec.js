@@ -141,6 +141,15 @@ describe('phonegap.cordova(options, [callback])', function() {
         });
     });
 
+    describe('adding plugin paths', function() {
+        it('should not alter the plugin path', function() {
+            options.cmd = 'cordova plugin add http://path/to/cordova-plugin.git';
+            phonegap.cordova(options);
+            expect(shell.exec).toHaveBeenCalled();
+            expect(shell.exec.mostRecentCall.args[0]).toMatch(options.cmd);
+        });
+    });
+
     describe('add platforms', function() {
         describe('when the command is of the type:', function() {
             beforeEach(function() {
