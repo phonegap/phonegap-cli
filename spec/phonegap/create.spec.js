@@ -74,7 +74,7 @@ describe('phonegap.create(options, [callback])', function() {
         phonegap.create(options);
         expect(phonegap.cordova).toHaveBeenCalledWith(
             {
-                cmd: 'cordova create "$path" "$id" "$name" "{}"'
+                cmd: 'cordova create "$path" "$id" "$name"'
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
@@ -83,16 +83,33 @@ describe('phonegap.create(options, [callback])', function() {
         );
     });
 
-    it('should try to create a project with custom values', function() {
+    it('should try to create a project with a given name and id', function() {
         options.id = 'com.example.app';
         options.name = 'My App';
         phonegap.create(options);
         expect(phonegap.cordova).toHaveBeenCalledWith(
             {
-                cmd: 'cordova create "$path" "$id" "$name" "{}"'
+                cmd: 'cordova create "$path" "$id" "$name"'
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
+            },
+            jasmine.any(Function)
+        );
+    });
+
+    it('should try to create a project with a given config', function() {
+        options.id = 'com.example.app';
+        options.name = 'My App';
+        options.config = { some: 'value' };
+        phonegap.create(options);
+        expect(phonegap.cordova).toHaveBeenCalledWith(
+            {
+                cmd: 'cordova create "$path" "$id" "$name" "$config"'
+                        .replace('$path', options.path)
+                        .replace('$id', options.id)
+                        .replace('$name', options.name)
+                        .replace('$config', '{\\"some\\":\\"value\\"}')
             },
             jasmine.any(Function)
         );
@@ -162,6 +179,26 @@ describe('phonegap.create(options, [callback])', function() {
                     done();
                 });
                 phonegap.create(options, function(e) {});
+            });
+        });
+
+        describe('when --link-to is provided', function() {
+            beforeEach(function() {
+                options['link-to'] = '/path/to/app';
+            });
+
+            it('should not move config.xml', function(done) {
+                phonegap.create(options, function(e) {
+                    expect(fs.existsSync).not.toHaveBeenCalled();
+                    expect(fs.renameSync).not.toHaveBeenCalled();
+                    done();
+                });
+            });
+
+            it('should not update config.xml', function(done) {
+                expect(fs.existsSync).not.toHaveBeenCalled();
+                expect(cordovaLib.configparser).not.toHaveBeenCalled();
+                done();
             });
         });
 
