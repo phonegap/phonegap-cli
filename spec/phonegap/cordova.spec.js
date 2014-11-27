@@ -71,6 +71,25 @@ describe('phonegap.cordova(options, [callback])', function() {
             options.verbose = true;
         });
 
+        it('should support spaces in path to cordova executable', function() {
+            var fakeResolvedPath = 'C:\\Users\\User Name\\AppData\\Roaming\\npm',
+                _join = path.join;
+            // resolve returns a fake Windows OS styled path with a space
+            spyOn(path, 'resolve').andReturn(fakeResolvedPath);
+            // spy on join and only modify the faked path, allowing the rest to call the normal join
+            // this is required to allow the test to run on both Windows and Unix, since both use
+            // different delimiting slashes.
+            spyOn(path, 'join').andCallFake(function(p1, p2) {
+                if (p1 === fakeResolvedPath)
+                    return fakeResolvedPath + '\\' + p2;
+                else
+                    return _join.apply(path, arguments);
+            });
+
+            phonegap.cordova(options);
+            expect(shell.exec.mostRecentCall.args[0]).toEqual('"C:\\Users\\User Name\\AppData\\Roaming\\npm\\cordova" build ios');
+        });
+
         it('should output stdout data', function(done) {
             phonegap.on('raw', function(data) {
                 expect(data).toEqual('hello stdout');
