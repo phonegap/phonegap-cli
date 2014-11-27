@@ -54,4 +54,10 @@ describe('phonegap', function() {
             expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/usage:/i);
         });
  
+    it('should remove the .js extension from the binary (windows-specific)', function() {
+        argv = ['node', '/user/local/bin/phonegap.js'];
+        cli.argv(argv.concat(['help']));
+        expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/usage: phonegap/i);
+        expect(process.stdout.write.mostRecentCall.args[0]).not.toMatch('phonegap.js');
+    });
 });
