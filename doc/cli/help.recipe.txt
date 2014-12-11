@@ -1,0 +1,14 @@
+Usage: $0 recipe [command]
+
+Description:
+
+  Executes the command recipe
+
+Commands:
+
+  list   list available recipes
+
+Examples:
+
+  $ $0 recipe list
+  $ $0 create Foobaz --recipe hello
