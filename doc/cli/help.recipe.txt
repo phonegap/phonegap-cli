@@ -1,4 +1,4 @@
-Usage: $0 remote [command]
+Usage: $0 recipe [command]
 
 Description:
 
