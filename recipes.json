@@ -1,0 +1,11 @@
+[
+  { "name":"hello"
+  , "desc":"default hello world app for phonegap"
+  , "repo":"https://github.com/phonegap/phonegap-app-hello-world"
+  }
+  ,
+  { "name":"hello cordova"
+  , "desc":"default hello world app for cordova"
+  , "repo":"https://github.com/apache/cordova-app-hello-world"
+  }
+]
