@@ -1,3 +1,10 @@
-{ "hello":{ "repo":"https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz", "desc":"default hello world app for phonegap" }
-, "hello cordova": { "repo":"https://github.com/apache/cordova-app-hello-world/archive/master.tar.gz", "desc":"default hello world app for cordova"}
+{ 
+    "hello": { 
+        "url":"https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz", 
+        "description":"default hello world app for phonegap" 
+    }, 
+    "hello cordova": { 
+        "url":"https://github.com/apache/cordova-app-hello-world/archive/master.tar.gz", 
+        "description":"default hello world app for cordova"
+    }
 }
