@@ -11,12 +11,14 @@ Description:
 
 Options:
 
+  --link                 create a symbolic link to plugin instead of copying
+                         the plugin into the project
+  --noregistry           do not search the registry for <plugins>
   --searchpath <paths>   searches the directory path and subdirectories for
                          the <plugins> before searching the registry. Multiple
                          paths can be specified by using --searchpath multiple
                          times or seperating the paths with your system's
                          PATH delimiter (":" on OS X / Linux, ";" on Windows)
-  --noregistry           do not search the registry for <plugins>
 
 Examples:
 
