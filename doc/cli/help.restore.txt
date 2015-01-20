@@ -12,6 +12,14 @@ Commands:
   platforms                 install platforms listed in config.xml
   plugins                   install plugins listed in config.xml
 
+Options:
+
+  --searchpath <path>    available to the plugins command, this option
+                         searches the directory path and subdirectories for
+                         the <plugins> before searching the registry. Multiple
+                         paths can be specified by using --searchpath multiple
+                         times or seperating the paths with your system's
+                         PATH delimiter (":" on OS X / Linux, ";" on Windows).
 Examples:
 
   $ $0 restore platforms --experimental
