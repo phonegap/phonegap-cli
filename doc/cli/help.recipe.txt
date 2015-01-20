@@ -2,7 +2,8 @@ Usage: $0 recipe [command]
 
 Description:
 
-  Executes the command recipe
+  Create projects from an existing project template and list templates
+  available.
 
 Commands:
 
@@ -11,4 +12,4 @@ Commands:
 Examples:
 
   $ $0 recipe list
-  $ $0 create Foobaz --recipe hello
+  $ $0 create my-app --recipe hello-world
