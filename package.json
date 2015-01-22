@@ -64,7 +64,7 @@
             "email": "ryan@adobe.com"
         }
     ],
-    "recipes": {
+    "templates": {
         "hello-world": {
             "description": "Default hello world app for PhoneGap.",
             "url": "https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz"

@@ -1,4 +1,5 @@
-Usage: $0 recipe [command]
+Usage: $0 template [command]
+       $0 recipe [command]
 
 Description:
 
@@ -7,9 +8,10 @@ Description:
 
 Commands:
 
-  list   list available recipes
+  list   list available app templates
 
 Examples:
 
-  $ $0 recipe list
+  $ $0 template list
+  $ $0 create my-app --template hello-world
   $ $0 create my-app --recipe hello-world
