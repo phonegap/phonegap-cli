@@ -8,6 +8,9 @@ Description:
   These values are set in the app manifest (www/config.xml) and are used when
   creating a native project (platforms/<platform>/).
 
+  The application can be created from an existing template as well. You can
+  list the existing templates with the `template list` command.
+
   The [config] option allows you to pass a JSON string, which will be injected
   into `<path>/.cordova/config.json`.
 
@@ -15,6 +18,7 @@ Options:
 
   --name, -n <name>         application name (default: "Hello World")
   --id, -i <package>        package name (default: "com.phonegap.hello-world")
+  --template <name>         create app using an existing app template
   --copy-from, -src <path>  create project using a copy of an existing project
   --link-to <path>          symlink/shortcut to the www assets without copying
 
@@ -23,4 +27,10 @@ Examples:
   $ $0 create path/to/my-app
   $ $0 create path/to/my-app "com.example.app" "My App" 
   $ $0 create path/to/my-app --id "com.example.app" --name "My App" 
+  $ $0 create path/to/my-app --template hello-world
   $ $0 create path/to/my-app --copy-from ../my-other-app
+
+ALso See:
+
+  $ $0 help template
+  $ $0 help template list
