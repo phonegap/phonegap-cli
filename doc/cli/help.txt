@@ -13,6 +13,7 @@ Commands:
   run <platforms>      build and install the project for a specific platform
   platform [command]   update a platform version
   plugin [command]     add, remove, and list plugins
+  template [command]   list available app templates
   info                 display information about the project
   serve                serve a phonegap project
   version              output version number

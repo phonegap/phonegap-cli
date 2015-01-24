@@ -1,0 +1,12 @@
+Usage: $0 template list
+       $0 recipe list
+
+Description:
+
+  Lists the availables templates to be used during the creation of an app.
+  The template name can be supplied to the `create --template <name>` command
+  to generate a new project using the specified template.
+
+Examples:
+
+  $ $0 template list

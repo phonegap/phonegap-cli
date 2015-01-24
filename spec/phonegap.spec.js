@@ -33,4 +33,8 @@ describe('phonegap', function() {
     it('should define phonegap.remote.logout', function() {
         expect(phonegap.remote.logout).toEqual(jasmine.any(Function));
     });
+
+    it('should define phonegap.template', function() {
+        expect(phonegap.template).toEqual(jasmine.any(Object));
+    });
 });

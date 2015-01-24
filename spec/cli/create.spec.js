@@ -301,4 +301,42 @@ describe('phonegap create <path>', function() {
             jasmine.any(Function));
         });
     });
+
+    describe('$ phonegap create ./my-app --template hello-world', function() {
+        it('should try to create the project with template', function() {
+            cli.argv(argv.concat([
+                'create', './my-app',
+                '--template', 'hello-world'
+            ]));
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: undefined,
+                name: undefined,
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined,
+                template: 'hello-world'
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app --recipe hello-world', function() {
+        it('should try to create the project with template', function() {
+            cli.argv(argv.concat([
+                'create', './my-app',
+                '--recipe', 'hello-world'
+            ]));
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: undefined,
+                name: undefined,
+                config: {},
+                'copy-from': undefined,
+                'link-to': undefined,
+                template: 'hello-world'
+            },
+            jasmine.any(Function));
+        });
+    });
 });
