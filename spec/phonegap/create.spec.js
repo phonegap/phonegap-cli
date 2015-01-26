@@ -129,14 +129,14 @@ describe('phonegap.create(options, [callback])', function() {
     });
 
     it('should try to create a project with a template', function() {
-        options.template = 'hello-world-cordova';
+        options.template = 'hello-cordova';
         phonegap.create(options);
         expect(cordova.config).toHaveBeenCalledWith(
             options.path,
             {
                 lib: {
                     www: {
-                        id: 'hello-world-cordova-template',
+                        id: 'hello-cordova-template',
                         version: jasmine.any(String),
                         uri: jasmine.any(String),
                         link: false
