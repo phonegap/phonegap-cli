@@ -69,7 +69,7 @@
             "description": "Default hello world app for PhoneGap.",
             "url": "https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz"
         },
-        "hello-world-cordova": {
+        "hello-cordova": {
             "description": "Default hello world app for Cordova.",
             "url": "https://github.com/apache/cordova-app-hello-world/archive/master.tar.gz"
         }
