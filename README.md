@@ -115,6 +115,40 @@
 
     var phonegap = require('phonegap');
 
+## App Templates
+
+Templates allow you to create a new app from an existing app template. The
+nice part about templates is that they are simply a Cordova-compatible app.
+Any existing app can be a template.
+
+You can list the available templates with:
+
+    $ phonegap template list
+
+You can create a new project from a template with:
+
+    $ phonegap create my-app --template hello-world
+
+### Adding a New Template
+
+Adding a new template is easy.
+
+1. Add your template to the [package.json template section][package-template].
+
+      // the key is your template name (e.g. hello-world)
+      // the url is a HTTP URL to a .tar.gz.
+      {
+        "templates": {
+          "hello-world": {
+            "description": "Default hello world app for PhoneGap.",
+            "url": "https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz"
+
+          }
+        }
+      }
+
+1. Send us a pull request!
+
 ## FAQ
 
 ### phonegap: command not found
@@ -244,4 +278,5 @@ There are a few steps that should be taken when upgrading to a new version of th
 
 [travis-ci-img]: https://travis-ci.org/phonegap/phonegap-cli.png?branch=master
 [travis-ci-url]: http://travis-ci.org/phonegap/phonegap-cli
+[package-template]: https://github.com/phonegap/phonegap-cli/blob/035057713c613cc0488e4b0beb5b72c4c820d54a/package.json#L67-L76
 
