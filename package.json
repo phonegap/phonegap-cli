@@ -65,6 +65,10 @@
         }
     ],
     "templates": {
+        "blank": {
+            "description": "A blank and empty PhoneGap app.",
+            "url": "https://github.com/phonegap/phonegap-app-blank/archive/master.tar.gz"
+        },
         "hello-world": {
             "description": "Default hello world app for PhoneGap.",
             "url": "https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz"
