@@ -142,7 +142,6 @@ Adding a new template is easy.
             "hello-world": {
               "description": "Default hello world app for PhoneGap.",
               "url": "https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz"
-
             }
           }
         }
