@@ -135,17 +135,17 @@ Adding a new template is easy.
 
 1. Add your template to the [package.json template section][package-template].
 
-      // the key is your template name (e.g. hello-world)
-      // the url is a HTTP URL to a .tar.gz.
-      {
-        "templates": {
-          "hello-world": {
-            "description": "Default hello world app for PhoneGap.",
-            "url": "https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz"
+        // the key is your template name (e.g. hello-world)
+        // the url is a HTTP URL to a .tar.gz.
+        {
+          "templates": {
+            "hello-world": {
+              "description": "Default hello world app for PhoneGap.",
+              "url": "https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz"
 
+            }
           }
         }
-      }
 
 1. Send us a pull request!
 
