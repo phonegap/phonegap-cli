@@ -30,7 +30,7 @@ Examples:
   $ $0 create path/to/my-app --template hello-world
   $ $0 create path/to/my-app --copy-from ../my-other-app
 
-ALso See:
+Also See:
 
   $ $0 help template
   $ $0 help template list
