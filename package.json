@@ -80,6 +80,10 @@
         "hello-cordova": {
             "description": "Default hello world app for Cordova.",
             "url": "https://github.com/apache/cordova-app-hello-world/archive/master.tar.gz"
+        },
+        "jquery-mobile-starter": {
+            "description": "Starter PhoneGap project using jQuery Mobile.",
+            "url": "https://github.com/cfjedimaster/jQuery-Mobile-Starter/archive/master.tar.gz"
         }
     }
 }
