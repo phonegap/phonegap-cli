@@ -1,7 +1,6 @@
-# PhoneGap CLI [![Build Status][travis-ci-img]][travis-ci-url]
+# PhoneGap CLI [![Build Status][travis-ci-img]][travis-ci-url] [![bitHound Score][bithound-img]][bithound-url]
 
 > PhoneGap command-line interface and Node.js library.
-
 
 ## Command-line
 
@@ -275,7 +274,9 @@ There are a few steps that should be taken when upgrading to a new version of th
 
         $ npm publish
 
-[travis-ci-img]: https://travis-ci.org/phonegap/phonegap-cli.png?branch=master
+[travis-ci-img]: https://travis-ci.org/phonegap/phonegap-cli.svg?branch=master
 [travis-ci-url]: http://travis-ci.org/phonegap/phonegap-cli
 [package-template]: https://github.com/phonegap/phonegap-cli/blob/035057713c613cc0488e4b0beb5b72c4c820d54a/package.json#L67-L76
+[bithound-img]: https://www.bithound.io/github/phonegap/phonegap-cli/badges/score.svg
+[bithound-url]: https://www.bithound.io/github/phonegap/phonegap-cli
 
