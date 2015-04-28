@@ -10,7 +10,12 @@ Description:
 
   Multiple plugins can be removed by specifying multiple <id>'s.
 
+Options:
+
+    --save          removes the plugin information from config.xml if it was added using --save
+
 Examples:
 
-  $ $0 plugin remove org.apache.cordova.geolocation
-  $ $0 plugin remove org.apache.cordova.geolocation org.apache.cordova.device
+  $ $0 plugin remove cordova-plugin-geolocation
+  $ $0 plugin remove cordova-plugin-geolocation --save
+  $ $0 plugin remove cordova-plugin-geolocation cordova-plugin-device

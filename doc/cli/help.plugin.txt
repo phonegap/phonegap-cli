@@ -15,9 +15,9 @@ Commands:
 Examples:
 
   $ $0 plugin search org.apache.cordova.geolocation
-  $ $0 plugin add org.apache.cordova.geolocation
+  $ $0 plugin add cordova-plugin-geolocation --save
   $ $0 plugin list
-  $ $0 plugin remove org.apache.cordova.geolocation
+  $ $0 plugin remove cordova-plugin-geolocation --save
 
 Also See:
 

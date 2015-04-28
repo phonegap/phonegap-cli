@@ -19,11 +19,13 @@ Options:
                          paths can be specified by using --searchpath multiple
                          times or seperating the paths with your system's
                          PATH delimiter (":" on OS X / Linux, ";" on Windows)
+  --save                 saves the plugin and version to your projects config.xml
 
 Examples:
 
   $ $0 plugin add /local/path/to/plugin/
   $ $0 plugin add http://example.com/path/to/plugin.git
-  $ $0 plugin add org.apache.cordova.geolocation
-  $ $0 plugin add org.apache.cordova.geolocation --searchpath ../local/plugins
-  $ $0 plugin add org.apache.cordova.geolocation org.apache.cordova.device
+  $ $0 plugin add cordova-plugin-geolocation
+  $ $0 plugin add cordova-plugin-geolocation --save
+  $ $0 plugin add cordova-plugin-geolocation --searchpath ../local/plugins
+  $ $0 plugin add cordova-plugin-geolocation cordova-plugin-device

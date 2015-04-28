@@ -7,9 +7,14 @@ Description:
 
   The <platforms> must be a platform name provided by the list command.
 
+Options:
+
+  --save               removes the platform and version from your projects config.xml
+
 Examples:
 
   $ $0 platform rm ios
+  $ $0 platform rm ios --save
   $ $0 platform remove ios
   $ $0 platform remove ios android
 

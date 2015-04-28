@@ -14,10 +14,12 @@ Description:
 Options:
 
   --usegit             use git instead of the npm registry
+  --save               saves the platform and version to your projects config.xml
 
 Examples:
 
   $ $0 platform add android
+  $ $0 platform add android --save
   $ $0 platform add android@3.5.1
   $ $0 platform add path/to/cordova-android
 

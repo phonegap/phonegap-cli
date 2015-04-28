@@ -18,10 +18,5 @@ Options:
 
 Examples:
 
-  $ $0 save platforms --experimental
-  $ $0 save plugins --experimental
-  $ $0 save plugins --experimetnal --shrinkwrap
-
-Also See:
-
-  $ $0 help restore
+  $ $0 platform save
+  $ $0 plugins save 

@@ -10,5 +10,5 @@ Examples:
 
   $ $0 cordova info
   $ $0 cordova create path/to/my-app
-  $ $0 cordova platform add android
+  $ $0 cordova platform add android --save
   $ $0 cordova run android --target=FOO

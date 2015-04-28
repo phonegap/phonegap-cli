@@ -24,5 +24,5 @@ Examples:
   $ $0 local plugin add /local/path/to/plugin/
   $ $0 plugin add /local/path/to/plugin/
   $ $0 plugin add http://example.com/path/to/plugin.git
-  $ $0 plugin remove org.apache.cordova.core.geolocation
+  $ $0 plugin remove cordova-plugin-geolocation 
   $ $0 plugin list
