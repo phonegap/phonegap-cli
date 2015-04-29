@@ -27,13 +27,6 @@ Additional Commands:
   emulate <platforms>  runs the project with the flag --emulator
   cordova              execute of any cordova command
 
-Experimental Commands:
-
-  Requires the --experimental flag to use the command
-
-  save                 save installed platforms and plugins
-  restore              restores saved platforms and plugins
-
 Options:
 
   -d, --verbose        allow verbose output
