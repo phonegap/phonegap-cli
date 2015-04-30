@@ -72,7 +72,7 @@ describe('phonegap.create(options, [callback])', function() {
 
     it('should try to create a project with default values', function() {
         phonegap.create(options);
-        expect(cordova.config).toHaveBeenCalledWith(
+        /*expect(cordova.config).toHaveBeenCalledWith(
             options.path,
             {
                 lib: {
@@ -84,13 +84,14 @@ describe('phonegap.create(options, [callback])', function() {
                     }
                 }
             }
-        );
+        );*/
         expect(phonegap.cordova).toHaveBeenCalledWith(
             {
-                cmd: 'cordova create "$path" "$id" "$name"'
+                cmd: 'cordova create "$path" "$id" "$name" "$config"'
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
+                        .replace('$config', options.config)
             },
             jasmine.any(Function)
         );
@@ -102,10 +103,11 @@ describe('phonegap.create(options, [callback])', function() {
         phonegap.create(options);
         expect(phonegap.cordova).toHaveBeenCalledWith(
             {
-                cmd: 'cordova create "$path" "$id" "$name"'
+                cmd: 'cordova create "$path" "$id" "$name" "$config"'
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
+                        .replace('$config', options.config)
             },
             jasmine.any(Function)
         );
@@ -122,7 +124,7 @@ describe('phonegap.create(options, [callback])', function() {
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
-                        .replace('$config', '{\\"some\\":\\"value\\"}')
+                        .replace('$config', '{\\"some\\":\\"value\\",\\"lib\\":{\\"www\\":{\\"id\\":\\"hello-world-template\\",\\"version\\":\\"master\\",\\"uri\\":\\"https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz\\",\\"link\\":false}}}')
             },
             jasmine.any(Function)
         );
@@ -131,7 +133,7 @@ describe('phonegap.create(options, [callback])', function() {
     it('should try to create a project with a template', function() {
         options.template = 'hello-cordova';
         phonegap.create(options);
-        expect(cordova.config).toHaveBeenCalledWith(
+        /*expect(cordova.config).toHaveBeenCalledWith(
             options.path,
             {
                 lib: {
@@ -143,13 +145,14 @@ describe('phonegap.create(options, [callback])', function() {
                     }
                 }
             }
-        );
+        );*/
         expect(phonegap.cordova).toHaveBeenCalledWith(
             {
-                cmd: 'cordova create "$path" "$id" "$name"'
+                cmd: 'cordova create "$path" "$id" "$name" "$config"'
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
+                        .replace('$config', options.config)
             },
             jasmine.any(Function)
         );
