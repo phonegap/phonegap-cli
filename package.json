@@ -1,7 +1,7 @@
 {
     "name": "phonegap",
     "description": "PhoneGap command-line interface and node.js library.",
-    "version": "5.0.0-0.28.1",
+    "version": "5.1.1-0.29.0",
     "homepage": "http://github.com/phonegap/phonegap-cli",
     "repository": {
         "type": "git",
@@ -20,7 +20,7 @@
         "phonegap": "./bin/phonegap.js"
     },
     "scripts": {
-        "test": "jasmine-node --color spec"
+        "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec"
     },
     "engineStrict": "true",
     "engines": {
@@ -29,7 +29,7 @@
     "dependencies": {
         "colors": "0.6.0-1",
         "connect-phonegap": "0.16.1",
-        "cordova": "5.0.0",
+        "cordova": "5.1.1",
         "minimist": "0.1.0",
         "phonegap-build": "0.9.1",
         "pluralize": "0.0.4",
