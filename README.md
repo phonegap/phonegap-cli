@@ -11,7 +11,7 @@
 
 ### Install
 
-    $ npm install -g phonegap
+    $ npm install -g phonegap@latest
 
 ### Getting Started
 
@@ -162,7 +162,7 @@ modules may not be in your `PATH`.
 
 #### Solution
 
-At the bottom of your `npm install -g phonegap` installation log, you will see the following:
+At the bottom of your `npm install -g phonegap@latest` installation log, you will see the following:
 
     ...
     /usr/local/share/npm/bin/phonegap -> /usr/local/share/npm/lib/node_modules/phonegap/bin/phonegap.js
