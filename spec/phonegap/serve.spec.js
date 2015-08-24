@@ -155,7 +155,11 @@ describe("PhoneGap serve", function () {
                 defaultOptions = {
                     port: 3000,
                     autoreload: true,
-                    localtunnel: false
+                    localtunnel: false,
+                    phonegap: {
+                        emit: function(){},
+                        on: function(){}
+                    }
                 };
 
             });
