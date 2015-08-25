@@ -5,7 +5,7 @@ Description:
   Creates a new application at the provided path.
 
   The application name and package ID can also be customized.
-  These values are set in the app manifest (www/config.xml) and are used when
+  These values are set in the app manifest (config.xml) and are used when
   creating a native project (platforms/<platform>/).
 
   The application can be created from an existing template as well. You can
