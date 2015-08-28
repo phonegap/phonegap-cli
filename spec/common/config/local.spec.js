@@ -59,16 +59,16 @@ describe('config.local', function() {
                 });
             });
 
-            it('should trigger callback with an error', function(done) {
+            it('should trigger callback without an error', function(done) {
                 config.local.load(function(e, data) {
-                    expect(e).toEqual(jasmine.any(Error));
+                    expect(e).not.toEqual(jasmine.any(Error));
                     done();
                 });
             });
 
-            it('should trigger callback without data', function(done) {
+            it('should trigger callback with default data', function(done) {
                 config.local.load(function(e, data) {
-                    expect(data).not.toBeDefined();
+                    expect(data).toEqual({});
                     done();
                 });
             });
