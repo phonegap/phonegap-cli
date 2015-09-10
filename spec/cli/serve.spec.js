@@ -80,4 +80,12 @@ describe('phonegap serve', function() {
             expect(phonegap.serve.mostRecentCall.args[0]).toMatch({ port: 1337 });
         });
     });
+
+    describe('$ phonegap serve --browser', function() {
+        it('should add browser platform on serve', function() {
+            cli.argv(argv.concat(['serve', '--browser']));
+            expect(phonegap.serve).toHaveBeenCalled();
+            expect(phonegap.serve.mostRecentCall.args[0]).toMatch({ browser: true });
+        });
+    });
 });
