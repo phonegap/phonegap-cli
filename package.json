@@ -1,7 +1,7 @@
 {
     "name": "phonegap",
     "description": "PhoneGap command-line interface and node.js library.",
-    "version": "5.2.2+cordova.5.2.0",
+    "version": "5.2.3+cordova.5.2.0",
     "homepage": "http://github.com/phonegap/phonegap-cli",
     "repository": {
         "type": "git",
@@ -66,6 +66,10 @@
         {
             "name": "Herm Wong",
             "email": "herm.wong@gmail.com"
+        },
+        {
+            "name": "Suraj Pindoria",
+            "email": "suraj.pindoria@yahoo.com"
         }
     ],
     "templates": {
