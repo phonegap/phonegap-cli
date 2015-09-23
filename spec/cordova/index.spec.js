@@ -3,7 +3,7 @@
  */
 
 var cordova = require('../../lib/cordova'),
-    original = require('../../node_modules/cordova/node_modules/cordova-lib');
+    original = require('cordova').cordova_lib;
 
 /*
  * Specification: cordova
