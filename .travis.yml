@@ -3,6 +3,9 @@ notifications:
   slack:
     secure: mkiEcw6I1VMWr/Fn/J1i2J+2ZSO4piX6azsDYcBPBmzItqClcQbYgqgb/vE8h3UvYXmF3Isbqau3of9/8Og08CashATJAj1dyOzHrbBGBm2SM8qvDaf2l0tg4X3mmTQpZMKSd7XZQenWASK1STLMz3TLsn56C2/x7n/4idz242M=
   email:
-  - PhoneGapCI@adobe.com
+    recipients:
+      - PhoneGapCI@adobe.com
+    on_success: change
+    on_failure: always
 node_js:
 - '0.12'
