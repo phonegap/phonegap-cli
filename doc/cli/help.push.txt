@@ -1,0 +1,19 @@
+Usage: $0 push [options]
+
+Description:
+
+  Sends a test push to the PhoneGap App.
+
+  The intended receiver is the PhoneGap App.
+
+Options:
+
+  --deviceID <deviceID>   device ID (required)
+  --service <service>     target service, "gcm", "apns" or "apns-sandbox" (required)
+  --payload <data>        JSON object to be sent via push service (required)
+
+Examples:
+
+  $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service gcm --payload '{ "data": { "title": "Hello", "message": "World"} }'
+
+  $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service apns --payload '{ "aps": { "alert": "Hello World", "badge": 5 } }'
