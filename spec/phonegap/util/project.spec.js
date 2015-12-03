@@ -98,6 +98,19 @@ describe('project', function() {
         });
     });
 
+    describe('getProjectPath([projectPath])', function() {
+        it('should default to current working directory', function() {
+            spyOn(cdvutil, 'isCordova').andReturn(true);
+            expect(project.getProjectPath()).toEqual(process.cwd());
+        });
+
+        it('should accept a projectPath parameter', function() {
+            var projectPath = '/path/to/project';
+            spyOn(cdvutil, 'isCordova').andReturn(true);
+            expect(project.getProjectPath(projectPath)).toEqual(projectPath);
+        });
+    });
+
     describe('listPlatforms', function () {
         var exampleOut = ['platformA', 'platformB'];
 
