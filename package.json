@@ -88,6 +88,10 @@
         "jquery-mobile-starter": {
             "description": "Starter PhoneGap project using jQuery Mobile.",
             "url": "https://github.com/cfjedimaster/jQuery-Mobile-Starter/archive/master.tar.gz"
+        },
+        "phonegap-template-framework7": {
+            "description": "Starter PhoneGap project for Framework7.",
+            "url": "https://github.com/phonegap/phonegap-template-framework7/archive/master.tar.gz"
         }
     }
 }
