@@ -35,6 +35,9 @@ describe('phonegap.create(options, [callback])', function() {
         spyOn(shell, 'cp');
         spyOn(fs, 'renameSync');
         spyOn(fs, 'existsSync');
+        spyOn(fs, 'statSync').andReturn({
+            isDirectory: function() { return false; } // template is not cached
+        });
 
         spyOn(process.stderr, 'write');
     });
@@ -156,6 +159,29 @@ describe('phonegap.create(options, [callback])', function() {
             },
             jasmine.any(Function)
         );
+    });
+
+    describe('when project template is cached', function() {
+        it('should delete the cached template', function() {
+            options.template = 'hello-cordova';
+            fs.statSync.andReturn({
+                isDirectory: function() { return true; } // template is cached
+            });
+            phonegap.create(options);
+            expect(shell.rm).toHaveBeenCalled();
+            expect(shell.rm.calls[0].args[1]).toMatch(/hello-cordova/);
+        });
+    });
+
+    describe('when project template is not cached', function() {
+        it('should delete the cached template', function() {
+            options.template = 'hello-cordova';
+            fs.statSync.andReturn({
+                isDirectory: function() { return false; } // template is not cached
+            });
+            phonegap.create(options);
+            expect(shell.rm).not.toHaveBeenCalled();
+        });
     });
 
     describe('successfully created a project', function() {
