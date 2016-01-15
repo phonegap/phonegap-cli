@@ -5,6 +5,7 @@
 var PhoneGap = require('../../lib/phonegap'),
     cordova = require('../../lib/cordova').cordova,
     cordovaLib = require('../../lib/cordova').lib,
+    network = require('../../lib/phonegap/util/network'),
     shell = require('shelljs'),
     path = require('path'),
     fs = require('fs'),
@@ -29,6 +30,9 @@ describe('phonegap.create(options, [callback])', function() {
         };
         spyOn(phonegap, 'version').andReturn({ phonegap: '2.8.0' });
         spyOn(phonegap, 'cordova');
+        spyOn(network, 'isOnline').andCallFake(function(callback) {
+            callback(false); // offline by default to speed up tests
+        });
         spyOn(cordova, 'config');
         spyOn(cordovaLib, 'configparser').andReturn(configParserSpy);
         spyOn(shell, 'rm');
@@ -162,22 +166,47 @@ describe('phonegap.create(options, [callback])', function() {
     });
 
     describe('when project template is cached', function() {
-        it('should delete the cached template', function() {
-            options.template = 'hello-cordova';
-            fs.statSync.andReturn({
-                isDirectory: function() { return true; } // template is cached
+        describe('when online', function() {
+            beforeEach(function() {
+                network.isOnline.andCallFake(function(callback) {
+                    callback(true);
+                });
             });
-            phonegap.create(options);
-            expect(shell.rm).toHaveBeenCalled();
-            expect(shell.rm.calls[0].args[1]).toMatch(/hello-cordova/);
+
+            it('should delete the cached template', function() {
+                options.template = 'hello-cordova';
+                fs.statSync.andReturn({
+                    isDirectory: function() { return true; } // template is cached
+                });
+                phonegap.create(options);
+                expect(shell.rm).toHaveBeenCalled();
+                expect(shell.rm.calls[0].args[1]).toMatch(/hello-cordova/);
+            });
+        });
+
+        describe('when offline', function() {
+            beforeEach(function() {
+                network.isOnline.andCallFake(function(callback) {
+                    callback(false);
+                });
+            });
+
+            it('should not delete the cached template', function() {
+                options.template = 'hello-cordova';
+                fs.statSync.andCallFake(function(templatePath) {
+                    throw new Error('file not found'); // template is not cached
+                });
+                phonegap.create(options);
+                expect(shell.rm).not.toHaveBeenCalled();
+            });
         });
     });
 
     describe('when project template is not cached', function() {
-        it('should delete the cached template', function() {
+        it('should not delete the cached template', function() {
             options.template = 'hello-cordova';
-            fs.statSync.andReturn({
-                isDirectory: function() { return false; } // template is not cached
+            fs.statSync.andCallFake(function(templatePath) {
+                throw new Error('file not found'); // template is not cached
             });
             phonegap.create(options);
             expect(shell.rm).not.toHaveBeenCalled();
