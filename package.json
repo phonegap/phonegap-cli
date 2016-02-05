@@ -31,7 +31,7 @@
         "connect-phonegap": "0.19.0",
         "cordova": "5.4.1",
         "minimist": "0.1.0",
-        "phonegap-build": "0.9.2",
+        "phonegap-build": "0.10.0",
         "pluralize": "0.0.4",
         "prompt": "0.2.11",
         "qrcode-terminal": "0.9.4",

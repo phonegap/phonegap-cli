@@ -126,4 +126,51 @@ describe('phonegap.remote.run(options, [callback])', function() {
             phonegap.remote.run(options);
         });
     });
+
+    describe('optional arguments', function() {
+        it('should support options.protocol', function() {
+            options.protocol = 'http';
+            phonegap.remote.run(options);
+            expect(phonegap.remote.build).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
+            );
+        });
+
+        it('should support options.host', function() {
+            options.host = 'stage.build.phonegap.com';
+            phonegap.remote.run(options);
+            expect(phonegap.remote.build).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
+            );
+        });
+
+        it('should support options.port', function() {
+            options.port = '1337';
+            phonegap.remote.run(options);
+            expect(phonegap.remote.build).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
+            );
+        });
+
+        it('should support options.path', function() {
+            options.path = '/api/v1';
+            phonegap.remote.run(options);
+            expect(phonegap.remote.build).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
+            );
+        });
+
+        it('should support options.proxy', function() {
+            options.proxy = 'my.proxy.com';
+            phonegap.remote.run(options);
+            expect(phonegap.remote.build).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
+            );
+        });
+    });
 });

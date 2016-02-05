@@ -4,6 +4,14 @@ Description:
 
   Builds your application for a specific platform.
 
+Options:
+
+  --protocol           server protocol (default: 'https:')
+  --host               server host (default: 'build.phonegap.com')
+  --port               server port (default: '443')
+  --path               server path prefix (default: '/api/v1')
+  --proxy              proxy server to route requests
+
 Examples:
 
   $ $0 remote build android

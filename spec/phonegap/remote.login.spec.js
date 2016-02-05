@@ -112,4 +112,51 @@ describe('phonegap.remote.login(options, [callback])', function() {
             phonegap.remote.login(options);
         });
     });
+
+    describe('optional arguments', function() {
+        it('should support options.protocol', function() {
+            options.protocol = 'http';
+            phonegap.remote.login(options);
+            expect(phonegapbuild.login).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
+            );
+        });
+
+        it('should support options.host', function() {
+            options.host = 'stage.build.phonegap.com';
+            phonegap.remote.login(options);
+            expect(phonegapbuild.login).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
+            );
+        });
+
+        it('should support options.port', function() {
+            options.port = '1337';
+            phonegap.remote.login(options);
+            expect(phonegapbuild.login).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
+            );
+        });
+
+        it('should support options.path', function() {
+            options.path = '/api/v1';
+            phonegap.remote.login(options);
+            expect(phonegapbuild.login).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
+            );
+        });
+
+        it('should support options.proxy', function() {
+            options.proxy = 'my.proxy.com';
+            phonegap.remote.login(options);
+            expect(phonegapbuild.login).toHaveBeenCalledWith(
+                options,
+                jasmine.any(Function)
+            );
+        });
+    });
 });

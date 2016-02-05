@@ -8,6 +8,11 @@ Options:
 
   -u, --username       your username (email address)
   -p, --password       your password
+  --protocol           server protocol (default: 'https:')
+  --host               server host (default: 'build.phonegap.com')
+  --port               server port (default: '443')
+  --path               server path prefix (default: '/api/v1')
+  --proxy              proxy server to route requests
 
 Examples:
 

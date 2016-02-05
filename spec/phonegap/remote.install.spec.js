@@ -89,7 +89,22 @@ describe('phonegap.remote.install(options, [callback])', function() {
         it('should call callback with a data object', function(done) {
             phonegap.remote.install(options, function(e, data) {
                 expect(data).toEqual(jasmine.any(Object));
+                expect(data.url).toEqual(jasmine.any(String));
                 done();
+            });
+        });
+
+        describe('with optional server arguments', function() {
+            it('should call callback with a data object', function(done) {
+                options.protocol = 'http:';
+                options.host = 'stage.build.phonegap.com';
+                options.port = '80';
+
+                phonegap.remote.install(options, function(e, data) {
+                    expect(data).toEqual(jasmine.any(Object));
+                    expect(data.url).toMatch('http://stage.build.phonegap.com:80');
+                    done();
+                });
             });
         });
     });
