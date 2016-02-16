@@ -131,7 +131,7 @@ describe('phonegap.create(options, [callback])', function() {
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
-                        .replace('$config', '{\\"some\\":\\"value\\",\\"lib\\":{\\"www\\":{\\"id\\":\\"hello-world-template\\",\\"version\\":\\"master\\",\\"uri\\":\\"https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz\\",\\"link\\":false}}}')
+                        .replace('$config', '{\\"some\\":\\"value\\",\\"lib\\":{\\"www\\":{\\"id\\":\\"hello-world-template\\",\\"version\\":\\"master\\",\\"uri\\":\\"https://github.com/phonegap/phonegap-template-hello-world/archive/master.tar.gz\\",\\"link\\":false}}}')
             },
             jasmine.any(Function)
         );
