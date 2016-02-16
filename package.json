@@ -75,23 +75,19 @@
     "templates": {
         "blank": {
             "description": "A blank and empty PhoneGap app.",
-            "url": "https://github.com/phonegap/phonegap-template-blank/archive/master.tar.gz"
+            "npm": "phonegap-template-blank"
         },
         "hello-world": {
             "description": "Default hello world app for PhoneGap.",
-            "url": "https://github.com/phonegap/phonegap-template-hello-world/archive/master.tar.gz"
+            "npm": "phonegap-template-hello-world"
         },
-        "hello-cordova": {
-            "description": "Default hello world app for Cordova.",
-            "url": "https://github.com/apache/cordova-app-hello-world/archive/master.tar.gz"
-        },
-        "jquery-mobile-starter": {
-            "description": "Starter PhoneGap project using jQuery Mobile.",
-            "url": "https://github.com/cfjedimaster/jQuery-Mobile-Starter/archive/master.tar.gz"
-        },
-        "phonegap-template-framework7": {
+        "framework7": {
             "description": "Starter PhoneGap project for Framework7.",
-            "url": "https://github.com/phonegap/phonegap-template-framework7/archive/master.tar.gz"
+            "npm": "phonegap-template-framework7"
+        },
+        "react-hot-loader": {
+            "description": "Starter PhoneGap project for Framework7.",
+            "npm": "phonegap-template-react-hot-loader"
         }
     }
 }
