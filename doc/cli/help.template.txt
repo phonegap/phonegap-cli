@@ -1,5 +1,4 @@
 Usage: $0 template [command]
-       $0 recipe [command]
 
 Description:
 
@@ -16,4 +15,3 @@ Examples:
   $ $0 template list
   $ $0 template search
   $ $0 create my-app --template hello-world
-  $ $0 create my-app --recipe hello-world
