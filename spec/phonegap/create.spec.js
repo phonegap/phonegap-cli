@@ -79,22 +79,9 @@ describe('phonegap.create(options, [callback])', function() {
 
     it('should try to create a project with default values', function() {
         phonegap.create(options);
-        /*expect(cordova.config).toHaveBeenCalledWith(
-            options.path,
-            {
-                lib: {
-                    www: {
-                        id: 'hello-world-template',
-                        version: jasmine.any(String),
-                        uri: jasmine.any(String),
-                        link: false
-                    }
-                }
-            }
-        );*/
         expect(phonegap.cordova).toHaveBeenCalledWith(
             {
-                cmd: 'cordova create "$path" "$id" "$name" "$config"'
+                cmd: 'cordova create "$path" "$id" "$name" --template="phonegap-template-hello-world"'
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
@@ -110,7 +97,7 @@ describe('phonegap.create(options, [callback])', function() {
         phonegap.create(options);
         expect(phonegap.cordova).toHaveBeenCalledWith(
             {
-                cmd: 'cordova create "$path" "$id" "$name" "$config"'
+                cmd: 'cordova create "$path" "$id" "$name" --template="phonegap-template-hello-world"'
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
@@ -127,35 +114,7 @@ describe('phonegap.create(options, [callback])', function() {
         phonegap.create(options);
         expect(phonegap.cordova).toHaveBeenCalledWith(
             {
-                cmd: 'cordova create "$path" "$id" "$name" "$config"'
-                        .replace('$path', options.path)
-                        .replace('$id', options.id)
-                        .replace('$name', options.name)
-                        .replace('$config', '{\\"some\\":\\"value\\",\\"lib\\":{\\"www\\":{\\"id\\":\\"hello-world-template\\",\\"version\\":\\"master\\",\\"uri\\":\\"https://github.com/phonegap/phonegap-template-hello-world/archive/master.tar.gz\\",\\"link\\":false}}}')
-            },
-            jasmine.any(Function)
-        );
-    });
-
-    it('should try to create a project with a template', function() {
-        options.template = 'hello-cordova';
-        phonegap.create(options);
-        /*expect(cordova.config).toHaveBeenCalledWith(
-            options.path,
-            {
-                lib: {
-                    www: {
-                        id: 'hello-cordova-template',
-                        version: jasmine.any(String),
-                        uri: jasmine.any(String),
-                        link: false
-                    }
-                }
-            }
-        );*/
-        expect(phonegap.cordova).toHaveBeenCalledWith(
-            {
-                cmd: 'cordova create "$path" "$id" "$name" "$config"'
+                cmd: 'cordova create "$path" "$id" "$name" "$config" --template="phonegap-template-hello-world"'
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
@@ -165,52 +124,34 @@ describe('phonegap.create(options, [callback])', function() {
         );
     });
 
-    describe('when project template is cached', function() {
-        describe('when online', function() {
-            beforeEach(function() {
-                network.isOnline.andCallFake(function(callback) {
-                    callback(true);
-                });
-            });
-
-            it('should delete the cached template', function() {
-                options.template = 'hello-cordova';
-                fs.statSync.andReturn({
-                    isDirectory: function() { return true; } // template is cached
-                });
-                phonegap.create(options);
-                expect(shell.rm).toHaveBeenCalled();
-                expect(shell.rm.calls[0].args[1]).toMatch(/hello-cordova/);
-            });
-        });
-
-        describe('when offline', function() {
-            beforeEach(function() {
-                network.isOnline.andCallFake(function(callback) {
-                    callback(false);
-                });
-            });
-
-            it('should not delete the cached template', function() {
-                options.template = 'hello-cordova';
-                fs.statSync.andCallFake(function(templatePath) {
-                    throw new Error('file not found'); // template is not cached
-                });
-                phonegap.create(options);
-                expect(shell.rm).not.toHaveBeenCalled();
-            });
-        });
+    it('should try to create a project with a template with a npm name', function() {
+        options.template = 'phonegap-template-react-hot-loader';
+        phonegap.create(options);
+        expect(phonegap.cordova).toHaveBeenCalledWith(
+            {
+                cmd: 'cordova create "$path" "$id" "$name" --template="phonegap-template-react-hot-loader"'
+                        .replace('$path', options.path)
+                        .replace('$id', options.id)
+                        .replace('$name', options.name)
+                        .replace('$config', options.config)
+            },
+            jasmine.any(Function)
+        );
     });
 
-    describe('when project template is not cached', function() {
-        it('should not delete the cached template', function() {
-            options.template = 'hello-cordova';
-            fs.statSync.andCallFake(function(templatePath) {
-                throw new Error('file not found'); // template is not cached
-            });
-            phonegap.create(options);
-            expect(shell.rm).not.toHaveBeenCalled();
-        });
+    it('should try to create a project with a template with a shortened name', function() {
+        options.template = 'blank';
+        phonegap.create(options);
+        expect(phonegap.cordova).toHaveBeenCalledWith(
+            {
+                cmd: 'cordova create "$path" "$id" "$name" --template="phonegap-template-blank"'
+                        .replace('$path', options.path)
+                        .replace('$id', options.id)
+                        .replace('$name', options.name)
+                        .replace('$config', options.config)
+            },
+            jasmine.any(Function)
+        );
     });
 
     describe('successfully created a project', function() {
