@@ -154,6 +154,21 @@ describe('phonegap.create(options, [callback])', function() {
         );
     });
 
+    it('should not create a project with an unnamed template', function() {
+        options.template = true; // equivalent to --template
+        phonegap.create(options);
+        expect(phonegap.cordova).toHaveBeenCalledWith(
+            {
+                cmd: 'cordova create "$path" "$id" "$name"'
+                        .replace('$path', options.path)
+                        .replace('$id', options.id)
+                        .replace('$name', options.name)
+                        .replace('$config', options.config)
+            },
+            jasmine.any(Function)
+        );
+    });
+
     describe('successfully created a project', function() {
         beforeEach(function() {
             phonegap.cordova.andCallFake(function(options, callback) {
