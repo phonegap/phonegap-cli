@@ -1,0 +1,12 @@
+Usage: $0 template search
+
+Description:
+
+  Opens your default browser to npmjs.com and displays all available
+  templates. A template uses the npm keyword `cordova:template` to
+  identify itself. At the moment, npmjs.com does not allow searching
+  within a keyword, so we must display all templates available.
+
+Examples:
+
+  $ $0 template search

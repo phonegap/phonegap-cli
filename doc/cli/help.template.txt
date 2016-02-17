@@ -8,10 +8,12 @@ Description:
 
 Commands:
 
-  list   list available app templates
+  list      list recommended app templates
+  search    open npmjs.com to show all templates available
 
 Examples:
 
   $ $0 template list
+  $ $0 template search
   $ $0 create my-app --template hello-world
   $ $0 create my-app --recipe hello-world

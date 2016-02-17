@@ -1,93 +1,93 @@
 {
-    "name": "phonegap",
-    "description": "PhoneGap command-line interface and node.js library.",
-    "version": "5.5.2+cordova.5.4.1",
-    "homepage": "http://github.com/phonegap/phonegap-cli",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/phonegap/phonegap-cli.git"
+  "name": "phonegap",
+  "description": "PhoneGap command-line interface and node.js library.",
+  "version": "5.5.2+cordova.5.4.1",
+  "homepage": "http://github.com/phonegap/phonegap-cli",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/phonegap/phonegap-cli.git"
+  },
+  "keywords": [
+    "cli",
+    "cordova",
+    "phonegap",
+    "phonegap build",
+    "phonegap/build"
+  ],
+  "preferGlobal": "true",
+  "main": "./lib/main.js",
+  "bin": {
+    "phonegap": "./bin/phonegap.js"
+  },
+  "scripts": {
+    "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec"
+  },
+  "engineStrict": "true",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "colors": "0.6.0-1",
+    "connect-phonegap": "0.20.1",
+    "cordova": "6.0.0",
+    "minimist": "0.1.0",
+    "opener": "1.4.1",
+    "phonegap-build": "0.10.0",
+    "pluralize": "0.0.4",
+    "prompt": "0.2.11",
+    "qrcode-terminal": "0.9.4",
+    "semver": "1.1.0",
+    "shelljs": "0.1.4"
+  },
+  "devDependencies": {
+    "jasmine-node": "1.14.5",
+    "chdir": "0.0.x"
+  },
+  "optionalDependencies": {},
+  "contributors": [
+    {
+      "name": "Michael Brooks",
+      "email": "michael@michaelbrooks.ca",
+      "url": "http://michaelbrooks.ca/"
     },
-    "keywords": [
-        "cli",
-        "cordova",
-        "phonegap",
-        "phonegap build",
-        "phonegap/build"
-    ],
-    "preferGlobal": "true",
-    "main": "./lib/main.js",
-    "bin": {
-        "phonegap": "./bin/phonegap.js"
+    {
+      "name": "Lorin Beer",
+      "email": "lorin.beer@gmail.com",
+      "url": "http://www.ensufire.com/"
     },
-    "scripts": {
-        "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec"
+    {
+      "name": "Jesse MacFadyen",
+      "url": "http://risingj.com"
     },
-    "engineStrict": "true",
-    "engines": {
-        "node": ">=0.10.0"
+    {
+      "name": "Ryan Stewart",
+      "email": "ryan@adobe.com"
     },
-    "dependencies": {
-        "colors": "0.6.0-1",
-        "connect-phonegap": "0.20.1",
-        "cordova": "6.0.0",
-        "minimist": "0.1.0",
-        "phonegap-build": "0.10.0",
-        "pluralize": "0.0.4",
-        "prompt": "0.2.11",
-        "qrcode-terminal": "0.9.4",
-        "semver": "1.1.0",
-        "shelljs": "0.1.4"
+    {
+      "name": "Herm Wong",
+      "email": "herm.wong@gmail.com"
     },
-    "devDependencies": {
-        "jasmine-node": "1.14.5",
-        "chdir": "0.0.x"
-    },
-    "optionalDependencies": {
-    },
-    "contributors": [
-        {
-            "name": "Michael Brooks",
-            "email": "michael@michaelbrooks.ca",
-            "url": "http://michaelbrooks.ca/"
-        },
-        {
-            "name": "Lorin Beer",
-            "email": "lorin.beer@gmail.com",
-            "url": "http://www.ensufire.com/"
-        },
-        {
-            "name": "Jesse MacFadyen",
-            "url": "http://risingj.com"
-        },
-        {
-            "name": "Ryan Stewart",
-            "email": "ryan@adobe.com"
-        },
-        {
-            "name": "Herm Wong",
-            "email": "herm.wong@gmail.com"
-        },
-        {
-            "name": "Suraj Pindoria",
-            "email": "suraj.pindoria@yahoo.com"
-        }
-    ],
-    "templates": {
-        "blank": {
-            "description": "A blank and empty PhoneGap app.",
-            "npm": "phonegap-template-blank"
-        },
-        "hello-world": {
-            "description": "Default hello world app for PhoneGap.",
-            "npm": "phonegap-template-hello-world"
-        },
-        "framework7": {
-            "description": "Starter PhoneGap project for Framework7.",
-            "npm": "phonegap-template-framework7"
-        },
-        "react-hot-loader": {
-            "description": "Starter PhoneGap project for Framework7.",
-            "npm": "phonegap-template-react-hot-loader"
-        }
+    {
+      "name": "Suraj Pindoria",
+      "email": "suraj.pindoria@yahoo.com"
     }
+  ],
+  "templates": {
+    "blank": {
+      "description": "A blank and empty PhoneGap app.",
+      "npm": "phonegap-template-blank"
+    },
+    "hello-world": {
+      "description": "Default hello world app for PhoneGap.",
+      "npm": "phonegap-template-hello-world"
+    },
+    "framework7": {
+      "description": "Starter PhoneGap project for Framework7.",
+      "npm": "phonegap-template-framework7"
+    },
+    "react-hot-loader": {
+      "description": "Starter PhoneGap project for Framework7.",
+      "npm": "phonegap-template-react-hot-loader"
+    }
+  }
 }
