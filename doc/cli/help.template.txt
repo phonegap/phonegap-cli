@@ -3,7 +3,7 @@ Usage: $0 template [command]
 
 Description:
 
-  Create projects from an existing project template and list templates
+  Create a new project from an existing template and list the templates
   available.
 
 Commands:

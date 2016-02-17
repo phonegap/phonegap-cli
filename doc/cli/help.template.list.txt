@@ -5,8 +5,14 @@ Description:
 
   Lists the availables templates to be used during the creation of an app.
   The template name can be supplied to the `create --template <name>` command
-  to generate a new project using the specified template.
+  to generate a new project using the specified template. The `<name>` can be
+  a npm package, local file path, or git URL.
 
 Examples:
 
   $ $0 template list
+
+Also See:
+
+  $ $0 help create
+  $ $0 help template
