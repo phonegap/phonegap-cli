@@ -154,12 +154,12 @@ describe('phonegap.create(options, [callback])', function() {
         );
     });
 
-    it('should not create a project with an unnamed template', function() {
+    it('should create a default project when template name invalid', function() {
         options.template = true; // equivalent to --template
         phonegap.create(options);
         expect(phonegap.cordova).toHaveBeenCalledWith(
             {
-                cmd: 'cordova create "$path" "$id" "$name"'
+                cmd: 'cordova create "$path" "$id" "$name" --template="phonegap-template-hello-world"'
                         .replace('$path', options.path)
                         .replace('$id', options.id)
                         .replace('$name', options.name)
