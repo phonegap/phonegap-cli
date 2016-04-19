@@ -29,7 +29,7 @@
   "dependencies": {
     "colors": "0.6.0-1",
     "connect-phonegap": "0.20.6",
-    "cordova": "6.0.0",
+    "cordova": "6.1.1",
     "minimist": "0.1.0",
     "opener": "1.4.1",
     "phonegap-build": "0.10.0",
@@ -71,6 +71,10 @@
     {
       "name": "Suraj Pindoria",
       "email": "suraj.pindoria@yahoo.com"
+    },
+    {
+      "name": "Tommy-Carlos Williams",
+      "email": "tommy@devgeeks.org"
     }
   ],
   "templates": {
