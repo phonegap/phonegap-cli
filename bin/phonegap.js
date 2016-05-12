@@ -32,8 +32,8 @@ function runPhoneGapCommand() {
         // tracking module will skip if it is not enabled
 
         tracking.trackEvent("pg-cli " + version,
-                            process.argv[2],
-                            process.argv[3],
+                            process.argv[2] || "-",
+                            process.argv[3] || "-",
                             e ? e.exitCode || 1 : 0 );
 
         // if we receive an error, then exit with an error status
