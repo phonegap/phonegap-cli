@@ -18,6 +18,7 @@ Commands:
   serve                serve a phonegap project
   version              output version number
   push                 send test push notification
+  tracking             display tracking opt-in settings
 
 Additional Commands:
 
