@@ -93,6 +93,10 @@
     "react-hot-loader": {
       "description": "Starter PhoneGap project using React.js, Babel, Webpack and Hot Reloading.",
       "npm": "phonegap-template-react-hot-loader"
+    },
+    "star-track": {
+      "description": "An example app using Framework7 and the Spotify API.",
+      "npm": "phonegap-app-star-track"
     }
   }
 }
