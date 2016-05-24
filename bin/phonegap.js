@@ -22,25 +22,21 @@ else {
     runPhoneGapCommand();
 }
 
-/*!
+/*
  * Run the command-line client.
  */
 function runPhoneGapCommand() {
-
+    // pass it into normal flow
     cli.argv(process.argv, function(e) {
-
-        // tracking module will skip if it is not enabled
-
-        tracking.trackEvent("pg-cli " + version,
-                            process.argv[2] || "-",
-                            process.argv[3] || "-",
-                            e ? e.exitCode || 1 : 0 );
-
-        // if we receive an error, then exit with an error status
+        // if we received an error, then we will exit with an error status
         // if an exit code was attached to the error, then use it
         // otherwise default to 1.
-        if (e) {
-            process.exit(e.exitCode || 1);
-        }
+        var exitCode = e ? e.exitCode || 1 : 0;
+        // tracking module will skip if it is not enabled
+        tracking.trackEvent("phonegap@" + version,
+                            process.argv[2] || "-",
+                            process.argv[3] || "-",
+                            exitCode);
+        process.exit(exitCode);
     });
 }
