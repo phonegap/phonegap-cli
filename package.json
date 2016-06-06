@@ -20,7 +20,8 @@
     "phonegap": "./bin/phonegap.js"
   },
   "scripts": {
-    "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec"
+    "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec",
+    "test-sanitize": "node node_modules/jasmine-node/bin/jasmine-node --color spec/cli/util/sanitize-args.spec.js"
   },
   "engineStrict": "true",
   "engines": {
