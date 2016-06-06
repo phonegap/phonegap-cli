@@ -39,6 +39,7 @@
       platform [command]   update a platform version
       help [command]       output usage information
       version              output version number
+      analytics            turn analytics on or off, or view current status
 
     Options:
 
@@ -274,9 +275,15 @@ There are a few steps that should be taken when upgrading to a new version of th
 
         $ npm publish
 
+## Analytics
+
+Please read our [privacy policy](http://www.adobe.com/privacy.html) for more information on the
+data we collect.
+
 [travis-ci-img]: https://travis-ci.org/phonegap/phonegap-cli.svg?branch=master
 [travis-ci-url]: http://travis-ci.org/phonegap/phonegap-cli
 [package-template]: https://github.com/phonegap/phonegap-cli/blob/035057713c613cc0488e4b0beb5b72c4c820d54a/package.json#L67-L76
 [bithound-img]: https://www.bithound.io/github/phonegap/phonegap-cli/badges/score.svg
 [bithound-url]: https://www.bithound.io/github/phonegap/phonegap-cli
+
 
