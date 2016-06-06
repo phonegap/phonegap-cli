@@ -6,15 +6,15 @@
 
 var CLI = require('../lib/cli');
 var cli = new CLI();
-var tracking = cli.tracking;
+var analytics = cli.analytics;
 var version = require('../package.json').version;
 var sanitizeArgs = require('../lib/cli/util/sanitize-args');
 
-if (tracking.statusUnknown()) {
-    tracking.prompt(function() {
-        // special case, if it is a 'phonegap tracking' command we don't want
+if (analytics.statusUnknown()) {
+    analytics.prompt(function() {
+        // special case, if it is a 'phonegap analytics' command we don't want
         // to run it because the prompt will have already done the work
-        if (process.argv[2] != "tracking") {
+        if (process.argv[2] != "analytics") {
             runPhoneGapCommand();
         }
     });
@@ -35,8 +35,8 @@ function runPhoneGapCommand() {
         var exitCode = e ? e.exitCode || 1 : 0;
         var args = Array.prototype.slice.call(process.argv);
         var cleanedResult = sanitizeArgs.clean(args.slice(2));
-        // tracking module will skip if it is not enabled
-        tracking.trackEvent("phonegap@" + version,
+        // analytics module will skip if it is not enabled
+        analytics.trackEvent("phonegap@" + version,
                             cleanedResult.command,
                             cleanedResult.params,
                             exitCode);
