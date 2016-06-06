@@ -56,7 +56,7 @@ describe('sanitize-args', function() {
     it('should return all args for basic commands',function(done) {
         var params = ["a", "b", "c"];
         var commands = ["build", "version", "-v", "prepare", "compile", "info", "template","install","emulate"];
-        commands.forEach(function(elem){
+        commands.forEach(function(elem) {
             var result = sanitizeArgs.clean([elem].concat(params));
             expect(result).toBeDefined();
             expect(result.command).toBeDefined();

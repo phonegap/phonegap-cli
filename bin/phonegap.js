@@ -10,11 +10,11 @@ var tracking = cli.tracking;
 var version = require('../package.json').version;
 var sanitizeArgs = require('../lib/cli/util/sanitize-args');
 
-if(tracking.statusUnknown()) {
-    tracking.prompt(function(){
+if (tracking.statusUnknown()) {
+    tracking.prompt(function() {
         // special case, if it is a 'phonegap tracking' command we don't want
         // to run it because the prompt will have already done the work
-        if(process.argv[2] != "tracking"){
+        if (process.argv[2] != "tracking") {
             runPhoneGapCommand();
         }
     });
