@@ -20,7 +20,8 @@
     "phonegap": "./bin/phonegap.js"
   },
   "scripts": {
-    "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec"
+    "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec",
+    "test-sanitize": "node node_modules/jasmine-node/bin/jasmine-node --color spec/cli/util/sanitize-args.spec.js"
   },
   "engineStrict": "true",
   "engines": {
@@ -30,6 +31,7 @@
     "colors": "0.6.0-1",
     "connect-phonegap": "0.21.7",
     "cordova": "6.1.1",
+    "insight": "0.8.2",
     "minimist": "0.1.0",
     "opener": "1.4.1",
     "phonegap-build": "0.10.0",
