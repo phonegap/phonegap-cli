@@ -99,8 +99,7 @@
       "npm": "phonegap-app-star-track"
     },
     "wikitude-augmented-reality": {
-      "description": "An example app using Wikitude's augmented reality plugin",
-      "npm": "phonegap-app-augmented-reality"
+      "description": "Augmented Reality demo app powered by the Wikitude plugin"
     }
   }
 }
