@@ -14,6 +14,12 @@ Options:
 
 Examples:
 
+  MacOS:
   $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service gcm --payload '{ "data": { "title": "Hello", "message": "World"} }'
 
   $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service apns --payload '{ "aps": { "alert": "Hello World", "badge": 5 } }'
+
+  Windows:
+  $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service gcm --payload "{ \"data\":{ \"title\": \"Hello\", \"message\": \"World\"} }"
+
+  $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service apns --payload "{ \"aps\": { \"alert\": \"Hello World\", \"badge\": 5 } }"
