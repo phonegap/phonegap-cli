@@ -14,7 +14,7 @@ if (analytics.statusUnknown()) {
     analytics.prompt(function() {
         // special case, if it is a 'phonegap analytics' command we don't want
         // to run it because the prompt will have already done the work
-        if (process.argv[2] != "analytics") {
+        if (process.argv[2] !== 'analytics') {
             runPhoneGapCommand();
         }
     });
@@ -36,7 +36,7 @@ function runPhoneGapCommand() {
         var args = Array.prototype.slice.call(process.argv);
         var cleanedResult = sanitizeArgs.clean(args.slice(2));
         // analytics module will skip if it is not enabled
-        analytics.trackEvent("phonegap@" + version,
+        analytics.trackEvent('phonegap@' + version,
                             cleanedResult.command,
                             cleanedResult.params,
                             exitCode);
