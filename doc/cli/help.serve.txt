@@ -14,8 +14,17 @@ Options:
   --no-autoreload      disable app refresh on file changes
   --browser            enable desktop browser support (default: true)
   --no-browser         disable desktop browser support
+  --console            enable console.log support to the terminal (default: true)
+  --no-console         disable console.log support to the terminal
+  --homepage           enable three-finger tap to go back to the server input page (default: true)
+  --no-homepage        disable three-finger tap
   --localtunnel        enable a local tunnel for public access (default: false)
-
+  --push               enable the app to register for push notifications
+  --no-push            disable the app from registering push notifications
+  --proxy              enable the browser to make xhr calls using a proxy
+  --no-proxy           disable proxying on the browser
+  --refresh            enable four finger tap to refresh to the app's current page (default: true)
+  --no-refresh         disable four finger tap
 Alias:
 
   $0 app
@@ -27,5 +36,9 @@ Examples:
   $ $0 serve --no-autoreload
   $ $0 serve --browser
   $ $0 serve --no-browser
+  $ $0 serve --console
+  $ $0 serve --no-console
+  $ $0 serve --homepage
+  $ $0 serve --no-homepage
   $ $0 serve --localtunnel
   $ $0 app
