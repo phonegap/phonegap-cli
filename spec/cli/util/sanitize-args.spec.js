@@ -74,7 +74,7 @@ describe('sanitize-args', function() {
         var result = sanitizeArgs.clean(["cordova", "-v"]);
         expect(result).toBeDefined();
         expect(result.command).toBe("cordova:-v");
-        expect(result.params).toBe("");
+        expect(result.params).toBe("-");
         done();
     });
 

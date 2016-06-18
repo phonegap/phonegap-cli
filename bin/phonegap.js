@@ -36,10 +36,10 @@ function runPhoneGapCommand() {
         var args = Array.prototype.slice.call(process.argv);
         var cleanedResult = sanitizeArgs.clean(args.slice(2));
         // analytics module will skip if it is not enabled
-        analytics.trackEvent('phonegap@' + version,
-                            cleanedResult.command,
-                            cleanedResult.params,
-                            exitCode);
+        analytics.trackEvent(cleanedResult.command,
+                             cleanedResult.params,
+                             exitCode + "",
+                            cleanedResult.count);
         process.exitCode = exitCode;
     });
 }
