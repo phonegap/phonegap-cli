@@ -18,6 +18,7 @@ Commands:
   serve                serve a phonegap project
   version              output version number
   push                 send test push notification
+  analytics            turn analytics on or off, or view current status
 
 Additional Commands:
 
@@ -43,3 +44,4 @@ Examples:
   $ $0 create path/to/my-app
   $ cd my-app/
   $ $0 run ios
+  $ phonegap analytics on
