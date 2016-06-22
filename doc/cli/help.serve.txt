@@ -16,6 +16,8 @@ Options:
   --no-browser         disable desktop browser support
   --console            enable console.log support to the terminal (default: true)
   --no-console         disable console.log support to the terminal
+  --deploy             enable the app to actually load updates or new apps from the server when already connected (default: true)
+  --no-deploy          disable the app from loading updates or new apps when already connected
   --homepage           enable three-finger tap to go back to the server input page (default: true)
   --no-homepage        disable three-finger tap
   --localtunnel        enable a local tunnel for public access (default: false)
