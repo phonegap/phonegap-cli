@@ -81,7 +81,7 @@ describe('phonegap remote install <platform>', function() {
         it('should try to install the app', function() {
             cli.argv(argv.concat(['remote', 'install', 'android']));
             expect(phonegap.remote.install).toHaveBeenCalledWith(
-                { platforms: ['android'] },
+                jasmine.objectContaining({ platforms: ['android'] }),
                 jasmine.any(Function)
             );
         });

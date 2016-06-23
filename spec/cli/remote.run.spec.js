@@ -81,7 +81,7 @@ describe('phonegap remote run <platform>', function() {
         it('should try to run the project', function() {
             cli.argv(argv.concat(['remote', 'run', 'android']));
             expect(phonegap.remote.run).toHaveBeenCalledWith(
-                { platforms: ['android'] },
+                jasmine.objectContaining({ platforms: ['android'] }),
                 jasmine.any(Function)
             );
         });
