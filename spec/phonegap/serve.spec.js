@@ -167,12 +167,14 @@ describe("PhoneGap serve", function () {
             it("should call connect-phonegap listen with default options", function (){
                 preparePromise = realPromise;
                 serve(invalidOptions);
-                expect(server.listen).toHaveBeenCalledWith({
+                expect(server.listen).toHaveBeenCalledWith(
+                jasmine.objectContaining({
                     port: defaultOptions.port,
                     autoreload: defaultOptions.autoreload,
                     localtunnel: defaultOptions.localtunnel,
                     phonegap: jasmine.any(Object)
-                });
+                    })
+                );
             });
  
             it("should call connect-phonegap listen with corrected autoreload option", function (){

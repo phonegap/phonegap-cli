@@ -135,7 +135,7 @@ describe('phonegap remote login', function() {
         it('should try to login', function() {
             cli.argv(argv.concat(['remote', 'login', '--username', 'zelda']));
             expect(phonegap.remote.login).toHaveBeenCalledWith(
-                { username: 'zelda', password: undefined },
+                jasmine.objectContaining({ username: 'zelda', password: undefined }),
                 jasmine.any(Function)
             );
         });
@@ -145,7 +145,7 @@ describe('phonegap remote login', function() {
         it('should try to login', function() {
             cli.argv(argv.concat(['remote', 'login', '-u', 'zelda']));
             expect(phonegap.remote.login).toHaveBeenCalledWith(
-                { username: 'zelda', password: undefined },
+                jasmine.objectContaining({ username: 'zelda', password: undefined }),
                 jasmine.any(Function)
             );
         });
@@ -155,7 +155,7 @@ describe('phonegap remote login', function() {
         it('should try to login', function() {
             cli.argv(argv.concat(['remote', 'login', '--password', 'tr1force']));
             expect(phonegap.remote.login).toHaveBeenCalledWith(
-                { username: undefined, password: 'tr1force' },
+                jasmine.objectContaining({ username: undefined, password: 'tr1force' }),
                 jasmine.any(Function)
             );
         });
@@ -165,7 +165,7 @@ describe('phonegap remote login', function() {
         it('should try to login', function() {
             cli.argv(argv.concat(['remote', 'login', '-p', 'tr1force']));
             expect(phonegap.remote.login).toHaveBeenCalledWith(
-                { username: undefined, password: 'tr1force' },
+                jasmine.objectContaining({ username: undefined, password: 'tr1force' }),
                 jasmine.any(Function)
             );
         });
@@ -175,7 +175,7 @@ describe('phonegap remote login', function() {
         it('should try to login', function() {
             cli.argv(argv.concat(['remote', 'login', '--username', 'zelda', '--password', 'tr1force']));
             expect(phonegap.remote.login).toHaveBeenCalledWith(
-                { username: 'zelda', password: 'tr1force' },
+                jasmine.objectContaining({ username: 'zelda', password: 'tr1force' }),
                 jasmine.any(Function)
             );
         });
