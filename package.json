@@ -33,6 +33,7 @@
     "colors": "0.6.0-1",
     "connect-phonegap": "0.24.5",
     "cordova": "6.4.0",
+    "cordova-create": "^1.0.1",
     "insight": "0.8.2",
     "configstore": "1.4.0",
     "os-name": "2.0.1",
