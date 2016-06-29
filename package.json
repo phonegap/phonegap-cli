@@ -30,6 +30,7 @@
     "colors": "0.6.0-1",
     "connect-phonegap": "0.22.0",
     "cordova": "6.1.1",
+    "cordova-create": "file:///Users/ctran/cordova/cordova-create",
     "insight": "0.8.2",
     "minimist": "0.1.0",
     "opener": "1.4.1",
@@ -92,8 +93,8 @@
       "npm": "phonegap-template-framework7"
     },
     "push": {
-        "description": "An example app for getting started with push notifications",
-        "npm": "phonegap-template-push"
+      "description": "An example app for getting started with push notifications",
+      "npm": "phonegap-template-push"
     },
     "react-hot-loader": {
       "description": "Starter PhoneGap project using React.js, Babel, Webpack and Hot Reloading.",
