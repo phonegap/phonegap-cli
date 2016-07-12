@@ -20,7 +20,9 @@
     "phonegap": "./bin/phonegap.js"
   },
   "scripts": {
-    "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec"
+    "test": "npm run prespec && npm run spec",
+    "spec": "node node_modules/jasmine-node/bin/jasmine-node --color spec",
+    "prespec": "node node_modules/jasmine-node/bin/jasmine-node --color pre_spec"
   },
   "engineStrict": "true",
   "engines": {
@@ -43,8 +45,9 @@
     "update-notifier": "^0.6.0"
   },
   "devDependencies": {
+    "chdir": "0.0.x",
     "jasmine-node": "1.14.5",
-    "chdir": "0.0.x"
+    "mockery": "^1.7.0"
   },
   "optionalDependencies": {},
   "contributors": [
