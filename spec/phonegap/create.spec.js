@@ -77,32 +77,17 @@ describe('phonegap.create(options, [callback])', function() {
         expect(phonegap.create(options)).toEqual(phonegap);
     });
 
-    describe('successfully created a project', function() {
-        beforeEach(function() {
-            phonegap.cordova.andCallFake(function(options, callback) {
-                callback(null);
-            });
-        });
-
-        /* Removed following tests. Config.xml is handled by Cordova Create and link-to has been deprecated
+        /* Removed following tests:
+        ** Config.xml is handled by Cordova Create
+        ** link-to has been deprecated
+        ** callback test moved to ../prespec/create.spec.js
         'when my-app/www/config.xml exists should move it to my-app/config.xml'
         'when my-app/www/config.xml does not exist should not move it to my-app/config.xml'       
         'when updating config.xml should parse the my-app/config.xml'
         'when config.xml does not exist should trigger a "warn" event'
         'when --link-to is provided should not move config.xml should not update config.xml'
-	*/
-
-        describe('when complete', function() {
-            //ToDo: @carynbear callback is made on successes, but getting an error still
-            it('should trigger callback without an error', function(done) {
-                phonegap.create(options, function(e) {
-                    expect(e).toBeNull();
-                    done();
-                });
-            });
-        });
-    });
-
+        'when complete should trigger callback without an error'
+        
     describe('failed to create a project', function() {
         beforeEach(function() {
             phonegap.cordova.andCallFake(function(options, callback) {
