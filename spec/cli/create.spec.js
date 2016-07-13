@@ -85,7 +85,6 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 'verbose': false,
                 'template': undefined
             },
@@ -102,7 +101,6 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -118,7 +116,6 @@ describe('phonegap create <path>', function() {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -148,7 +145,6 @@ describe('phonegap create <path>', function() {
                     }
                 },
                 'copy-from': undefined,
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -164,7 +160,6 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -180,7 +175,6 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -196,7 +190,6 @@ describe('phonegap create <path>', function() {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -212,7 +205,6 @@ describe('phonegap create <path>', function() {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -232,7 +224,6 @@ describe('phonegap create <path>', function() {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -252,7 +243,6 @@ describe('phonegap create <path>', function() {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -271,7 +261,6 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': 'http://example.com/app.tar.gz',
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -290,7 +279,6 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': 'http://example.com/app.tar.gz',
-                'link-to': undefined,
                 'verbose': false
             },
             jasmine.any(Function));
@@ -328,7 +316,6 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 template: 'hello-world',
                 'verbose': false
             },
@@ -348,7 +335,6 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined,
                 template: 'hello-world',
                 'verbose': false
             },
