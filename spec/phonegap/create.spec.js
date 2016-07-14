@@ -103,14 +103,35 @@ describe('phonegap.create(options, [callback])', function() {
 });
 
 describe('phonegap create end to end: ', function(){
-    beforeEach(function(){
-        //create tmp folder
+    var tmpDir, appName, appId, project;
+    tmpDir = helpers.tmpDir('pg_create_test');
+    appName = 'TestBase';
+    appId = 'org.testing';
+    
+
+var configSubDirPkgJson = {
+    lib: {
+        www: {
+            template: true,
+            url: path.join(__dirname, 'templates', 'withsubdirectory_package_json'),
+            version: ''
+        }
+    }
+};
+
+    beforeEach(function() {
+        tmpDir = helpers.tmpDir('pg_create_test');
+        project = path.join(tmpDir, appName);
     });
 
-    afterEach(function(){
-        //delete tmp folder
-    });
 
+    afterEach(function() {
+        process.chdir(path.join(__dirname, '..'));  // Needed to rm the dir on Windows.
+        if(fs.existsSync(tmpDir)) {
+            shell.rm('-rf', dir);
+        }
+        shell.rm('-rf', tmpDir);
+    });
 
     describe('package json exists', function(){
         xit('should not create package.json' function(){
