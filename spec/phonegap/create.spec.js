@@ -8,6 +8,7 @@ var PhoneGap = require('../../lib/phonegap'),
     network = require('../../lib/phonegap/util/network'),
     shell = require('shelljs'),
     path = require('path'),
+    os = require('os'),
     fs = require('fs'),
     phonegap,
     options,
@@ -44,6 +45,10 @@ describe('phonegap.create(options, [callback])', function() {
         });
 
         spyOn(process.stderr, 'write');
+    });
+
+    afterEach(function(){
+        this.removeAllSpies();
     });
 
     it('should require options', function() {
@@ -107,3 +112,49 @@ describe('phonegap.create(options, [callback])', function() {
         });
     });
 });
+
+describe('phonegap create end to end: ', function(){
+    beforeEach(function(){
+        //create tmp folder
+    });
+
+    afterEach(function(){
+        //delete tmp folder
+    });
+
+
+    describe('package json exists', function(){
+        xit('should not create package.json' function(){
+            //code here to call create
+        });
+        xit('should have the latest production cordova dependency', function(){
+
+        });
+    });
+
+    describe('package json does not exist', function(){
+        xit('should warn and create package.json', function(){
+            //code here to call create
+        });
+        xit('should have correct name, version, author, description as in config.xml', function(){
+
+        });
+        xit('should have the latest production cordova dependency', function(){
+
+        });
+
+    });
+
+});
+
+function tmpDir (subdir) {
+    var dir = path.join(os.tmpdir(), 'e2e-test');
+    if (subdir) {
+        dir = path.join(dir, subdir);
+    }
+    if(fs.existsSync(dir)) {
+        shell.rm('-rf', dir);
+    }
+    shell.mkdir('-p', dir);
+    return dir;
+};
