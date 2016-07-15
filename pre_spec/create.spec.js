@@ -32,18 +32,17 @@ describe('create.new.spec.js "phonegap.create"', function() {
             path: '/some/path/to/app/www'
         };
 
-        configParserSpy = {
-            name: jasmine.createSpy('configParser name'),
-            version: jasmine.createSpy('configParser version')
-        };
-        spyOn(cordovaCommon, 'ConfigParser').andCallFake(function(){
-            this.name = configParserSpy.name,
-            this.version = configParserSpy.version
-        });
+        // configParserSpy = {
+        //     name: jasmine.createSpy('configParser name'),
+        //     version: jasmine.createSpy('configParser version')
+        // };
+        // spyOn(cordovaCommon, 'ConfigParser').andCallFake(function(){
+        //     this.name = configParserSpy.name,
+        //     this.version = configParserSpy.version
+        // });
         
         configParserSpy = jasmine.createSpyObj('configParserSpy', ['name', 'version']);
-        spyOn(cordovaCommon, 'ConfigParser').andReturn(configParserSpy);
-        
+        spyOn(cordovaCommon, 'ConfigParser').andReturn(configParserSpy); 
 
         spyOn(fs, 'writeFileSync').andCallFake(function(){});
         spyOn(fs, 'existsSync').andCallFake(function(){return false}); //If true, then will try to open pkg json which doesn't exist
