@@ -269,6 +269,13 @@ describe('sanitize-args', function() {
     /*
         remote [login*, logout, build, install, run]
     */
+    it('should handle `phonegap remote` calls without additional args',function(done) {
+        var result = sanitizeArgs.clean(["remote"]);
+        expect(result).toBeDefined();
+        expect(result.params).toBe("");
+        done();
+    });
+
     it('should clean `phonegap remote login` calls',function(done) {
         var result = sanitizeArgs.clean(["remote","login","secret"]);
         expect(result).toBeDefined();
