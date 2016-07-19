@@ -90,6 +90,15 @@ describe('sanitize-args', function() {
         done();
     });
 
+    it('should strip `create` calls with args like --key=???',function(done) {
+        var result = sanitizeArgs.clean(["create","--key1=secret","--key2=alsosecret"]);
+        expect(result).toBeDefined();
+        expect(result.command).toBe("create");
+        // sani result is count of args, and what flags are present
+        expect(result.params).toBe("count:2 --key1,--key2");
+        done();
+    });
+
     it('should handle `cordova create` calls',function(done) {
         var result = sanitizeArgs.clean(["cordova", "create", "--verbose","secretProjectPath","projName", "-d"]);
         expect(result.command).toBe("cordova:create");
