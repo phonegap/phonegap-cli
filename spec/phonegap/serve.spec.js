@@ -11,6 +11,10 @@ var serveModule = require("../../lib/phonegap/serve"),
 var dummyPromise = { then: function() {} },
     realPromise = { then: function(f) { f(); } };
 
+// ToDo: @carynbear verify tests behave the expected way
+var CordovaSpy = createSpy('Phonegap Cordova Spy').andCallFake(function(cmd, callback){
+    callback();
+});
 
 describe("PhoneGap serve", function () {
     
@@ -40,7 +44,9 @@ describe("PhoneGap serve", function () {
             // define wrapper as a stub
             wrapper = {
                 emit: function(){},
-                on: function(){}
+                on: function(){},
+                // ToDo: @carynbear should put in some manual tests to make sure shelling out works.
+                cordova: CordovaSpy
             };
 
             // initialize the serve function with wrapper
@@ -50,9 +56,6 @@ describe("PhoneGap serve", function () {
             spyOn(project,'cd').andReturn(true);
 
             preparePromise = dummyPromise;
-            spyOn(cordova, 'prepare').andCallFake(function(platforms, callback) {
-                callback(true);
-            });
 
             spyOn(server,'listen').andReturn({ on: function() { return this; }});
         });
@@ -103,8 +106,8 @@ describe("PhoneGap serve", function () {
 
         it('should prepare the build first', function() {
             serve({});
-            expect(cordova.prepare).toHaveBeenCalled();
-            expect(cordova.prepare).toHaveBeenCalledWith([], jasmine.any(Function));
+            expect(CordovaSpy).toHaveBeenCalled();
+            // expect(CordovaSpy).toHaveBeenCalledWith({'cordova prepare'}, jasmine.any(Function));
         });
 
         it("should call connect-phonegap listen", function (){
