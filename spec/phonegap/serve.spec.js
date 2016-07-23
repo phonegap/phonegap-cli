@@ -1,8 +1,7 @@
 
 var serveModule = require("../../lib/phonegap/serve"),
     http = require("http"),
-    server = require("connect-phonegap"),
-    cordova = require('../../lib/cordova').cordova,
+    server = require("connect-phonegap"), 
     project = require("../../lib/phonegap/util/project"),
     preparePromise = null,
     serve = null;
