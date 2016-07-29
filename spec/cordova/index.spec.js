@@ -9,7 +9,7 @@ var cordova = require('../../lib/cordova'),
  * Specification: cordova
  */
 
-// ToDo: @carynbear phonegap is checking that cordova is a local dependency
+// ToDo: @carynbear clean this up; phonegap is checking that cordova is a local dependency
 describe('cordova.cordova', function() {
     xit('should be defined', function() {
         expect(cordova.cordova).toEqual(jasmine.any(Object));
@@ -17,14 +17,14 @@ describe('cordova.cordova', function() {
     });
 });
 
-// ToDo: @carynbear phonegap is checking that cordova is a local dependency
+// ToDo: @carynbear clean this up; phonegap is checking that cordova is a local dependency
 describe('cordova.lib', function() {
     xit('should be defined', function() {
         expect(cordova.lib).toEqual(jasmine.any(Object));
         expect(cordova.lib).toEqual(original);
     });
 
-    // ToDo: @carynbear phonegap is checking that cordova is a local dependency
+    // ToDo: @carynbear clean this up; phonegap is checking that cordova is a local dependency
     xit('should customize the binary name (binname)', function() {
         expect(cordova.lib.binname).toEqual('phonegap');
     });
