@@ -19,7 +19,7 @@ describe('$ phonegap cordova', function() {
         spyOn(process.stderr, 'write');
     });
 
-    //ToDo: @carynbear decoupling requires that cordova commands be run in a project; cannot test with current implementation
+    //ToDo: @carynbear clean this up; decoupling requires that cordova commands be run in a project; cannot test with current implementation
     xit('should bypass the PhoneGap CLI chain', function(done) {
         var version = "12345"
         spyOn(phonegap, 'cordova').andReturn(version);
