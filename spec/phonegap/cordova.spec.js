@@ -128,16 +128,18 @@ describe('phonegap.cordova(options, [callback])', function() {
         }, TIMEOUT);
 
         it('should output stdout data', function(done) {
+            var pass = false;
             var rawSpy = createSpy('raw output').andCallFake(function(data){
-                expect(data).toEqual('hello stdout');  
+                pass = (data == 'hello stdout') || data;
             });
-            phonegap.on('raw', rawSpy);
+            phonegap.on('log', rawSpy);
             phonegap.cordova(options, function(err){
                 expect(err).toBeUndefined();
             });
             process.nextTick(function(){
                 processSpy.stdout.emit('data', 'hello stdout');
                 expect(rawSpy).toHaveBeenCalled();
+                expect(pass).toBe(true);
                 done();
             });
         }, TIMEOUT);
@@ -198,7 +200,7 @@ describe('phonegap.cordova(options, [callback])', function() {
                 shell.exec.andCallThrough();
                 console.log(options);
             });
-            // ToDo: @carynbear... this not testable with current dependency implementation b/c no cordova to call without project.
+            // ToDo: @carynbear clean this up; this not testable with current dependency implementation b/c no cordova to call without project.
             // expects failure when calling cordova build ios on a non-project
             xit('should trigger the callback with an error', function(done) {
                 phonegap.cordova(options, function(e) {
