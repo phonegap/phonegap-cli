@@ -47,14 +47,8 @@ describe("PhoneGap serve", function () {
             wrapper = {
                 emit: function(){},
                 on: function(){},
-                // ToDo: @carynbear should put in some manual tests to make sure shelling out works.
                 cordova : CordovaSpy,
                 util : {
-                    // cordova : {
-                    //     prepare : createSpy('Phonegap Util Cordova Prepare Spy'),
-                    //     platform : createSpy('Phonegap Util Cordova Platform Spy'),
-                    //     plugin : createSpy('Phonegap Util Cordova Plugin Spy')
-                    // }
                 }
             };
 

@@ -194,7 +194,7 @@ describe('phonegap.cordova(options, [callback])', function() {
                 shell.exec.andCallThrough();
                 console.log(options);
             });
-            // ToDo: @carynbear clean this up; this not testable with current dependency implementation b/c no cordova to call without project.
+            // ToDo: @carynbear this not testable with current dependency implementation b/c no cordova to call without project.
             // expects failure when calling cordova build ios on a non-project
             xit('should trigger the callback with an error', function(done) {
                 phonegap.cordova(options, function(e) {
