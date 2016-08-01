@@ -29,7 +29,6 @@ describe('$ phonegap [options] commands', function() {
     });
 
     describe('on an error', function() {
-        // ToDo: @carynbear clean this up; can't really use cordova outside a project
         it('should have non-zero exit code', function() {
             var process = shell.exec(bin + ' cordova noop', { silent: true });
             expect(process.code).not.toEqual(0);

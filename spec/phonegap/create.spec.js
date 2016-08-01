@@ -84,7 +84,7 @@ describe('phonegap.create(options, [callback])', function() {
         'when updating config.xml should parse the my-app/config.xml'
         'when config.xml does not exist should trigger a "warn" event'
         'when --link-to is provided should not move config.xml should not update config.xml'
-        'when complete should trigger callback without an error'
+        'when complete should trigger callback without an error'*/
         
     describe('failed to create a project', function() {
         beforeEach(function() {
@@ -133,11 +133,11 @@ var configSubDirPkgJson = {
         shell.rm('-rf', tmpDir);
     });
 
-    describe('package json exists', function(){
-        xit('should not create package.json' function(){
+    /*describe('package json exists', function() {
+        xit('should not create package.json' function() {
             //code here to call create
         });
-        xit('should have the latest production cordova dependency', function(){
+        xit('should have the latest production cordova dependency', function() {
 
         });
     });
@@ -153,7 +153,7 @@ var configSubDirPkgJson = {
 
         });
 
-    });
+    });*/
 
 });
 
