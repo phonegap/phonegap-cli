@@ -10,22 +10,21 @@ var serveModule = require("../../lib/phonegap/serve"),
 var dummyPromise = { then: function() {} },
     realPromise = { then: function(f) { f(); } };
 
-// ToDo: @carynbear verify tests behave the expected way
 var CordovaSpy;
 
 describe("PhoneGap serve", function () {
     
-    // describe("module", function () {
+    describe("module", function () {
  
-    //     it("should export at object", function() {
-    //         expect(serveModule).toEqual(any(Object)); 
-    //     });
+        it("should export at object", function() {
+            expect(serveModule).toEqual(any(Object)); 
+        });
 
-    //     it("should export an object with a create parameter", function() {
-    //         expect(serveModule.create).toEqual(any(Function));
-    //     });
+        it("should export an object with a create parameter", function() {
+            expect(serveModule.create).toEqual(any(Function));
+        });
     
-    // });
+    });
 
     describe("when called", function() {
         var validOptions,
@@ -47,9 +46,7 @@ describe("PhoneGap serve", function () {
             wrapper = {
                 emit: function(){},
                 on: function(){},
-                cordova : CordovaSpy,
-                util : {
-                }
+                cordova : CordovaSpy
             };
 
             // initialize the serve function with wrapper
