@@ -8,7 +8,6 @@ var serveModule = require("../../lib/phonegap/serve"),
 var dummyPromise = { then: function() {} },
     realPromise = { then: function(f) { f(); } };
 
-// ToDo: @carynbear verify tests behave the expected way
 var CordovaSpy;
 
 describe("PhoneGap serve", function () {
