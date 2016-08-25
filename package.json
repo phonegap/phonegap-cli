@@ -104,7 +104,8 @@
       "npm": "phonegap-app-star-track"
     },
     "wikitude-augmented-reality": {
-      "description": "Augmented Reality demo app powered by the Wikitude plugin"
+      "description": "Augmented Reality demo app powered by the Wikitude plugin",
+      "npm": "phonegap-app-augmented-reality"
     }
   }
 }
