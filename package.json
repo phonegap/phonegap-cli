@@ -83,6 +83,10 @@
       "description": "A blank and empty PhoneGap app.",
       "npm": "phonegap-template-blank"
     },
+    "csdk-image-editor": {
+      "description": "A template for using the Creative Cloud Image Editor.",
+      "npm": "phonegap-template-csdk-image-editor"
+    },
     "hello-world": {
       "description": "Default hello world app for PhoneGap.",
       "npm": "phonegap-template-hello-world"
