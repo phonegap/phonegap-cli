@@ -5,12 +5,17 @@
 var PhoneGap = require('../../lib/phonegap'),
     events = require('events'),
     cordova = require('../../lib/cordova'),
+    cordovaDependency = require('phonegap-cordova-dependence'),
+    Q = require('q'),
     fs = require('fs'),
     path = require('path'),
     shell = require('shelljs'),
     phonegap,
     processSpy,
-    options;
+    utilSpy,
+    options,
+    cordovaDependencySpy
+    TIMEOUT = 10000;
 
 /*!
  * Specification: phonegap.cordova(options, [callback])
@@ -22,18 +27,38 @@ describe('phonegap.cordova(options, [callback])', function() {
         options = {
             cmd: 'cordova build ios'
         };
-        spyOn(cordova.util, 'listPlatforms').andReturn(['ios']);
+        utilSpy = {
+            listPlatforms : function(){
+                return ['ios']
+            },
+            isCordova : function(){
+                return '/some/path'
+            }
+        };
+        spyOn(cordovaDependency, 'exec').andCallFake(function(){
+            return Q('');
+        });
+        spyOn(cordova.util, 'listPlatforms').andCallFake(utilSpy.listPlatforms);
+        spyOn(cordova.util, 'isCordova').andCallFake(utilSpy.isCordova);
         processSpy = {
             stdout: new events.EventEmitter(),
             stderr: new events.EventEmitter()
         };
-        spyOn(shell, 'exec').andReturn(processSpy);
+        spyOn(shell, 'exec').andCallFake(function(command, options, callback) {
+            callback(0, '');
+            return processSpy;
+        });
         // disable adding phonegap.js
-        spyOn(cordova.util, 'isCordova').andReturn('/some/path');
-        spyOn(fs, 'existsSync').andReturn(false);
+        spyOn(fs, 'existsSync').andCallFake(function(){
+            return true;
+        });
         spyOn(shell, 'cp');
         // disable phonegap.js deprecation warning
         spyOn(shell, 'grep').andReturn('');
+    });
+
+    afterEach(function(){
+        this.removeAllSpies();
     });
 
     it('should require options', function() {
@@ -60,18 +85,21 @@ describe('phonegap.cordova(options, [callback])', function() {
         expect(phonegap.cordova(options)).toEqual(phonegap);
     });
 
-    it('should try to execute the cordova command', function() {
-        phonegap.cordova(options);
-        expect(shell.exec).toHaveBeenCalled();
-        expect(shell.exec.mostRecentCall.args[0]).toMatch(options.cmd);
-    });
+    it('should try to execute the cordova command', function(done) {
+        phonegap.cordova(options, function(err){
+            expect(err).toBeUndefined();
+            expect(shell.exec).toHaveBeenCalled();
+            expect(shell.exec.mostRecentCall.args[0]).toMatch(options.cmd);
+            done();
+        });
+    }, TIMEOUT);
 
     describe('executing a cordova command', function() {
         beforeEach(function() {
             options.verbose = true;
         });
 
-        it('should support spaces in path to cordova executable', function() {
+        it('should support spaces in path to cordova executable', function(done) {
             var fakeResolvedPath = 'C:\\Users\\User Name\\AppData\\Roaming\\npm',
                 _join = path.join;
             // resolve returns a fake Windows OS styled path with a space
@@ -85,28 +113,43 @@ describe('phonegap.cordova(options, [callback])', function() {
                 else
                     return _join.apply(path, arguments);
             });
-
-            phonegap.cordova(options);
-            expect(shell.exec.mostRecentCall.args[0]).toEqual('"C:\\Users\\User Name\\AppData\\Roaming\\npm\\cordova" build ios');
-        });
+            phonegap.cordova(options, function(err){
+                expect(err).toBeUndefined();
+                expect(shell.exec).toHaveBeenCalled();
+                expect(shell.exec.mostRecentCall.args[0]).toEqual('"C:\\Users\\User Name\\AppData\\Roaming\\npm\\cordova" build ios');
+                done();
+            });
+        }, TIMEOUT);
 
         it('should output stdout data', function(done) {
-            phonegap.on('raw', function(data) {
-                expect(data).toEqual('hello stdout');
+            var pass = false;
+            var rawSpy = createSpy('raw output').andCallFake(function(data){
+                pass = (data == 'hello stdout') || data;
+            });
+            phonegap.on('log', rawSpy);
+            phonegap.cordova(options, function(err){
+                expect(err).toBeUndefined();
+            });
+            process.nextTick(function(){
+                processSpy.stdout.emit('data', 'hello stdout');
+                expect(rawSpy).toHaveBeenCalled();
+                expect(pass).toBe(true);
                 done();
             });
-            phonegap.cordova(options);
-            processSpy.stdout.emit('data', 'hello stdout');
-        });
-
+        }, TIMEOUT);
+        
         it('should output stderr data', function(done) {
-            phonegap.on('raw', function(data) {
-                expect(data).toEqual('hello stderr');
+            var rawSpy = createSpy('raw output').andCallFake(function(data){
+                expect(data).toEqual('hello stderr');  
+            })
+            phonegap.on('error', rawSpy);
+            phonegap.cordova(options);
+            process.nextTick(function(){
+                processSpy.stderr.emit('data', 'hello stderr');
+                expect(rawSpy).toHaveBeenCalled();
                 done();
             });
-            phonegap.cordova(options);
-            processSpy.stderr.emit('data', 'hello stderr');
-        });
+        }, TIMEOUT);
 
         describe('successful', function(done) {
             beforeEach(function() {
@@ -136,36 +179,40 @@ describe('phonegap.cordova(options, [callback])', function() {
                 });
             });
 
-            it('should trigger the callback without an error', function(done) {
+            it('should trigger the callback with an error', function(done) {
                 phonegap.cordova(options, function(e) {
                     expect(e).toEqual(jasmine.any(Error));
                     expect(e.exitCode).toEqual(1);
                     done();
                 });
-            });
+            }, TIMEOUT);
         });
 
         describe('when not a valid cordova project', function() {
             beforeEach(function() {
                 cordova.util.isCordova.andReturn(false);
                 shell.exec.andCallThrough();
+                console.log(options);
             });
-
-            it('should trigger the callback without an error', function(done) {
+            // ToDo: @carynbear this not testable with current dependency implementation b/c no cordova to call without project.
+            // expects failure when calling cordova build ios on a non-project
+            xit('should trigger the callback with an error', function(done) {
                 phonegap.cordova(options, function(e) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
                 });
-            });
+            }, TIMEOUT);
         });
     });
 
     describe('adding plugin paths', function() {
-        it('should not alter the plugin path', function() {
+        it('should not alter the plugin path', function(done) {
             options.cmd = 'cordova plugin add http://path/to/cordova-plugin.git';
-            phonegap.cordova(options);
-            expect(shell.exec).toHaveBeenCalled();
-            expect(shell.exec.mostRecentCall.args[0]).toMatch(options.cmd);
+            phonegap.cordova(options, function(e){
+                expect(shell.exec).toHaveBeenCalled();
+                expect(shell.exec.mostRecentCall.args[0]).toMatch(options.cmd);
+                done();
+            });
         });
     });
 
@@ -175,70 +222,115 @@ describe('phonegap.cordova(options, [callback])', function() {
                 cordova.util.listPlatforms.andReturn([]);
             });
 
-            it('cordova prepare <platform>', function() {
+            it('cordova prepare <platform>', function(done) {
                 options.cmd = 'cordova prepare ios';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.argsForCall[0][0]).toMatch('platform add --save ios');
+                    expect(shell.exec.argsForCall[1][0]).toMatch('prepare ios');
+                    done();
+                });
+                
             });
 
-            it('cordova compile <platform>', function() {
+            it('cordova compile <platform>', function(done) {
                 options.cmd = 'cordova compile ios';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.argsForCall[0][0]).toMatch('platform add --save ios');
+                    expect(shell.exec.argsForCall[1][0]).toMatch('compile ios');
+                    done();
+                });
             });
 
-            it('cordova build <platform>', function() {
+            it('cordova build <platform>', function(done) {
                 options.cmd = 'cordova build ios';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.argsForCall[0][0]).toMatch('platform add --save ios');
+                    expect(shell.exec.argsForCall[1][0]).toMatch('build ios');
+                    done();
+                });
             });
 
-            it('cordova run <platform>', function() {
+            it('cordova run <platform>', function(done) {
                 options.cmd = 'cordova run ios';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.argsForCall[0][0]).toMatch('platform add --save ios');
+                    expect(shell.exec.argsForCall[1][0]).toMatch('run ios');
+                    done();
+                });
             });
 
-            it('cordova emulate <platform>', function() {
+            it('cordova emulate <platform>', function(done) {
                 options.cmd = 'cordova emulate ios';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.argsForCall[0][0]).toMatch('platform add --save ios');
+                    expect(shell.exec.argsForCall[1][0]).toMatch('emulate ios');
+                    done();
+                });
             });
 
-            it('not cordova prepare', function() {
+            it('not cordova prepare', function(done) {
                 options.cmd = 'cordova prepare';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                    expect(shell.exec.mostRecentCall.args[0]).toMatch('prepare');
+                    done();
+                });
             });
 
-            it('not cordova compile', function() {
+            it('not cordova compile', function(done) {
                 options.cmd = 'cordova compile';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                    expect(shell.exec.mostRecentCall.args[0]).toMatch('compile');
+                    done();
+                });
             });
 
-            it('not cordova build', function() {
+            it('not cordova build', function(done) {
                 options.cmd = 'cordova build';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                    expect(shell.exec.mostRecentCall.args[0]).toMatch('build');
+                    done();
+                });
             });
 
-            it('not cordova run', function() {
+            it('not cordova run', function(done) {
                 options.cmd = 'cordova run';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                    expect(shell.exec.mostRecentCall.args[0]).toMatch('run');
+                    done();
+                });
             });
 
-            it('not cordova emulate', function() {
+            it('not cordova emulate', function(done) {
                 options.cmd = 'cordova emulate';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                    expect(shell.exec.mostRecentCall.args[0]).toMatch('emulate');
+                    done();
+                });
             });
 
-            it('not cordova create <path>', function() {
+            it('not cordova create <path>', function(done) {
                 options.cmd = 'cordova create my-app';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add');
+                process.nextTick(function() {
+                    expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save ios');
+                    expect(shell.exec.mostRecentCall.args[0]).toMatch('create my-app');
+                    done();
+                });
             });
         });
 
@@ -247,20 +339,32 @@ describe('phonegap.cordova(options, [callback])', function() {
                 options.cmd = 'cordova run';
             });
 
-            it('should not add a platform', function() {
+            it('should not add a platform', function(done) {
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save');
+                process.nextTick(function() {
+                    expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save');
+                    expect(shell.exec.mostRecentCall.args[0]).toMatch('run');
+                    done();
+                });
             });
 
-            it('should ignore an option and not add a platform', function() {
+            it('should ignore an option and not add a platform', function(done) {
                 options.cmd = 'cordova run --emulator';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save');
+                process.nextTick(function() {
+                    expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save');
+                    expect(shell.exec.mostRecentCall.args[0]).toMatch('run --emulator');
+                    done();
+                });
             });
-            it('should ignore options and not add a platform', function() {
+            it('should ignore options and not add a platform', function(done) {
                 options.cmd = 'cordova run --emulator --target="Sim"';
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save');
+                process.nextTick(function() {
+                    expect(shell.exec.mostRecentCall.args[0]).not.toMatch('platform add --save');
+                    expect(shell.exec.mostRecentCall.args[0]).toMatch('run --emulator --target="Sim"');
+                    done();
+                });
             });
         });
 
@@ -270,9 +374,13 @@ describe('phonegap.cordova(options, [callback])', function() {
                 cordova.util.listPlatforms.andReturn([]);
             });
 
-            it('should try to add the platform', function() {
+            it('should try to add the platform', function(done) {
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).toMatch('platform add --save ios');
+                process.nextTick(function() {
+                    expect(shell.exec.argsForCall[0][0]).toMatch('platform add --save ios');
+                    expect(shell.exec.argsForCall[1][0]).toMatch('build ios');
+                    done();
+                });
             });
         });
 
@@ -282,9 +390,13 @@ describe('phonegap.cordova(options, [callback])', function() {
                 cordova.util.listPlatforms.andReturn([]);
             });
 
-            it('should try to add all of the platforms', function() {
+            it('should try to add all of the platforms', function(done) {
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).toMatch('platform add --save ios android');
+                process.nextTick(function() {
+                    expect(shell.exec.argsForCall[0][0]).toMatch('platform add --save ios android');
+                    expect(shell.exec.argsForCall[1][0]).toMatch('build ios');
+                    done();
+                });
             });
         });
 
@@ -294,9 +406,13 @@ describe('phonegap.cordova(options, [callback])', function() {
                 cordova.util.listPlatforms.andReturn(['android']);
             });
 
-            it('should try to add the missing platforms', function() {
+            it('should try to add the missing platforms', function(done) {
                 phonegap.cordova(options);
-                expect(shell.exec.mostRecentCall.args[0]).toMatch('platform add --save ios wp8');
+                process.nextTick(function() {
+                    expect(shell.exec.argsForCall[0][0]).toMatch('platform add --save ios wp8');
+                    expect(shell.exec.argsForCall[1][0]).toMatch('build ios');
+                    done();
+                });
             });
         });
 
@@ -328,28 +444,34 @@ describe('phonegap.cordova(options, [callback])', function() {
             shell.grep.andReturn('<script src="phonegap.js"></script>');
             // enable injecting phonegap.js
             fs.existsSync.andCallFake(function(filepath) {
-                // return true if checking cordova.js path
-                return (filepath.match('cordova.js'));
+                // return true if checking node_modules or cordova.js path
+                return (filepath.match('node_modules') || filepath.match('cordova.js'));
             });
         });
 
-        it('should add phonegap.js for ios', function() {
+        it('should add phonegap.js for ios', function(done) {
             phonegap.cordova(options);
-            expect(shell.cp).toHaveBeenCalled();
-            expect(shell.cp.mostRecentCall.args[1]).toMatch(/ios.*cordova\.js/);
-            expect(shell.cp.mostRecentCall.args[2]).toMatch(/ios.*phonegap\.js/);
+            process.nextTick(function(){
+                expect(shell.cp).toHaveBeenCalled();
+                expect(shell.cp.mostRecentCall.args[1]).toMatch(/ios.*cordova\.js/);
+                expect(shell.cp.mostRecentCall.args[2]).toMatch(/ios.*phonegap\.js/);
+                done();
+            });
         });
 
-        it('should add phonegap.js for ios and android', function() {
+        it('should add phonegap.js for ios and android', function(done) {
             options.cmd = 'cordova build ios android';
             cordova.util.listPlatforms.andReturn(['ios', 'android']);
             phonegap.cordova(options);
-            expect(shell.cp).toHaveBeenCalled();
-            expect(shell.cp.calls.length).toEqual(2);
-            expect(shell.cp.calls[0].args[1]).toMatch(/ios.*cordova\.js/);
-            expect(shell.cp.calls[0].args[2]).toMatch(/ios.*phonegap\.js/);
-            expect(shell.cp.calls[1].args[1]).toMatch(/android.*cordova\.js/);
-            expect(shell.cp.calls[1].args[2]).toMatch(/android.*phonegap\.js/);
+            process.nextTick(function(){
+                expect(shell.cp).toHaveBeenCalled();
+                expect(shell.cp.calls.length).toEqual(2);
+                expect(shell.cp.calls[0].args[1]).toMatch(/ios.*cordova\.js/);
+                expect(shell.cp.calls[0].args[2]).toMatch(/ios.*phonegap\.js/);
+                expect(shell.cp.calls[1].args[1]).toMatch(/android.*cordova\.js/);
+                expect(shell.cp.calls[1].args[2]).toMatch(/android.*phonegap\.js/);
+                done();
+            });
         });
     });
 
@@ -358,6 +480,10 @@ describe('phonegap.cordova(options, [callback])', function() {
             beforeEach(function() {
                 // no phonegap.js reference found
                 shell.grep.andReturn('');
+                fs.existsSync.andCallFake(function(filepath) {
+                    // return true if checking node_modules or cordova.js path
+                    return (filepath.match('node_modules') || filepath.match('cordova.js'));
+                });
             });
 
             it('should not emit a deprecation warning', function(done) {
@@ -379,11 +505,15 @@ describe('phonegap.cordova(options, [callback])', function() {
             });
 
             it('should not emit a deprecation warning', function(done) {
-                phonegap.on('warn', function(message) {
+                var warnSpy = createSpy('warning').andCallFake(function(message) {
                     expect(message).toMatch(/phonegap\.js/i);
-                    done();
                 });
+                phonegap.on('warn', warnSpy);
                 phonegap.cordova(options);
+                process.nextTick(function() {
+                    expect(warnSpy).toHaveBeenCalled();
+                    done(); // given time for warn event to be emitted
+                });
             });
         });
     });
