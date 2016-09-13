@@ -34,10 +34,8 @@
     "minimist": "0.1.0",
     "opener": "1.4.1",
     "phonegap-build": "0.10.0",
-    "pluralize": "0.0.4",
     "prompt": "0.2.11",
     "qrcode-terminal": "0.9.4",
-    "semver": "1.1.0",
     "shelljs": "0.1.4",
     "update-notifier": "^0.6.0"
   },
