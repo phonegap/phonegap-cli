@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "colors": "0.6.0-1",
-    "connect-phonegap": "0.23.0",
+    "connect-phonegap": "0.23.1",
     "cordova": "6.1.1",
     "insight": "0.8.2",
     "minimist": "0.1.0",
