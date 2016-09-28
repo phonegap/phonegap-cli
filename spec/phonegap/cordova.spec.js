@@ -5,7 +5,7 @@
 var PhoneGap = require('../../lib/phonegap'),
     events = require('events'),
     cordova = require('../../lib/cordova'),
-    cordovaDependency = require('phonegap-cordova-dependence'),
+    cordovaDependency = require('../../lib/phonegap/cordova-dependence'),
     Q = require('q'),
     fs = require('fs'),
     path = require('path'),
