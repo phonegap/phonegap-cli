@@ -43,7 +43,6 @@
     "opener": "1.4.1",
     "opn": "^4.0.2",
     "phonegap-build": "0.10.0",
-    "phonegap-cordova-dependence": "git+https://github.com/carynbear/phonegap-cordova-dependence.git",
     "prompt": "0.2.11",
     "q": "^1.4.1",
     "qrcode-terminal": "0.9.4",
