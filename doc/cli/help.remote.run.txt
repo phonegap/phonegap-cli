@@ -13,6 +13,7 @@ Options:
   --port               server port (default: '443')
   --path               server path prefix (default: '/api/v1')
   --proxy              proxy server to route requests
+  --format             format the response in json or qr (default: 'qr')
 
 Examples:
 
