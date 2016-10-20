@@ -41,7 +41,7 @@
     "prompt": "1.0.0",
     "qrcode-terminal": "0.11.0",
     "shelljs": "0.7.4",
-    "update-notifier": "^0.6.0"
+    "update-notifier": "1.0.2"
   },
   "devDependencies": {
     "chdir": "0.0.x",
