@@ -10,17 +10,17 @@ describe('$ phonegap [options] commands', function() {
 
     it('should support no arguments', function() {
         var process = shell.exec(bin + '', { silent: true });
-        expect(process.output).toMatch('Usage:');
+        expect(process.stdout).toMatch('Usage:');
     });
 
     it('should support commands', function() {
         var process = shell.exec(bin + ' version', { silent: true });
-        expect(process.output).toMatch(/^\w+\.\w+\.\w+/);
+        expect(process.stdout).toMatch(/^\w+\.\w+\.\w+/);
     });
 
     it('should support options', function() {
         var process = shell.exec(bin + ' --version', { silent: true });
-        expect(process.output).toMatch(/^\w+\.\w+\.\w+/);
+        expect(process.stdout).toMatch(/^\w+\.\w+\.\w+/);
     });
 
     it('should have exit code 0', function() {
