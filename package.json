@@ -38,7 +38,7 @@
     "opener": "1.4.1",
     "opn": "^4.0.2",
     "phonegap-build": "0.10.0",
-    "prompt": "0.2.11",
+    "prompt": "1.0.0",
     "qrcode-terminal": "0.9.4",
     "shelljs": "0.1.4",
     "update-notifier": "^0.6.0"
