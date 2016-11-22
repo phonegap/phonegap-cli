@@ -107,6 +107,10 @@
       "description": "An example app using Framework7 and the Spotify API.",
       "npm": "phonegap-app-star-track"
     },
+    "webvr": {
+      "description": "A WebVR and Google Cardboard demo ported from borismus/webvr-boilerplate.",
+      "npm": "phonegap-template-webvr"
+    },
     "wikitude-augmented-reality": {
       "description": "Augmented Reality demo app powered by the Wikitude plugin",
       "npm": "phonegap-app-augmented-reality"
