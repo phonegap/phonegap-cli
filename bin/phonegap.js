@@ -11,7 +11,6 @@ var version = require('../package.json').version;
 var sanitizeArgs = require('../lib/cli/util/sanitize-args');
 
 if (analytics.statusUnknown()) {
-
     // if it is an analytics command, just run it
     if (process.argv.length > 2 && process.argv[2] === 'analytics') {
         runPhoneGapCommand();

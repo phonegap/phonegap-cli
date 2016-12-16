@@ -24,7 +24,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
     it('should require options parameter', function() {
         expect(function() {
             options = undefined;
-            phonegap.remote.login(options, function(){});
+            phonegap.remote.login(options, function() {});
         }).toThrow();
     });
 

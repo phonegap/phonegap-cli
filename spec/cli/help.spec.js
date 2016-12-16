@@ -38,22 +38,21 @@ describe('phonegap', function() {
         expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/usage:/i);
     });
 
+    it('should output the help usage information when invoked with help eg $ phonegap help help', function() {
+        cli.argv(argv.concat(['help', 'help']));
+        expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/usage:/i);
+    });
 
-        it('should output the help usage information when invoked with help eg $ phonegap help help', function() {
-            cli.argv(argv.concat(['help', 'help']));
-            expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/usage:/i);
-        });
+    it('should output the help usage information when invoked with help eg $ phonegap help --help', function() {
+        cli.argv(argv.concat(['help', '--help']));
+        expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/usage:/i);
+    });
 
-        it('should output the help usage information when invoked with help eg $ phonegap help --help', function() {
-            cli.argv(argv.concat(['help', '--help']));
-            expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/usage:/i);
-        });
- 
-        it('should output the help usage information when invoked with help eg $ phonegap help -h', function() {
-            cli.argv(argv.concat(['help', '-h']));
-            expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/usage:/i);
-        });
- 
+    it('should output the help usage information when invoked with help eg $ phonegap help -h', function() {
+        cli.argv(argv.concat(['help', '-h']));
+        expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/usage:/i);
+    });
+
     it('should remove the .js extension from the binary (windows-specific)', function() {
         argv = ['node', '/user/local/bin/phonegap.js'];
         cli.argv(argv.concat(['help']));

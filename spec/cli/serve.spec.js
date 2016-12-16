@@ -54,7 +54,7 @@ describe('phonegap serve', function() {
         argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
         spyOn(phonegap, 'serve').andReturn({
-            on: function(){}
+            on: function() {}
         });
     });
 

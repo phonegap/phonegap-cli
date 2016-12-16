@@ -72,63 +72,63 @@ describe('phonegap remote login', function() {
     });
 
     describe('$ phonegap remote login', function() {
-            it('should try to login', function() {
+        it('should try to login', function() {
+            cli.argv(argv.concat(['remote', 'login']));
+            expect(phonegap.remote.login).toHaveBeenCalledWith(
+                jasmine.any(Object),
+                jasmine.any(Function)
+            );
+        });
+
+        describe('successful login', function() {
+            beforeEach(function() {
+                phonegap.remote.login.andCallFake(function(argv, callback) {
+                    phonegap.emit('login');
+                    callback(null, {});
+                });
+            });
+
+            it('should prompt for username and password', function() {
                 cli.argv(argv.concat(['remote', 'login']));
-                expect(phonegap.remote.login).toHaveBeenCalledWith(
-                    jasmine.any(Object),
-                    jasmine.any(Function)
-                );
+                expect(console.prompt).toHaveBeenCalled();
             });
 
-            describe('successful login', function() {
-                beforeEach(function() {
-                    phonegap.remote.login.andCallFake(function(argv, callback) {
-                        phonegap.emit('login');
-                        callback(null, {});
-                    });
-                });
-
-                it('should prompt for username and password', function() {
-                    cli.argv(argv.concat(['remote', 'login']));
-                    expect(console.prompt).toHaveBeenCalled();
-                });
-
-                it('should trigger callback without an error', function(done) {
-                    cli.argv(argv.concat(['remote', 'login']), function(e, api) {
-                        expect(e).toBeNull();
-                        done();
-                    });
-                });
-
-                it('should trigger callback with API object', function(done) {
-                    cli.argv(argv.concat(['remote', 'login']), function(e, api) {
-                        expect(api).toBeDefined();
-                        done();
-                    });
+            it('should trigger callback without an error', function(done) {
+                cli.argv(argv.concat(['remote', 'login']), function(e, api) {
+                    expect(e).toBeNull();
+                    done();
                 });
             });
 
-            describe('failed login', function() {
-                beforeEach(function() {
-                    phonegap.remote.login.andCallFake(function(argv, callback) {
-                        callback(new Error('Invalid password'));
-                    });
-                });
-
-                it('should trigger callback with an error', function(done) {
-                    cli.argv(argv.concat(['remote', 'login']), function(e, api) {
-                        expect(e).toBeDefined();
-                        done();
-                    });
-                });
-
-                it('should trigger callback without an API object', function(done) {
-                    cli.argv(argv.concat(['remote', 'login']), function(e, api) {
-                        expect(api).not.toBeDefined();
-                        done();
-                    });
+            it('should trigger callback with API object', function(done) {
+                cli.argv(argv.concat(['remote', 'login']), function(e, api) {
+                    expect(api).toBeDefined();
+                    done();
                 });
             });
+        });
+
+        describe('failed login', function() {
+            beforeEach(function() {
+                phonegap.remote.login.andCallFake(function(argv, callback) {
+                    callback(new Error('Invalid password'));
+                });
+            });
+
+            it('should trigger callback with an error', function(done) {
+                cli.argv(argv.concat(['remote', 'login']), function(e, api) {
+                    expect(e).toBeDefined();
+                    done();
+                });
+            });
+
+            it('should trigger callback without an API object', function(done) {
+                cli.argv(argv.concat(['remote', 'login']), function(e, api) {
+                    expect(api).not.toBeDefined();
+                    done();
+                });
+            });
+        });
     });
 
     describe('$ phonegap remote login --username zelda', function() {
