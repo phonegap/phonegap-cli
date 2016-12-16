@@ -4,18 +4,18 @@
         "node": true
     },
     "rules": {
-        "eol-last": ["warn", "always"],
-        "indent": ["warn", 4, {
+        "eol-last": ["error", "always"],
+        "indent": ["error", 4, {
             "ObjectExpression": "first",
             "SwitchCase": 1
         }],
-        "no-multiple-empty-lines": ["warn", {
+        "no-multiple-empty-lines": ["error", {
             "max": 2,
             "maxEOF": 1
         }],
-        "no-trailing-spaces": "warn",
+        "no-trailing-spaces": "error",
         "padded-blocks": [1, "never"],
-        "semi": ["warn", "always"],
-        "space-before-blocks": "warn"
+        "semi": ["error", "always"],
+        "space-before-blocks": "error"
     }
 }
