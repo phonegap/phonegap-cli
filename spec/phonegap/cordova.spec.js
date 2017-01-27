@@ -169,6 +169,32 @@ describe('phonegap.cordova(options, [callback])', function() {
         });
     });
 
+    describe('adding/removing plugin', function() {
+        it('should save/remove the plugin in config.xml without --save flag', function() {
+            var options1 = {};
+            // test for phonegap plugin add
+            options1.cmd = options.cmd = 'cordova plugin add cordova-plugin-camera';
+            phonegap.cordova(options);
+            //options.cmd now has --save appended.
+            expect(shell.exec).toHaveBeenCalled();
+            expect(options.cmd).toBe(options1.cmd + " --save");
+            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
+            // test for phonegap plugin rm
+            options1.cmd = options.cmd = 'cordova plugin rm cordova-plugin-camera';
+            phonegap.cordova(options);
+            expect(shell.exec).toHaveBeenCalled();
+            expect(options.cmd).toBe(options1.cmd + " --save");
+            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
+
+            // test for phonegap plugin remove
+            options1.cmd = options.cmd = 'cordova plugin remove cordova-plugin-camera';
+            phonegap.cordova(options);
+            expect(shell.exec).toHaveBeenCalled();
+            expect(options.cmd).toBe(options1.cmd + " --save");
+            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
+        });
+    });
+
     describe('add platforms', function() {
         describe('when the command is of the type:', function() {
             beforeEach(function() {

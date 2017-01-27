@@ -22,7 +22,7 @@ describe('phonegap.remote.logout(options, [callback])', function() {
     it('should require options parameter', function() {
         expect(function() {
             options = undefined;
-            phonegap.remote.logout(options, function(){});
+            phonegap.remote.logout(options, function() {});
         }).toThrow();
     });
 

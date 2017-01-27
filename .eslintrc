@@ -1,0 +1,21 @@
+{
+    "env": {
+        "jasmine": true,
+        "node": true
+    },
+    "rules": {
+        "eol-last": ["error", "always"],
+        "indent": ["error", 4, {
+            "ObjectExpression": "first",
+            "SwitchCase": 1
+        }],
+        "no-multiple-empty-lines": ["error", {
+            "max": 2,
+            "maxEOF": 1
+        }],
+        "no-trailing-spaces": "error",
+        "padded-blocks": [1, "never"],
+        "semi": ["error", "always"],
+        "space-before-blocks": "error"
+    }
+}
