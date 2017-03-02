@@ -29,7 +29,7 @@
   "dependencies": {
     "archiver": "^1.0.0",
     "colors": "0.6.0-1",
-    "connect-phonegap": "0.24.3",
+    "connect-phonegap": "0.24.4",
     "cordova": "6.4.0",
     "insight": "0.8.2",
     "minimist": "0.1.0",
