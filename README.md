@@ -6,7 +6,7 @@
 
 ### Requirements
 
-- [Install node.js](http://nodejs.org/) version `>=0.10.x`
+- [Install node.js](http://nodejs.org/) version `>=4.0.0`
 - [Install ios-sim](https://github.com/phonegap/ios-sim#installation) to deploy apps to the iOS simulator.
 
 ### Install

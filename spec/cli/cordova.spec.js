@@ -24,8 +24,11 @@ describe('$ phonegap cordova', function() {
     it('should bypass the PhoneGap CLI chain', function(done) {
         var version = require('../../node_modules/cordova/package.json').version;
         phonegap.on('raw', function(data) {
-            expect(data).toMatch(version);
-            done();
+            // cordova@6.4.0 adds an extra '\n' after all output
+            if (data !== '\n') {
+                expect(data).toMatch(version);
+                done();
+            }
         });
         cli.argv(argv.concat(['cordova', '--version']));
     });

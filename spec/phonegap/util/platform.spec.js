@@ -80,29 +80,29 @@ describe('platform', function() {
 
     describe('supports', function() {
         beforeEach(function() {
-            platforms = [ 'android', 'ios' , 'blackberry10' ] 
+            platforms = [ 'android', 'ios' , 'blackberry10' ];
         });
 
 
         it('should return the same array when called with valid platforms', function () {
             var result = platform.supports(platforms);
-            
-            expect(result.length).toEqual(platforms.length)
+
+            expect(result.length).toEqual(platforms.length);
             expect(result).toEqual(platforms);
         });
 
 
         it('should return an empty array when called with invalid platforms', function () {
             var result = platform.supports(['none','are','platforms']);
-            
-            expect(result.length).toEqual(0)
+
+            expect(result.length).toEqual(0);
             expect(result).toEqual([]);
         });
 
 
         it('should return only the valid platforms when called with an invalid platform', function () {
             var result;
-            
+
             platforms.push('notaplatform');
             result = platform.supports(platforms);
             expect(result).toEqual(platforms.slice(0,3));

@@ -26,11 +26,9 @@ describe('project', function() {
                 callback: function(e) {}
             };
             delegate.emitter.on('error', function(e) {});  // required error catcher
-
         });
 
         describe('when in project path', function() {
-
             beforeEach(function() {
                 spyOn(cdvutil, 'isCordova').andCallFake(function(_path) {
                     return true;
@@ -51,7 +49,6 @@ describe('project', function() {
             });
 
             it('should return the path', function() {
-
                 chdir(currentPath, function() {
                     expect(project.cd(delegate)).toEqual(projectPath);
                 });
@@ -105,11 +102,11 @@ describe('project', function() {
         beforeEach(function() {
             spyOn(cdvutil, 'listPlatforms').andCallFake(function() {
                 return exampleOut;
-            }); 
-        });        
+            });
+        });
 
         it('should be defined', function() {
-            expect(project.listPlatforms).toBeDefined();    
+            expect(project.listPlatforms).toBeDefined();
         });
 
         it('should pass the results of the cordova-lib utility', function () {
@@ -130,13 +127,12 @@ describe('project', function() {
                 expect(project.checkPlatform(platform)).toBe(false);
             });
         });
-    
     });
 
 
     describe('readPackage', function () {
         var relativePath;
-        
+
         beforeEach(function() {
             packagepath = path.join(__dirname, '..', '..', '..', 'package.json');
             spyOn(JSON,'parse').andReturn({});
@@ -147,7 +143,7 @@ describe('project', function() {
         });
 
         it('should return the package.json contents', function() {
-            expect(project.readPackage()).toEqual({}); 
+            expect(project.readPackage()).toEqual({});
         });
     });
 
@@ -155,7 +151,7 @@ describe('project', function() {
         var fixtureUri = '/User/dev/correct/uri/to/config',
             fixtureContent = 'aabbcc';
 
-        beforeEach(function(){
+        beforeEach(function() {
             createSpyObj('fs', ['open','readFile']);
             spyOn(fs,'readFile').andReturn(null,'');
         });
@@ -169,7 +165,7 @@ describe('project', function() {
         it('should return the path of the config file when successful', function () {
             var res = project.clobberProjectConfig(fixtureUri, {'aa':'bb','cc':'bb'});
 
-            expect(res).toEqual(fixtureUri); 
+            expect(res).toEqual(fixtureUri);
         });
     });
 });

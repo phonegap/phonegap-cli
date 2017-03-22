@@ -1,7 +1,7 @@
 
 var serveModule = require("../../lib/phonegap/serve"),
     http = require("http"),
-    server = require("connect-phonegap"), 
+    server = require("connect-phonegap"),
     cordova = require('../../lib/cordova').cordova,
     project = require("../../lib/phonegap/util/project"),
     preparePromise = null,
@@ -13,17 +13,14 @@ var dummyPromise = { then: function() {} },
 
 
 describe("PhoneGap serve", function () {
-    
     describe("module", function () {
- 
         it("should export at object", function() {
-            expect(serveModule).toEqual(any(Object)); 
+            expect(serveModule).toEqual(any(Object));
         });
 
         it("should export an object with a create parameter", function() {
             expect(serveModule.create).toEqual(any(Function));
         });
-    
     });
 
     describe("when called", function() {
@@ -39,14 +36,14 @@ describe("PhoneGap serve", function () {
             };
             // define wrapper as a stub
             wrapper = {
-                emit: function(){},
-                on: function(){}
+                emit: function() {},
+                on: function() {}
             };
 
             // initialize the serve function with wrapper
             serve = serveModule.create(wrapper);
-           
-            // declare spies 
+
+            // declare spies
             spyOn(project,'cd').andReturn(true);
 
             preparePromise = dummyPromise;
@@ -61,44 +58,44 @@ describe("PhoneGap serve", function () {
             expect(serve).toEqual(any(Function));
         });
 
-        it("should require options parameter", function(){
+        it("should require options parameter", function() {
             expect(function() {
                 serve();
             }).toThrow();
         });
 
         it("should return the wrapper object given to create", function () {
-            var ret = serve({}); 
+            var ret = serve({});
             expect(ret).toEqual(wrapper);
         });
 
-        it("should accept empty options", function(){
+        it("should accept empty options", function() {
             expect(function() {
                 serve({});
             }).not.toThrow();
         });
-   
-        it("should not require callback parameter", function(){
+
+        it("should not require callback parameter", function() {
             expect(function() {
                 serve(validOptions);
             }).not.toThrow();
         });
 
-        it("should not require options.port", function(){
+        it("should not require options.port", function() {
             expect(function() {
                 serve({port:undefined});
-            }).not.toThrow();    
+            }).not.toThrow();
         });
 
-        it("should not require options.port", function(){
+        it("should not require options.port", function() {
             expect(function() {
                 serve({port:undefined});
-            }).not.toThrow();    
+            }).not.toThrow();
         });
 
-        it("should change to the project directory", function (){
+        it("should change to the project directory", function () {
             serve(validOptions);
-            expect(project.cd).toHaveBeenCalled(); 
+            expect(project.cd).toHaveBeenCalled();
         });
 
         it('should prepare the build first', function() {
@@ -107,23 +104,23 @@ describe("PhoneGap serve", function () {
             expect(cordova.prepare).toHaveBeenCalledWith([], jasmine.any(Function));
         });
 
-        it("should call connect-phonegap listen", function (){
+        it("should call connect-phonegap listen", function () {
             preparePromise = realPromise;
             serve({});
             expect(server.listen).toHaveBeenCalled();
         });
 
-        it("should call connect-phonegap listen with valid options passed through", function (){
+        it("should call connect-phonegap listen with valid options passed through", function () {
             preparePromise = realPromise;
             serve(validOptions);
             expect(server.listen).toHaveBeenCalledWith(validOptions);
         });
 
         describe("if cordova prepare throws", function () {
-           var invalidOptions,
-               defaultOptions;
+            var invalidOptions,
+                defaultOptions;
 
-           beforeEach(function () {
+            beforeEach(function () {
                 invalidOptions = {
                     port: undefined,
                     autoreload:"batman",
@@ -135,12 +132,11 @@ describe("PhoneGap serve", function () {
                     localtunnel: false
                 };
 
-               spyOn(cordova, 'prepare').andCallFake(function () {
+                spyOn(cordova, 'prepare').andCallFake(function () {
                     throw new Error('IWETTUM!');
                 });
             });
-
-       });
+        });
 
         describe("if called with invalid options", function () {
             var invalidOptions,
@@ -157,40 +153,38 @@ describe("PhoneGap serve", function () {
                     autoreload: true,
                     localtunnel: false,
                     phonegap: {
-                        emit: function(){},
-                        on: function(){}
+                        emit: function() {},
+                        on: function() {}
                     }
                 };
-
             });
- 
-            it("should call connect-phonegap listen with default options", function (){
+
+            it("should call connect-phonegap listen with default options", function () {
                 preparePromise = realPromise;
                 serve(invalidOptions);
                 expect(server.listen).toHaveBeenCalledWith(
-                jasmine.objectContaining({
-                    port: defaultOptions.port,
-                    autoreload: defaultOptions.autoreload,
-                    localtunnel: defaultOptions.localtunnel,
-                    phonegap: jasmine.any(Object)
+                    jasmine.objectContaining({
+                        port: defaultOptions.port,
+                        autoreload: defaultOptions.autoreload,
+                        localtunnel: defaultOptions.localtunnel,
+                        phonegap: jasmine.any(Object)
                     })
                 );
             });
- 
-            it("should call connect-phonegap listen with corrected autoreload option", function (){
+
+            it("should call connect-phonegap listen with corrected autoreload option", function () {
                 defaultOptions.autoreload = "batman";
                 preparePromise = realPromise;
                 serve(defaultOptions);
                 expect(server.listen.argsForCall[0][0].autoreload).toEqual(true);
             });
 
-            it("should call connect-phonegap listen with corrected localtunnel option", function (){
+            it("should call connect-phonegap listen with corrected localtunnel option", function () {
                 defaultOptions.localtunnel = "batman";
                 preparePromise = realPromise;
                 serve(defaultOptions);
                 expect(server.listen.argsForCall[0][0].localtunnel).toEqual(false);
             });
-
         });
     });
 });

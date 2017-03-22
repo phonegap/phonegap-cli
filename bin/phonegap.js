@@ -11,13 +11,14 @@ var version = require('../package.json').version;
 var sanitizeArgs = require('../lib/cli/util/sanitize-args');
 
 if (analytics.statusUnknown()) {
-    analytics.prompt(function() {
-        // special case, if it is a 'phonegap analytics' command we don't want
-        // to run it because the prompt will have already done the work
-        if (process.argv[2] !== 'analytics') {
-            runPhoneGapCommand();
-        }
-    });
+    // if it is an analytics command, just run it
+    if (process.argv.length > 2 && process.argv[2] === 'analytics') {
+        runPhoneGapCommand();
+    }
+    else {
+        // otherwise prompt and then run it
+        analytics.prompt(runPhoneGapCommand);
+    }
 }
 else {
     runPhoneGapCommand();

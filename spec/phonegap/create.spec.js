@@ -21,7 +21,7 @@ describe('phonegap.create(options, [callback])', function() {
     beforeEach(function() {
         phonegap = new PhoneGap();
         options = {
-            path: '/some/path/to/app/www'
+            path: path.resolve('spec', 'fixture', 'app-with-config', 'www')
         };
         configParserSpy = {
             setPackageName: jasmine.createSpy(),
@@ -204,24 +204,6 @@ describe('phonegap.create(options, [callback])', function() {
             });
         });
 
-        describe('when updating config.xml', function() {
-            beforeEach(function() {
-                fs.existsSync.andReturn(true);
-            });
-
-            it('should parse the my-app/config.xml', function(done) {
-                phonegap.create(options, function(e) {
-                    expect(cordovaLib.configparser).toHaveBeenCalledWith(
-                        path.join(options.path, 'config.xml')
-                    );
-                    expect(configParserSpy.setPackageName).toHaveBeenCalledWith(options.id);
-                    expect(configParserSpy.setName).toHaveBeenCalledWith(options.name);
-                    expect(configParserSpy.write).toHaveBeenCalled();
-                    done();
-                });
-            });
-        });
-
         describe('when config.xml does not exist', function() {
             beforeEach(function() {
                 fs.existsSync.andReturn(false);
@@ -247,12 +229,6 @@ describe('phonegap.create(options, [callback])', function() {
                     expect(fs.renameSync).not.toHaveBeenCalled();
                     done();
                 });
-            });
-
-            it('should not update config.xml', function(done) {
-                expect(fs.existsSync).not.toHaveBeenCalled();
-                expect(cordovaLib.configparser).not.toHaveBeenCalled();
-                done();
             });
         });
 

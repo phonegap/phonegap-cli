@@ -16,7 +16,6 @@ describe('phonegap unknown', function() {
         argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
-
     });
 
     //describe('$ phonegap noop', function() {
