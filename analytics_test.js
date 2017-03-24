@@ -3,6 +3,11 @@ var os_name = require('os-name');
 var CLI=require('./lib/cli');
 var cli = new CLI();
 var flags = cli.argv.FLAGS;
+var Insight = require('insight');
+var insight = new Insight({
+    "trackingCode": "gobbledeegoop",
+    "pkg": require('./package.json')
+});
 
 var regular_commands = [];
 for (var m in cli) {
@@ -53,14 +58,14 @@ for (var m in cli) {
 var example_event = {
     "version": "1.1",
     "host": "cli",
-    "short_message": "top-level command: help, create, plugin. OR, could group by functionality together here, i.e. help, create, plugin ls, plugin rm, plugin add, etc.",
-    "_userID": "something representing a unique user. how?",
+    "short_message": "plugin",
+    "_params": ["add", "cordova-plugin-camera"],
+    "_flags": ["--debug"],
+    "_userID": insight.clientId,
     "_appVersion": require('./package.json').version,
     "_nodeVersion": process.version,
     "_platform": os_name(),
     "_env": 1
 };
 
-console.log('Regular commands:', regular_commands);
-console.log('All CLI flags:', flags);
 console.log('Example event:', example_event);
