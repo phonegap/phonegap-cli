@@ -33,6 +33,7 @@
     "connect-phonegap": "0.24.5",
     "cordova": "6.4.0",
     "insight": "0.8.2",
+    "os-name": "2.0.1",
     "minimist": "0.1.0",
     "node-uuid": "1.4.7",
     "opener": "1.4.1",
