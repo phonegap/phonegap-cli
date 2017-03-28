@@ -31,7 +31,7 @@ function runPhoneGapCommand() {
     cli.argv(process.argv, function(e) {
         var args = Array.prototype.slice.call(process.argv);
         // analytics module will skip if it is not enabled
-        analytics.trackEvent(args, e);
+        analytics.trackEvent(args.slice(2), e); // slice off the first two, as that contains node [0] and phonegap.js [1]
         process.exitCode = e ? e.exitCode || 1 : 0;
     });
 }
