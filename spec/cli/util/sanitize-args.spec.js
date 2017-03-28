@@ -70,11 +70,11 @@ describe('sanitize-args', function() {
         });
 
         it('should strip `create` calls with args like --key=???',function() {
-            var result = sanitizeArgs.clean(["create","--key1=secret","--key2=alsosecret"]);
+            var result = sanitizeArgs.stringifyForGoogleAnalytics(["create","--key1=secret","--key2=alsosecret"]);
             expect(result).toBeDefined();
             expect(result.command).toBe("create");
             // sani result is count of args, and what flags are present
-            expect(result.params).toBe("count:2 --key1,--key2");
+            expect(result.params).toBe("--key1,--key2");
         });
 
         it('should filter out sensitive info from `cordova create` calls',function() {
