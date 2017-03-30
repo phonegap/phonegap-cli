@@ -362,4 +362,26 @@ describe('sanitize-args', function() {
             });
         });
     });
+    describe('getCommand', function() {
+        it('should be able to handle zero arguments', function() {
+            var get_cmd = function() {
+                sanitizeArgs.getCommand([]);
+            };
+            expect(get_cmd).not.toThrow();
+        });
+        it('should return "help" by default if no arguments are given', function() {
+            expect(sanitizeArgs.getCommand([])).toEqual('help');
+        });
+    });
+    describe('filterParameters', function() {
+        it('should be able to handle zero arguments', function() {
+            var filter_cmd = function() {
+                sanitizeArgs.filterParameters([]);
+            };
+            expect(filter_cmd).not.toThrow();
+        });
+        it('should return an empty array by default if no arguments are given', function() {
+            expect(sanitizeArgs.filterParameters([])).toEqual([]);
+        });
+    });
 });
