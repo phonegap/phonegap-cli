@@ -8,4 +8,12 @@ notifications:
     on_success: change
     on_failure: always
 node_js:
-- '4.0'
+  - '4.0'
+install:
+  - npm install
+  - npm install -g codecov
+script:
+  - npm test
+  - npm run cover
+after_script:
+  - codecov
