@@ -76,9 +76,10 @@ describe('phonegap remote <command>', function() {
     describe('unknown command', function() {
         it('should output the unknown command', function() {
             spyOn(cli, 'unknown');
-            cli.argv(argv.concat(['remote', 'noop']));
-            expect(cli.unknown.mostRecentCall.args[0]).toMatch({
-                _: ['remote', 'noop']
+            var noop_cmds = ['remote', 'noop'];
+            cli.argv(argv.concat(noop_cmds));
+            noop_cmds.forEach(function(arg) {
+                expect(cli.unknown.mostRecentCall.args[0].processArgv).toContain(arg);
             });
         });
     });

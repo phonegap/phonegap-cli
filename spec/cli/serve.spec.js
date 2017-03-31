@@ -69,7 +69,7 @@ describe('phonegap serve', function() {
         it('should connect to phonegap serve on port 1337', function() {
             cli.argv(argv.concat(['serve', '--port', '1337']));
             expect(phonegap.serve).toHaveBeenCalled();
-            expect(phonegap.serve.mostRecentCall.args[0]).toMatch({ port: 1337 });
+            expect(phonegap.serve.mostRecentCall.args[0].port).toEqual(1337);
         });
     });
 
@@ -77,7 +77,7 @@ describe('phonegap serve', function() {
         it('should connect to phonegap serve on port 1337', function() {
             cli.argv(argv.concat(['serve', '-p', '1337']));
             expect(phonegap.serve).toHaveBeenCalled();
-            expect(phonegap.serve.mostRecentCall.args[0]).toMatch({ port: 1337 });
+            expect(phonegap.serve.mostRecentCall.args[0].port).toEqual(1337);
         });
     });
 
@@ -85,7 +85,7 @@ describe('phonegap serve', function() {
         it('should add browser platform on serve', function() {
             cli.argv(argv.concat(['serve', '--browser']));
             expect(phonegap.serve).toHaveBeenCalled();
-            expect(phonegap.serve.mostRecentCall.args[0]).toMatch({ browser: true });
+            expect(phonegap.serve.mostRecentCall.args[0].browser).toEqual(true);
         });
     });
 });

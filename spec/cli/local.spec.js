@@ -78,8 +78,8 @@ describe('phonegap local <command>', function() {
 
     it('should redirect to cordova', function() {
         cli.argv(argv.concat(['local', 'build', 'ios', 'android', '--verbose']));
-        expect(cli.cordova.mostRecentCall.args[0]).toMatch({
-            cmd: ['cordova', 'build', 'ios', 'android', '--verbose']
+        ['cordova', 'build', 'ios', 'android', '--verbose'].forEach(function(arg) {
+            expect(cli.cordova.mostRecentCall.args[0].processArgv).toContain(arg);
         });
     });
 
@@ -91,8 +91,8 @@ describe('phonegap local <command>', function() {
     describe('install command', function() {
         it('should delegate to `phonegap run`', function() {
             cli.argv(argv.concat(['local', 'run', 'ios']));
-            expect(cli.cordova.mostRecentCall.args[0]).toMatch({
-                cmd: ['cordova', 'run', 'ios']
+            ['cordova', 'run', 'ios'].forEach(function(arg) {
+                expect(cli.cordova.mostRecentCall.args[0].processArgv).toContain(arg);
             });
         });
     });
