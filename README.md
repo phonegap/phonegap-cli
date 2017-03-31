@@ -1,4 +1,4 @@
-# PhoneGap CLI [![Build Status][travis-ci-img]][travis-ci-url] [![bitHound Score][bithound-img]][bithound-url]
+# PhoneGap CLI [![Build Status][travis-ci-img]][travis-ci-url] [![bitHound Score][bithound-img]][bithound-url] [![codecov](https://codecov.io/gh/phonegap/phonegap-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/phonegap/phonegap-cli)
 
 > PhoneGap command-line interface and Node.js library.
 
