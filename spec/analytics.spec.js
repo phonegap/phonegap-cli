@@ -90,7 +90,7 @@ describe('PhoneGap Analytics', function() {
                 var dump = JSON.parse(post_spy.calls[0].args[0].form);
                 expect(dump._session).not.toEqual(session);
                 expect(set_spy).toHaveBeenCalledWith('lastRun', jasmine.any(Number));
-                expect(set_spy.calls[0].args[1]).toEqual(now);
+                expect(Math.abs(set_spy.calls[0].args[1] - now)).toBeLessThan(5); // give some leeway in case the clock ticks on e.g. Travis
             });
         });
     });
