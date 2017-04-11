@@ -19,6 +19,7 @@ Commands:
   version              output version number
   push                 send test push notification
   analytics            turn analytics on or off, or view current status
+  report-issue         opens your browser and launches github.com with a ready to report issue
 
 Additional Commands:
 
