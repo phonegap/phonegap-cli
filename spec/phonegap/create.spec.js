@@ -3,15 +3,13 @@
  */
 
 var PhoneGap = require('../../lib/phonegap'),
-    cordova = require('../../lib/cordova').cordova,
-    cordovaLib = require('../../lib/cordova').lib,
+    cordova = require('../../lib/cordova'),
     network = require('../../lib/phonegap/util/network'),
     shell = require('shelljs'),
     path = require('path'),
     fs = require('fs'),
     phonegap,
-    options,
-    configParserSpy;
+    options;
 
 /*
  * Specification: phonegap.create(options, [callback])
@@ -23,18 +21,13 @@ describe('phonegap.create(options, [callback])', function() {
         options = {
             path: path.resolve('spec', 'fixture', 'app-with-config', 'www')
         };
-        configParserSpy = {
-            setPackageName: jasmine.createSpy(),
-            setName: jasmine.createSpy(),
-            write: jasmine.createSpy()
-        };
         spyOn(phonegap, 'version').andReturn({ phonegap: '2.8.0' });
         spyOn(phonegap, 'cordova');
         spyOn(network, 'isOnline').andCallFake(function(callback) {
             callback(false); // offline by default to speed up tests
         });
-        spyOn(cordova, 'config');
-        spyOn(cordovaLib, 'configparser').andReturn(configParserSpy);
+        spyOn(cordova.cordova, 'config');
+        spyOn(cordova.lib.configparser.prototype, 'write');
         spyOn(shell, 'rm');
         spyOn(shell, 'cp');
         spyOn(fs, 'renameSync');
