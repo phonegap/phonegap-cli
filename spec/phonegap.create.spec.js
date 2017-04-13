@@ -24,15 +24,16 @@ var PhoneGap = require('../lib/phonegap'),
  * Specification: phonegap.create(options, [callback])
  */
 describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create', function() {
+    var createArgs = [];
     beforeEach(function() {
-        cordovaCreateSpy = jasmine.createSpy("cordovaCreateSpy").andCallFake(function(){ 
-            return Q();
-        });
         cordovaDependencySpy = jasmine.createSpy("cordovaDependencySpy").andCallFake(function(){
             return Q();
         });
         mockery.enable({ useCleanCache:true });
-        mockery.registerMock('cordova-create', cordovaCreateSpy);
+        mockery.registerMock('cordova-create', function(a, b, c, d, e) {
+            createArgs.push(a,b,c,d,e);
+            return Q();
+        });
         mockery.registerMock('./cordova-dependence', {exec : cordovaDependencySpy});
         mockery.warnOnUnregistered(false);
         phonegap = new PhoneGap();
@@ -44,6 +45,7 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
     });
 
     afterEach(function(){
+        createArgs = [];
         this.removeAllSpies();
         mockery.resetCache();
         mockery.deregisterAll();
@@ -59,10 +61,14 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         };
         cfg.lib = {};
         cfg.lib.www = wwwCfg;
-        name = options.name || 'Hello World';
+        name = options.name || 'helloworld';
         id = options.id || 'com.phonegap.helloworld';
         phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
+            expect(createArgs[0]).toEqual(options.path);
+            expect(createArgs[1]).toEqual(id);
+            expect(createArgs[2]).toEqual(name);
+            expect(createArgs[3]).toEqual(cfg);
+            expect(createArgs[4]).toEqual(jasmine.any(Object));
             expect(cordovaDependencySpy).toHaveBeenCalled();
             done();
         });
@@ -79,11 +85,16 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         cfg.lib.www = wwwCfg;
         options.id = 'com.example.app';
         options.name = 'My App';
-        name = options.name || 'Hello World';
+        name = options.name || 'helloworld';
         id = options.id || 'com.phonegap.helloworld';
 
         phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
+            expect(createArgs[0]).toEqual(options.path);
+            expect(createArgs[1]).toEqual(id);
+            expect(createArgs[2]).toEqual(name);
+            expect(createArgs[3]).toEqual(cfg);
+            expect(createArgs[4]).toEqual(jasmine.any(Object));
+            //expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
             expect(cordovaDependencySpy).toHaveBeenCalled();
             done();
         });
@@ -93,10 +104,15 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         options.id = 'com.example.app';
         options.name = 'My App';
         options.config = { some: 'value' };
-        name = options.name || 'Hello World';
+        name = options.name || 'helloworld';
         id = options.id || 'com.phonegap.helloworld';
         phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, options.config, jasmine.any(Object));
+            expect(createArgs[0]).toEqual(options.path);
+            expect(createArgs[1]).toEqual(id);
+            expect(createArgs[2]).toEqual(name);
+            expect(createArgs[3]).toEqual(options.config);
+            expect(createArgs[4]).toEqual(jasmine.any(Object));
+            //expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, options.config, jasmine.any(Object));
             expect(cordovaDependencySpy).toHaveBeenCalled();
             done();
         });
@@ -106,7 +122,7 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         var cfg, wwwCfg;
         
         options.template = 'phonegap-template-react-hot-loader';
-        name = options.name || 'Hello World';
+        name = options.name || 'helloworld';
         id = options.id || 'com.phonegap.helloworld';
         cfg = {};
         wwwCfg = {
@@ -117,7 +133,12 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         cfg.lib.www = wwwCfg;
 
         phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
+            expect(createArgs[0]).toEqual(options.path);
+            expect(createArgs[1]).toEqual(id);
+            expect(createArgs[2]).toEqual(name);
+            expect(createArgs[3]).toEqual(cfg);
+            expect(createArgs[4]).toEqual(jasmine.any(Object));
+            //expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
             expect(cordovaDependencySpy).toHaveBeenCalled();
             done();
         });
@@ -128,7 +149,7 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         var cfg, wwwCfg;
 
         options.template = 'blank';
-        name = options.name || 'Hello World';
+        name = options.name || 'helloworld';
         id = options.id || 'com.phonegap.helloworld';
         cfg = {};
         wwwCfg = {
@@ -139,7 +160,12 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         cfg.lib.www = wwwCfg;
 
         phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
+            expect(createArgs[0]).toEqual(options.path);
+            expect(createArgs[1]).toEqual(id);
+            expect(createArgs[2]).toEqual(name);
+            expect(createArgs[3]).toEqual(cfg);
+            expect(createArgs[4]).toEqual(jasmine.any(Object));
+            //expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
             expect(cordovaDependencySpy).toHaveBeenCalled();
             done();
         });
@@ -149,7 +175,7 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         var cfg, wwwCfg;
 
         options.template = true; // equivalent to --template
-        name = options.name || 'Hello World';
+        name = options.name || 'helloworld';
         id = options.id || 'com.phonegap.helloworld';
         cfg = {};
         wwwCfg = {
@@ -159,7 +185,12 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         cfg.lib = {};
         cfg.lib.www = wwwCfg;
         phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
+            expect(createArgs[0]).toEqual(options.path);
+            expect(createArgs[1]).toEqual(id);
+            expect(createArgs[2]).toEqual(name);
+            expect(createArgs[3]).toEqual(cfg);
+            expect(createArgs[4]).toEqual(jasmine.any(Object));
+            //expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
             expect(cordovaDependencySpy).toHaveBeenCalled();
             done();
         });

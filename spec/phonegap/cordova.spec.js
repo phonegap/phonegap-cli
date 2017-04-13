@@ -14,7 +14,6 @@ var PhoneGap = require('../../lib/phonegap'),
     processSpy,
     utilSpy,
     options,
-    cordovaDependencySpy
     TIMEOUT = 10000;
 
 /*!
@@ -192,11 +191,10 @@ describe('phonegap.cordova(options, [callback])', function() {
             beforeEach(function() {
                 cordova.util.isCordova.andReturn(false);
                 shell.exec.andCallThrough();
-                console.log(options);
             });
             // ToDo: @carynbear this not testable with current dependency implementation b/c no cordova to call without project.
             // expects failure when calling cordova build ios on a non-project
-            xit('should trigger the callback with an error', function(done) {
+            it('should trigger the callback with an error', function(done) {
                 phonegap.cordova(options, function(e) {
                     expect(e).toEqual(jasmine.any(Error));
                     done();
@@ -217,29 +215,26 @@ describe('phonegap.cordova(options, [callback])', function() {
     });
 
     describe('adding/removing plugin', function() {
-        it('should save/remove the plugin in config.xml without --save flag', function() {
+        it('should save/remove the plugin in config.xml without --save flag', function(done) {
             var options1 = {};
             // test for phonegap plugin add
             options1.cmd = options.cmd = 'cordova plugin add cordova-plugin-camera';
-            phonegap.cordova(options);
-            //options.cmd now has --save appended.
-            expect(shell.exec).toHaveBeenCalled();
-            expect(options.cmd).toBe(options1.cmd + " --save");
-            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
-            // test for phonegap plugin rm
-            options1.cmd = options.cmd = 'cordova plugin rm cordova-plugin-camera';
-            phonegap.cordova(options);
-            expect(shell.exec).toHaveBeenCalled();
-            expect(options.cmd).toBe(options1.cmd + " --save");
-            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
+            phonegap.cordova(options, function() {
+                //options.cmd now has --save appended.
+                expect(shell.exec).toHaveBeenCalled();
 
-            // test for phonegap plugin remove
-            options1.cmd = options.cmd = 'cordova plugin remove cordova-plugin-camera';
-            phonegap.cordova(options);
-            expect(shell.exec).toHaveBeenCalled();
-            expect(options.cmd).toBe(options1.cmd + " --save");
-            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
-        });
+                expect(options.cmd).toBe(options1.cmd + " --save");
+                expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
+                // test for phonegap plugin rm
+                options1.cmd = options.cmd = 'cordova plugin rm cordova-plugin-camera';
+                phonegap.cordova(options, function() {
+                    expect(shell.exec).toHaveBeenCalled();
+                    expect(options.cmd).toBe(options1.cmd + " --save");
+                    expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
+                    done();
+                });
+            });
+        }, 10000);
     });
 
     describe('add platforms', function() {
