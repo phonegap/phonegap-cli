@@ -15,6 +15,7 @@
             "maxEOF": 1
         }],
         "no-trailing-spaces": "error",
+        "no-unused-vars": ["error",{ "args": "none" }],
         "padded-blocks": [1, "never"],
         "semi": ["error", "always"],
         "space-before-blocks": "error"

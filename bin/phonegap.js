@@ -7,7 +7,6 @@
 var CLI = require('../lib/cli');
 var cli = new CLI();
 var analytics = cli.analytics;
-var version = require('../package.json').version;
 
 if (analytics.statusUnknown()) {
     // if it is an analytics command, just run it

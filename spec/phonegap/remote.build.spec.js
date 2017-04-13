@@ -5,11 +5,9 @@
 var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
     PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
-    events = require('events'),
     phonegap,
     appData,
-    options,
-    stdout;
+    options;
 
 /*
  * Specification: phonegap.remote.build(options, [callback])

@@ -2,8 +2,7 @@
  * Module dependencies.
  */
 
-var phonegap = require('../../lib/main'),
-    CLI = require('../../lib/cli'),
+var CLI = require('../../lib/cli'),
     argv,
     cli,
     stdout;

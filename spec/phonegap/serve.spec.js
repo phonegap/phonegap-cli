@@ -1,10 +1,8 @@
 
 var serveModule = require("../../lib/phonegap/serve"),
-    http = require("http"),
     server = require("connect-phonegap"),
     cordova = require('../../lib/cordova').cordova,
     project = require("../../lib/phonegap/util/project"),
-    preparePromise = null,
     serve = null;
 
 
@@ -117,24 +115,22 @@ describe("PhoneGap serve", function () {
         });
 
         describe("if cordova prepare throws", function () {
-            var invalidOptions,
-                defaultOptions;
+            var defaultOptions;
 
             beforeEach(function () {
-                invalidOptions = {
-                    port: undefined,
-                    autoreload:"batman",
-                    localtunnel:"wonderwoman"
-                };
                 defaultOptions = {
                     port: 3000,
                     autoreload: true,
                     localtunnel: false
                 };
 
-                spyOn(cordova, 'prepare').andCallFake(function () {
+                cordova.prepare.andCallFake(function () {
                     throw new Error('IWETTUM!');
                 });
+            });
+            it('should still serve', function() {
+                serve(defaultOptions);
+                expect(server.listen).toHaveBeenCalledWith(defaultOptions);
             });
         });
 

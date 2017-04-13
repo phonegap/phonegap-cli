@@ -5,8 +5,7 @@
 var phonegap = require('../../lib/main'),
     CLI = require('../../lib/cli'),
     argv,
-    cli,
-    stdout;
+    cli;
 
 /*!
  * Specification: $ phonegap cordova <command>
@@ -18,7 +17,6 @@ describe('$ phonegap cordova', function() {
         argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
-        stdout = process.stdout.write;
     });
 
     it('should bypass the PhoneGap CLI chain', function(done) {

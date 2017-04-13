@@ -2,8 +2,7 @@
  * Module dependencies.
  */
 
-var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
-    PhoneGap = require('../../lib/phonegap'),
+var PhoneGap = require('../../lib/phonegap'),
     project = require('../../lib/phonegap/util/project'),
     qrcode = require('qrcode-terminal'),
     phonegap,

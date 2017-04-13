@@ -7,7 +7,6 @@ var project = require('../../../lib/phonegap/util/project'),
     events = require('events'),
     chdir = require('chdir'),
     path = require('path'),
-    fs = require('fs'),
     currentPath,
     projectPath,
     delegate;
@@ -131,8 +130,6 @@ describe('project', function() {
 
 
     describe('readPackage', function () {
-        var relativePath;
-
         beforeEach(function() {
             packagepath = path.join(__dirname, '..', '..', '..', 'package.json');
             spyOn(JSON,'parse').andReturn({});
@@ -144,28 +141,6 @@ describe('project', function() {
 
         it('should return the package.json contents', function() {
             expect(project.readPackage()).toEqual({});
-        });
-    });
-
-    describe('clobbersConfig', function() {
-        var fixtureUri = '/User/dev/correct/uri/to/config',
-            fixtureContent = 'aabbcc';
-
-        beforeEach(function() {
-            createSpyObj('fs', ['open','readFile']);
-            spyOn(fs,'readFile').andReturn(null,'');
-        });
-
-        it('should be defined clue', function() {
-            expect(project.clobberProjectConfig).toBeDefined();
-        });
-        it('should return null if path is invalid', function () {
-            var res = project.clobberProjectConfig('blarg',{});
-        });
-        it('should return the path of the config file when successful', function () {
-            var res = project.clobberProjectConfig(fixtureUri, {'aa':'bb','cc':'bb'});
-
-            expect(res).toEqual(fixtureUri);
         });
     });
 });
