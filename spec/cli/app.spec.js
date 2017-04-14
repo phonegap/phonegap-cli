@@ -67,7 +67,7 @@ describe('phonegap app', function() {
         cli = new CLI();
         argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
-        spyOn(phonegap, 'serve') 
+        spyOn(phonegap, 'serve');
     });
 
     describe('$ phonegap app', function() {

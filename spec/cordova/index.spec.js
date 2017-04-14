@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-var cordova = require('../../lib/cordova')
+var cordova = require('../../lib/cordova');
 
 /*
  * Specification: cordova

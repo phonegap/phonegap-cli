@@ -2,13 +2,8 @@
 var serveModule = require("../../lib/phonegap/serve"),
     server = require("connect-phonegap"),
     project = require("../../lib/phonegap/util/project"),
-<<<<<<< f14d342bc35970a0f4db6632ad48cbfed3dee520
-=======
-    preparePromise = null,
     gaze = require("gaze"),
->>>>>>> fixed up decouple work, updated tests
     serve = null;
-
 
 var dummyPromise = { then: function() {} },
     realPromise = { then: function(f) { f(); } };
@@ -38,7 +33,7 @@ describe("PhoneGap serve", function () {
                 localtunnel:false
             };
 
-            CordovaSpy = createSpy('Phonegap Cordova Spy').andCallFake(function(cmd, callback){
+            CordovaSpy = createSpy('Phonegap Cordova Spy').andCallFake(function(cmd, callback) {
                 callback();
             });
 
@@ -60,19 +55,15 @@ describe("PhoneGap serve", function () {
             preparePromise = dummyPromise;
 
             spyOn(server,'listen').andReturn({ on: function() { return this; }});
-            spyOn(gaze, 'Gaze').andCallFake(function(something){
+            spyOn(gaze, 'Gaze').andCallFake(function(something) {
                 var fakeGaze = {
                     on: function(evts, callback) {
-                        callback()
+                        callback();
                     }
-                }
+                };
 
                 return fakeGaze;
-            })
-        });
-
-        afterEach(function(){
-            this.removeAllSpies();
+            });
         });
 
         it("should be a function", function() {
@@ -154,20 +145,18 @@ describe("PhoneGap serve", function () {
                     callback(new Error('IWETTUM!'));
                 });
             });
-            
+
             it('should still serve', function() {
                 serve(defaultOptions);
                 expect(server.listen).toHaveBeenCalledWith(defaultOptions);
             });
 
-            it("should call connect-phonegap listen", function (){
+            it("should call connect-phonegap listen", function () {
                 preparePromise = realPromise;
                 serve({});
                 expect(server.listen).toHaveBeenCalled();
             });
-
-       });
->>>>>>> passing all the tests hallelujah :)
+        });
 
         describe("if called with invalid options", function () {
             var invalidOptions,
@@ -219,3 +208,4 @@ describe("PhoneGap serve", function () {
         });
     });
 });
+

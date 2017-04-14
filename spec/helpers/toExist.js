@@ -5,7 +5,6 @@ beforeEach(function () {
         'toExist': function () {
             return {
                 compare: function (testPath) {
-
                     var result = {};
                     result.pass = fs.existsSync(testPath);
 
@@ -14,11 +13,10 @@ beforeEach(function () {
                     } else {
                         result.message = 'Expected file ' + testPath + ' to not exist.';
                     }
-
-                    return result
-
+                    return result;
                 }
-            }
+            };
         }
     });
 });
+
