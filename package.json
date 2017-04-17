@@ -104,6 +104,18 @@
       "description": "Starter PhoneGap project for Framework7.",
       "npm": "phonegap-template-framework7"
     },
+    "layout-blank": {
+      "description": "A blank layout template using Framework7 and Vue.js",
+      "npm": "phonegap-template-vue-f7-blank"
+    },
+    "layout-panel": {
+      "description": "A side panel layout template that expands to a split view using Framework7 and Vue.js",
+      "npm": "phonegap-template-vue-f7-split-view"
+    },
+    "layout-tabs": {
+      "description": "A tabbed layout template using Framework7 and Vue.js",
+      "npm": "phonegap-template-vue-f7-tabs"
+    },
     "push": {
       "description": "An example app for getting started with push notifications",
       "npm": "phonegap-template-push"
