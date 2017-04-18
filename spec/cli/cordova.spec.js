@@ -25,10 +25,10 @@ describe('$ phonegap cordova', function() {
             expect(command).toEqual({ cmd : 'cordova --version --no-telemetry', verbose : false });
             expect(phonegap.cordova).toHaveBeenCalled();
             done();
-        }
+        };
         spyOn(phonegap, 'cordova').andCallFake(function(command, cb) {
             return cb(command);
-        }); 
+        });
         cli.argv(argv.concat(['cordova', '--version']), callback);
     });
 
