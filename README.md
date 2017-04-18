@@ -1,4 +1,4 @@
-# PhoneGap CLI [![Build Status][travis-ci-img]][travis-ci-url] [![bitHound Score][bithound-img]][bithound-url] [![codecov](https://codecov.io/gh/phonegap/phonegap-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/phonegap/phonegap-cli)
+# PhoneGap CLI [![Build Status][travis-ci-img]][travis-ci-url] [![Build status](https://ci.appveyor.com/api/projects/status/4yq7ij035ya3g5bq/branch/master?svg=true)](https://ci.appveyor.com/project/stevengill/phonegap-cli/branch/master) [![bitHound Score][bithound-img]][bithound-url] [![codecov](https://codecov.io/gh/phonegap/phonegap-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/phonegap/phonegap-cli)
 
 > PhoneGap command-line interface and Node.js library.
 
