@@ -192,8 +192,6 @@ describe('phonegap.cordova(options, [callback])', function() {
                 cordova.util.isCordova.andReturn(false);
                 shell.exec.andCallThrough();
             });
-            // ToDo: @carynbear this not testable with current dependency implementation b/c no cordova to call without project.
-            // expects failure when calling cordova build ios on a non-project
             it('should trigger the callback with an error', function(done) {
                 phonegap.cordova(options, function(e) {
                     expect(e).toEqual(jasmine.any(Error));

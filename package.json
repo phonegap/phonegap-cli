@@ -34,7 +34,7 @@
     "connect-phonegap": "https://github.com/stevengill/connect-phonegap.git#177",
     "cordova-create": "^1.0.1",
     "cordova-common": "^2.0.0",
-    "elementtree": "^0.1.6",
+    "elementtree": "0.1.6",
     "insight": "0.8.2",
     "configstore": "1.4.0",
     "os-name": "2.0.1",

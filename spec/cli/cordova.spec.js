@@ -20,18 +20,16 @@ describe('$ phonegap cordova', function() {
     });
 
     //ToDo: @carynbear reproduce this test; decoupling requires that cordova commands be run in a project; cannot test with current implementation
-    xit('should bypass the PhoneGap CLI chain', function(done) {
-        var version = "12345";
-        spyOn(phonegap, 'cordova').andReturn(version);
-        // var version = require('../../node_modules/cordova/package.json').version;
-        phonegap.on('raw', function(data) {
-            // cordova@6.4.0 adds an extra '\n' after all output
-            if (data !== '\n') {
-                expect(data).toMatch(version);
-                done();
-            }
-        });
-        cli.argv(argv.concat(['cordova', '--version']));
+    it('should bypass the PhoneGap CLI chain', function(done) {
+        var callback = function(command) {
+            expect(command).toEqual({ cmd : 'cordova --version --no-telemetry', verbose : false });
+            expect(phonegap.cordova).toHaveBeenCalled();
+            done();
+        }
+        spyOn(phonegap, 'cordova').andCallFake(function(command, cb) {
+            return cb(command);
+        }); 
+        cli.argv(argv.concat(['cordova', '--version']), callback);
     });
 
     describe('reconstructing the original command:', function() {
