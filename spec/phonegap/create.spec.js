@@ -203,6 +203,20 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
             done();
         });
     });
+
+    it('should not require callback', function(done) {
+        phonegap.create(options, function(e) {
+            expect(e).toBeUndefined();
+            done();
+        });
+    });
+
+    it('should return itself', function(done) {
+        expect(phonegap.create(options, function(e) {
+            expect(e).toBeUndefined();
+            done();
+        })).toEqual(phonegap);
+    });
 });
 
 /*
@@ -236,24 +250,14 @@ describe('spec/phonegap/create.spec.js phonegap.create', function() {
     it('should require options', function() {
         expect(function() {
             options = undefined;
-            phonegap.create(options, function(e) {});
+            phonegap.create(options);
         }).toThrow();
     });
 
     it('should require options.path', function() {
         expect(function() {
             options.path = undefined;
-            phonegap.create(options, function(e) {});
-        }).toThrow();
-    });
-
-    it('should not require callback', function() {
-        expect(function() {
             phonegap.create(options);
-        }).not.toThrow();
-    });
-
-    it('should return itself', function() {
-        expect(phonegap.create(options)).toEqual(phonegap);
+        }).toThrow();
     });
 });
