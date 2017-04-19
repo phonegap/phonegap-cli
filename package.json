@@ -104,18 +104,6 @@
       "description": "Starter PhoneGap project for Framework7.",
       "npm": "phonegap-template-framework7"
     },
-    "layout-blank": {
-      "description": "A blank layout template using Framework7 and Vue.js",
-      "npm": "phonegap-template-vue-f7-blank"
-    },
-    "layout-panel": {
-      "description": "A side panel layout template that expands to a split view using Framework7 and Vue.js",
-      "npm": "phonegap-template-vue-f7-split-view"
-    },
-    "layout-tabs": {
-      "description": "A tabbed layout template using Framework7 and Vue.js",
-      "npm": "phonegap-template-vue-f7-tabs"
-    },
     "push": {
       "description": "An example app for getting started with push notifications",
       "npm": "phonegap-template-push"
@@ -124,9 +112,21 @@
       "description": "Starter PhoneGap project using React.js, Babel, Webpack and Hot Reloading.",
       "npm": "phonegap-template-react-hot-loader"
     },
+    "single-vue": {
+      "description": "A single view layout template using Framework7 and Vue.js",
+      "npm": "phonegap-template-vue-f7-blank"
+    },
+    "split-vue": {
+      "description": "A split view layout template that degrades to a panel view using Framework7 and Vue.js",
+      "npm": "phonegap-template-vue-f7-split-view"
+    },
     "star-track": {
       "description": "An example app using Framework7 and the Spotify API.",
       "npm": "phonegap-app-star-track"
+    },
+    "tabbed-vue": {
+      "description": "A tabbed layout template using Framework7 and Vue.js",
+      "npm": "phonegap-template-vue-f7-tabs"
     },
     "webvr": {
       "description": "A WebVR and Google Cardboard demo ported from borismus/webvr-boilerplate.",
