@@ -372,6 +372,15 @@ describe('sanitize-args', function() {
         it('should return "help" by default if no arguments are given', function() {
             expect(sanitizeArgs.getCommand([])).toEqual('help');
         });
+        it('should return the main command when no switches are provided', function() {
+            expect(sanitizeArgs.getCommand(['serve'])).toEqual('serve');
+        });
+        it('should return the main command when switches are provided at the end', function() {
+            expect(sanitizeArgs.getCommand(['serve', '-d'])).toEqual('serve');
+        });
+        it('should return the main command when switches are provided at the start', function() {
+            expect(sanitizeArgs.getCommand(['-d', 'serve'])).toEqual('serve');
+        });
     });
     describe('filterParameters', function() {
         it('should be able to handle zero arguments', function() {
