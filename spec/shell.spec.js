@@ -60,4 +60,31 @@ describe('$ phonegap [options] commands', function() {
             expect(process.exitCode).toEqual(1337);
         });
     });
+    /*
+     * Unfortunately, the below does not work with jasmine-node
+     * I really really tried to implement a test for the uncaught exception handler
+     * to no avail. jasmine-node just exits prematurely.
+     * Perhaps when we move to jasmine2 this can be tested properly.
+    describe('when node throws an uncaught exception', function() {
+        beforeEach(function() {
+            jasmine.CATCH_EXCEPTIONS = false;
+        });
+        afterEach(function() {
+            jasmine.CATCH_EXCEPTIONS = true;
+        });
+        it('should track the event in analytics', function(done) {
+            spyOn(cli.prototype.analytics, 'trackEvent');
+            spyOn(console, 'error');
+            cli = require('../lib/cli');
+            process.argv = ['node', 'phonegap.js', 'die', 'inafire'];
+            spyOn(cli.prototype, 'argv').andCallFake(function(args, cb) {
+                throw 'Poop!';
+            });
+            expect(trigger_phonegap_cli).toThrow();
+            expect(console.error.mostRecentCall.args[0]).toMatch('There was an unhandled exception');
+            expect(cli.prototype.analytics.trackEvent).toHaveBeenCalledWith(['die', 'inafire']);
+            done();
+        });
+    });
+    */
 });

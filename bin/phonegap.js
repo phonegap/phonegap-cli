@@ -8,6 +8,20 @@ var CLI = require('../lib/cli');
 var cli = new CLI();
 var analytics = cli.analytics;
 
+process.on('uncaughtException', function(err) {
+    console.error('There was an unhandled exception within phonegap-cli! If you would like to help the PhoneGap project, please file the following details over at https://github.com/phonegap/phonegap-cli/issues');
+    console.error(err.stack);
+    var args = Array.prototype.slice.call(process.argv).slice(2);
+    // Track event using standard analytics lib, but provide third argument
+    // that are 'overrides' so that we can force the event name to be a "crash"
+    // and force tracking of original parameters.
+    analytics.trackEvent(args, err, {
+        short_message: "crash",
+        _params: args
+    });
+    process.exit(1);
+});
+
 if (analytics.statusUnknown()) {
     // if it is an analytics command, just run it
     if (process.argv.length > 2 && process.argv[2] === 'analytics') {

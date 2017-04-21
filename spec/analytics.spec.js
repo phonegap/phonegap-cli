@@ -66,6 +66,11 @@ describe('PhoneGap Analytics', function() {
             var dump = JSON.parse(post_spy.calls[0].args[0].form);
             expect(dump._params).toContain('list');
         });
+        it('should honour the overrides parameter (third param)', function() {
+            analytics.trackEvent(['serve', '--no-autoreload'], null/*error*/, {short_message:"OVERRULED!"});
+            var dump = JSON.parse(post_spy.calls[0].args[0].form);
+            expect(dump.short_message).toEqual('OVERRULED!');
+        });
         describe('session tracking', function() {
             it('should tag events with a session id', function() {
                 var cmd = ['plugins', 'list'];
