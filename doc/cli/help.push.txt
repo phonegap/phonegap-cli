@@ -6,6 +6,11 @@ Description:
 
   The intended receiver is the PhoneGap App.
 
+  Please note that this feature _must_ be used with an app that is compatible
+  with push notifications. Quickest way to get started is to use the `push`
+  application template (`phonegap create pushtest --template push`), and follow
+  this tutorial: http://docs.phonegap.com/tutorials/develop/push-notifications
+
 Options:
 
   --deviceID <deviceID>   device ID (required)
