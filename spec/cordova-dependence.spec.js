@@ -4,7 +4,6 @@ var path = require('path'),
     shell = require('shelljs'),
     EventEmitter = require('events').EventEmitter,
     mockery = require('mockery'),
-    cordova_common = require('cordova-common'),
     fn = require('../lib/phonegap/cordova-dependence').exec,
     processSpy = {
         stdout: new EventEmitter(),
@@ -18,14 +17,13 @@ var tests = path.resolve(__dirname, 'testcases');
 describe('phonegap cordova dependency tests', function() {
     var projectDir;
 
-    iit ('should error if project is not a project', function(done) {
+    it ('should error if project is not a project', function(done) {
         projectDir = path.resolve(tests, 'not_a_project');
-        spyOn(cordova_common.CordovaCheck, 'findProjectRoot').andReturn(false);
         fn(projectDir)
         .then(function() {
             expect('fail').toBe('thrown');
         }).fail(function(err) {
-            expect(err.message).toContain('does not point to a valid PhoneGap project');
+            expect(err.message).toBe('"'+projectDir+'"' + ' does not point to a valid PhoneGap project');
         }).fin(done);
     });
 
