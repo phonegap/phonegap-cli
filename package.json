@@ -21,7 +21,7 @@
     "phonegap": "./bin/phonegap.js"
   },
   "scripts": {
-    "test": "jasmine-node --color spec && eslint ./ --ignore-path .gitignore",
+    "test": "jasmine-node --color spec && node_modules/eslint/bin/eslint.js ./ --ignore-path .gitignore",
     "cover": "istanbul cover --print detail -x **/spec/** jasmine-node -- --color spec"
   },
   "engineStrict": true,
