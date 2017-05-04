@@ -361,21 +361,42 @@ describe('phonegap.cordova(options, [callback])', function() {
 
         it('should add phonegap.js for ios', function() {
             phonegap.cordova(options);
+<<<<<<< HEAD
             expect(shell.cp).toHaveBeenCalled();
             expect(shell.cp.mostRecentCall.args[1]).toMatch(/ios.*cordova\.js/);
             expect(shell.cp.mostRecentCall.args[2]).toMatch(/ios.*phonegap\.js/);
+=======
+            process.nextTick(function(){
+                expect(shell.cp).toHaveBeenCalled();
+                expect(shell.cp.mostRecentCall.args[1]).toMatch(/ios.*cordova\.js/);
+                expect(shell.cp.mostRecentCall.args[2]).toMatch(/ios.*phonegap\.js/);
+                done();
+            });
+>>>>>>> parent of 3c74547... fixed failing tests for decouple cordova work, fixed eslint
         });
 
         it('should add phonegap.js for ios and android', function() {
             options.cmd = 'cordova build ios android';
             cordova.util.listPlatforms.andReturn(['ios', 'android']);
             phonegap.cordova(options);
+<<<<<<< HEAD
             expect(shell.cp).toHaveBeenCalled();
             expect(shell.cp.calls.length).toEqual(2);
             expect(shell.cp.calls[0].args[1]).toMatch(/ios.*cordova\.js/);
             expect(shell.cp.calls[0].args[2]).toMatch(/ios.*phonegap\.js/);
             expect(shell.cp.calls[1].args[1]).toMatch(/android.*cordova\.js/);
             expect(shell.cp.calls[1].args[2]).toMatch(/android.*phonegap\.js/);
+=======
+            process.nextTick(function(){
+                expect(shell.cp).toHaveBeenCalled();
+                expect(shell.cp.calls.length).toEqual(2);
+                expect(shell.cp.calls[0].args[1]).toMatch(/ios.*cordova\.js/);
+                expect(shell.cp.calls[0].args[2]).toMatch(/ios.*phonegap\.js/);
+                expect(shell.cp.calls[1].args[1]).toMatch(/android.*cordova\.js/);
+                expect(shell.cp.calls[1].args[2]).toMatch(/android.*phonegap\.js/);
+                done();
+            });
+>>>>>>> parent of 3c74547... fixed failing tests for decouple cordova work, fixed eslint
         });
     });
 

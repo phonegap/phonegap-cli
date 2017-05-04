@@ -24,7 +24,6 @@
     "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec; node_modules/eslint/bin/eslint.js ./ --ignore-path .gitignore",
     "cover": "istanbul cover --print detail -x **/spec/** node_modules/jasmine-node/bin/jasmine-node -- --color spec"
   },
-  "engineStrict": true,
   "engines": {
     "node": ">=4.0.0"
   },

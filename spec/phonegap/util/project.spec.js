@@ -99,7 +99,9 @@ describe('project', function() {
 
 
         beforeEach(function() {
+            console.log('b4 each');
             spyOn(cdvutil, 'listPlatforms').andCallFake(function() {
+                console.log('fake listPlatforms', exampleOut);
                 return exampleOut;
             });
         });
