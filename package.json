@@ -41,6 +41,7 @@
     "minimist": "0.1.0",
     "opener": "1.4.1",
     "opn": "^4.0.2",
+    "ora": "^1.2.0",
     "os-name": "2.0.1",
     "phonegap-build": "0.10.0",
     "prompt": "0.2.11",
