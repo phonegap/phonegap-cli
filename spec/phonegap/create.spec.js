@@ -182,6 +182,7 @@ describe('phonegap.create(options, [callback])', function() {
                 });
             });
         });
+<<<<<<< HEAD
 
         describe('when my-app/www/config.xml does not exist', function() {
             beforeEach(function() {
@@ -196,6 +197,10 @@ describe('phonegap.create(options, [callback])', function() {
                 });
             });
         });
+=======
+    });
+});
+>>>>>>> parent of a7b107d... made changes based on pr review
 
         describe('when config.xml does not exist', function() {
             beforeEach(function() {
@@ -235,6 +240,7 @@ describe('phonegap.create(options, [callback])', function() {
         });
     });
 
+<<<<<<< HEAD
     describe('failed to create a project', function() {
         beforeEach(function() {
             phonegap.cordova.andCallFake(function(options, callback) {
@@ -248,5 +254,29 @@ describe('phonegap.create(options, [callback])', function() {
                 done();
             });
         });
+=======
+    it('should require options', function() {
+        expect(function() {
+            options = undefined;
+            phonegap.create(options, function(e) {});
+        }).toThrow();
+    });
+
+    it('should require options.path', function() {
+        expect(function() {
+            options.path = undefined;
+            phonegap.create(options, function(e) {});
+        }).toThrow();
+>>>>>>> parent of a7b107d... made changes based on pr review
+    });
+
+    it('should not require callback', function() {
+        expect(function() {
+            phonegap.create(options);
+        }).not.toThrow();
+    });
+
+    it('should return itself', function() {
+        expect(phonegap.create(options)).toEqual(phonegap);
     });
 });
