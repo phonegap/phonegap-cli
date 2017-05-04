@@ -15,7 +15,6 @@ var PhoneGap = require('../lib/phonegap'),
     mockery = require('mockery'),
     Q = require('q'),
     phonegap,
-    //cordovaDependency = require('../lib/phonegap/cordova-dependence'),
     options,
     cordovaCreateSpy,
     TIMEOUT = 10000;
@@ -33,7 +32,7 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         });
         mockery.enable({ useCleanCache:true });
         mockery.registerMock('cordova-create', cordovaCreateSpy);
-        mockery.registerMock('./cordova-dependence', {exec : cordovaDependencySpy});
+        mockery.registerMock('phonegap-cordova-dependence', {exec : cordovaDependencySpy});
         mockery.warnOnUnregistered(false);
         phonegap = new PhoneGap();
         options = {
