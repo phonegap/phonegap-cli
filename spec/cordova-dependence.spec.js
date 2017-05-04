@@ -77,10 +77,7 @@ describe('Management of Cordova as an npm dependency', function() {
             fn('/some/random/directory', emitter)
             .then(function() {
                 expect(emitter.emit).toHaveBeenCalledWith('warn', 'No package.json was found for your project. Creating one from config.xml');
-                console.log();
-                expect(path.basename(fs.writeFileSync.mostRecentCall.args[0])).toEqual('package.json');
-                expect(fs.writeFileSync.mostRecentCall.args[1]).toEqual('{\n    "displayName": "name",\n    "name": "package_name",\n    "version": "version"\n}');
-                expect(fs.writeFileSync.mostRecentCall.args[2]).toEqual('utf8');
+                expect(fs.writeFileSync).toHaveBeenCalledWith('/very/legit/project/directory/package.json', '{\n    "displayName": "name",\n    "name": "package_name",\n    "version": "version"\n}', 'utf8');
             }).fail(function(err) {
                 console.log(err);
                 expect(err).not.toBeDefined();
