@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "jasmine-node --color spec && node_modules/eslint/bin/eslint.js ./ --ignore-path .gitignore",
-    "cover": "istanbul cover --print detail -x **/spec/** jasmine-node -- --color spec"
+    "cover": "istanbul cover --print detail -x **/spec/** jasmine-node -- --color spec" 
   },
   "engineStrict": true,
   "engines": {
@@ -31,17 +31,16 @@
   "dependencies": {
     "archiver": "^1.0.0",
     "colors": "0.6.0-1",
-    "configstore": "1.4.0",
     "connect-phonegap": "https://github.com/stevengill/connect-phonegap.git#177",
-    "cordova-common": "^2.0.0",
     "cordova-create": "^1.0.1",
+    "cordova-common": "^2.0.0",
     "elementtree": "0.1.6",
-    "gaze": "^1.1.2",
     "insight": "0.8.2",
+    "configstore": "1.4.0",
+    "os-name": "2.0.1",
     "minimist": "0.1.0",
     "opener": "1.4.1",
     "opn": "^4.0.2",
-    "os-name": "2.0.1",
     "phonegap-build": "0.10.0",
     "prompt": "0.2.11",
     "q": "^1.4.1",
