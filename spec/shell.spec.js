@@ -22,14 +22,9 @@ describe('$ phonegap [options] commands', function() {
     });
 
     it('should support no arguments and post help', function() {
-<<<<<<< f14d342bc35970a0f4db6632ad48cbfed3dee520
         process.argv = ['node', 'phonegap.js'];
-=======
-        spyOn(console, 'log');
-        //console.log(console.log);
->>>>>>> fixed up decouple work, updated tests
         trigger_phonegap_cli();
-        //expect(console.log.mostRecentCall.args[0]).toMatch('Usage:');
+        expect(console.log.mostRecentCall.args[0]).toMatch('Usage:');
     });
 
     it('should support commands', function() {

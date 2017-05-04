@@ -25,21 +25,21 @@ describe('phonegap help serve', function() {
     describe('$ phonegap serve help', function() {
         it('should output usage info', function() {
             cli.argv(argv.concat(['serve', 'help']));
-            //expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 
     describe('$ phonegap serve --help', function() {
         it('should output usage info', function() {
             cli.argv(argv.concat(['serve', '--help']));
-            //expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 
     describe('$ phonegap serve -h', function() {
         it('should output usage info', function() {
             cli.argv(argv.concat(['serve', '-h']));
-            //expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
+            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 });
