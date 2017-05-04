@@ -174,6 +174,53 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         });
     }, TIMEOUT);
 
+    // it('package json does not exist, should warn and create package.json', function(done){
+    //     var flag;
+    //     runs(function(){
+    //         phonegap.once('warn', function(message) {
+    //             expect(message).toMatch('No package.json was found for your project. Creating one from config.xml');
+    //         });
+    //         phonegap.create(options, function(e) {
+    //             expect(e).not.toBeDefined();
+    //             expect(configParserSpy).toHaveBeenCalled();
+    //             flag = true;
+    //             done();
+    //         });
+    //     });
+
+    //     waitsFor(function(){
+    //         return flag;
+    //     }, 'phonegap create timeout', TIMEOUT);
+    // }, TIMEOUT);
+
+    // it('should not create package.json', function(done){
+    //     var flag, mockPkgJson;
+    //     options.path = '/some/path/to/app/www/';
+    //     runs(function(){
+    //         mockPkgJson = require(path.resolve(__dirname, 'package.dummy.spec.json'));
+    //         fs.existsSync.andReturn(true); //If true, then will try to open pkg json which doesn't exist
+    //         mockery.registerMock('/some/path/to/app/www/package.json', mockPkgJson);
+    //         phonegap.create(options, function(e) {
+    //             expect(e).not.toBeDefined();
+    //             expect(configParserSpy).not.toHaveBeenCalled();
+    //             flag = true;
+    //             done();
+    //         });
+    //     });
+
+    //     waitsFor(function(){
+    //         return flag;
+    //     }, 'phonegap create timeout', TIMEOUT);
+
+    //     runs(function(){
+    //         mockery.deregisterMock('/some/path/to/app/www/package.json');
+    //     })
+
+    // }, TIMEOUT);
+    
+    // it('passed', function(){
+    //     expect(1).toEqual(1);
+    // })
 });
 
 
