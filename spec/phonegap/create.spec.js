@@ -182,7 +182,6 @@ describe('phonegap.create(options, [callback])', function() {
                 });
             });
         });
-<<<<<<< HEAD
 
         describe('when my-app/www/config.xml does not exist', function() {
             beforeEach(function() {
@@ -197,10 +196,6 @@ describe('phonegap.create(options, [callback])', function() {
                 });
             });
         });
-=======
-    });
-});
->>>>>>> parent of a7b107d... made changes based on pr review
 
         describe('when config.xml does not exist', function() {
             beforeEach(function() {
@@ -240,21 +235,6 @@ describe('phonegap.create(options, [callback])', function() {
         });
     });
 
-<<<<<<< HEAD
-    describe('failed to create a project', function() {
-        beforeEach(function() {
-            phonegap.cordova.andCallFake(function(options, callback) {
-                callback(new Error('path already exists'));
-            });
-        });
-
-        it('should trigger callback with an error', function(done) {
-            phonegap.create(options, function(e) {
-                expect(e).toEqual(jasmine.any(Error));
-                done();
-            });
-        });
-=======
     it('should require options', function() {
         expect(function() {
             options = undefined;
@@ -267,7 +247,13 @@ describe('phonegap.create(options, [callback])', function() {
             options.path = undefined;
             phonegap.create(options, function(e) {});
         }).toThrow();
->>>>>>> parent of a7b107d... made changes based on pr review
+    });
+
+    it('should accept a numeric path', function() {
+        expect(function() {
+            options.path = 123;
+            phonegap.create(options, function(e) {});
+        }).not.toThrow();
     });
 
     it('should not require callback', function() {
@@ -278,5 +264,27 @@ describe('phonegap.create(options, [callback])', function() {
 
     it('should return itself', function() {
         expect(phonegap.create(options)).toEqual(phonegap);
+    });
+
+    //describe('successfully created a project', function() {
+        /* Removed following tests:
+        ** Config.xml is handled by Cordova Create
+        ** link-to has been deprecated
+        ** callback test moved to ../prespec/create.spec.js
+        'when my-app/www/config.xml exists should move it to my-app/config.xml'
+        'when my-app/www/config.xml does not exist should not move it to my-app/config.xml'
+        'when updating config.xml should parse the my-app/config.xml'
+        'when config.xml does not exist should trigger a "warn" event'
+        'when --link-to is provided should not move config.xml should not update config.xml'
+        'when complete should trigger callback without an error'
+         */
+    //});
+
+
+    it('should trigger callback with an error because cordova-create is not mocked', function(done) {
+        phonegap.create(options, function(e) {
+            expect(e).toBeDefined();
+            done();
+        });
     });
 });
