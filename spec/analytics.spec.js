@@ -23,7 +23,7 @@ describe('PhoneGap Analytics', function() {
             cb(fake_error);
         });
         trigger_phonegap_cli();
-        expect(track).toHaveBeenCalledWith(jasmine.any(Array), fake_error);
+        expect(track).toHaveBeenCalledWith(jasmine.any(Array), fake_error, jasmine.any(Object));
     });
     describe('trackEvent', function() {
         var post_spy;
