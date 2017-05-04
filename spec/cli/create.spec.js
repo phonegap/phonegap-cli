@@ -85,8 +85,7 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'verbose': false,
-                'template': undefined
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -101,7 +100,7 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'verbose': false
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -116,7 +115,7 @@ describe('phonegap create <path>', function() {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'verbose': false
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -145,7 +144,7 @@ describe('phonegap create <path>', function() {
                     }
                 },
                 'copy-from': undefined,
-                'verbose': false
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -160,7 +159,7 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'verbose': false
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -175,7 +174,7 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'verbose': false
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -190,7 +189,7 @@ describe('phonegap create <path>', function() {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'verbose': false
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -205,7 +204,7 @@ describe('phonegap create <path>', function() {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'verbose': false
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -224,7 +223,7 @@ describe('phonegap create <path>', function() {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'verbose': false
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -243,7 +242,7 @@ describe('phonegap create <path>', function() {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'verbose': false
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -261,7 +260,7 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': 'http://example.com/app.tar.gz',
-                'verbose': false
+                'link-to': undefined
             },
             jasmine.any(Function));
         });
@@ -279,7 +278,25 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': 'http://example.com/app.tar.gz',
-                'verbose': false
+                'link-to': undefined
+            },
+            jasmine.any(Function));
+        });
+    });
+
+    describe('$ phonegap create ./my-app --link-to path/to/an-app', function() {
+        it('should try to create the project', function() {
+            cli.argv(argv.concat([
+                'create', './my-app',
+                '--link-to', 'path/to/an-app'
+            ]));
+            expect(phonegap.create).toHaveBeenCalledWith({
+                path: './my-app',
+                id: undefined,
+                name: undefined,
+                config: {},
+                'copy-from': undefined,
+                'link-to': 'path/to/an-app'
             },
             jasmine.any(Function));
         });
@@ -297,8 +314,8 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                template: 'hello-world',
-                'verbose': false
+                'link-to': undefined,
+                template: 'hello-world'
             },
             jasmine.any(Function));
         });
@@ -316,8 +333,8 @@ describe('phonegap create <path>', function() {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                template: 'hello-world',
-                'verbose': false
+                'link-to': undefined,
+                template: 'hello-world'
             },
             jasmine.any(Function));
         });

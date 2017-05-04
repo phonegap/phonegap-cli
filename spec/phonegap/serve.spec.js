@@ -1,14 +1,14 @@
 
 var serveModule = require("../../lib/phonegap/serve"),
     server = require("connect-phonegap"),
+    cordova = require('../../lib/cordova').cordova,
     project = require("../../lib/phonegap/util/project"),
-    gaze = require("gaze"),
     serve = null;
+
 
 var dummyPromise = { then: function() {} },
     realPromise = { then: function(f) { f(); } };
 
-var CordovaSpy;
 
 describe("PhoneGap serve", function () {
     describe("module", function () {
@@ -32,18 +32,10 @@ describe("PhoneGap serve", function () {
                 autoreload:true,
                 localtunnel:false
             };
-
-            CordovaSpy = createSpy('Phonegap Cordova Spy').andCallFake(function(cmd, callback) {
-                callback();
-            });
-
             // define wrapper as a stub
             wrapper = {
                 emit: function() {},
-                on: function() {},
-                cordova : CordovaSpy,
-                util : {
-                }
+                on: function() {}
             };
 
             // initialize the serve function with wrapper
@@ -53,17 +45,11 @@ describe("PhoneGap serve", function () {
             spyOn(project,'cd').andReturn(true);
 
             preparePromise = dummyPromise;
+            spyOn(cordova, 'prepare').andCallFake(function(platforms, callback) {
+                callback(true);
+            });
 
             spyOn(server,'listen').andReturn({ on: function() { return this; }});
-            spyOn(gaze, 'Gaze').andCallFake(function(something) {
-                var fakeGaze = {
-                    on: function(evts, callback) {
-                        callback();
-                    }
-                };
-
-                return fakeGaze;
-            });
         });
 
         it("should be a function", function() {
@@ -110,13 +96,10 @@ describe("PhoneGap serve", function () {
             expect(project.cd).toHaveBeenCalled();
         });
 
-        it('should prepare the build first if not adding browser', function() {
-            serve({browser:false});
-            expect(CordovaSpy).toHaveBeenCalledWith({cmd: 'cordova prepare'}, jasmine.any(Function));
-        });
-        it('should add the browser platform first', function() {
+        it('should prepare the build first', function() {
             serve({});
-            expect(CordovaSpy).toHaveBeenCalledWith({cmd: 'cordova platform add browser'}, jasmine.any(Function));
+            expect(cordova.prepare).toHaveBeenCalled();
+            expect(cordova.prepare).toHaveBeenCalledWith([], jasmine.any(Function));
         });
 
         it("should call connect-phonegap listen", function () {
@@ -141,20 +124,13 @@ describe("PhoneGap serve", function () {
                     localtunnel: false
                 };
 
-                CordovaSpy.andCallFake(function(cmd, callback) {
-                    callback(new Error('IWETTUM!'));
+                cordova.prepare.andCallFake(function () {
+                    throw new Error('IWETTUM!');
                 });
             });
-
             it('should still serve', function() {
                 serve(defaultOptions);
                 expect(server.listen).toHaveBeenCalledWith(defaultOptions);
-            });
-
-            it("should call connect-phonegap listen", function () {
-                preparePromise = realPromise;
-                serve({});
-                expect(server.listen).toHaveBeenCalled();
             });
         });
 
@@ -208,4 +184,3 @@ describe("PhoneGap serve", function () {
         });
     });
 });
-

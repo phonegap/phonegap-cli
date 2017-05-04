@@ -1,9 +1,9 @@
 /*
  * Module dependencies.
  */
+
 var config = require('../../../lib/common/config'),
     path = require('path'),
-    shell = require('shelljs'),
     fs = require('fs');
 
 /**
@@ -84,7 +84,6 @@ describe('config.local', function() {
                 name: 'HelloCordova'
             };
             spyOn(fs, 'writeFile');
-            spyOn(shell, 'mkdir').andReturn(true);
         });
 
         it('should require the data parameter', function() {
