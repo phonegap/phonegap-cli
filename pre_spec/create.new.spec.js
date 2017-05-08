@@ -14,6 +14,7 @@ var PhoneGap = require('../lib/phonegap'),
     options,
     configParserSpy,
     cordovaCreateSpy = jasmine.createSpy("cordovaCreateSpy").andCallFake(function(){ 
+        console.log("Called Fake");
         return Q(); 
     });
 
@@ -111,11 +112,17 @@ describe('create.new.spec.js "phonegap.create"', function() {
         expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, options.id, options.name, cfg , jasmine.any(Object));
     });
 
-    it('should trigger callback without an error', function(done) {
-        phonegap.create(options, function(e) {
-            expect(e).toBeNull();
-            done();
-        });
+    it('should create a external project when supplied', function() {
+        options.template = 'cordova-app-hello-world'; 
+        phonegap.create(options);
+        var cfg = {};
+        var wwwCfg = {
+            url: 'phonegap-template-hello-world', //'cordova-app-hello-world',
+            template: true
+        };
+        cfg.lib = {};
+        cfg.lib.www = wwwCfg;
+        expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, options.id, options.name, cfg , jasmine.any(Object));
     });
 
 });
