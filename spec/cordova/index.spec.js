@@ -10,7 +10,7 @@ var cordova = require('../../lib/cordova'),
  */
 
 describe('cordova.cordova', function() {
-    xit('should be defined', function() {
+    it('should be defined', function() {
         expect(cordova.cordova).toEqual(jasmine.any(Object));
         expect(cordova.cordova).toEqual(original.cordova);
     });

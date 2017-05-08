@@ -18,12 +18,6 @@ var PhoneGap = require('../../lib/phonegap'),
 
 describe('phonegap.cordova(options, [callback])', function() {
     beforeEach(function() {
-        // cordovaDependencySpy = jasmine.createSpy("cordovaDependencySpy").andCallFake(function(){
-        //     return Q();
-        // });
-        // mockery.enable({ useCleanCache:true });
-        // mockery.registerMock('phonegap-cordova-dependence', {exec : cordovaDependencySpy});
-        // mockery.warnOnUnregistered(false);
         phonegap = new PhoneGap();
         options = {
             cmd: 'cordova build ios'
@@ -155,7 +149,6 @@ describe('phonegap.cordova(options, [callback])', function() {
             beforeEach(function() {
                 cordova.util.isCordova.andReturn(false);
                 shell.exec.andCallThrough();
-                console.log(options);
             });
 
             it('should trigger the callback without an error', function(done) {

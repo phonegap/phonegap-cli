@@ -16,6 +16,7 @@ var PhoneGap = require('../lib/phonegap'),
     Q = require('q'),
     phonegap,
     options,
+    configParserSpy,
     cordovaCreateSpy,
     TIMEOUT = 10000;
 
@@ -24,15 +25,14 @@ var PhoneGap = require('../lib/phonegap'),
  */
 describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create', function() {
     beforeEach(function() {
+        configParserSpy = jasmine.createSpy("configParserSpy").andReturn(
+            jasmine.createSpyObj('configParserObjectSpy', ['name', 'version']));
         cordovaCreateSpy = jasmine.createSpy("cordovaCreateSpy").andCallFake(function(){ 
-            return Q();
-        });
-        cordovaDependencySpy = jasmine.createSpy("cordovaDependencySpy").andCallFake(function(){
-            return Q();
+            return Q(); 
         });
         mockery.enable({ useCleanCache:true });
         mockery.registerMock('cordova-create', cordovaCreateSpy);
-        mockery.registerMock('phonegap-cordova-dependence', {exec : cordovaDependencySpy});
+        mockery.registerMock('./util/ConfigParser', configParserSpy);
         mockery.warnOnUnregistered(false);
         phonegap = new PhoneGap();
         options = {
@@ -49,8 +49,9 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         mockery.disable(); 
     });
 
-    it('should try to create a project with default values', function(done) {
-        var cfg, wwwCfg;
+    it('should try to create a project with default values', function() {
+        var flag, cfg, wwwCfg;
+        
         cfg = {};
         wwwCfg = {
             url: "phonegap-template-hello-world",
@@ -60,15 +61,24 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         cfg.lib.www = wwwCfg;
         name = options.name || 'Hello World';
         id = options.id || 'com.phonegap.helloworld';
-        phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
-            expect(cordovaDependencySpy).toHaveBeenCalled();
-            done();
-        });
+        
+        runs(function(){
+            phonegap.create(options, function(e) {
+                expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
+                flag = true;
+            });
+        })
+
+        waitsFor(function(){
+            return flag;
+        }, 'phonegap create timeout', TIMEOUT);
+        
+        
     }, TIMEOUT);
 
-    it('should try to create a project with a given name and id', function(done) {
-        var cfg, wwwCfg;
+    it('should try to create a project with a given name and id', function() {
+        var flag, cfg, wwwCfg;
+
         cfg = {};
         wwwCfg = {
             url: "phonegap-template-hello-world",
@@ -81,28 +91,41 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         name = options.name || 'Hello World';
         id = options.id || 'com.phonegap.helloworld';
 
-        phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
-            expect(cordovaDependencySpy).toHaveBeenCalled();
-            done();
+        runs(function(){
+            phonegap.create(options, function(e) {
+                expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
+                flag = true;
+            });
         });
+
+        waitsFor(function(){
+            return flag;
+        }, 'phonegap create timeout', TIMEOUT); 
     }, TIMEOUT);
 
-    it('should try to create a project with a given config', function(done) {
+    it('should try to create a project with a given config', function() {
+        var flag;
+
         options.id = 'com.example.app';
         options.name = 'My App';
         options.config = { some: 'value' };
         name = options.name || 'Hello World';
         id = options.id || 'com.phonegap.helloworld';
-        phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, options.config, jasmine.any(Object));
-            expect(cordovaDependencySpy).toHaveBeenCalled();
-            done();
+
+        runs(function(){
+            phonegap.create(options, function(e) {
+                expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, options.config, jasmine.any(Object));
+                flag = true;
+            });
         });
+
+        waitsFor(function(){
+            return flag;
+        }, 'phonegap create timeout', TIMEOUT);
     }, TIMEOUT);
 
-    it('should try to create a project with a template with a npm name', function(done) {
-        var cfg, wwwCfg;
+    it('should try to create a project with a template with a npm name', function() {
+        var flag, cfg, wwwCfg;
         
         options.template = 'phonegap-template-react-hot-loader';
         name = options.name || 'Hello World';
@@ -115,16 +138,21 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         cfg.lib = {};
         cfg.lib.www = wwwCfg;
 
-        phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
-            expect(cordovaDependencySpy).toHaveBeenCalled();
-            done();
+        runs(function(){
+            phonegap.create(options, function(e) {
+                expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
+                flag = true;
+            });
         });
+
+        waitsFor(function(){
+            return flag;
+        }, 'phonegap create timeout', TIMEOUT);
     }, TIMEOUT);
 
 
-    it('should try to create a project with a template with a shortened name', function(done) {
-        var cfg, wwwCfg;
+    it('should try to create a project with a template with a shortened name', function() {
+        var flag, cfg, wwwCfg;
 
         options.template = 'blank';
         name = options.name || 'Hello World';
@@ -137,15 +165,21 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         cfg.lib = {};
         cfg.lib.www = wwwCfg;
 
-        phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
-            expect(cordovaDependencySpy).toHaveBeenCalled();
-            done();
+
+        runs(function(){
+            phonegap.create(options, function(e) {
+                expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
+                flag = true;
+            });
         });
+
+        waitsFor(function(){
+            return flag;
+        }, 'phonegap create timeout', TIMEOUT);
     }, TIMEOUT);
         
-    it('should create a default project when template name invalid', function(done) {
-        var cfg, wwwCfg;
+    it('should create a default project when template name invalid', function() {
+        var flag, cfg, wwwCfg;
 
         options.template = true; // equivalent to --template
         name = options.name || 'Hello World';
@@ -157,70 +191,87 @@ describe('"spec/phonegap/create.spec.js" phonegap.create calling cordova-create'
         };
         cfg.lib = {};
         cfg.lib.www = wwwCfg;
-        phonegap.create(options, function(e) {
-            expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
-            expect(cordovaDependencySpy).toHaveBeenCalled();
-            done();
+
+
+        runs(function(){
+            phonegap.create(options, function(e) {
+                expect(cordovaCreateSpy).toHaveBeenCalledWith(options.path, id, name, cfg, jasmine.any(Object));
+                flag = true;
+            });
         });
 
+        waitsFor(function(){
+            return flag;
+        }, 'phonegap create timeout', TIMEOUT);
     }, TIMEOUT);
 
     it('should trigger callback without an error', function(done) {
+        var flag;
         options.path = '/some/other/path/to/app/www/'
-        phonegap.create(options, function(e) {
-            expect(cordovaDependencySpy).toHaveBeenCalled();
-            expect(e).not.toBeDefined();
-            done();
+
+        runs(function(){
+            phonegap.create(options, function(e) {
+                expect(configParserSpy).toHaveBeenCalledWith(
+                   '/some/other/path/to/app/www/config.xml'
+                );
+                expect(e).not.toBeDefined();
+                flag = true;
+                done();
+            });
         });
+
+        waitsFor(function(){
+            return flag;
+        }, 'phonegap create timeout', TIMEOUT);
     }, TIMEOUT);
 
-    // it('package json does not exist, should warn and create package.json', function(done){
-    //     var flag;
-    //     runs(function(){
-    //         phonegap.once('warn', function(message) {
-    //             expect(message).toMatch('No package.json was found for your project. Creating one from config.xml');
-    //         });
-    //         phonegap.create(options, function(e) {
-    //             expect(e).not.toBeDefined();
-    //             expect(configParserSpy).toHaveBeenCalled();
-    //             flag = true;
-    //             done();
-    //         });
-    //     });
+    it('package json does not exist, should warn and create package.json', function(done){
+        var flag;
+        runs(function(){
+            phonegap.once('warn', function(message) {
+                expect(message).toMatch('No package.json was found for your project. Creating one from config.xml');
+            });
+            phonegap.create(options, function(e) {
+                expect(e).not.toBeDefined();
+                expect(configParserSpy).toHaveBeenCalled();
+                flag = true;
+                done();
+            });
+        });
 
-    //     waitsFor(function(){
-    //         return flag;
-    //     }, 'phonegap create timeout', TIMEOUT);
-    // }, TIMEOUT);
+        waitsFor(function(){
+            return flag;
+        }, 'phonegap create timeout', TIMEOUT);
+    }, TIMEOUT);
 
-    // it('should not create package.json', function(done){
-    //     var flag, mockPkgJson;
-    //     options.path = '/some/path/to/app/www/';
-    //     runs(function(){
-    //         mockPkgJson = require(path.resolve(__dirname, 'package.dummy.spec.json'));
-    //         fs.existsSync.andReturn(true); //If true, then will try to open pkg json which doesn't exist
-    //         mockery.registerMock('/some/path/to/app/www/package.json', mockPkgJson);
-    //         phonegap.create(options, function(e) {
-    //             expect(e).not.toBeDefined();
-    //             expect(configParserSpy).not.toHaveBeenCalled();
-    //             flag = true;
-    //             done();
-    //         });
-    //     });
+    it('should not create package.json', function(done){
+        var flag, mockPkgJson;
+        options.path = '/some/path/to/app/www/';
+        runs(function(){
+            mockPkgJson = require(path.resolve(__dirname, 'package.dummy.spec.json'));
+            fs.existsSync.andReturn(true); //If true, then will try to open pkg json which doesn't exist
+            mockery.registerMock('/some/path/to/app/www/package.json', mockPkgJson);
+            phonegap.create(options, function(e) {
+                expect(e).not.toBeDefined();
+                expect(configParserSpy).not.toHaveBeenCalled();
+                flag = true;
+                done();
+            });
+        });
 
-    //     waitsFor(function(){
-    //         return flag;
-    //     }, 'phonegap create timeout', TIMEOUT);
+        waitsFor(function(){
+            return flag;
+        }, 'phonegap create timeout', TIMEOUT);
 
-    //     runs(function(){
-    //         mockery.deregisterMock('/some/path/to/app/www/package.json');
-    //     })
+        runs(function(){
+            mockery.deregisterMock('/some/path/to/app/www/package.json');
+        })
 
-    // }, TIMEOUT);
+    }, TIMEOUT);
     
-    // it('passed', function(){
-    //     expect(1).toEqual(1);
-    // })
+    it('passed', function(){
+        expect(1).toEqual(1);
+    })
 });
 
 
