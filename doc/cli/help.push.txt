@@ -14,17 +14,17 @@ Description:
 Options:
 
   --deviceID <deviceID>   device ID (required)
-  --service <service>     target service, "gcm", "apns" or "apns-sandbox" (required)
+  --service <service>     target service, "fcm", "apns" or "apns-sandbox" (required)
   --payload <data>        JSON object to be sent via push service (required)
 
 Examples:
 
   MacOS:
-  $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service gcm --payload '{ "data": { "title": "Hello", "message": "World"} }'
+  $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service fcm --payload '{ "data": { "title": "Hello", "message": "World"} }'
 
   $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service apns --payload '{ "aps": { "alert": "Hello World", "badge": 5 } }'
 
   Windows:
-  $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service gcm --payload "{ \"data\":{ \"title\": \"Hello\", \"message\": \"World\"} }"
+  $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service fcm --payload "{ \"data\":{ \"title\": \"Hello\", \"message\": \"World\"} }"
 
   $ $0 push --deviceID APA91bE1MmeTc92igNoi5OkDWUV --service apns --payload "{ \"aps\": { \"alert\": \"Hello World\", \"badge\": 5 } }"
