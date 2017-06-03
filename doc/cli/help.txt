@@ -37,7 +37,7 @@ Options:
   -h, --help           output usage information
   --no-update-notifier disable update notifier, to opt-out of update-notifier
                        change the 'optOut' property to 'true' in
-                       ~/.config/configstore/update-notifier-phonegap.yml
+                       ~/.config/configstore/update-notifier-phonegap.json
 
 Examples:
 
