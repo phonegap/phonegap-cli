@@ -57,6 +57,6 @@ describe('phonegap', function() {
         argv = ['node', '/user/local/bin/phonegap.js'];
         cli.argv(argv.concat(['help']));
         expect(process.stdout.write.mostRecentCall.args[0]).toMatch(/usage: phonegap/i);
-        expect(process.stdout.write.mostRecentCall.args[0]).not.toMatch('phonegap.js');
+        expect(process.stdout.write.mostRecentCall.args[0]).not.toMatch('Usage: phonegap.js');
     });
 });
