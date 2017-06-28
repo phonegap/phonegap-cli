@@ -87,7 +87,7 @@ describe('phonegap.cordova(options, [callback])', function() {
             });
 
             phonegap.cordova(options);
-            expect(shell.exec.mostRecentCall.args[0]).toEqual('"C:\\Users\\User Name\\AppData\\Roaming\\npm\\cordova" build ios');
+            expect(shell.exec.mostRecentCall.args[0]).toEqual('"C:\\Users\\User Name\\AppData\\Roaming\\npm\\cordova" build ios --no-telemetry');
         });
 
         it('should output stdout data', function(done) {
@@ -158,6 +158,25 @@ describe('phonegap.cordova(options, [callback])', function() {
                 });
             });
         });
+
+        describe('will add cordova do not track flag', function() {
+            it('$ cordova build ios', function() {
+                phonegap.cordova(options);
+                expect(options.cmd).toBe('cordova build ios --no-telemetry');
+            });
+
+            it('$ cordova platform ls', function() {
+                options.cmd = 'cordova platform ls';
+                phonegap.cordova(options);
+                expect(options.cmd).toBe('cordova platform ls --no-telemetry');
+            });
+
+            it('$ cordova run android', function() {
+                options.cmd = 'cordova run android';
+                phonegap.cordova(options);
+                expect(options.cmd).toBe('cordova run android --no-telemetry');
+            });
+        });
     });
 
     describe('adding plugin paths', function() {
@@ -177,21 +196,21 @@ describe('phonegap.cordova(options, [callback])', function() {
             phonegap.cordova(options);
             //options.cmd now has --save appended.
             expect(shell.exec).toHaveBeenCalled();
-            expect(options.cmd).toBe(options1.cmd + " --save");
-            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
+            expect(options.cmd).toBe(options1.cmd + " --no-telemetry --save");
+            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --no-telemetry --save");
             // test for phonegap plugin rm
             options1.cmd = options.cmd = 'cordova plugin rm cordova-plugin-camera';
             phonegap.cordova(options);
             expect(shell.exec).toHaveBeenCalled();
-            expect(options.cmd).toBe(options1.cmd + " --save");
-            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
+            expect(options.cmd).toBe(options1.cmd + " --no-telemetry --save");
+            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --no-telemetry --save");
 
             // test for phonegap plugin remove
             options1.cmd = options.cmd = 'cordova plugin remove cordova-plugin-camera';
             phonegap.cordova(options);
             expect(shell.exec).toHaveBeenCalled();
-            expect(options.cmd).toBe(options1.cmd + " --save");
-            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --save");
+            expect(options.cmd).toBe(options1.cmd + " --no-telemetry --save");
+            expect(shell.exec.mostRecentCall.args[0]).toMatch(options1.cmd + " --no-telemetry --save");
         });
     });
 

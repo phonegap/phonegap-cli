@@ -40,7 +40,7 @@ describe('$ phonegap cordova', function() {
             cli.argv(argv.concat(['cordova', 'build', 'ios', '--release']));
             expect(phonegap.cordova).toHaveBeenCalledWith(
                 {
-                    cmd: 'cordova build ios --release --no-telemetry',
+                    cmd: 'cordova build ios --release',
                     verbose: false
                 },
                 jasmine.any(Function)
@@ -51,7 +51,7 @@ describe('$ phonegap cordova', function() {
             cli.argv(argv.concat(['cordova', 'create', 'my-app', '--name', 'Hello World']));
             expect(phonegap.cordova).toHaveBeenCalledWith(
                 {
-                    cmd: 'cordova create my-app --name "Hello World" --no-telemetry',
+                    cmd: 'cordova create my-app --name "Hello World"',
                     verbose: false
                 },
                 jasmine.any(Function)
@@ -68,7 +68,7 @@ describe('$ phonegap cordova', function() {
             cli.argv(argv.concat(['cordova', 'run', 'ios', '-e']));
             expect(phonegap.cordova).toHaveBeenCalledWith(
                 {
-                    cmd: 'cordova run ios --emulator --no-telemetry',
+                    cmd: 'cordova run ios --emulator',
                     verbose: false
                 },
                 jasmine.any(Function)
