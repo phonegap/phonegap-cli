@@ -4,6 +4,7 @@
 
 var phonegap = require('../../lib/main'),
     CLI = require('../../lib/cli'),
+    os = require('os'),
     argv,
     cli;
 
@@ -23,7 +24,7 @@ describe('$ phonegap cordova', function() {
         var version = require('../../node_modules/cordova/package.json').version;
         phonegap.on('raw', function(data) {
             // cordova@6.4.0 adds an extra '\n' after all output
-            if (data !== '\n') {
+            if (data !== os.EOL) {
                 expect(data).toMatch(version);
                 done();
             }
