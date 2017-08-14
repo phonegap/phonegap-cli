@@ -31,7 +31,7 @@
   "dependencies": {
     "archiver": "^1.0.0",
     "colors": "0.6.0-1",
-    "connect-phonegap": "0.24.6",
+    "connect-phonegap": "0.24.7",
     "cordova": "6.5.0",
     "insight": "0.8.2",
     "configstore": "1.4.0",
