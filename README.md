@@ -232,7 +232,7 @@ There are a few steps that should be taken when upgrading to a new version of th
 1. Update the `package.json` version.
 
         {
-          "version": "3.1.0-0.15.0"
+          "version": "3.1.0+cordova.0.15.0"
         }
 
 1. Run the tests.
@@ -241,11 +241,12 @@ There are a few steps that should be taken when upgrading to a new version of th
 
 1. Commit stating the version increment.
 
-        $ git commit -am "Version 3.1.0-0.15.0"
+        $ git add package.json
+        $ git commit -am "Version 3.1.0+cordova.0.15.0"
 
 1. Tag the version commit.
 
-        $ git tag 3.1.0-0.15.0
+        $ git tag 3.1.0+cordova.0.15.0
 
 1. Update the [PhoneGap Hello World App](https://github.com/phonegap/phonegap-app-hello-world) to match the new version.
   - See [Update instructions](https://github.com/phonegap/phonegap-app-hello-world#updating-the-application).
@@ -285,5 +286,3 @@ data we collect.
 [package-template]: https://github.com/phonegap/phonegap-cli/blob/035057713c613cc0488e4b0beb5b72c4c820d54a/package.json#L67-L76
 [bithound-img]: https://www.bithound.io/github/phonegap/phonegap-cli/badges/score.svg
 [bithound-url]: https://www.bithound.io/github/phonegap/phonegap-cli
-
-
