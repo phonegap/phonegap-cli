@@ -2,19 +2,19 @@
  * Module dependencies.
  */
 
-var updateCheck = require('../../../lib/cli/util/update-check'),
-    orig_env;
+var updateCheck = require('../../../lib/cli/util/update-check');
+var orig_env;
 
 /*
  * Specification: update checker
  */
 
-function trigger_cli() {
+function trigger_cli () {
     require('../../../lib/cli');
 }
 
-describe('update checker', function() {
-    beforeEach(function() {
+describe('update checker', function () {
+    beforeEach(function () {
         // save process.env so that we can restore in afterEach()
         orig_env = process.env;
         // delete the cli module from require cache
@@ -23,16 +23,16 @@ describe('update checker', function() {
         delete require.cache[require.resolve('../../../lib/cli')];
         spyOn(updateCheck, 'start');
     });
-    afterEach(function() {
+    afterEach(function () {
         process.env = orig_env;
     });
 
-    it('should check for an update when not running as electron', function() {
+    it('should check for an update when not running as electron', function () {
         delete process.env.ELECTRON_RUN_AS_NODE;
         trigger_cli();
         expect(updateCheck.start).toHaveBeenCalled();
     });
-    it('should NOT check for an update when running as electron', function() {
+    it('should NOT check for an update when running as electron', function () {
         process.env.ELECTRON_RUN_AS_NODE = true;
         trigger_cli();
         expect(updateCheck.start).not.toHaveBeenCalled();

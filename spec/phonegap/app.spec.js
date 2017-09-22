@@ -2,19 +2,19 @@
  * Module dependencies.
  */
 
-var PhoneGap = require('../../lib/phonegap'),
-    phonegap;
+var PhoneGap = require('../../lib/phonegap');
+var phonegap;
 
 /*!
  * Specification: phonegap.app(options, [callback])
  */
 
-describe('phonegap.app(options, [callback])', function() {
-    beforeEach(function() {
+describe('phonegap.app(options, [callback])', function () {
+    beforeEach(function () {
         phonegap = new PhoneGap();
     });
 
-    it('should use phonegap.serve', function() {
+    it('should use phonegap.serve', function () {
         expect(phonegap.app).toEqual(phonegap.serve);
     });
 });

@@ -2,18 +2,18 @@
  * Module dependencies.
  */
 
-var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
-    PhoneGap = require('../../lib/phonegap'),
-    config = require('../../lib/common/config'),
-    phonegap,
-    options;
+var phonegapbuild = require('../../lib/phonegap/util/phonegap-build');
+var PhoneGap = require('../../lib/phonegap');
+var config = require('../../lib/common/config');
+var phonegap;
+var options;
 
 /*!
  * Specification: phonegap.remote.login(options, [callback])
  */
 
-describe('phonegap.remote.login(options, [callback])', function() {
-    beforeEach(function() {
+describe('phonegap.remote.login(options, [callback])', function () {
+    beforeEach(function () {
         phonegap = new PhoneGap();
         options = {};
         spyOn(process.stderr, 'write');
@@ -21,24 +21,24 @@ describe('phonegap.remote.login(options, [callback])', function() {
         spyOn(config.global, 'load');
     });
 
-    it('should require options parameter', function() {
-        expect(function() {
+    it('should require options parameter', function () {
+        expect(function () {
             options = undefined;
-            phonegap.remote.login(options, function() {});
+            phonegap.remote.login(options, function () {});
         }).toThrow();
     });
 
-    it('should not require callback parameter', function() {
-        expect(function() {
+    it('should not require callback parameter', function () {
+        expect(function () {
             phonegap.remote.login(options);
         }).not.toThrow();
     });
 
-    it('should return itself', function() {
+    it('should return itself', function () {
         expect(phonegap.remote.login(options)).toEqual(phonegap);
     });
 
-    it('should try to login', function() {
+    it('should try to login', function () {
         phonegap.remote.login(options);
         expect(phonegapbuild.login).toHaveBeenCalledWith(
             options,
@@ -46,12 +46,12 @@ describe('phonegap.remote.login(options, [callback])', function() {
         );
     });
 
-    describe('on "login" event', function() {
-        it('should map PhoneGapBuild "login" event', function(done) {
-            phonegapbuild.login.andCallFake(function(options, callback) {
+    describe('on "login" event', function () {
+        it('should map PhoneGapBuild "login" event', function (done) {
+            phonegapbuild.login.andCallFake(function (options, callback) {
                 phonegapbuild.emit('login', options, callback);
             });
-            phonegap.on('login', function(options, callback) {
+            phonegap.on('login', function (options, callback) {
                 expect(options).toEqual(options);
                 expect(callback).toEqual(jasmine.any(Function));
                 done();
@@ -60,52 +60,52 @@ describe('phonegap.remote.login(options, [callback])', function() {
         });
     });
 
-    describe('successful login', function() {
-        beforeEach(function() {
-            phonegapbuild.login.andCallFake(function(opt, callback) {
+    describe('successful login', function () {
+        beforeEach(function () {
+            phonegapbuild.login.andCallFake(function (opt, callback) {
                 callback(null, {});
             });
         });
 
-        it('should trigger callback without an error', function(done) {
-            phonegap.remote.login(options, function(e, api) {
+        it('should trigger callback without an error', function (done) {
+            phonegap.remote.login(options, function (e, api) {
                 expect(e).toBeNull();
                 done();
             });
         });
 
-        it('should trigger callback with API object', function(done) {
-            phonegap.remote.login(options, function(e, api) {
+        it('should trigger callback with API object', function (done) {
+            phonegap.remote.login(options, function (e, api) {
                 expect(api).toBeDefined();
                 done();
             });
         });
     });
 
-    describe('failed login', function() {
-        beforeEach(function() {
-            phonegapbuild.login.andCallFake(function(opt, callback) {
+    describe('failed login', function () {
+        beforeEach(function () {
+            phonegapbuild.login.andCallFake(function (opt, callback) {
                 phonegapbuild.emit('error', new Error('Ganon stole the token!'));
                 callback(new Error('Ganon stole the token!'));
             });
         });
 
-        it('should trigger callback with an error', function(done) {
-            phonegap.remote.login(options, function(e, api) {
+        it('should trigger callback with an error', function (done) {
+            phonegap.remote.login(options, function (e, api) {
                 expect(e).toBeDefined();
                 done();
             });
         });
 
-        it('should trigger callback without an API object', function(done) {
-            phonegap.remote.login(options, function(e, api) {
+        it('should trigger callback without an API object', function (done) {
+            phonegap.remote.login(options, function (e, api) {
                 expect(api).not.toBeDefined();
                 done();
             });
         });
 
-        it('should fire "error" event', function(done) {
-            phonegap.on('error', function(e) {
+        it('should fire "error" event', function (done) {
+            phonegap.on('error', function (e) {
                 expect(e).toEqual(jasmine.any(Error));
                 done();
             });
@@ -113,8 +113,8 @@ describe('phonegap.remote.login(options, [callback])', function() {
         });
     });
 
-    describe('optional arguments', function() {
-        it('should support options.protocol', function() {
+    describe('optional arguments', function () {
+        it('should support options.protocol', function () {
             options.protocol = 'http';
             phonegap.remote.login(options);
             expect(phonegapbuild.login).toHaveBeenCalledWith(
@@ -123,7 +123,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
             );
         });
 
-        it('should support options.host', function() {
+        it('should support options.host', function () {
             options.host = 'stage.build.phonegap.com';
             phonegap.remote.login(options);
             expect(phonegapbuild.login).toHaveBeenCalledWith(
@@ -132,7 +132,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
             );
         });
 
-        it('should support options.port', function() {
+        it('should support options.port', function () {
             options.port = '1337';
             phonegap.remote.login(options);
             expect(phonegapbuild.login).toHaveBeenCalledWith(
@@ -141,7 +141,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
             );
         });
 
-        it('should support options.path', function() {
+        it('should support options.path', function () {
             options.path = '/api/v1';
             phonegap.remote.login(options);
             expect(phonegapbuild.login).toHaveBeenCalledWith(
@@ -150,7 +150,7 @@ describe('phonegap.remote.login(options, [callback])', function() {
             );
         });
 
-        it('should support options.proxy', function() {
+        it('should support options.proxy', function () {
             options.proxy = 'my.proxy.com';
             phonegap.remote.login(options);
             expect(phonegapbuild.login).toHaveBeenCalledWith(

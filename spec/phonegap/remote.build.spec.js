@@ -2,19 +2,19 @@
  * Module dependencies.
  */
 
-var phonegapbuild = require('../../lib/phonegap/util/phonegap-build'),
-    PhoneGap = require('../../lib/phonegap'),
-    project = require('../../lib/phonegap/util/project'),
-    phonegap,
-    appData,
-    options;
+var phonegapbuild = require('../../lib/phonegap/util/phonegap-build');
+var PhoneGap = require('../../lib/phonegap');
+var project = require('../../lib/phonegap/util/project');
+var phonegap;
+var appData;
+var options;
 
 /*
  * Specification: phonegap.remote.build(options, [callback])
  */
 
-describe('phonegap.remote.build(options, [callback])', function() {
-    beforeEach(function() {
+describe('phonegap.remote.build(options, [callback])', function () {
+    beforeEach(function () {
         phonegap = new PhoneGap();
         options = {
             platforms: ['android']
@@ -33,27 +33,27 @@ describe('phonegap.remote.build(options, [callback])', function() {
         spyOn(project, 'cd').andReturn(true);
     });
 
-    it('should require options', function() {
-        expect(function() {
+    it('should require options', function () {
+        expect(function () {
             options = undefined;
-            phonegap.remote.build(options, function(e) {});
+            phonegap.remote.build(options, function (e) {});
         }).toThrow();
     });
 
-    it('should require options.platforms', function() {
-        expect(function() {
+    it('should require options.platforms', function () {
+        expect(function () {
             options.platforms = undefined;
-            phonegap.remote.build(options, function(e) {});
+            phonegap.remote.build(options, function (e) {});
         }).toThrow();
     });
 
-    it('should not require callback', function() {
-        expect(function() {
+    it('should not require callback', function () {
+        expect(function () {
             phonegap.remote.build(options);
         }).not.toThrow();
     });
 
-    it('should change to project directory', function() {
+    it('should change to project directory', function () {
         phonegap.remote.build(options);
         expect(project.cd).toHaveBeenCalledWith({
             emitter: phonegap,
@@ -61,11 +61,11 @@ describe('phonegap.remote.build(options, [callback])', function() {
         });
     });
 
-    it('should return itself', function() {
+    it('should return itself', function () {
         expect(phonegap.remote.build(options)).toEqual(phonegap);
     });
 
-    it('should try to build the project', function() {
+    it('should try to build the project', function () {
         phonegap.remote.build(options);
         expect(phonegapbuild.build).toHaveBeenCalledWith(
             {
@@ -75,46 +75,46 @@ describe('phonegap.remote.build(options, [callback])', function() {
         );
     });
 
-    describe('successful project build', function() {
-        beforeEach(function() {
-            phonegapbuild.build.andCallFake(function(opts, callback) {
+    describe('successful project build', function () {
+        beforeEach(function () {
+            phonegapbuild.build.andCallFake(function (opts, callback) {
                 callback(null, appData);
             });
         });
 
-        it('should call callback without an error', function(done) {
-            phonegap.remote.build(options, function(e, data) {
+        it('should call callback without an error', function (done) {
+            phonegap.remote.build(options, function (e, data) {
                 expect(e).toBeNull();
                 done();
             });
         });
 
-        it('should call callback with a data object', function(done) {
-            phonegap.remote.build(options, function(e, data) {
+        it('should call callback with a data object', function (done) {
+            phonegap.remote.build(options, function (e, data) {
                 expect(data).toEqual(appData);
                 done();
             });
         });
     });
 
-    describe('failed project build', function() {
-        beforeEach(function() {
-            phonegapbuild.build.andCallFake(function(opts, callback) {
+    describe('failed project build', function () {
+        beforeEach(function () {
+            phonegapbuild.build.andCallFake(function (opts, callback) {
                 var e = new Error('could not connect to PhoneGap/Build');
                 phonegapbuild.emit('error', e);
                 callback(e);
             });
         });
 
-        it('should call callback with an error', function(done) {
-            phonegap.remote.build(options, function(e, data) {
+        it('should call callback with an error', function (done) {
+            phonegap.remote.build(options, function (e, data) {
                 expect(e).toEqual(jasmine.any(Error));
                 done();
             });
         });
 
-        it('should fire "error" event', function(done) {
-            phonegap.on('error', function(e) {
+        it('should fire "error" event', function (done) {
+            phonegap.on('error', function (e) {
                 expect(e).toEqual(jasmine.any(Error));
                 done();
             });
@@ -122,8 +122,8 @@ describe('phonegap.remote.build(options, [callback])', function() {
         });
     });
 
-    describe('optional arguments', function() {
-        it('should support options.protocol', function() {
+    describe('optional arguments', function () {
+        it('should support options.protocol', function () {
             options.protocol = 'http';
             phonegap.remote.build(options);
             expect(phonegapbuild.build).toHaveBeenCalledWith(
@@ -132,7 +132,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
             );
         });
 
-        it('should support options.host', function() {
+        it('should support options.host', function () {
             options.host = 'stage.build.phonegap.com';
             phonegap.remote.build(options);
             expect(phonegapbuild.build).toHaveBeenCalledWith(
@@ -141,7 +141,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
             );
         });
 
-        it('should support options.port', function() {
+        it('should support options.port', function () {
             options.port = '1337';
             phonegap.remote.build(options);
             expect(phonegapbuild.build).toHaveBeenCalledWith(
@@ -150,7 +150,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
             );
         });
 
-        it('should support options.path', function() {
+        it('should support options.path', function () {
             options.path = '/api/v1';
             phonegap.remote.build(options);
             expect(phonegapbuild.build).toHaveBeenCalledWith(
@@ -159,7 +159,7 @@ describe('phonegap.remote.build(options, [callback])', function() {
             );
         });
 
-        it('should support options.proxy', function() {
+        it('should support options.proxy', function () {
             options.proxy = 'my.proxy.com';
             phonegap.remote.build(options);
             expect(phonegapbuild.build).toHaveBeenCalledWith(

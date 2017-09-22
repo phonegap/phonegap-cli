@@ -21,7 +21,8 @@
     "phonegap": "./bin/phonegap.js"
   },
   "scripts": {
-    "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec && node node_modules/eslint/bin/eslint.js ./ --ignore-path .gitignore",
+    "test": "node node_modules/jasmine-node/bin/jasmine-node --color spec && npm run eslint",
+    "eslint": "eslint ./ --ignore-path .gitignore",
     "cover": "istanbul cover --print detail -x **/spec/** node_modules/jasmine-node/bin/jasmine-node -- --color spec"
   },
   "engineStrict": true,
@@ -50,7 +51,13 @@
   },
   "devDependencies": {
     "chdir": "0.0.x",
-    "eslint": "^3.12.2",
+    "eslint": "^4.7.2",
+    "eslint-config-semistandard": "^11.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
     "jasmine-node": "1.14.5",
     "istanbul": "0.4.5"
   },

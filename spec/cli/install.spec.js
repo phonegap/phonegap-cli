@@ -2,17 +2,17 @@
  * Module dependencies.
  */
 
-var CLI = require('../../lib/cli'),
-    argv,
-    cli,
-    stdout;
+var CLI = require('../../lib/cli');
+var argv;
+var cli;
+var stdout;
 
 /*
  * Specification: phonegap help install
  */
 
-describe('phonegap help install', function() {
-    beforeEach(function() {
+describe('phonegap help install', function () {
+    beforeEach(function () {
         cli = new CLI();
         argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
@@ -20,43 +20,43 @@ describe('phonegap help install', function() {
         stdout = process.stdout.write;
     });
 
-    describe('$ phonegap help', function() {
-        it('should include the command', function() {
+    describe('$ phonegap help', function () {
+        it('should include the command', function () {
             cli.argv(argv.concat(['help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+install <platforms>.*\r?\n/i);
         });
     });
 
-    describe('$ phonegap install', function() {
-        it('should output usage info', function() {
+    describe('$ phonegap install', function () {
+        it('should output usage info', function () {
             cli.argv(argv.concat(['install']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
         });
     });
 
-    describe('$ phonegap help install', function() {
-        it('should output usage info', function() {
+    describe('$ phonegap help install', function () {
+        it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'install']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
         });
     });
 
-    describe('$ phonegap install help', function() {
-        it('should output usage info', function() {
+    describe('$ phonegap install help', function () {
+        it('should output usage info', function () {
             cli.argv(argv.concat(['install', 'help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
         });
     });
 
-    describe('$ phonegap install --help', function() {
-        it('should output usage info', function() {
+    describe('$ phonegap install --help', function () {
+        it('should output usage info', function () {
             cli.argv(argv.concat(['install', '--help']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
         });
     });
 
-    describe('$ phonegap install -h', function() {
-        it('should output usage info', function() {
+    describe('$ phonegap install -h', function () {
+        it('should output usage info', function () {
             cli.argv(argv.concat(['install', '-h']));
             expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
         });
@@ -67,8 +67,8 @@ describe('phonegap help install', function() {
  * Specification: phonegap install <platform>
  */
 
-describe('phonegap install <platform>', function() {
-    beforeEach(function() {
+describe('phonegap install <platform>', function () {
+    beforeEach(function () {
         cli = new CLI();
         argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(cli, 'cordova');
@@ -76,13 +76,13 @@ describe('phonegap install <platform>', function() {
         stdout = process.stdout.write;
     });
 
-    describe('$ phonegap install android', function() {
-        it('should delegate to `cordova run`', function() {
+    describe('$ phonegap install android', function () {
+        it('should delegate to `cordova run`', function () {
             cli.argv(argv.concat(['install', 'android']));
             expect(cli.cordova).toHaveBeenCalled();
         });
 
-        it('should emit a deprecation message', function() {
+        it('should emit a deprecation message', function () {
             cli.argv(argv.concat(['install', 'android']));
             expect(stdout.calls[0].args[0]).toMatch('DEPRECATED');
         });
