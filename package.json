@@ -32,7 +32,7 @@
     "archiver": "^1.0.0",
     "colors": "0.6.0-1",
     "connect-phonegap": "0.24.9",
-    "cordova": "7.0.1",
+    "cordova": "7.1.0",
     "insight": "0.8.2",
     "configstore": "1.4.0",
     "os-name": "2.0.1",
