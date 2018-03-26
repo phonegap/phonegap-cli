@@ -17,7 +17,6 @@ Commands:
   info                 display information about the project
   serve                serve a phonegap project
   version              output version number
-  push                 send test push notification (to a push-notification-compatible application)
   analytics            turn analytics on or off, or view current status
   report-issue         opens your browser and launches github.com with a ready to report issue
 
