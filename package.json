@@ -118,9 +118,21 @@
       "description": "Starter PhoneGap project using React.js, Babel, Webpack and Hot Reloading.",
       "npm": "phonegap-template-react-hot-loader"
     },
+    "single-vue": {
+      "description": "A single view layout template using Framework7 and Vue.js",
+      "npm": "phonegap-template-vue-f7-blank"
+    },
+    "split-vue": {
+      "description": "A split view layout template that degrades to a panel view using Framework7 and Vue.js",
+      "npm": "phonegap-template-vue-f7-split-view"
+    },
     "star-track": {
       "description": "An example app using Framework7 and the Spotify API.",
       "npm": "phonegap-app-star-track"
+    },
+    "tabbed-vue": {
+      "description": "A tabbed layout template using Framework7 and Vue.js",
+      "npm": "phonegap-template-vue-f7-tabs"
     },
     "webvr": {
       "description": "A WebVR and Google Cardboard demo ported from borismus/webvr-boilerplate.",
