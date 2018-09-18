@@ -23,7 +23,7 @@
   "scripts": {
     "test": "jasmine && npm run eslint",
     "eslint": "eslint ./ --ignore-path .gitignore",
-    "cover": "istanbul cover --print detail -x **/spec/** node_modules/jasmine-node/bin/jasmine-node -- --color spec"
+    "cover": "istanbul cover --print detail -x **/spec/** jasmine -- --color"
   },
   "engineStrict": true,
   "engines": {
