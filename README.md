@@ -1,4 +1,6 @@
-# PhoneGap CLI [![Build Status][travis-ci-img]][travis-ci-url] [![Build status](https://ci.appveyor.com/api/projects/status/4yq7ij035ya3g5bq/branch/master?svg=true)](https://ci.appveyor.com/project/stevengill/phonegap-cli/branch/master) [![bitHound Score][bithound-img]][bithound-url] [![codecov](https://codecov.io/gh/phonegap/phonegap-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/phonegap/phonegap-cli)
+# PhoneGap CLI 
+[![Build Status][travis-ci-img]][travis-ci-url]&nbsp;
+[![Build status](https://ci.appveyor.com/api/projects/status/4yq7ij035ya3g5bq/branch/master?svg=true)](https://ci.appveyor.com/project/stevengill/phonegap-cli/branch/master)&nbsp;[![codecov](https://codecov.io/gh/phonegap/phonegap-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/phonegap/phonegap-cli)
 
 > PhoneGap command-line interface and Node.js library.
 
@@ -284,5 +286,3 @@ data we collect.
 [travis-ci-img]: https://travis-ci.org/phonegap/phonegap-cli.svg?branch=master
 [travis-ci-url]: http://travis-ci.org/phonegap/phonegap-cli
 [package-template]: https://github.com/phonegap/phonegap-cli/blob/035057713c613cc0488e4b0beb5b72c4c820d54a/package.json#L67-L76
-[bithound-img]: https://www.bithound.io/github/phonegap/phonegap-cli/badges/score.svg
-[bithound-url]: https://www.bithound.io/github/phonegap/phonegap-cli
