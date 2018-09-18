@@ -41,7 +41,7 @@
     "opener": "1.4.1",
     "opn": "^4.0.2",
     "os-name": "2.0.1",
-    "phonegap-build": "0.10.0",
+    "phonegap-build": "^1.0.0",
     "pluralize": "0.0.4",
     "prompt": "^1.0.0",
     "qrcode-terminal": "0.9.4",
