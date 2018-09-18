@@ -24,42 +24,42 @@ describe('phonegap help create', function () {
     describe('$ phonegap help', function () {
         it('should include the command', function () {
             cli.argv(argv.concat(['help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+create <path>.*\r?\n/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/\r?\n\s+create <path>.*\r?\n/i);
         });
     });
 
     describe('$ phonegap create', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['create']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ create/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
         });
     });
 
     describe('$ phonegap help create', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'create']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ create/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
         });
     });
 
     describe('$ phonegap create help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['create', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ create/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
         });
     });
 
     describe('$ phonegap create --help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['create', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ create/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
         });
     });
 
     describe('$ phonegap create -h', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['create', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ create/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
         });
     });
 });
@@ -85,7 +85,8 @@ describe('phonegap create <path>', function () {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -100,7 +101,8 @@ describe('phonegap create <path>', function () {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -115,7 +117,8 @@ describe('phonegap create <path>', function () {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -144,7 +147,8 @@ describe('phonegap create <path>', function () {
                     }
                 },
                 'copy-from': undefined,
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -159,7 +163,8 @@ describe('phonegap create <path>', function () {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -174,7 +179,8 @@ describe('phonegap create <path>', function () {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -189,7 +195,8 @@ describe('phonegap create <path>', function () {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -204,7 +211,8 @@ describe('phonegap create <path>', function () {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -223,7 +231,8 @@ describe('phonegap create <path>', function () {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -242,7 +251,8 @@ describe('phonegap create <path>', function () {
                 name: 'My App',
                 config: {},
                 'copy-from': undefined,
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -260,7 +270,8 @@ describe('phonegap create <path>', function () {
                 name: undefined,
                 config: {},
                 'copy-from': 'http://example.com/app.tar.gz',
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -278,7 +289,8 @@ describe('phonegap create <path>', function () {
                 name: undefined,
                 config: {},
                 'copy-from': 'http://example.com/app.tar.gz',
-                'link-to': undefined
+                'link-to': undefined,
+                template: undefined
             },
             jasmine.any(Function));
         });
@@ -296,7 +308,8 @@ describe('phonegap create <path>', function () {
                 name: undefined,
                 config: {},
                 'copy-from': undefined,
-                'link-to': 'path/to/an-app'
+                'link-to': 'path/to/an-app',
+                template: undefined
             },
             jasmine.any(Function));
         });

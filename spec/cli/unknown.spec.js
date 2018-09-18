@@ -10,7 +10,7 @@ describe('phonegap unknown', function () {
         unknown({
             _: ['node', 'phonegap.js', 'noop']
         }, function () {});
-        expect(cnsl.error.mostRecentCall.args[0]).toMatch('noop');
-        expect(cnsl.error.mostRecentCall.args[0]).toMatch(/is not a \w+ command/);
+        expect(cnsl.error.calls.mostRecent().args[0]).toMatch('noop');
+        expect(cnsl.error.calls.mostRecent().args[0]).toMatch(/is not a \w+ command/);
     });
 });

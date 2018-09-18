@@ -24,35 +24,35 @@ describe('phonegap help template list', function () {
     describe('$ phonegap help template', function () {
         it('should include the command', function () {
             cli.argv(argv.concat(['help', 'template']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+list.*\r?\n/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/\r?\n\s+list.*\r?\n/i);
         });
     });
 
     describe('$ phonegap help template list', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'template', 'list']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ template list/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ template list/i);
         });
     });
 
     describe('$ phonegap template list help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['template', 'list', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ template list/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ template list/i);
         });
     });
 
     describe('$ phonegap template list --help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['template', 'list', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ template list/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ template list/i);
         });
     });
 
     describe('$ phonegap template list -h', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['template', 'list', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ template list/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ template list/i);
         });
     });
 });
@@ -76,9 +76,9 @@ describe('phonegap template list', function () {
 
     it('should list each available template', function (done) {
         var templates = require('../../package.json').templates;
-        phonegap.template.list.andCallThrough();
+        phonegap.template.list.and.callThrough();
         cli.argv(argv.concat(['template', 'list']), function () {
-            expect(phonegap.emit.calls.length).toEqual(
+            expect(phonegap.emit.calls.count()).toEqual(
                 Object.keys(templates).length
             );
             done();

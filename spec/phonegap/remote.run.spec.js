@@ -23,7 +23,7 @@ describe('phonegap.remote.run(options, [callback])', function () {
         spyOn(process.stdout, 'write');
         spyOn(process.stderr, 'write');
         spyOn(phonegap.remote, 'build');
-        spyOn(project, 'cd').andReturn(true);
+        spyOn(project, 'cd').and.returnValue(true);
     });
 
     it('should require options', function () {
@@ -65,7 +65,7 @@ describe('phonegap.remote.run(options, [callback])', function () {
 
     describe('successful build', function () {
         beforeEach(function () {
-            phonegap.remote.build.andCallFake(function (options, callback) {
+            phonegap.remote.build.and.callFake(function (options, callback) {
                 callback(null, {
                     download: {
                         android: '/api/v1/apps/1234'
@@ -73,7 +73,7 @@ describe('phonegap.remote.run(options, [callback])', function () {
                     token: 'abc123'
                 });
             });
-            spyOn(config.global, 'load').andCallFake(function (callback) {
+            spyOn(config.global, 'load').and.callFake(function (callback) {
                 callback(null, {
                     phonegap: {
                         token: 'abc123'
@@ -105,7 +105,7 @@ describe('phonegap.remote.run(options, [callback])', function () {
 
     describe('failed build', function () {
         beforeEach(function () {
-            phonegap.remote.build.andCallFake(function (opts, callback) {
+            phonegap.remote.build.and.callFake(function (opts, callback) {
                 phonegapbuild.emit('error', new Error('Server did not respond'));
                 callback(new Error('Server did not respond'));
             });

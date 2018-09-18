@@ -25,35 +25,35 @@ describe('phonegap help remote login', function () {
     describe('$ phonegap help remote', function () {
         it('should include the command', function () {
             cli.argv(argv.concat(['help', 'remote']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+login.*\r?\n/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/\r?\n\s+login.*\r?\n/i);
         });
     });
 
     describe('$ phonegap help remote login', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'remote', 'login']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote login/i);
         });
     });
 
     describe('$ phonegap remote login help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'login', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote login/i);
         });
     });
 
     describe('$ phonegap remote login --help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'login', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote login/i);
         });
     });
 
     describe('$ phonegap remote login -h', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'login', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote login/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote login/i);
         });
     });
 });
@@ -82,7 +82,7 @@ describe('phonegap remote login', function () {
 
         describe('successful login', function () {
             beforeEach(function () {
-                phonegap.remote.login.andCallFake(function (argv, callback) {
+                phonegap.remote.login.and.callFake(function (argv, callback) {
                     phonegap.emit('login');
                     callback(null, {});
                 });
@@ -110,7 +110,7 @@ describe('phonegap remote login', function () {
 
         describe('failed login', function () {
             beforeEach(function () {
-                phonegap.remote.login.andCallFake(function (argv, callback) {
+                phonegap.remote.login.and.callFake(function (argv, callback) {
                     callback(new Error('Invalid password'));
                 });
             });
@@ -186,13 +186,13 @@ describe('phonegap remote login', function () {
             it('should prompt for username', function () {
                 phonegap.emit('login', {}, function () {});
                 expect(console.prompt).toHaveBeenCalled();
-                expect(console.prompt.mostRecentCall.args[0].override.username).toBeUndefined();
+                expect(console.prompt.calls.mostRecent().args[0].override.username).toBeUndefined();
             });
 
             it('should prompt for password', function () {
                 phonegap.emit('login', {}, function () {});
                 expect(console.prompt).toHaveBeenCalled();
-                expect(console.prompt.mostRecentCall.args[0].override.password).toBeUndefined();
+                expect(console.prompt.calls.mostRecent().args[0].override.password).toBeUndefined();
             });
         });
 
@@ -200,13 +200,13 @@ describe('phonegap remote login', function () {
             it('should not prompt for username', function () {
                 phonegap.emit('login', { username: 'zelda' }, function () {});
                 expect(console.prompt).toHaveBeenCalled();
-                expect(console.prompt.mostRecentCall.args[0].override.username).toEqual('zelda');
+                expect(console.prompt.calls.mostRecent().args[0].override.username).toEqual('zelda');
             });
 
             it('should prompt for password', function () {
                 phonegap.emit('login', { username: 'zelda' }, function () {});
                 expect(console.prompt).toHaveBeenCalled();
-                expect(console.prompt.mostRecentCall.args[0].override.password).toBeUndefined();
+                expect(console.prompt.calls.mostRecent().args[0].override.password).toBeUndefined();
             });
         });
 
@@ -214,13 +214,13 @@ describe('phonegap remote login', function () {
             it('should prompt for username', function () {
                 phonegap.emit('login', { password: 'tr1force' }, function () {});
                 expect(console.prompt).toHaveBeenCalled();
-                expect(console.prompt.mostRecentCall.args[0].override.username).toBeUndefined();
+                expect(console.prompt.calls.mostRecent().args[0].override.username).toBeUndefined();
             });
 
             it('should not prompt for password', function () {
                 phonegap.emit('login', { password: 'tr1force' }, function () {});
                 expect(console.prompt).toHaveBeenCalled();
-                expect(console.prompt.mostRecentCall.args[0].override.password).toEqual('tr1force');
+                expect(console.prompt.calls.mostRecent().args[0].override.password).toEqual('tr1force');
             });
         });
 
@@ -231,7 +231,7 @@ describe('phonegap remote login', function () {
                     function () {}
                 );
                 expect(console.prompt).toHaveBeenCalled();
-                expect(console.prompt.mostRecentCall.args[0].override.username).toEqual('zelda');
+                expect(console.prompt.calls.mostRecent().args[0].override.username).toEqual('zelda');
             });
 
             it('should not prompt for password', function () {
@@ -240,13 +240,13 @@ describe('phonegap remote login', function () {
                     function () {}
                 );
                 expect(console.prompt).toHaveBeenCalled();
-                expect(console.prompt.mostRecentCall.args[0].override.password).toEqual('tr1force');
+                expect(console.prompt.calls.mostRecent().args[0].override.password).toEqual('tr1force');
             });
         });
 
         describe('successful prompt', function () {
             beforeEach(function () {
-                console.prompt.andCallFake(function (options, callback) {
+                console.prompt.and.callFake(function (options, callback) {
                     callback(null, { username: 'zelda', password: 'tr1force' });
                 });
             });
@@ -268,7 +268,7 @@ describe('phonegap remote login', function () {
 
         describe('failed prompt', function () {
             beforeEach(function () {
-                console.prompt.andCallFake(function (options, callback) {
+                console.prompt.and.callFake(function (options, callback) {
                     callback(new Error('prompt was cancelled'));
                 });
             });

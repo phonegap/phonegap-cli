@@ -17,7 +17,7 @@ describe('network', function () {
 
         describe('when online', function () {
             beforeEach(function () {
-                dns.lookup.andCallFake(function (host, callback) {
+                dns.lookup.and.callFake(function (host, callback) {
                     callback(null);
                 });
             });
@@ -32,7 +32,7 @@ describe('network', function () {
 
         describe('when offline', function () {
             beforeEach(function () {
-                dns.lookup.andCallFake(function (host, callback) {
+                dns.lookup.and.callFake(function (host, callback) {
                     var e = new Error('getaddrinfo ENOTFOUND google.com');
                     e.code = 'ENOTFOUND';
                     callback(e);

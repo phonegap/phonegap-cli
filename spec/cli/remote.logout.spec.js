@@ -24,35 +24,35 @@ describe('phonegap help remote logout', function () {
     describe('$ phonegap help remote', function () {
         it('should include the command', function () {
             cli.argv(argv.concat(['help', 'remote']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+logout.*\r?\n/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/\r?\n\s+logout.*\r?\n/i);
         });
     });
 
     describe('$ phonegap help remote logout', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'remote', 'logout']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote logout/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote logout/i);
         });
     });
 
     describe('$ phonegap remote logout help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'logout', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote logout/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote logout/i);
         });
     });
 
     describe('$ phonegap remote logout --help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'logout', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote logout/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote logout/i);
         });
     });
 
     describe('$ phonegap remote logout -h', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'logout', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote logout/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote logout/i);
         });
     });
 });
@@ -76,7 +76,7 @@ describe('phonegap remote logout', function () {
 
         describe('successful logout', function () {
             beforeEach(function () {
-                phonegap.remote.logout.andCallFake(function (argv, callback) {
+                phonegap.remote.logout.and.callFake(function (argv, callback) {
                     callback(null);
                 });
             });
@@ -91,7 +91,7 @@ describe('phonegap remote logout', function () {
 
         describe('failed logout', function () {
             beforeEach(function () {
-                phonegap.remote.logout.andCallFake(function (argv, callback) {
+                phonegap.remote.logout.and.callFake(function (argv, callback) {
                     callback(new Error('Account does not exist.'));
                 });
             });

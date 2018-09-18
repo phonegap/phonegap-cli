@@ -21,7 +21,7 @@ describe('phonegap.version()', function () {
 
     describe('version object', function () {
         beforeEach(function () {
-            spyOn(fs, 'readFileSync').andReturn('{ "version": "2.8.0-0.10.6" }');
+            spyOn(fs, 'readFileSync').and.returnValue('{ "version": "2.8.0-0.10.6" }');
         });
 
         it('should contain version.npm', function () {

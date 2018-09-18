@@ -9,11 +9,11 @@ var serve = null;
 describe('PhoneGap serve', function () {
     describe('module', function () {
         it('should export at object', function () {
-            expect(serveModule).toEqual(any(Object)); // eslint-disable-line
+            expect(serveModule).toEqual(jasmine.any(Object)); // eslint-disable-line
         });
 
         it('should export an object with a create parameter', function () {
-            expect(serveModule.create).toEqual(any(Function)); // eslint-disable-line
+            expect(serveModule.create).toEqual(jasmine.any(Function)); // eslint-disable-line
         });
     });
 
@@ -38,17 +38,17 @@ describe('PhoneGap serve', function () {
             serve = serveModule.create(wrapper);
 
             // declare spies
-            spyOn(project, 'cd').andReturn(true);
+            spyOn(project, 'cd').and.returnValue(true);
 
-            spyOn(cordova, 'prepare').andCallFake(function (platforms) {
+            spyOn(cordova, 'prepare').and.callFake(function (platforms) {
                 return Q();
             });
 
-            spyOn(server, 'listen').andReturn({ on: function () { return this; }}); // eslint-disable-line
+            spyOn(server, 'listen').and.returnValue({ on: function () { return this; }}); // eslint-disable-line
         });
 
         it('should be a function', function () {
-            expect(serve).toEqual(any(Function)); // eslint-disable-line
+            expect(serve).toEqual(jasmine.any(Function)); // eslint-disable-line
         });
 
         it('should require options parameter', function () {
@@ -125,7 +125,7 @@ describe('PhoneGap serve', function () {
                     localtunnel: false
                 };
 
-                cordova.prepare.andCallFake(function () {
+                cordova.prepare.and.callFake(function () {
                     return Q.reject('IWETTUM!');
                 });
             });
@@ -176,20 +176,18 @@ describe('PhoneGap serve', function () {
 
             it('should call connect-phonegap listen with corrected autoreload option', function (done) {
                 defaultOptions.autoreload = 'batman';
-                serve(defaultOptions)
-                    .then(function () {
-                        expect(server.listen.argsForCall[0][0].autoreload).toEqual(true);
-                        done();
-                    });
+                return serve(defaultOptions).then(function () {
+                    expect(server.listen.calls.argsFor(0)[0].autoreload).toEqual(true);
+                    done();
+                });
             });
 
             it('should call connect-phonegap listen with corrected localtunnel option', function (done) {
                 defaultOptions.localtunnel = 'batman';
-                serve(defaultOptions)
-                    .then(function () {
-                        expect(server.listen.argsForCall[0][0].localtunnel).toEqual(false);
-                        done();
-                    });
+                return serve(defaultOptions).then(function () {
+                    expect(server.listen.calls.argsFor(0)[0].localtunnel).toEqual(false);
+                    done();
+                });
             });
         });
     });
