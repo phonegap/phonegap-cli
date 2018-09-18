@@ -23,42 +23,42 @@ describe('phonegap help install', function () {
     describe('$ phonegap help', function () {
         it('should include the command', function () {
             cli.argv(argv.concat(['help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+install <platforms>.*\r?\n/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/\r?\n\s+install <platforms>.*\r?\n/i);
         });
     });
 
     describe('$ phonegap install', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['install']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
         });
     });
 
     describe('$ phonegap help install', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'install']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
         });
     });
 
     describe('$ phonegap install help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['install', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
         });
     });
 
     describe('$ phonegap install --help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['install', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
         });
     });
 
     describe('$ phonegap install -h', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['install', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ install \[<platforms>\]/i);
         });
     });
 });
@@ -84,7 +84,7 @@ describe('phonegap install <platform>', function () {
 
         it('should emit a deprecation message', function () {
             cli.argv(argv.concat(['install', 'android']));
-            expect(stdout.calls[0].args[0]).toMatch('DEPRECATED');
+            expect(stdout.calls.argsFor(0)[0]).toMatch('DEPRECATED');
         });
     });
 });

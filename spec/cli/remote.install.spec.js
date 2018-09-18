@@ -25,42 +25,42 @@ describe('phonegap help remote install', function () {
     describe('$ phonegap help remote', function () {
         it('should include the command', function () {
             cli.argv(argv.concat(['help', 'remote']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+install <platform>.*\r?\n/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/\r?\n\s+install <platform>.*\r?\n/i);
         });
     });
 
     describe('$ phonegap remote install', function () {
         it('outputs usage info', function () {
             cli.argv(argv.concat(['remote', 'install']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote install/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote install/i);
         });
     });
 
     describe('$ phonegap help remote install', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'remote', 'install']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote install/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote install/i);
         });
     });
 
     describe('$ phonegap remote install help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'install', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote install/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote install/i);
         });
     });
 
     describe('$ phonegap remote install --help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'install', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote install/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote install/i);
         });
     });
 
     describe('$ phonegap remote install -h', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'install', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote install/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote install/i);
         });
     });
 });
@@ -88,7 +88,7 @@ describe('phonegap remote install <platform>', function () {
 
         describe('successful install', function () {
             beforeEach(function () {
-                phonegap.remote.install.andCallFake(function (opts, callback) {
+                phonegap.remote.install.and.callFake(function (opts, callback) {
                     callback(null, {});
                 });
             });
@@ -110,7 +110,7 @@ describe('phonegap remote install <platform>', function () {
 
         describe('failed install', function () {
             beforeEach(function () {
-                phonegap.remote.install.andCallFake(function (opts, callback) {
+                phonegap.remote.install.and.callFake(function (opts, callback) {
                     callback(new Error('Could not connect to PhoneGap Build.'));
                 });
             });

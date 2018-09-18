@@ -48,7 +48,7 @@ describe('phonegap.remote.login(options, [callback])', function () {
 
     describe('on "login" event', function () {
         it('should map PhoneGapBuild "login" event', function (done) {
-            phonegapbuild.login.andCallFake(function (options, callback) {
+            phonegapbuild.login.and.callFake(function (options, callback) {
                 phonegapbuild.emit('login', options, callback);
             });
             phonegap.on('login', function (options, callback) {
@@ -62,7 +62,7 @@ describe('phonegap.remote.login(options, [callback])', function () {
 
     describe('successful login', function () {
         beforeEach(function () {
-            phonegapbuild.login.andCallFake(function (opt, callback) {
+            phonegapbuild.login.and.callFake(function (opt, callback) {
                 callback(null, {});
             });
         });
@@ -84,7 +84,7 @@ describe('phonegap.remote.login(options, [callback])', function () {
 
     describe('failed login', function () {
         beforeEach(function () {
-            phonegapbuild.login.andCallFake(function (opt, callback) {
+            phonegapbuild.login.and.callFake(function (opt, callback) {
                 phonegapbuild.emit('error', new Error('Ganon stole the token!'));
                 callback(new Error('Ganon stole the token!'));
             });

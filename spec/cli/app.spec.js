@@ -25,35 +25,35 @@ describe('phonegap help app', function () {
     describe('$ phonegap help', function () {
         it('should not include the command', function () {
             cli.argv(argv.concat(['help']));
-            expect(stdout.mostRecentCall.args[0]).not.toMatch(/\r?\n\s+app.*\r?\n/i);
+            expect(stdout.calls.mostRecent().args[0]).not.toMatch(/\r?\n\s+app.*\r?\n/i);
         });
     });
 
     describe('$ phonegap help app', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'app']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 
     describe('$ phonegap app help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['app', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 
     describe('$ phonegap app --help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['app', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 
     describe('$ phonegap app -h', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['app', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ serve/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ serve/i);
         });
     });
 });
@@ -67,7 +67,7 @@ describe('phonegap app', function () {
         cli = new CLI();
         argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
-        spyOn(phonegap, 'serve').andReturn({
+        spyOn(phonegap, 'serve').and.returnValue({
             on: function () {}
         });
     });

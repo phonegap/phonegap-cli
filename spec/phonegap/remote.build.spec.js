@@ -30,7 +30,7 @@ describe('phonegap.remote.build(options, [callback])', function () {
         spyOn(process.stderr, 'write');
         spyOn(phonegap.remote, 'login');
         spyOn(phonegapbuild, 'build');
-        spyOn(project, 'cd').andReturn(true);
+        spyOn(project, 'cd').and.returnValue(true);
     });
 
     it('should require options', function () {
@@ -77,7 +77,7 @@ describe('phonegap.remote.build(options, [callback])', function () {
 
     describe('successful project build', function () {
         beforeEach(function () {
-            phonegapbuild.build.andCallFake(function (opts, callback) {
+            phonegapbuild.build.and.callFake(function (opts, callback) {
                 callback(null, appData);
             });
         });
@@ -99,7 +99,7 @@ describe('phonegap.remote.build(options, [callback])', function () {
 
     describe('failed project build', function () {
         beforeEach(function () {
-            phonegapbuild.build.andCallFake(function (opts, callback) {
+            phonegapbuild.build.and.callFake(function (opts, callback) {
                 var e = new Error('could not connect to PhoneGap/Build');
                 phonegapbuild.emit('error', e);
                 callback(e);

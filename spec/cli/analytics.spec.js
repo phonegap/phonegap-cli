@@ -24,21 +24,21 @@ describe('phonegap help analytics', function () {
     describe('$ phonegap analytics help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['analytics', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ analytics/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ analytics/i);
         });
     });
 
     describe('$ phonegap analytics --help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['analytics', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ analytics/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ analytics/i);
         });
     });
 
     describe('$ phonegap analytics -h', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['analytics', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ analytics/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ analytics/i);
         });
     });
 });
@@ -52,7 +52,7 @@ describe('phonegap analytics', function () {
         cli = new CLI();
         argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
-        spyOn(cli, 'analytics').andReturn({
+        spyOn(cli, 'analytics').and.returnValue({
             on: function () {}
         });
     });
@@ -68,7 +68,7 @@ describe('phonegap analytics', function () {
         it('should connect to phonegap analytics', function () {
             cli.argv(argv.concat(['analytics', 'on']));
             expect(cli.analytics).toHaveBeenCalled();
-            var analytics_params = cli.analytics.mostRecentCall.args[0]['_'];
+            var analytics_params = cli.analytics.calls.mostRecent().args[0]['_'];
             expect(analytics_params).toContain('analytics');
             expect(analytics_params).toContain('on');
         });
@@ -78,7 +78,7 @@ describe('phonegap analytics', function () {
         it('should connect to phonegap analytics', function () {
             cli.argv(argv.concat(['analytics', 'off']));
             expect(cli.analytics).toHaveBeenCalled();
-            var analytics_params = cli.analytics.mostRecentCall.args[0]['_'];
+            var analytics_params = cli.analytics.calls.mostRecent().args[0]['_'];
             expect(analytics_params).toContain('analytics');
             expect(analytics_params).toContain('off');
         });

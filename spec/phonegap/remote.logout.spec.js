@@ -46,7 +46,7 @@ describe('phonegap.remote.logout(options, [callback])', function () {
 
     describe('successful logout', function () {
         beforeEach(function () {
-            phonegapbuild.logout.andCallFake(function (options, callback) {
+            phonegapbuild.logout.and.callFake(function (options, callback) {
                 callback(null);
             });
         });
@@ -61,7 +61,7 @@ describe('phonegap.remote.logout(options, [callback])', function () {
 
     describe('failed logout', function () {
         beforeEach(function () {
-            phonegapbuild.logout.andCallFake(function (options, callback) {
+            phonegapbuild.logout.and.callFake(function (options, callback) {
                 phonegapbuild.emit('error', new Error('write access denied'));
                 callback(new Error('write access denied'));
             });

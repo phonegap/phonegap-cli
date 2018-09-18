@@ -25,14 +25,14 @@ describe('config.local', function () {
         it('should try to read the configuration file', function () {
             config.local.load(function (e, data) {});
             expect(fs.readFile).toHaveBeenCalled();
-            expect(fs.readFile.mostRecentCall.args[0]).toEqual(
+            expect(fs.readFile.calls.mostRecent().args[0]).toEqual(
                 path.join(process.cwd(), '.cordova', 'config.json')
             );
         });
 
         describe('successfully read configuration file', function () {
             beforeEach(function () {
-                fs.readFile.andCallFake(function (path, callback) {
+                fs.readFile.and.callFake(function (path, callback) {
                     callback(null, '{}');
                 });
             });
@@ -54,7 +54,7 @@ describe('config.local', function () {
 
         describe('failed to read configuration file', function () {
             beforeEach(function () {
-                fs.readFile.andCallFake(function (path, callback) {
+                fs.readFile.and.callFake(function (path, callback) {
                     callback(new Error('file not found'));
                 });
             });
@@ -101,12 +101,12 @@ describe('config.local', function () {
         it('should try to write the data to the file', function () {
             config.local.save(data, function (e) {});
             expect(fs.writeFile).toHaveBeenCalled();
-            expect(fs.writeFile.mostRecentCall.args[1]).toEqual(JSON.stringify(data));
+            expect(fs.writeFile.calls.mostRecent().args[1]).toEqual(JSON.stringify(data));
         });
 
         describe('successful file write', function () {
             beforeEach(function () {
-                fs.writeFile.andCallFake(function (filepath, data, callback) {
+                fs.writeFile.and.callFake(function (filepath, data, callback) {
                     callback(null);
                 });
             });
@@ -121,7 +121,7 @@ describe('config.local', function () {
 
         describe('failed file write', function () {
             beforeEach(function () {
-                fs.writeFile.andCallFake(function (filepath, data, callback) {
+                fs.writeFile.and.callFake(function (filepath, data, callback) {
                     callback(new Error('permission denied'));
                 });
             });

@@ -24,35 +24,35 @@ describe('phonegap help template search', function () {
     describe('$ phonegap help template', function () {
         it('should include the command', function () {
             cli.argv(argv.concat(['help', 'template']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+search.*\r?\n/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/\r?\n\s+search.*\r?\n/i);
         });
     });
 
     describe('$ phonegap help template search', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'template', 'search']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ template search/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ template search/i);
         });
     });
 
     describe('$ phonegap template search help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['template', 'search', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ template search/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ template search/i);
         });
     });
 
     describe('$ phonegap template search --help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['template', 'search', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ template search/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ template search/i);
         });
     });
 
     describe('$ phonegap template search -h', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['template', 'search', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ template search/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ template search/i);
         });
     });
 });

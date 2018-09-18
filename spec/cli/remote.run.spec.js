@@ -25,42 +25,42 @@ describe('phonegap help remote run', function () {
     describe('$ phonegap help remote', function () {
         it('should include the command', function () {
             cli.argv(argv.concat(['help', 'remote']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+run <platform>.*\r?\n/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/\r?\n\s+run <platform>.*\r?\n/i);
         });
     });
 
     describe('$ phonegap remote run', function () {
         it('outputs usage info', function () {
             cli.argv(argv.concat(['remote', 'run']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote run/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote run/i);
         });
     });
 
     describe('$ phonegap help remote run', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'remote', 'run']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote run/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote run/i);
         });
     });
 
     describe('$ phonegap remote run help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'run', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote run/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote run/i);
         });
     });
 
     describe('$ phonegap remote run --help', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'run', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote run/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote run/i);
         });
     });
 
     describe('$ phonegap remote run -h', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['remote', 'run', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ remote run/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote run/i);
         });
     });
 });
@@ -88,7 +88,7 @@ describe('phonegap remote run <platform>', function () {
 
         describe('successful run', function () {
             beforeEach(function () {
-                phonegap.remote.run.andCallFake(function (opts, callback) {
+                phonegap.remote.run.and.callFake(function (opts, callback) {
                     callback(null, {});
                 });
             });
@@ -110,7 +110,7 @@ describe('phonegap remote run <platform>', function () {
 
         describe('failed run', function () {
             beforeEach(function () {
-                phonegap.remote.run.andCallFake(function (opts, callback) {
+                phonegap.remote.run.and.callFake(function (opts, callback) {
                     callback(new Error('Could not connect to PhoneGap Build.'));
                 });
             });
