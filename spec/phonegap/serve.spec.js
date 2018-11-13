@@ -3,7 +3,6 @@ var serveModule = require('../../lib/phonegap/serve');
 var server = require('connect-phonegap');
 var cordova = require('../../lib/cordova').cordova;
 var project = require('../../lib/phonegap/util/project');
-var Q = require('q');
 var serve = null;
 
 describe('PhoneGap serve', function () {
@@ -41,7 +40,7 @@ describe('PhoneGap serve', function () {
             spyOn(project, 'cd').and.returnValue(true);
 
             spyOn(cordova, 'prepare').and.callFake(function (platforms) {
-                return Q();
+                return Promise.resolve();
             });
 
             spyOn(server, 'listen').and.returnValue({ on: function () { return this; }}); // eslint-disable-line
@@ -126,7 +125,7 @@ describe('PhoneGap serve', function () {
                 };
 
                 cordova.prepare.and.callFake(function () {
-                    return Q.reject('IWETTUM!');
+                    return Promise.reject(new Error('IWETTUM!'));
                 });
             });
 
