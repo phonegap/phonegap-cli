@@ -6,6 +6,7 @@
   "helpers": [
     "helpers/**/*.js"
   ],
-  "stopSpecOnExpectationFailure": false,
+  "oneFailurePerSpec": true,
+
   "random": false
 }

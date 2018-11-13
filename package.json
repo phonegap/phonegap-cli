@@ -21,7 +21,8 @@
     "phonegap": "./bin/phonegap.js"
   },
   "scripts": {
-    "test": "jasmine && npm run eslint",
+    "test": "npm run jasmine && npm run eslint",
+    "jasmine": "npx jasmine --config=spec/support/jasmine.json",
     "eslint": "eslint ./ --ignore-path .gitignore",
     "cover": "istanbul cover --print detail -x **/spec/** jasmine -- --color"
   },
@@ -34,7 +35,7 @@
     "colors": "0.6.0-1",
     "configstore": "1.4.0",
     "connect-phonegap": "^0.25.0",
-    "cordova": "8.0.0",
+    "cordova": "^8.1.2",
     "insight": "^0.10.1",
     "jasmine": "^3.2.0",
     "minimist": "0.1.0",
