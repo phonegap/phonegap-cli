@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "npm run jasmine && npm run eslint",
-    "jasmine": "npx jasmine --config=spec/support/jasmine.json",
+    "jasmine": "node node_modules/jasmine/bin/jasmine --config=spec/support/jasmine.json",
     "eslint": "eslint ./ --ignore-path .gitignore",
     "cover": "istanbul cover --print detail -x **/spec/** jasmine -- --color"
   },
