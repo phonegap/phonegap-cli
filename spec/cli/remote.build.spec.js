@@ -29,13 +29,6 @@ describe('phonegap help remote build', function () {
         });
     });
 
-    describe('$ phonegap remote build', function () {
-        it('outputs usage info', function () {
-            cli.argv(argv.concat(['remote', 'build']));
-            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ remote build/i);
-        });
-    });
-
     describe('$ phonegap help remote build', function () {
         it('should output usage info', function () {
             cli.argv(argv.concat(['help', 'remote', 'build']));
@@ -75,6 +68,16 @@ describe('phonegap remote build <platform>', function () {
         argv = ['node', '/usr/local/bin/phonegap'];
         spyOn(process.stdout, 'write');
         spyOn(phonegap.remote, 'build');
+    });
+
+    describe('$ phonegap remote build EMPTY', function () {
+        it('should try to build the project', function () {
+            cli.argv(argv.concat(['remote', 'build']));
+            expect(phonegap.remote.build).toHaveBeenCalledWith(
+                jasmine.objectContaining({ platforms: [undefined] }),
+                jasmine.any(Function)
+            );
+        });
     });
 
     describe('$ phonegap remote build android', function () {
