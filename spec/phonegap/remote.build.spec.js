@@ -40,11 +40,11 @@ describe('phonegap.remote.build(options, [callback])', function () {
         }).toThrow();
     });
 
-    it('should require options.platforms', function () {
+    it('should support empty options.platforms', function () {
         expect(function () {
             options.platforms = undefined;
             phonegap.remote.build(options, function (e) {});
-        }).toThrow();
+        }).not.toThrow();
     });
 
     it('should not require callback', function () {
