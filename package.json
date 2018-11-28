@@ -92,16 +92,16 @@
     {
       "name": "Tommy-Carlos Williams",
       "email": "tommy@devgeeks.org"
+    },
+    {
+      "name": "Tim Kim",
+      "email": "timk@adobe.com"
     }
   ],
   "templates": {
     "blank": {
       "description": "A blank and empty PhoneGap app.",
       "npm": "phonegap-template-blank"
-    },
-    "csdk-image-editor": {
-      "description": "A template for using the Creative Cloud Image Editor.",
-      "npm": "phonegap-template-csdk-image-editor"
     },
     "hello-world": {
       "description": "Default hello world app for PhoneGap.",
@@ -134,14 +134,6 @@
     "tabbed-vue": {
       "description": "A tabbed layout template using Framework7 and Vue.js",
       "npm": "phonegap-template-vue-f7-tabs"
-    },
-    "webvr": {
-      "description": "A WebVR and Google Cardboard demo ported from borismus/webvr-boilerplate.",
-      "npm": "phonegap-template-webvr"
-    },
-    "wikitude-augmented-reality": {
-      "description": "Augmented Reality demo app powered by the Wikitude plugin",
-      "npm": "phonegap-app-augmented-reality"
     }
   }
 }
