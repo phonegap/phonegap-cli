@@ -1,4 +1,5 @@
 language: node_js
+
 notifications:
   slack:
     secure: mkiEcw6I1VMWr/Fn/J1i2J+2ZSO4piX6azsDYcBPBmzItqClcQbYgqgb/vE8h3UvYXmF3Isbqau3of9/8Og08CashATJAj1dyOzHrbBGBm2SM8qvDaf2l0tg4X3mmTQpZMKSd7XZQenWASK1STLMz3TLsn56C2/x7n/4idz242M=
@@ -7,15 +8,26 @@ notifications:
       - PhoneGapCI@adobe.com
     on_success: change
     on_failure: always
+
+git:
+  depth: 10
+
+os:
+ - windows
+ - linux
+
 node_js:
-  - '6.0'
   - '8.0'
   - '10.0'
+  - '12.0'
+
 install:
   - npm install
   - npm install -g codecov
+
 script:
   - npm test
   - npm run cover
+
 after_script:
   - codecov
