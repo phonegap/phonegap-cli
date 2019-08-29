@@ -10,7 +10,7 @@ notifications:
     on_failure: always
 
 git:
-  depth: 10
+  depth: 50
 
 os:
  - windows
