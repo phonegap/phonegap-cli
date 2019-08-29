@@ -21,9 +21,9 @@
     "phonegap": "./bin/phonegap.js"
   },
   "scripts": {
-    "test": "jasmine && eslint",
+    "test": "npm run jasmine && npm run eslint",
     "jasmine": "jasmine --config=spec/support/jasmine.json",
-    "eslint": "eslint lib bin --debug",
+    "eslint": "eslint lib bin spec",
     "cover": "istanbul cover --print detail -x **/spec/** jasmine -- --color"
   },
   "engineStrict": true,

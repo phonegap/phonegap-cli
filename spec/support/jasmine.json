@@ -6,7 +6,5 @@
   "helpers": [
     "helpers/**/*.js"
   ],
-  "oneFailurePerSpec": true,
-
-  "random": false
+  "oneFailurePerSpec": true
 }
