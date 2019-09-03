@@ -17,9 +17,9 @@ os:
  - linux
 
 node_js:
-  - '8.0'
-  - '10.0'
-  - '12.0'
+  - '8'
+  - '10'
+  - '12'
 
 install:
   - npm install
