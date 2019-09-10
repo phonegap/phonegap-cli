@@ -9,9 +9,6 @@ notifications:
     on_success: change
     on_failure: always
 
-git:
-  depth: 50
-
 os:
  - windows
  - linux
