@@ -1,31 +1,31 @@
-var cli = require('../lib/cli');
+// var cli = require('../lib/cli');
 var analytics = require('../lib/cli/analytics');
 var request = require('request');
 
-function trigger_phonegap_cli () {
-    require('../bin/phonegap');
-}
+// function trigger_phonegap_cli () {
+//     require('../bin/phonegap');
+// }
 
-describe('PhoneGap Analytics', function () {
-    beforeEach(function () {
-        // ensure we dont prompt for turning analytics on
-        spyOn(cli.prototype.analytics, 'statusUnknown').and.returnValue(false);
-    });
-    afterEach(function () {
-        // delete the phonegap cli entry module from require cache
-        // so we can exercise its logic in each test case
-        delete require.cache[require.resolve('../bin/phonegap')];
-    });
-    it('should pass error objects from command invocations to analytics', function () {
-        var fake_error = {message: 'yo dawg'};
-        var track = spyOn(cli.prototype.analytics, 'trackEvent');
-        spyOn(cli.prototype, 'argv').and.callFake(function (argv, cb) {
-            cb(fake_error);
-        });
-        trigger_phonegap_cli();
-        expect(track).toHaveBeenCalledWith(jasmine.any(Array), fake_error, jasmine.any(Object));
-    });
-});
+// describe('PhoneGap Analytics', function () {
+//     beforeEach(function () {
+//         // ensure we dont prompt for turning analytics on
+//         spyOn(cli.prototype.analytics, 'statusUnknown').and.returnValue(false);
+//     });
+//     afterEach(function () {
+//         // delete the phonegap cli entry module from require cache
+//         // so we can exercise its logic in each test case
+//         delete require.cache[require.resolve('../bin/phonegap')];
+//     });
+//     it('should pass error objects from command invocations to analytics', function () {
+//         var fake_error = {message: 'yo dawg'};
+//         var track = spyOn(cli.prototype.analytics, 'trackEvent');
+//         spyOn(cli.prototype, 'argv').and.callFake(function (argv, cb) {
+//             cb(fake_error);
+//         });
+//         trigger_phonegap_cli();
+//         expect(track).toHaveBeenCalledWith(jasmine.any(Array), fake_error, jasmine.any(Object));
+//     });
+// });
 
 describe('trackEvent', function () {
     var post_spy;
