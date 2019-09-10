@@ -9,17 +9,14 @@ notifications:
     on_success: change
     on_failure: always
 
-git:
-  depth: 10
-
 os:
  - windows
  - linux
 
 node_js:
-  - '8.0'
-  - '10.0'
-  - '12.0'
+  - '8'
+  - '10'
+  - '12'
 
 install:
   - npm install
