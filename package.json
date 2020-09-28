@@ -1,7 +1,7 @@
 {
   "name": "phonegap",
   "description": "PhoneGap command-line interface and node.js library.",
-  "version": "9.0.0+cordova.9.0.0",
+  "version": "10.0.0+cordova.10.0.0",
   "license": "Apache-2.0",
   "homepage": "http://github.com/phonegap/phonegap-cli",
   "repository": {
@@ -24,7 +24,8 @@
     "test": "npm run jasmine && npm run eslint",
     "jasmine": "jasmine --config=spec/support/jasmine.json",
     "eslint": "eslint lib bin spec",
-    "cover": "istanbul cover --print detail -x **/spec/** jasmine -- --color"
+    "cover": "istanbul cover --print detail -x **/spec/** jasmine -- --color",
+    "build": "nexe"
   },
   "engineStrict": true,
   "engines": {
@@ -35,7 +36,7 @@
     "colors": "0.6.0-1",
     "configstore": "1.4.0",
     "connect-phonegap": "^0.25.0",
-    "cordova": "^9.0.0",
+    "cordova": "^10.0.0",
     "insight": "^0.10.1",
     "jasmine": "^3.2.0",
     "minimist": "0.1.0",
@@ -59,7 +60,8 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "istanbul": "0.4.5"
+    "istanbul": "0.4.5",
+    "nexe": "^3.3.7"
   },
   "optionalDependencies": {},
   "contributors": [
@@ -92,6 +94,10 @@
     {
       "name": "Tommy-Carlos Williams",
       "email": "tommy@devgeeks.org"
+    },
+    {
+      "name": "Cyril Micoud",
+      "email": "cyril.micoud@gmail.com"
     }
   ],
   "templates": {
