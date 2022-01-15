@@ -47,7 +47,7 @@
     "prompt": "^1.0.0",
     "qrcode-terminal": "0.9.4",
     "request": "^2.88.0",
-    "shelljs": "0.1.4",
+    "shelljs": "0.8.5",
     "update-notifier": "^0.6.0"
   },
   "devDependencies": {
