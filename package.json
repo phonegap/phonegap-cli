@@ -38,7 +38,7 @@
     "cordova": "^9.0.0",
     "insight": "^0.10.1",
     "jasmine": "^3.2.0",
-    "minimist": "0.1.0",
+    "minimist": "1.2.6",
     "opener": "1.4.1",
     "opn": "^4.0.2",
     "os-name": "2.0.1",
